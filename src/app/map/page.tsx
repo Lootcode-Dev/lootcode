@@ -1,8 +1,10 @@
+"use client";
+
 import mapFile from "./map.json";
 import Image from "next/image";
 
-const nodeRad: number = 25;
-const mapRes: number[] = [1280, 720]; // (w, h)
+const nodeRad = 25;
+const mapRes = [1280, 720]; // (w, h)
 
 export default function Page() {
   return (
@@ -13,19 +15,28 @@ export default function Page() {
           className="rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
         >
           {mapFile.nodes.map((node, index) => (
-            <g key={index}>
+            <g key={index} id={"node-" + node.name}>
+              {node.next.map((depend, index) => (
+                <line
+                  x1={getNodeX(node.pos[0] || 0)}
+                  y1={getNodeY(node.pos[1] || 0)}
+                  x2={getNodeX(findNodePos(depend)[0] || 0)}
+                  y2={getNodeY(findNodePos(depend)[1] || 0)}
+                  stroke="white"
+                ></line>
+              ))}
               <circle
                 r={"" + nodeRad}
-                cx={"" + getNodeX(node[0] || 0)}
-                cy={"" + getNodeY(node[1] || 0)}
+                cx={"" + getNodeX(node.pos[0] || 0)}
+                cy={"" + getNodeY(node.pos[1] || 0)}
                 className="fill-yellow-200 stroke-black hover:fill-yellow-400"
               ></circle>
               <text
-                x={"" + getNodeX(node[0] || 0)}
-                y={"" + getNodeY(node[1] || 0)}
+                x={"" + getNodeX(node.pos[0] || 0)}
+                y={"" + getNodeY(node.pos[1] || 0)}
                 className="text-white"
               >
-                My
+                {node.name}
               </text>
             </g>
           ))}
@@ -41,4 +52,18 @@ function getNodeX(x: number): number {
 
 function getNodeY(y: number): number {
   return (mapRes[1] || 0) * (y / 100);
+}
+
+//Finds a node's position by its name
+function findNodePos(name: string): number[] | undefined {
+  let pos: number[];
+  mapFile.nodes.map((node, index) => {
+    if (node.name === name) {
+      console.log("inside: " + node.pos);
+      pos = node.pos;
+      return;
+    }
+  });
+
+  return pos;
 }
