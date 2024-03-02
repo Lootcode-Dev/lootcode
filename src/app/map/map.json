@@ -1,24 +1,74 @@
 {
-    "nodes": [
+    "chapters":
+    [
         {
-            "pos": [20,20],
-            "name": "1",
-            "next": ["2"]
+            "name": "Chapter 1",
+            "nodes": [
+                {
+                    "pos": [20,20],
+                    "name": "1",
+                    "next": ["2"]
+                },
+                {
+                    "pos": [50,30],
+                    "name": "2",
+                    "next": ["3", "4"]
+                },
+                {
+                    "pos": [70,40],
+                    "name": "3",
+                    "next": []
+                },
+                {
+                    "pos": [30,50],
+                    "name": "4",
+                    "next": []
+                },
+                {
+                    "pos": [0,0],
+                    "name": "TL",
+                    "next": []
+                },
+                {
+                    "pos": [100,100],
+                    "name": "BR",
+                    "next": []
+                }
+            ]
         },
         {
-            "pos": [50,30],
-            "name": "2",
-            "next": ["3", "4"]
+            "name":"Chapter 2",
+            "nodes": [
+                {
+                    "pos": [10,10],
+                    "name": "No. 1",
+                    "next": ["No. 2", "No. 3"]
+                },
+                {
+                    "pos": [30,5],
+                    "name": "No. 2",
+                    "next": ["No. 4"]
+                },
+                {
+                    "pos": [20,40],
+                    "name": "No. 3",
+                    "next": ["No. 4"]
+                },
+                {
+                    "pos": [50,30],
+                    "name": "No. 4",
+                    "next": []
+                }
+            ]
         },
         {
-            "pos": [70,40],
-            "name": "3",
-            "next": []
+            "name":"Chapter 3",
+            "nodes":[]
         },
         {
-            "pos": [30,50],
-            "name": "4",
-            "next": []
+            "name":"Chapter 4",
+            "nodes":[]
         }
+        
     ]
 }
