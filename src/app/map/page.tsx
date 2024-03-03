@@ -41,22 +41,23 @@ export default function Page() {
                 <g key={index} id={"node-" + node.name}>
                   {node.next.map((depend, index) => (
                     <line
-                      x1={getNodeX(node.pos[0] || 0)}
-                      y1={getNodeY(node.pos[1] || 0)}
-                      x2={getNodeX(findNodePos(depend, chapter)[0] || 0)}
-                      y2={getNodeY(findNodePos(depend, chapter)[1] || 0)}
+                      key={index}
+                      x1={getNodeX(node.pos[0] ?? 0)}
+                      y1={getNodeY(node.pos[1] ?? 0)}
+                      x2={getNodeX(findNodePos(depend, chapter)?.[0] ?? 0)}
+                      y2={getNodeY(findNodePos(depend, chapter)?.[1] ?? 0)}
                       stroke="white"
                     ></line>
                   ))}
                   <circle
                     r={"" + nodeRad}
-                    cx={"" + getNodeX(node.pos[0] || 0)}
-                    cy={"" + getNodeY(node.pos[1] || 0)}
+                    cx={"" + getNodeX(node.pos[0] ?? 0)}
+                    cy={"" + getNodeY(node.pos[1] ?? 0)}
                     className="fill-yellow-200 stroke-black hover:fill-yellow-400"
                   ></circle>
                   <text
-                    x={"" + getNodeX(node.pos[0] || 0)}
-                    y={"" + getNodeY(node.pos[1] || 0)}
+                    x={"" + getNodeX(node.pos[0] ?? 0)}
+                    y={"" + getNodeY(node.pos[1] ?? 0)}
                     className="text-white"
                   >
                     {node.name}
@@ -87,19 +88,20 @@ export default function Page() {
 }
 
 function getNodeX(x: number): number {
-  return (mapRes[0] || 0) * (x / 100);
+  return (mapRes[0] ?? 0) * (x / 100);
 }
 
 function getNodeY(y: number): number {
-  return (mapRes[1] || 0) * (y / 100);
+  return (mapRes[1] ?? 0) * (y / 100);
 }
 
 //Finds a node's position by its name
 function findNodePos(name: string, ch: number): number[] | undefined {
   let pos: number[];
-  mapFile.chapters[ch]?.nodes.map((node, index) => {
+  pos = [-1, -1]; // Default value for typescript
+  mapFile.chapters[ch]?.nodes.map((node) => {
     if (node.name === name) {
-      console.log("inside: " + node.pos);
+      // console.log("inside: " + node.pos);
       pos = node.pos;
       return;
     }
