@@ -16,7 +16,7 @@ export default async function Navbar() {
       </div>
       <div>
         <SignedIn>
-          <UserButton showName={true} />
+          <UserButton afterSignOutUrl="/sign-in" showName={true} />
         </SignedIn>
         <SignedOut>
           <Button className="bg-purple-700 text-white">
