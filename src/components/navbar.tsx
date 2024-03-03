@@ -2,7 +2,6 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default async function Navbar() {
   return (
@@ -17,7 +16,7 @@ export default async function Navbar() {
       </div>
       <div>
         <SignedIn>
-          <UserButton afterSignOutUrl="/" showName={true} />
+          <UserButton showName={true} />
         </SignedIn>
         <SignedOut>
           <Button className="bg-purple-700 text-white">
