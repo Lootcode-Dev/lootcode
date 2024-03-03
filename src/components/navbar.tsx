@@ -1,6 +1,6 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, SwordIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function Navbar() {
@@ -16,7 +16,16 @@ export default async function Navbar() {
       </div>
       <div>
         <SignedIn>
-          <UserButton afterSignOutUrl="/sign-in" showName={true} />
+          <div className="flex items-center gap-8">
+            <Link href="/map">
+              <Button className="bg-purple-700 text-white">
+                <div className="flex items-center gap-2">
+                  Adventure <SwordIcon className="h-5 w-5" />
+                </div>
+              </Button>
+            </Link>
+            <UserButton afterSignOutUrl="/sign-in" showName={true} />
+          </div>
         </SignedIn>
         <SignedOut>
           <Button className="bg-purple-700 text-white">
