@@ -2,9 +2,20 @@ import { writeFile } from "fs/promises";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { $ } from "zx";
+import { readFile } from "fs/promises";
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
+    .input(z.object({ name: z.string() }))
+    .query(async ({ input }) => {
+      const contents = await readFile(
+        `./src/problems/${input.name}/${input.name}.md`,
+        "utf-8",
+      );
+      console.log(contents);
+      return contents;
+    }),
+  runProblem: protectedProcedure
     .input(z.object({ name: z.string(), code: z.string() }))
     .query(async ({ input, ctx }) => {
       $.verbose = false;
@@ -24,12 +35,11 @@ export const codeRouter = createTRPCRouter({
       } catch (error) {
         console.log("ERROR DETECTED");
         console.log("", error);
-        process.exit();
       }
 
-      await $`./${ctx.userId}${input.name}.out < ./src/problems/${input.name}/input/b.in > ./temp/${ctx.userId}${input.name}.txt`;
+      await $`./${ctx.userId}${input.name}.out < ./src/problems/${input.name}/input/a.in > ./temp/${ctx.userId}${input.name}.txt`;
       const output = await $`cat ./temp/${ctx.userId}${input.name}.txt`;
-      const expected = await $`cat ./src/problems/${input.name}/output/b.out`;
+      const expected = await $`cat ./src/problems/${input.name}/output/a.out`;
       console.log("Output: " + output.stdout);
       console.log("Expected: " + expected.stdout);
       if (output.stdout === expected.stdout) {
@@ -39,6 +49,8 @@ export const codeRouter = createTRPCRouter({
       }
 
       console.log("Ran successfully");
+
+      // Cleanup
 
       return 0;
     }),

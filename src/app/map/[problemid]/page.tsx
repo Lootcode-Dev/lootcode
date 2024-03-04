@@ -33,17 +33,27 @@ export default function Problem({ params }: PageProps) {
   const [size, setSize] = useState<number>(0);
   const [code, setCode] = useState<string>("");
 
+  const { data: problem } = api.code.getProblem.useQuery({
+    name: params.problemid,
+  });
+
   const {
     data: data,
     refetch: codeRun,
     error: codeError,
-  } = api.code.getProblem.useQuery(
+  } = api.code.runProblem.useQuery(
     {
       name: params.problemid,
       code: code,
     },
     { enabled: false },
   );
+
+  useEffect(() => {
+    if (problem) {
+      console.log(problem);
+    }
+  }, [problem]);
 
   useEffect(() => {
     if (data) console.log(data);
@@ -63,8 +73,10 @@ export default function Problem({ params }: PageProps) {
         <ResizablePanel defaultSize={30}>
           <Markdown
             remarkPlugins={[remarkGfm]}
-            className="prose dark:prose-invert"
-          ></Markdown>
+            className="prose dark:prose-invert whitespace-pre-wrap p-4"
+          >
+            {problem}
+          </Markdown>
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={70}>

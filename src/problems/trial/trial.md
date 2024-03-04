@@ -1,7 +1,9 @@
 # Trial problem
+
 Help! The villagers are being attacked, and the only way to save them is adding two numbers!
 
 ## Input
+
 Input will be two integers separated by a single space character
 
 ```
@@ -9,4 +11,5 @@ Input will be two integers separated by a single space character
 ```
 
 ## Output
+
 Print the resulting number
