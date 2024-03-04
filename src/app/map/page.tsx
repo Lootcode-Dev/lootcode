@@ -4,6 +4,7 @@ import { useState } from "react";
 import mapFile from "./map.json";
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
+import { map } from "@trpc/server/observable";
 
 const nodeRad = 25;
 const mapRes = [1280, 720];
@@ -29,7 +30,7 @@ export default function Page() {
             <div className="items-top flex flex-col rounded-xl bg-[#15162c] p-4">
               <Button
                 className="mt-2 bg-purple-700"
-                onClick={() => setChapter(-1)}
+                onClick={() => {setSelNode(-1); setChapter(-1)}}
               >
                 Back
               </Button>
@@ -50,7 +51,7 @@ export default function Page() {
                       stroke="white"
                     ></line>
                   ))}
-                  <circle onMouseEnter={()=>setSelNode(index)} onMouseLeave={()=>setSelNode(-1)}
+                  <circle onClick={()=> selNode != index ? setSelNode(index) : setSelNode(-1)}
                     r={"" + nodeRad}
                     cx={"" + getNodeX(node.pos[0] ?? 0)}
                     cy={"" + getNodeY(node.pos[1] ?? 0)}
@@ -61,8 +62,17 @@ export default function Page() {
                     y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRad*2)}
                     className="fill-white border stroke-black stroke-1 text-xl font-bold"
                   >
-                    {selNode == index ? node.name : ""}
+                    {node.name}
                   </text>
+                  
+                  {selNode != -1 ? 
+                  <g>
+                    <rect x={mapRes[0]-300} y={0} width={300} height={mapRes[1]} className="fill-[#15162c]"/>
+                    <text x={mapRes[0]-300 + 15} y={45} className="text-3xl fill-white">{mapFile.chapters[chapter]?.nodes[selNode].name}</text>
+                  </g>
+                  : <g/>}
+
+
                 </g>
               ))}
             </svg>
