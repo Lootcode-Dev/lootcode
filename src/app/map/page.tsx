@@ -10,6 +10,7 @@ const mapRes = [1280, 720];
 
 export default function Page() {
   const [chapter, setChapter] = useState(-1);
+  const [selNode, setSelNode] = useState(-1);
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -49,18 +50,18 @@ export default function Page() {
                       stroke="white"
                     ></line>
                   ))}
-                  <circle
+                  <circle onMouseEnter={()=>setSelNode(index)} onMouseLeave={()=>setSelNode(-1)}
                     r={"" + nodeRad}
                     cx={"" + getNodeX(node.pos[0] ?? 0)}
                     cy={"" + getNodeY(node.pos[1] ?? 0)}
                     className="fill-yellow-200 stroke-black hover:fill-yellow-400"
                   ></circle>
-                  <text
-                    x={"" + getNodeX(node.pos[0] ?? 0)}
-                    y={"" + getNodeY(node.pos[1] ?? 0)}
-                    className="text-white"
+                  <text id={"nodeText" + index}
+                    x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length*5)}
+                    y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRad*2)}
+                    className="fill-white border stroke-black stroke-1 text-xl font-bold"
                   >
-                    {node.name}
+                    {selNode == index ? node.name : ""}
                   </text>
                 </g>
               ))}
