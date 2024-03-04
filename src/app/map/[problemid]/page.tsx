@@ -31,6 +31,27 @@ interface PageProps {
 export default function Problem({ params }: PageProps) {
   const [language, setLanguage] = useState<string>("python");
   const [size, setSize] = useState<number>(0);
+  const [code, setCode] = useState<string>("");
+
+  const {
+    data: data,
+    refetch: codeRun,
+    error: codeError,
+  } = api.code.getProblem.useQuery(
+    {
+      name: params.problemid,
+      code: code,
+    },
+    { enabled: false },
+  );
+
+  useEffect(() => {
+    if (data) console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (codeError) console.log("ERROR DETECTED\n\n\n", codeError);
+  }, [codeError]);
 
   return (
     <main className="z-10 flex h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
@@ -82,8 +103,8 @@ export default function Problem({ params }: PageProps) {
                       highlightActiveLineGutter: true,
                       autocompletion: false,
                     }}
-                    onChange={(value, viewUpdate) => {
-                      console.log(value, viewUpdate);
+                    onChange={(value) => {
+                      setCode(value);
                     }}
                   />
                 </div>
@@ -93,7 +114,9 @@ export default function Problem({ params }: PageProps) {
             {/* Panel 3 */}
             <ResizablePanel defaultSize={20}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">Three</span>
+                <span className="font-semibold" onClick={() => codeRun()}>
+                  Three
+                </span>
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
