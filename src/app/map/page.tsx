@@ -55,7 +55,9 @@ export default function Page() {
                     r={"" + nodeRad}
                     cx={"" + getNodeX(node.pos[0] ?? 0)}
                     cy={"" + getNodeY(node.pos[1] ?? 0)}
-                    className="fill-yellow-200 stroke-black hover:fill-yellow-400"
+                    stroke={selNode == index ? "orange" : "black"}
+                    strokeWidth={selNode == index ? "4" : "1"}
+                    className="fill-yellow-200 hover:fill-yellow-400"
                   ></circle>
                   <text id={"nodeText" + index}
                     x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length*5)}
