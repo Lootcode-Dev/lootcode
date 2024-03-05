@@ -18,9 +18,9 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { useEffect, useState } from "react";
-import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { api } from "~/trpc/react";
+import ReactMarkdown from "react-markdown";
 
 interface PageProps {
   params: {
@@ -56,10 +56,6 @@ export default function Problem({ params }: PageProps) {
   }, [problem]);
 
   useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
-
-  useEffect(() => {
     if (codeError) console.log("ERROR DETECTED\n\n\n", codeError);
   }, [codeError]);
 
@@ -70,19 +66,25 @@ export default function Problem({ params }: PageProps) {
         className="h-screen w-screen rounded-lg border"
       >
         {/* Panel 1: Markdown */}
-        <ResizablePanel defaultSize={30}>
-          <Markdown
-            remarkPlugins={[remarkGfm]}
-            className="prose dark:prose-invert whitespace-pre-wrap p-4"
-          >
-            {problem}
-          </Markdown>
+        <ResizablePanel defaultSize={30} className="bg-[#282A36]">
+          <div className="max-h-[100vh] overflow-auto">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+            >
+              {problem}
+            </ReactMarkdown>
+          </div>
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={70}>
           <ResizablePanelGroup direction="vertical">
             {/* Panel 2: Editor */}
-            <ResizablePanel defaultSize={40} onResize={setSize}>
+            <ResizablePanel
+              defaultSize={40}
+              onResize={setSize}
+              className="bg-[#282A36]"
+            >
               <div className="flex flex-col">
                 <div className="  h-[5vh] bg-zinc-800 p-1">
                   <Select onValueChange={setLanguage}>

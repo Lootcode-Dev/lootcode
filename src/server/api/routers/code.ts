@@ -12,7 +12,6 @@ export const codeRouter = createTRPCRouter({
         `./src/problems/${input.name}/${input.name}.md`,
         "utf-8",
       );
-      console.log(contents);
       return contents;
     }),
   runProblem: protectedProcedure
