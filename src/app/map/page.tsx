@@ -8,6 +8,7 @@ import { map } from "@trpc/server/observable";
 
 const nodeRad = 25;
 const mapRes = [1280, 720];
+const sidebarW = 300;
 
 export default function Page() {
   const [chapter, setChapter] = useState(-1);
@@ -26,18 +27,22 @@ export default function Page() {
     <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
-          <div className="flex size-full justify-center">
-            <div className="items-top flex flex-col rounded-xl bg-[#15162c] p-4">
+          <div className="flex h-[80vh] w-full justify-center">
+            <div className="items-top mx-2 flex flex-col rounded-xl bg-[#15162c] p-4">
               <Button
                 className="mt-2 bg-purple-700"
-                onClick={() => {setSelNode(-1); setChapter(-1)}}
+                onClick={() => {
+                  setSelNode(-1);
+                  setChapter(-1);
+                  console.log(selNode);
+                }}
               >
                 Back
               </Button>
             </div>
             <svg
               viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
-              className="rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
+              className="mx-2 rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
             >
               {mapFile.chapters[chapter]?.nodes.map((node, index) => (
                 <g key={index} id={"node-" + node.name}>
@@ -51,7 +56,11 @@ export default function Page() {
                       stroke="white"
                     ></line>
                   ))}
-                  <circle onClick={()=> selNode != index ? setSelNode(index) : setSelNode(-1)}
+                  <circle
+                    onClick={() => {
+                      selNode != index ? setSelNode(index) : setSelNode(-1);
+                      console.log(selNode);
+                    }}
                     r={"" + nodeRad}
                     cx={"" + getNodeX(node.pos[0] ?? 0)}
                     cy={"" + getNodeY(node.pos[1] ?? 0)}
@@ -59,25 +68,24 @@ export default function Page() {
                     strokeWidth={selNode == index ? "4" : "1"}
                     className="fill-yellow-200 hover:fill-yellow-400"
                   ></circle>
-                  <text id={"nodeText" + index}
-                    x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length*5)}
-                    y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRad*2)}
-                    className="fill-white border stroke-black stroke-1 text-xl font-bold"
+                  <text
+                    id={"nodeText" + index}
+                    x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length * 5)}
+                    y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRad * 2)}
+                    className="border fill-white stroke-black stroke-1 text-xl font-bold"
                   >
                     {node.name}
                   </text>
-                  
-                  {selNode != -1 ? 
-                  <g>
-                    <rect x={mapRes[0]-300} y={0} width={300} height={mapRes[1]} className="fill-[#15162c]"/>
-                    <text x={mapRes[0]-300 + 15} y={45} className="text-3xl fill-white">{mapFile.chapters[chapter]?.nodes[selNode].name}</text>
-                  </g>
-                  : <g/>}
-
-
                 </g>
               ))}
             </svg>
+            {selNode != -1 ? (
+              <div className="mx-2 w-[20vw] rounded-xl bg-[#15162c] p-4 text-3xl">
+                {selNode != -1 ? getNode(chapter, selNode).name : ""}
+              </div>
+            ) : (
+              <div />
+            )}
           </div>
         ) : (
           <div className="flex flex-col items-center">
@@ -121,4 +129,8 @@ function findNodePos(name: string, ch: number): number[] | undefined {
   });
 
   return pos;
+}
+
+function getNode(ch: number, i: number): any {
+  return mapFile.chapters[ch]?.nodes[i];
 }
