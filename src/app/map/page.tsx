@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import mapFile from "./map.json";
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { map } from "@trpc/server/observable";
+
+import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
 
 const nodeRad = 25;
 const mapRes = [1280, 720];
@@ -13,6 +16,15 @@ const sidebarW = 300;
 export default function Page() {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
+
+  /*
+  let renderedMDFile: File;
+
+  useEffect(()=>{
+    if(chapter != -1 && selNode != -1)
+      renderedMDFile = new File("~/problems/"+)
+  })
+  */
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -80,8 +92,15 @@ export default function Page() {
               ))}
             </svg>
             {selNode != -1 ? (
-              <div className="mx-2 w-[20vw] rounded-xl bg-[#15162c] p-4 text-3xl">
-                {selNode != -1 ? getNode(chapter, selNode).name : ""}
+              <div className="w-[20vw] rounded-xl bg-[#15162c] p-4">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  className="prose prose-headings:text-purple-500 prose-em:text-yellow-200 text-white"
+                >
+                  {selNode != -1
+                    ? "# Test\n" + getNode(chapter, selNode).name
+                    : ""}
+                </ReactMarkdown>
               </div>
             ) : (
               <div />
@@ -133,4 +152,8 @@ function findNodePos(name: string, ch: number): number[] | undefined {
 
 function getNode(ch: number, i: number): any {
   return mapFile.chapters[ch]?.nodes[i];
+}
+
+function nameToFileName(name: string): string {
+  return name.split(" ").join("_").toLowerCase();
 }
