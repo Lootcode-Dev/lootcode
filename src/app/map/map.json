@@ -6,32 +6,12 @@
             "nodes": [
                 {
                     "pos": [20,20],
-                    "name": "1",
-                    "next": ["2"]
+                    "name": "Trial",
+                    "next": ["Trial2"]
                 },
                 {
                     "pos": [50,30],
-                    "name": "2",
-                    "next": ["3", "4"]
-                },
-                {
-                    "pos": [70,40],
-                    "name": "3",
-                    "next": []
-                },
-                {
-                    "pos": [30,50],
-                    "name": "4",
-                    "next": []
-                },
-                {
-                    "pos": [0,0],
-                    "name": "TL",
-                    "next": []
-                },
-                {
-                    "pos": [100,100],
-                    "name": "BR",
+                    "name": "Trial2",
                     "next": []
                 }
             ]
@@ -63,7 +43,38 @@
         },
         {
             "name":"Chapter 3",
-            "nodes":[]
+            "nodes": [
+                {
+                    "pos": [20,20],
+                    "name": "1",
+                    "next": ["2"]
+                },
+                {
+                    "pos": [50,30],
+                    "name": "2",
+                    "next": ["3", "4"]
+                },
+                {
+                    "pos": [70,40],
+                    "name": "3",
+                    "next": []
+                },
+                {
+                    "pos": [30,50],
+                    "name": "4",
+                    "next": []
+                },
+                {
+                    "pos": [0,0],
+                    "name": "TL",
+                    "next": []
+                },
+                {
+                    "pos": [100,100],
+                    "name": "BR",
+                    "next": []
+                }
+            ]
         },
         {
             "name":"Chapter 4",

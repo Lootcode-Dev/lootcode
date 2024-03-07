@@ -6,8 +6,10 @@ import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { map } from "@trpc/server/observable";
 
+import { api } from "~/trpc/react";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
+import { Link } from "lucide-react";
 
 const nodeRad = 25;
 const mapRes = [1280, 720];
@@ -17,14 +19,9 @@ export default function Page() {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
-  /*
-  let renderedMDFile: File;
-
-  useEffect(()=>{
-    if(chapter != -1 && selNode != -1)
-      renderedMDFile = new File("~/problems/"+)
-  })
-  */
+  const { data: problem } = api.code.getProblem.useQuery({
+    name: nameToFileName(getNodeName(chapter, selNode)),
+  });
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -91,16 +88,21 @@ export default function Page() {
                 </g>
               ))}
             </svg>
-            {selNode != -1 ? (
-              <div className="w-[20vw] rounded-xl bg-[#15162c] p-4">
+            {selNode != -1 && problem != undefined ? (
+              <div className="flex w-[20vw] flex-col">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
-                  className="prose prose-headings:text-purple-500 prose-em:text-yellow-200 text-white"
+                  className="prose grow overflow-auto scroll-smooth 
+                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
                 >
-                  {selNode != -1
-                    ? "# Test\n" + getNode(chapter, selNode).name
-                    : ""}
+                  {selNode != -1 ? problem : ""}
                 </ReactMarkdown>
+
+                <a
+                  href={"/map/" + nameToFileName(getNodeName(chapter, selNode))}
+                >
+                  <Button className="mt-2 w-full bg-purple-700">Embark</Button>
+                </a>
               </div>
             ) : (
               <div />
@@ -152,6 +154,13 @@ function findNodePos(name: string, ch: number): number[] | undefined {
 
 function getNode(ch: number, i: number): any {
   return mapFile.chapters[ch]?.nodes[i];
+}
+
+function getNodeName(ch: number, i: number): string {
+  let n: any = getNode(ch, i);
+  if (n == undefined) return "";
+
+  return n.name;
 }
 
 function nameToFileName(name: string): string {
