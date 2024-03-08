@@ -15,11 +15,17 @@ const nodeRad = 25;
 const mapRes = [1280, 720];
 const sidebarW = 300;
 
+interface Node{
+  pos: number[]
+  name: string
+  next: string[]
+}
+
 export default function Page() {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
-  const { data: problem } = api.code.getProblem.useQuery({
+  const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery({
     name: nameToFileName(getNodeName(chapter, selNode)),
   });
 
@@ -53,7 +59,7 @@ export default function Page() {
               viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
               className="mx-2 rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
             >
-              {mapFile.chapters[chapter]?.nodes.map((node, index) => (
+              {mapFile.chapters[chapter]?.nodes.map((node: Node, index) => (
                 <g key={index} id={"node-" + node.name}>
                   {node.next.map((depend, index) => (
                     <line
@@ -152,12 +158,12 @@ function findNodePos(name: string, ch: number): number[] | undefined {
   return pos;
 }
 
-function getNode(ch: number, i: number): any {
+function getNode(ch: number, i: number): Node | undefined{
   return mapFile.chapters[ch]?.nodes[i];
 }
 
 function getNodeName(ch: number, i: number): string {
-  let n: any = getNode(ch, i);
+  const n: Node|undefined = getNode(ch, i);
   if (n == undefined) return "";
 
   return n.name;
