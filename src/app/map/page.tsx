@@ -25,9 +25,13 @@ export default function Page() {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
-  const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery({
+  const { data: problem, refetch: getProblem} = api.code.getProblem.useQuery({
     name: nameToFileName(getNodeName(chapter, selNode)),
-  });
+  }, {enabled: false});
+
+  useEffect(() => {
+    getProblem()
+  }, [chapter, selNode])
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
