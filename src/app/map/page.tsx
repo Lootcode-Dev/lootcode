@@ -10,28 +10,28 @@ import { api } from "~/trpc/react";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { Link } from "lucide-react";
+import NodeGraph from "~/components/nodegraph";
 
-const nodeRad = 25;
-const mapRes = [1280, 720];
-const sidebarW = 300;
-
-interface Node{
-  pos: number[]
-  name: string
-  next: string[]
+interface Node {
+  pos: number[];
+  name: string;
+  next: string[];
 }
 
 export default function Page() {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
-  const { data: problem, refetch: getProblem} = api.code.getProblem.useQuery({
-    name: nameToFileName(getNodeName(chapter, selNode)),
-  }, {enabled: false});
+  const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
+    {
+      name: nameToFileName(getNodeName(chapter, selNode)),
+    },
+    { enabled: false },
+  );
 
   useEffect(() => {
-    getProblem()
-  }, [chapter, selNode])
+    getProblem();
+  }, [chapter, selNode]);
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -59,79 +59,43 @@ export default function Page() {
                 Back
               </Button>
             </div>
-            <svg
-              viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
-              className="mx-2 rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
-            >
-              {mapFile.chapters[chapter]?.nodes.map((node: Node, index) => (
-                <g key={index} id={"node-" + node.name}>
-                  {node.next.map((depend, index) => (
-                    <line
-                      key={index}
-                      x1={getNodeX(node.pos[0] ?? 0)}
-                      y1={getNodeY(node.pos[1] ?? 0)}
-                      x2={getNodeX(findNodePos(depend, chapter)?.[0] ?? 0)}
-                      y2={getNodeY(findNodePos(depend, chapter)?.[1] ?? 0)}
-                      stroke="white"
-                    ></line>
-                  ))}
-                  <circle
-                    onClick={() => {
-                      selNode != index ? setSelNode(index) : setSelNode(-1);
-                      console.log(selNode);
-                    }}
-                    r={"" + nodeRad}
-                    cx={"" + getNodeX(node.pos[0] ?? 0)}
-                    cy={"" + getNodeY(node.pos[1] ?? 0)}
-                    stroke={selNode == index ? "orange" : "black"}
-                    strokeWidth={selNode == index ? "4" : "1"}
-                    className="fill-yellow-200 hover:fill-yellow-400"
-                  ></circle>
-                  <text
-                    id={"nodeText" + index}
-                    x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length * 5)}
-                    y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRad * 2)}
-                    className="border fill-white stroke-black stroke-1 text-xl font-bold"
-                  >
-                    {node.name}
-                  </text>
-                </g>
-              ))}
-            </svg>
-            {selNode != -1 && problem != undefined ? (
-              <div className="flex w-[20vw] flex-col">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className="prose grow overflow-auto scroll-smooth 
-                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
-                >
-                  {selNode != -1 ? problem : ""}
-                </ReactMarkdown>
+            <NodeGraph
+              nodes={mapFile.chapters[chapter]?.nodes}
+              nodeRadius={25}
+              getNode={selNode}
+              setNode={setSelNode}
+            />
 
+            <div className="flex w-[20vw] flex-col">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className="prose grow overflow-auto scroll-smooth 
+                rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+              >
+                {selNode != -1
+                  ? problem
+                  : "# Welcome to Lootcode!\n*Select a node to begin your adventure...*"}
+              </ReactMarkdown>
+
+              {selNode != -1 && problem != undefined ? (
                 <a
                   href={"/map/" + nameToFileName(getNodeName(chapter, selNode))}
                 >
                   <Button className="mt-2 w-full bg-purple-700">Embark</Button>
                 </a>
-              </div>
-            ) : (
-              <div />
-            )}
+              ) : (
+                <div />
+              )}
+            </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center">
-            <div className="text-[60px]">Select a chapter...</div>
-            <div className="flex flex-row items-center">
-              {mapFile.chapters.map((ch, value) => (
-                <div
-                  key={value}
-                  className="m-4 rounded-xl border-2 border-yellow-200 bg-[#15162c] p-4 text-3xl hover:bg-[#2e026d]"
-                  onClick={() => setChapter(value)}
-                >
-                  {ch.name}
-                </div>
-              ))}
-            </div>
+          <div className="flex h-[80vh] w-full justify-center">
+            <NodeGraph
+              nodes={mapFile.chapters}
+              nodeRadius={50}
+              getNode={chapter}
+              setNode={setChapter}
+            />
           </div>
         )}
       </div>
@@ -139,35 +103,12 @@ export default function Page() {
   );
 }
 
-function getNodeX(x: number): number {
-  return (mapRes[0] ?? 0) * (x / 100);
-}
-
-function getNodeY(y: number): number {
-  return (mapRes[1] ?? 0) * (y / 100);
-}
-
-//Finds a node's position by its name
-function findNodePos(name: string, ch: number): number[] | undefined {
-  let pos: number[];
-  pos = [-1, -1]; // Default value for typescript
-  mapFile.chapters[ch]?.nodes.map((node) => {
-    if (node.name === name) {
-      // console.log("inside: " + node.pos);
-      pos = node.pos;
-      return;
-    }
-  });
-
-  return pos;
-}
-
-function getNode(ch: number, i: number): Node | undefined{
+function getNode(ch: number, i: number): Node | undefined {
   return mapFile.chapters[ch]?.nodes[i];
 }
 
 function getNodeName(ch: number, i: number): string {
-  const n: Node|undefined = getNode(ch, i);
+  const n: Node | undefined = getNode(ch, i);
   if (n == undefined) return "";
 
   return n.name;
