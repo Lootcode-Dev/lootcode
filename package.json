@@ -22,6 +22,7 @@
     "@planetscale/database": "^1.16.0",
     "@prisma/adapter-planetscale": "^5.10.2",
     "@prisma/client": "^5.10.2",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@t3-oss/env-nextjs": "^0.9.2",
