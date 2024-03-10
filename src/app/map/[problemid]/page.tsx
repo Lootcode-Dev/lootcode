@@ -62,6 +62,19 @@ export default function Problem({ params }: PageProps) {
     { enabled: false },
   );
 
+  const {
+    data: templateData,
+    refetch: templateRun,
+    error: templateError,
+  } = api.code.runProblem.useQuery(
+    {
+      name: params.problemid,
+      code: code,
+      lang: language,
+    },
+    { enabled: false },
+  );
+
   useEffect(() => {
     if (problem) {
       console.log(problem);
@@ -145,6 +158,12 @@ export default function Problem({ params }: PageProps) {
                   onClick={() => codeRun()}
                 >
                   Three
+                </span>
+                <span
+                  className="border-2 border-red-500 font-semibold"
+                  onClick={() => templateRun()}
+                >
+                  Four
                 </span>
               </div>
             </ResizablePanel>

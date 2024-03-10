@@ -209,42 +209,16 @@ export const codeRouter = createTRPCRouter({
             code: "BAD_REQUEST",
             message: "Invalid language",
           });
-          break;
       }
+    }),
+    testTemplate: protectedProcedure
+    .input(z.object({ name: z.string(), code: z.string(), lang: z.string() }))
+    .query(async ({ input }) => {
+      const contents = await readFile(
+        `./src/problems/${input.name}/${input.name}.md`,
+        "utf-8",
+      );
 
-      await writeFile(`./temp/${ctx.userId}${input.name}.c`, input.code);
-          try {
-            await $`gcc ./temp/${ctx.userId}${input.name}.c -o ./temp/${ctx.userId}${input.name}.out`;
-            console.log("Compiled Successfully");
-          } catch (error: any) {
-            console.log("COMPILATION ERROR DETECTED");
-            console.log(error.stderr);
-          }
-
-          // Iterate through the input files
-          for (const file of filenames) {
-            // Run the code with the input and write the output to a temp file
-            await $`./temp/${ctx.userId}${input.name}.out < ./src/problems/${input.name}/input/${file} > ./temp/${ctx.userId}${input.name}.txt`;
-
-            // Test the output against the expected output
-            const expectedFile = file.replace(".in", ".out");
-            const output = await $`cat ./temp/${ctx.userId}${input.name}.txt`;
-            const expected =
-              await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
-            console.log("Output: " + output.stdout);
-            console.log("Expected: " + expected.stdout);
-            if (output.stdout === expected.stdout) {
-              console.log("Correct answer\n");
-            } else {
-              console.log("Wrong answer\n");
-            }
-          }
-
-          // Cleanup
-          await $`rm ./temp/${ctx.userId}${input.name}.c`;
-          await $`rm ./temp/${ctx.userId}${input.name}.out`;
-          await $`rm ./temp/${ctx.userId}${input.name}.txt`;
-
-          break;
+      return contents;
     }),
 });
