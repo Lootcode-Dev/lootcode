@@ -7,7 +7,7 @@ export const mapRouter = createTRPCRouter({
     .input(z.object({ name: z.string() }))
     .query(async ({ input }) => {
       const contents = await readFile(
-        `./src/descriptions/${input.name}.md`,
+        `./src/problems/descriptions/${input.name}.md`,
         "utf-8",
       );
       return contents;
