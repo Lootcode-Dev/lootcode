@@ -37,6 +37,18 @@ export default function Problem({ params }: PageProps) {
     name: params.problemid,
   });
 
+  /*
+    TRPC OBJECT
+    data, refetch, error
+
+    {
+      data: data
+      refetch: codeRun
+    }
+
+
+  */
+
   const {
     data: data,
     refetch: codeRun,
@@ -45,6 +57,7 @@ export default function Problem({ params }: PageProps) {
     {
       name: params.problemid,
       code: code,
+      lang: language,
     },
     { enabled: false },
   );
@@ -98,7 +111,6 @@ export default function Problem({ params }: PageProps) {
                         <SelectItem value="java">Java</SelectItem>
                         <SelectItem value="cpp">C++</SelectItem>
                         <SelectItem value="c">C</SelectItem>
-                        <SelectItem value="javascript">Javascript</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -128,7 +140,10 @@ export default function Problem({ params }: PageProps) {
             {/* Panel 3 */}
             <ResizablePanel defaultSize={20}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold" onClick={() => codeRun()}>
+                <span
+                  className="border-2 border-red-500 font-semibold"
+                  onClick={() => codeRun()}
+                >
                   Three
                 </span>
               </div>
