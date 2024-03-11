@@ -66,7 +66,7 @@ export default function Problem({ params }: PageProps) {
     data: templateData,
     refetch: templateRun,
     error: templateError,
-  } = api.code.runProblem.useQuery(
+  } = api.code.testTemplate.useQuery(
     {
       name: params.problemid,
       code: code,
