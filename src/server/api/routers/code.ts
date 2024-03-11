@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { writeFile } from "fs/promises";
+import { writeFile, readFile } from "fs/promises";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { $ } from "zx";
 import { readdirSync } from "fs";
-import { readFile } from "fs/promises";
 import { TRPCError } from "@trpc/server";
 
 
@@ -36,12 +35,15 @@ export const codeRouter = createTRPCRouter({
 
 
       interface langType {ext: string; compile ?: string; run : string} //Our Interface for our dictionary 
-      const codePath = `./temp/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
+
+      await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
+      const codePathRemoval = `./temp/${ctx.userId}${input.name}/` //This is the temp user folder where we store code
+      const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
       const problemPathInput = `./src/problems/${input.name}/input/` //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
         "python": {ext: "py", run: `python3 ${codePath}.py`},
-        "java": {ext: "java", compile: `javac ${codePath}.java`, run: `java -classpath ./temp/ ${ctx.userId}${input.name}`},
+        "java": {ext: "java", compile: `javac ${codePath}.java`, run: `java -classpath ./temp/${ctx.userId}${input.name} ${ctx.userId}${input.name}`},
         "c": {ext: "c", compile: `gcc ${codePath}.c -o ${codePath}.out -lm`, run: `${codePath}.out`},
         "cpp": {ext: "cpp", compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`, run: `${codePath}.out`}
       }
@@ -58,6 +60,16 @@ export const codeRouter = createTRPCRouter({
       const filenames = readdirSync(`${problemPathInput}`);
       console.log(filenames);
 
+      //Make sure the java class name is appropriate for our file system
+      if (langObject.ext == "java") { 
+        const regex = /public\s+class\s+_?\w+/; //Regex to look for main class
+        if (input.code.search(regex) == -1) { //Simulate a compile time error in tthe case there is no main class
+          codeGradeResponse.compileError = "Compile Time Error";
+          await $`rm -rf ${codePathRemoval}`; //Clean Up
+          return codeGradeResponse; 
+        }
+        input.code = input.code.replace(regex, `public class ${ctx.userId}${input.name}`); //Replace the name of the main class with what we want it to be
+      }
       // Write the code to a temp file with the correct extension
       await writeFile(`${codePath}.${langObject.ext}`, input.code);
 
@@ -69,7 +81,7 @@ export const codeRouter = createTRPCRouter({
           codeGradeResponse.compileError = "Compile Time Error";
           console.log(error);
 
-          await $withoutEscaping`${codePath}.${langObject.ext}`; //Clean Up
+          await $`rm -rf ${codePathRemoval}`; //Clean Up
           return codeGradeResponse; //Our code didn't compile no need to test the cases 
         }
       }
@@ -134,7 +146,7 @@ export const codeRouter = createTRPCRouter({
       }
 
       // Cleanup
-      await $`rm ${codePath}.*`; //Remove all the user files in temp
+      await $`rm -rf ${codePathRemoval}`; //Remove all the user files in temp
 
       console.log(codeGradeResponse);
       return codeGradeResponse;
