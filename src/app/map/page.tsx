@@ -47,6 +47,7 @@ export default function Page() {
 
   useEffect(() => {
     void getProblem();
+    console.log(mapFile.chapters[chapter]?.nodes[selNode]?.type);
   }, [chapter, getProblem, selNode]);
 
   useEffect(() => {
@@ -121,18 +122,14 @@ export default function Page() {
                 </ReactMarkdown>
 
                 {selNode != -1 && problem != undefined ? (
-                  <a
-                    href={
-                      "/map/" + nameToFileName(getNodeName(chapter, selNode))
-                    }
-                  >
-                    <Button className="mt-2 w-full bg-purple-700">
-                      Embark
-                    </Button>
-                  </a>
-                ) : (
-                  <div />
-                )}
+                    <a
+                    href={"/" + (mapFile.chapters[chapter]?.nodes[selNode]?.type == "problem" ? "map" : "game") + "/" + nameToFileName(getNodeName(chapter, selNode))}
+                    >
+                      <Button className="mt-2 w-full bg-purple-700">Embark</Button>
+                    </a>
+                  ) : (
+                    <div />
+                  )}
               </div>
             </div>
           </div>

@@ -9,12 +9,14 @@
                 {
                     "pos": [20,20],
                     "name": "Trial",
-                    "next": ["Trial2"]
+                    "next": ["Trial2"],
+                    "type": "problem"
                 },
                 {
                     "pos": [50,30],
                     "name": "Trial2",
-                    "next": []
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -26,22 +28,26 @@
                 {
                     "pos": [10,10],
                     "name": "No. 1",
-                    "next": ["No. 2", "No. 3"]
+                    "next": ["No. 2", "No. 3"],
+                    "type": "problem"
                 },
                 {
                     "pos": [30,5],
                     "name": "No. 2",
-                    "next": ["No. 4"]
+                    "next": ["No. 4"],
+                    "type": "problem"
                 },
                 {
                     "pos": [20,40],
                     "name": "No. 3",
-                    "next": ["No. 4"]
+                    "next": ["No. 4"],
+                    "type": "problem"
                 },
                 {
                     "pos": [50,30],
                     "name": "No. 4",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
@@ -53,32 +59,38 @@
                 {
                     "pos": [20,20],
                     "name": "1",
-                    "next": ["2"]
+                    "next": ["2"],
+                    "type": "problem"
                 },
                 {
                     "pos": [50,30],
                     "name": "2",
-                    "next": ["3", "4"]
+                    "next": ["3", "4"],
+                    "type": "problem"
                 },
                 {
                     "pos": [70,40],
                     "name": "3",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [30,50],
                     "name": "4",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [0,0],
                     "name": "TL",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [100,100],
                     "name": "BR",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
