@@ -63,7 +63,9 @@ export default function CodeCase({ c }: { c: caseRes }) {
           <div>Expected: </div>
           <div className="rounded-md bg-[#1f2937] p-2">{c.expected}</div>
           <div>Output: </div>
-          <div className="rounded-md bg-[#1f2937] p-2">{c.output}</div>
+          <div className="whitespace-normal rounded-md bg-[#1f2937] p-2">
+            {c.output.replace(/\n/g, "(\\n)")}
+          </div>
         </div>
       )}
     </div>

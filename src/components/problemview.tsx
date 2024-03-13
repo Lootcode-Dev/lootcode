@@ -88,11 +88,11 @@ export default function ProblemView({ problemid }: { problemid: string }) {
   }, [runResponse]);
 
   return (
-    <main className="z-10 flex h-[92.5vh] flex-col items-center border border-red-500 bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+    <main className="z-10 flex h-[92.5vh] flex-col items-center  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <ResizablePanelGroup direction="horizontal" className="border">
         {/* Panel 1: Markdown */}
         <ResizablePanel defaultSize={30} className="bg-[#282A36]">
-          <div className="max-h-[100vh] overflow-auto">
+          <div className="max-h-[92.5vh] overflow-auto">
             <ReactMarkdownNoSSR
               remarkPlugins={[remarkGfm]}
               className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"

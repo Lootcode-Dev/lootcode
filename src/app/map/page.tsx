@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// TODO: EXTRACT TO COMPONENT TO WRAP WITH AUTH CALLBACK
 "use client";
 
 import { useEffect, useState } from "react";
