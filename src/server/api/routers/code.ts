@@ -8,7 +8,6 @@ import { $ } from "zx";
 import { readdirSync } from "fs";
 import { TRPCError } from "@trpc/server";
 
-
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
     .input(z.object({ name: z.string() }))
@@ -28,25 +27,55 @@ export const codeRouter = createTRPCRouter({
       $.verbose = false;
 
       // Prepare the output
-      interface caseRes {num: number; expected: string; output: string; result: boolean; runtimeError?: string} //Case Interface for cases in teh Code Grade Interface
-      interface codeGradeResult {compileError?: string; numPassed: number; numFailed: number; cases: caseRes[]} //Code Grade Interface
+      interface caseRes {
+        num: number;
+        input: string;
+        expected: string;
+        output: string;
+        result: boolean;
+        runtimeError?: string;
+      } //Case Interface for cases in the Code Grade Interface
+      interface codeGradeResult {
+        compileError?: string;
+        numPassed: number;
+        numFailed: number;
+        cases: caseRes[];
+      } //Code Grade Interface
+      const codeGradeResponse: codeGradeResult = {
+        numPassed: 0,
+        numFailed: 0,
+        cases: [],
+      }; //OUR RESPONSE BACK TO OUR CLIENT
 
-      const codeGradeResponse: codeGradeResult = {numPassed: 0, numFailed: 0, cases: []}; //OUR RESPONSE BACK TO OUR CLINET
-
-
-      interface langType {ext: string; compile ?: string; run : string} //Our Interface for our dictionary 
+      interface langType {
+        ext: string;
+        compile?: string;
+        run: string;
+      } //Our Interface for our dictionary
 
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
-      const codePathRemoval = `./temp/${ctx.userId}${input.name}/` //This is the temp user folder where we store code
+      const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
-      const problemPathInput = `./src/problems/${input.name}/input/` //The path is based on the problem name
+      const problemPathInput = `./src/problems/${input.name}/input/`; //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
-        "python": {ext: "py", run: `python3 ${codePath}.py`},
-        "java": {ext: "java", compile: `javac ${codePath}.java`, run: `java -classpath ./temp/${ctx.userId}${input.name} ${ctx.userId}${input.name}`},
-        "c": {ext: "c", compile: `gcc ${codePath}.c -o ${codePath}.out -lm`, run: `${codePath}.out`},
-        "cpp": {ext: "cpp", compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`, run: `${codePath}.out`}
-      }
+        python: { ext: "py", run: `python3 ${codePath}.py` },
+        java: {
+          ext: "java",
+          compile: `javac ${codePath}.java`,
+          run: `java -classpath ./temp/${ctx.userId}${input.name} ${ctx.userId}${input.name}`,
+        },
+        c: {
+          ext: "c",
+          compile: `gcc ${codePath}.c -o ${codePath}.out -lm`,
+          run: `${codePath}.out`,
+        },
+        cpp: {
+          ext: "cpp",
+          compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`,
+          run: `${codePath}.out`,
+        },
+      };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
       if (langObject == "Error") {
         console.log("Invalid language");
@@ -61,30 +90,35 @@ export const codeRouter = createTRPCRouter({
       console.log(filenames);
 
       //Make sure the java class name is appropriate for our file system
-      if (langObject.ext == "java") { 
+      if (langObject.ext == "java") {
         const regex = /public\s+class\s+_?\w+/; //Regex to look for main class
-        if (input.code.search(regex) == -1) { //Simulate a compile time error in tthe case there is no main class
+        if (input.code.search(regex) == -1) {
+          //Simulate a compile time error in tthe case there is no main class
           codeGradeResponse.compileError = "Compile Time Error";
           await $`rm -rf ${codePathRemoval}`; //Clean Up
-          return codeGradeResponse; 
+          return codeGradeResponse;
         }
-        input.code = input.code.replace(regex, `public class ${ctx.userId}${input.name}`); //Replace the name of the main class with what we want it to be
+        input.code = input.code.replace(
+          regex,
+          `public class ${ctx.userId}${input.name}`,
+        ); //Replace the name of the main class with what we want it to be
       }
       // Write the code to a temp file with the correct extension
       await writeFile(`${codePath}.${langObject.ext}`, input.code);
 
+      // START COMPILE PIPELINE
       if (langObject.compile) {
         try {
-          await $withoutEscaping`${langObject.compile}` //Compile our code
+          await $withoutEscaping`${langObject.compile}`; //Compile our code
           console.log("Compiled Successfully");
-        } catch(error) {
+        } catch (error: any) {
           codeGradeResponse.compileError = "Compile Time Error";
           console.log(error);
 
           await $`rm -rf ${codePathRemoval}`; //Clean Up
-          return codeGradeResponse; //Our code didn't compile no need to test the cases 
+          return codeGradeResponse; //Our code didn't compile no need to test the cases
         }
-      }
+      } // END COMPILE PIPELINE
 
       // Iterate through the input files
       let i = 1;
@@ -92,42 +126,61 @@ export const codeRouter = createTRPCRouter({
         // Declare our case object
         const thisCase: caseRes = {
           num: i, //Case Number
+          input: "", //Input
           expected: "", //Expected Result
           output: "", //Our program output
           result: false, //Did we pass all cases?
           runtimeError: "", //We had an error during runtime
         };
 
+        // START RUNTIME ERROR PIPELINE
         // Run the code with the input and write the output to a temp file
         try {
           const IO = `< ${problemPathInput}${file} > ${codePath}.txt`;
           await $withoutEscaping`timeout 1s ${langObject.run} ${IO}`;
-        } catch (error: any) { //Error with running the code
-          if (error.exitCode === 124) { //Time Limit Exceeded
+        } catch (error: any) {
+          //Error with running the code
+          if (error.exitCode === 124) {
+            //Time Limit Exceeded
             //TLE exist code is 124
             console.log("Time limit exceeded");
             thisCase.runtimeError = "Time limit exceeded";
             thisCase.output = "Time limit exceeded";
-          } else { //Runtime error
+            i++;
+          } else {
+            //Runtime error
             console.log("Runtime error");
             console.log(error.stderr);
             thisCase.runtimeError = error.stderr;
             thisCase.output = "Runtime error";
+            i++;
           }
+
+          // Get the input
+          const inputFile =
+            await $`cat ./src/problems/${input.name}/input/${file}`;
+          thisCase.input = inputFile.stdout;
 
           //Get the expected output
           const expectedFile = file.replace(".in", ".out");
-          const expected = await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+          const expected =
+            await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
           thisCase.expected = expected.stdout;
-          
+
           codeGradeResponse.cases.push(thisCase);
           continue;
-        }
+        } // END RUNTIME ERROR PIPELINE
+
+        // Get the input
+        const inputFile =
+          await $`cat ./src/problems/${input.name}/input/${file}`;
+        thisCase.input = inputFile.stdout;
 
         // Test the output against the expected output
         const expectedFile = file.replace(".in", ".out");
         const output = await $`cat ${codePath}.txt`;
-        const expected = await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+        const expected =
+          await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
 
         console.log("Output: " + output.stdout);
         console.log("Expected: " + expected.stdout);
@@ -153,12 +206,15 @@ export const codeRouter = createTRPCRouter({
     }),
 });
 
-export function $withoutEscaping(pieces: TemplateStringsArray, ...args: unknown[]): any {
-  const origQuote = $.quote //ZX shell escapes using this quote function
+export function $withoutEscaping(
+  pieces: TemplateStringsArray,
+  ...args: unknown[]
+): any {
+  const origQuote = $.quote; //ZX shell escapes using this quote function
   try {
-      $.quote = unescapedCmd => unescapedCmd //Change the quote function to not esacape
-      return $(pieces, args) //Return the result of our shell command without escaping
+    $.quote = (unescapedCmd) => unescapedCmd; //Change the quote function to not esacape
+    return $(pieces, args); //Return the result of our shell command without escaping
   } finally {
-      $.quote = origQuote //Set the functionality of quote back to being able to escape (without changing our return, so our return returned an unescaped sequence fixing our compilation problems)
+    $.quote = origQuote; //Set the functionality of quote back to being able to escape (without changing our return, so our return returned an unescaped sequence fixing our compilation problems)
   }
 }
