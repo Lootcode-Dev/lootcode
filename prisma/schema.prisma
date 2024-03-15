@@ -2,19 +2,18 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["driverAdapters"]
+    provider = "prisma-client-js"
 }
 
 datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")
 
-    // Do not use foreign keys (PlanetScale does not support them)
     relationMode = "prisma"
 }
 
 model User {
-    id    String @id @unique
-    email String @unique
+    id       String @id @unique
+    email    String @unique
+    problems String
 }
