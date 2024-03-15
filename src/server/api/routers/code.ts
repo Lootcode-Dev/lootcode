@@ -7,6 +7,9 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { $ } from "zx";
 import { readdirSync } from "fs";
 import { TRPCError } from "@trpc/server";
+import indFile from "~/problems/index.json";
+import { db } from "~/server/db";
+import { check } from "prettier";
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
@@ -43,12 +46,14 @@ export const codeRouter = createTRPCRouter({
         numFailed: number;
         cases: caseRes[];
         time: string;
+        reward: boolean;
       } //Code Grade Interface
       const codeGradeResponse: codeGradeResult = {
         numPassed: 0,
         numFailed: 0,
         time: JSON.stringify(new Date()),
         cases: [],
+        reward: false,
       }; //OUR RESPONSE BACK TO OUR CLIENT
 
       interface langType {
@@ -207,7 +212,42 @@ export const codeRouter = createTRPCRouter({
       // Cleanup
       await $`rm -rf ${codePathRemoval}`; //Remove all the user files in temp
 
-      // console.log(codeGradeResponse);
+      // Check if the user has fully passed the problem for the first time, if so, reward them
+      function checkCompletion(): number {
+        const currentProblems = indFile.problems;
+        const index = currentProblems.findIndex(
+          (problem) => problem === input.name,
+        );
+        return index;
+      }
+
+      if (codeGradeResponse.numFailed === 0) {
+        console.log(checkCompletion());
+        if (checkCompletion() !== -1) {
+          const index = checkCompletion();
+          const user = await db.user.findFirst({
+            where: { id: ctx.userId },
+          });
+          if (user?.problems[index] === "0") {
+            const currentProblems = user.problems.split("");
+            console.log(currentProblems);
+            currentProblems[index] = "1";
+
+            // Join the array back into a string
+            user.problems = currentProblems.join("");
+            console.log(user.problems);
+            await db.user.update({
+              where: { id: ctx.userId },
+              data: user,
+            });
+            codeGradeResponse.reward = true;
+          } else {
+            console.log("User has already completed this problem");
+          }
+        }
+      }
+
+      console.log(codeGradeResponse);
       return codeGradeResponse;
     }),
 });

@@ -47,6 +47,7 @@ interface codeGradeResult {
   numFailed: number;
   cases: caseRes[];
   time: string;
+  reward: boolean;
 } //Code Grade Interface
 
 export default function ProblemView({ problemid }: { problemid: string }) {
