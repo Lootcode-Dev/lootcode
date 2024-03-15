@@ -2,6 +2,7 @@
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
+import { Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { run } from "node:test";
 import { useEffect, useRef, useState } from "react";
@@ -52,8 +53,8 @@ export default function ProblemView({ problemid }: { problemid: string }) {
   const [language, setLanguage] = useState<string>("python");
   const [codeSize, setCodeSize] = useState<number>(0);
   const [runningCode, setRunningCode] = useState<boolean>(false);
-  const [runData, setRunData] = useState<codeGradeResult>();
-  const code = useRef<string>("");
+  const runData = useRef<codeGradeResult>();
+  const [code, setCode] = useState<string>("");
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
@@ -62,14 +63,16 @@ export default function ProblemView({ problemid }: { problemid: string }) {
   const { data: runResponse, refetch: codeRun } = api.code.runProblem.useQuery(
     {
       name: problemid,
-      code: code.current,
+      code: code,
       lang: language,
     },
     { enabled: false },
   );
 
   useEffect(() => {
-    setRunData(runResponse);
+    if (runResponse) {
+      runData.current = runResponse;
+    }
     setRunningCode(false);
   }, [runResponse]);
 
@@ -137,8 +140,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                       autocompletion: false,
                     }}
                     onChange={(value) => {
-                      code.current = value;
-                      console.log(code.current);
+                      setCode(value);
                     }}
                   />
                 </div>
@@ -152,24 +154,32 @@ export default function ProblemView({ problemid }: { problemid: string }) {
             >
               <div className={`flex h-full flex-col items-center`}>
                 <div className="flex h-[5vh] w-full items-center bg-zinc-800 p-1 px-4">
-                  {runData && (
+                  {!runningCode && runData.current && (
                     <div className="flex gap-4">
-                      <div>Total: {runData.numFailed + runData.numPassed} </div>
-                      <div>Passed: {runData.numPassed} </div>
-                      <div>Failed: {runData.numFailed} </div>
+                      <div>
+                        Total:{" "}
+                        {runData.current?.numFailed +
+                          runData.current?.numPassed}{" "}
+                      </div>
+                      <div>Passed: {runData.current?.numPassed} </div>
+                      <div>Failed: {runData.current?.numFailed} </div>
                     </div>
                   )}
                 </div>
                 <div
                   className={`mt-4 h-full max-h-full w-full flex-col space-y-4 overflow-auto  px-2`}
                 >
-                  {runData ? (
-                    runData.compileError ? (
+                  {runningCode ? (
+                    <div className="flex h-full items-center justify-center font-extrabold text-yellow-200">
+                      <Loader2 className="h-10 w-10 animate-spin" />
+                    </div>
+                  ) : runData.current ? (
+                    runData.current?.compileError ? (
                       <div className="flex items-center justify-center font-extrabold text-red-500">
-                        {runData.compileError}
+                        {runData.current.compileError}
                       </div>
                     ) : (
-                      runData.cases.map((c, index) => (
+                      runData.current?.cases.map((c, index) => (
                         <CodeCase c={c} key={`${c.num}-${index}`} />
                       ))
                     )
