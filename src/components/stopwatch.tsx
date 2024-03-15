@@ -37,7 +37,7 @@ const Stopwatch = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 rounded-md border p-2">
+    <div className="flex items-center gap-2 p-2 w-full justify-center">
       <div className="text-yellow-200">{formatTime()}</div>
       <button onClick={isActive ? handlePause : handleStart}>
         {isActive ? (
