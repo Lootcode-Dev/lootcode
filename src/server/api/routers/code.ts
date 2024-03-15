@@ -17,26 +17,28 @@ export const codeRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const contents = { description: "", loot: "", solved: false };
 
-      contents.description = await readFile(
-        `./src/problems/${input.name}/${input.name}.md`,
-        "utf-8",
-      );
+      if (input.name !== "") {
+        contents.description = await readFile(
+          `./src/problems/${input.name}/${input.name}.md`,
+          "utf-8",
+        );
 
-      contents.loot = await readFile(
-        `./src/problems/${input.name}/loot.md`,
-        "utf-8",
-      );
+        contents.loot = await readFile(
+          `./src/problems/${input.name}/loot.md`,
+          "utf-8",
+        );
 
-      const currentProblems = indFile.problems;
-      const index = currentProblems.findIndex(
-        (problem) => problem === input.name,
-      );
-      if (index !== -1) {
-        const user = await db.user.findFirst({
-          where: { id: ctx.userId },
-        });
-        if (user?.problems[index] === "1") {
-          contents.solved = true;
+        const currentProblems = indFile.problems;
+        const index = currentProblems.findIndex(
+          (problem) => problem === input.name,
+        );
+        if (index !== -1) {
+          const user = await db.user.findFirst({
+            where: { id: ctx.userId },
+          });
+          if (user?.problems[index] === "1") {
+            contents.solved = true;
+          }
         }
       }
 
