@@ -3,16 +3,9 @@
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import dynamic from "next/dynamic";
-// Dynamically import CodeMirror with no SSR
-const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
-  ssr: false,
-});
-import { useEffect, useState } from "react";
-const ReactMarkdownNoSSR = dynamic(() => import("react-markdown"), {
-  ssr: false,
-});
+import { run } from "node:test";
+import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
-import { set } from "zod";
 import CodeCase from "~/components/codecase";
 import { Button } from "~/components/ui/button";
 import {
@@ -30,6 +23,13 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { api } from "~/trpc/react";
+// Dynamically import CodeMirror with no SSR
+const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
+  ssr: false,
+});
+const ReactMarkdownNoSSR = dynamic(() => import("react-markdown"), {
+  ssr: false,
+});
 
 // Prepare the output
 interface caseRes {
@@ -45,46 +45,32 @@ interface codeGradeResult {
   numPassed: number;
   numFailed: number;
   cases: caseRes[];
+  time: string;
 } //Code Grade Interface
 
 export default function ProblemView({ problemid }: { problemid: string }) {
   const [language, setLanguage] = useState<string>("python");
   const [codeSize, setCodeSize] = useState<number>(0);
-  const [code, setCode] = useState<string>("");
   const [runningCode, setRunningCode] = useState<boolean>(false);
   const [runData, setRunData] = useState<codeGradeResult>();
-
-  const handleRun = () => {
-    setRunningCode(true);
-    void codeRun();
-  };
+  const code = useRef<string>("");
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
   });
 
-  const {
-    data: runResponse,
-    refetch: codeRun,
-    error: codeError,
-  } = api.code.runProblem.useQuery(
+  const { data: runResponse, refetch: codeRun } = api.code.runProblem.useQuery(
     {
       name: problemid,
-      code: code,
+      code: code.current,
       lang: language,
     },
     { enabled: false },
   );
 
   useEffect(() => {
-    if (codeError) console.log("ERROR DETECTED\n\n\n", codeError);
-  }, [codeError]);
-
-  useEffect(() => {
-    if (runResponse) {
-      setRunningCode(false);
-      setRunData(runResponse);
-    }
+    setRunData(runResponse);
+    setRunningCode(false);
   }, [runResponse]);
 
   return (
@@ -128,7 +114,10 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                   </Select>
                   <Button
                     className="border bg-purple-950"
-                    onClick={() => handleRun()}
+                    onClick={() => {
+                      setRunningCode(true);
+                      void codeRun();
+                    }}
                   >
                     {runningCode ? "Running..." : "Run"}
                   </Button>
@@ -148,7 +137,8 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                       autocompletion: false,
                     }}
                     onChange={(value) => {
-                      setCode(value);
+                      code.current = value;
+                      console.log(code.current);
                     }}
                   />
                 </div>

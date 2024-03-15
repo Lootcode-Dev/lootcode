@@ -15,8 +15,6 @@ import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 
-import { currentUser } from "@clerk/nextjs";
-import { db } from "~/server/db";
 
 import {
   Dialog,
@@ -44,7 +42,7 @@ export default function MapView({ id, email, problems }: IUser) {
   const [selNode, setSelNode] = useState(-1);
 
   const dummyProblems =
-    "000000000000000000000000000000000000000000000000000000000000000000000000000";
+    "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {

@@ -26,6 +26,8 @@ export const codeRouter = createTRPCRouter({
       // Zx setup
       $.verbose = false;
 
+      console.log("CODE: ", input.code);
+
       // Prepare the output
       interface caseRes {
         num: number;
@@ -40,10 +42,12 @@ export const codeRouter = createTRPCRouter({
         numPassed: number;
         numFailed: number;
         cases: caseRes[];
+        time: string;
       } //Code Grade Interface
       const codeGradeResponse: codeGradeResult = {
         numPassed: 0,
         numFailed: 0,
+        time: JSON.stringify(new Date()),
         cases: [],
       }; //OUR RESPONSE BACK TO OUR CLIENT
 
@@ -87,7 +91,7 @@ export const codeRouter = createTRPCRouter({
 
       // Get all of our input files
       const filenames = readdirSync(`${problemPathInput}`);
-      console.log(filenames);
+      // console.log(filenames);
 
       //Make sure the java class name is appropriate for our file system
       if (langObject.ext == "java") {
@@ -110,10 +114,10 @@ export const codeRouter = createTRPCRouter({
       if (langObject.compile) {
         try {
           await $withoutEscaping`${langObject.compile}`; //Compile our code
-          console.log("Compiled Successfully");
+          // console.log("Compiled Successfully");
         } catch (error: any) {
           codeGradeResponse.compileError = "Compile Time Error";
-          console.log(error);
+          // console.log(error);
 
           await $`rm -rf ${codePathRemoval}`; //Clean Up
           return codeGradeResponse; //Our code didn't compile no need to test the cases
@@ -143,16 +147,18 @@ export const codeRouter = createTRPCRouter({
           if (error.exitCode === 124) {
             //Time Limit Exceeded
             //TLE exist code is 124
-            console.log("Time limit exceeded");
+            // console.log("Time limit exceeded");
             thisCase.runtimeError = "Time limit exceeded";
             thisCase.output = "Time limit exceeded";
+            codeGradeResponse.numFailed++;
             i++;
           } else {
             //Runtime error
-            console.log("Runtime error");
-            console.log(error.stderr);
+            // console.log("Runtime error");
+            // console.log(error.stderr);
             thisCase.runtimeError = error.stderr;
             thisCase.output = "Runtime error";
+            codeGradeResponse.numFailed++;
             i++;
           }
 
@@ -182,16 +188,16 @@ export const codeRouter = createTRPCRouter({
         const expected =
           await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
 
-        console.log("Output: " + output.stdout);
-        console.log("Expected: " + expected.stdout);
+        // console.log("Output: " + output.stdout);
+        // console.log("Expected: " + expected.stdout);
         thisCase.expected = expected.stdout;
         thisCase.output = output.stdout;
         if (output.stdout === expected.stdout) {
-          console.log("Correct answer\n");
+          // console.log("Correct answer\n");
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
-          console.log("Wrong answer\n");
+          // console.log("Wrong answer\n");
           codeGradeResponse.numFailed++;
         }
         codeGradeResponse.cases.push(thisCase);
@@ -201,7 +207,7 @@ export const codeRouter = createTRPCRouter({
       // Cleanup
       await $`rm -rf ${codePathRemoval}`; //Remove all the user files in temp
 
-      console.log(codeGradeResponse);
+      // console.log(codeGradeResponse);
       return codeGradeResponse;
     }),
 });
