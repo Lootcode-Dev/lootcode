@@ -2,9 +2,8 @@
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
-import { Loader2 } from "lucide-react";
+import { Coins, CoinsIcon, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { run } from "node:test";
 import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import CodeCase from "~/components/codecase";
@@ -24,6 +23,15 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { api } from "~/trpc/react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -48,6 +56,7 @@ interface codeGradeResult {
   cases: caseRes[];
   time: string;
   reward: boolean;
+  solved: boolean;
 } //Code Grade Interface
 
 export default function ProblemView({ problemid }: { problemid: string }) {
@@ -56,6 +65,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
   const [runningCode, setRunningCode] = useState<boolean>(false);
   const runData = useRef<codeGradeResult>();
   const [code, setCode] = useState<string>("");
+  const [firstSolve, setFirstSolve] = useState<boolean>(false);
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
@@ -74,6 +84,9 @@ export default function ProblemView({ problemid }: { problemid: string }) {
     if (runResponse) {
       runData.current = runResponse;
     }
+    if (runResponse?.reward === true) {
+      setFirstSolve(true);
+    }
     setRunningCode(false);
   }, [runResponse]);
 
@@ -87,7 +100,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
               remarkPlugins={[remarkGfm]}
               className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
             >
-              {problem}
+              {problem?.description}
             </ReactMarkdownNoSSR>
           </div>
         </ResizablePanel>
@@ -157,15 +170,37 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                 <div className="flex h-[5vh] w-full items-center bg-zinc-800 p-1 px-4">
                   {!runningCode && runData.current && (
                     <div className="flex gap-4">
+                      <div>Total: </div>
                       <div>
-                        Total:{" "}
                         {runData.current?.numFailed +
-                          runData.current?.numPassed}{" "}
+                          runData.current?.numPassed}
                       </div>
-                      <div>Passed: {runData.current?.numPassed} </div>
-                      <div>Failed: {runData.current?.numFailed} </div>
+                      <div>Passed: </div>
+                      <div>{runData.current?.numPassed} </div>
+                      <div>Failed:</div>
+                      <div> {runData.current?.numFailed} </div>
                     </div>
                   )}
+                  <div className="flex w-full items-center justify-end">
+                    {runData.current?.solved === true ||
+                    runData.current?.reward === true ? (
+                      <>
+                        <Dialog open={firstSolve} onOpenChange={setFirstSolve}>
+                          <DialogTrigger asChild>
+                            <CoinsIcon className="mx-2 h-6 w-6 text-yellow-200" />
+                          </DialogTrigger>
+                          <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+                            <ReactMarkdownNoSSR
+                              remarkPlugins={[remarkGfm]}
+                              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                            >
+                              {problem?.loot}
+                            </ReactMarkdownNoSSR>
+                          </DialogContent>
+                        </Dialog>
+                      </>
+                    ) : null}
+                  </div>
                 </div>
                 <div
                   className={`mt-4 h-full max-h-full w-full flex-col space-y-4 overflow-auto  px-2`}

@@ -15,7 +15,6 @@ import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 
-
 import {
   Dialog,
   DialogContent,
@@ -90,7 +89,7 @@ export default function MapView({ id, email, problems }: IUser) {
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle>
                     <DialogDescription>
@@ -129,12 +128,7 @@ export default function MapView({ id, email, problems }: IUser) {
 
               <div className="flex w-[20vw] flex-col">
                 <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                  {checkCompletion(
-                    getNodeName(chapter, selNode),
-                    problems ?? dummyProblems,
-                  )
-                    ? "Completed"
-                    : "Not Completed"}
+                  {problem?.solved ? "Completed" : "Not Completed"}
                 </div>
 
                 <ReactMarkdown
@@ -142,7 +136,7 @@ export default function MapView({ id, email, problems }: IUser) {
                   className="prose grow overflow-auto scroll-smooth 
                     rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
                 >
-                  {selNode != -1 ? problem : desc}
+                  {selNode != -1 ? problem?.description : desc}
                 </ReactMarkdown>
 
                 {selNode != -1 && problem != undefined ? (
@@ -189,17 +183,4 @@ function getNodeName(ch: number, i: number): string {
 
 function nameToFileName(name: string): string {
   return name.split(" ").join("-").toLowerCase();
-}
-
-function checkCompletion(problem: string, user: string): boolean {
-  let res = false;
-
-  indFile.problems.map((prob, index) => {
-    if (nameToFileName(problem) === prob) {
-      res = user[index] === "1";
-      return;
-    }
-  });
-
-  return res;
 }

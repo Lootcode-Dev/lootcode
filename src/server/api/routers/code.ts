@@ -14,11 +14,31 @@ import { check } from "prettier";
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
     .input(z.object({ name: z.string() }))
-    .query(async ({ input }) => {
-      const contents = await readFile(
+    .query(async ({ input, ctx }) => {
+      const contents = { description: "", loot: "", solved: false };
+
+      contents.description = await readFile(
         `./src/problems/${input.name}/${input.name}.md`,
         "utf-8",
       );
+
+      contents.loot = await readFile(
+        `./src/problems/${input.name}/loot.md`,
+        "utf-8",
+      );
+
+      const currentProblems = indFile.problems;
+      const index = currentProblems.findIndex(
+        (problem) => problem === input.name,
+      );
+      if (index !== -1) {
+        const user = await db.user.findFirst({
+          where: { id: ctx.userId },
+        });
+        if (user?.problems[index] === "1") {
+          contents.solved = true;
+        }
+      }
 
       return contents;
     }),
@@ -28,8 +48,6 @@ export const codeRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       // Zx setup
       $.verbose = false;
-
-      console.log("CODE: ", input.code);
 
       // Prepare the output
       interface caseRes {
@@ -47,6 +65,7 @@ export const codeRouter = createTRPCRouter({
         cases: caseRes[];
         time: string;
         reward: boolean;
+        solved: boolean;
       } //Code Grade Interface
       const codeGradeResponse: codeGradeResult = {
         numPassed: 0,
@@ -54,6 +73,7 @@ export const codeRouter = createTRPCRouter({
         time: JSON.stringify(new Date()),
         cases: [],
         reward: false,
+        solved: false,
       }; //OUR RESPONSE BACK TO OUR CLIENT
 
       interface langType {
@@ -242,8 +262,20 @@ export const codeRouter = createTRPCRouter({
             });
             codeGradeResponse.reward = true;
           } else {
+            codeGradeResponse.reward = true;
             console.log("User has already completed this problem");
           }
+        }
+      }
+
+      if (checkCompletion() !== -1) {
+        const index = checkCompletion();
+        const user = await db.user.findFirst({
+          where: { id: ctx.userId },
+        });
+        if (user?.problems[index] === "1") {
+          console.log("User has already completed this problem");
+          codeGradeResponse.solved = true;
         }
       }
 
