@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { writeFile, readFile } from "fs/promises";
-import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
-import { $ } from "zx";
-import { readdirSync } from "fs";
 import { TRPCError } from "@trpc/server";
+import { readdirSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
+import { z } from "zod";
+import { $ } from "zx";
 import indFile from "~/problems/index.json";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
-import { check } from "prettier";
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
@@ -243,6 +242,7 @@ export const codeRouter = createTRPCRouter({
         return index;
       }
 
+      // Check if the user has fully passed the problem for the first time, if so, reward them
       if (codeGradeResponse.numFailed === 0) {
         console.log(checkCompletion());
         if (checkCompletion() !== -1) {

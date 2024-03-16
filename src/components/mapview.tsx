@@ -40,9 +40,6 @@ export default function MapView({ id, email, problems }: IUser) {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
-  const dummyProblems =
-    "00000000000000000000000000000000000000000000000000000000000000000000000000";
-
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {
       name: nameToFileName(getNodeName(chapter, selNode)),
