@@ -6,7 +6,7 @@ An evil overlord has taken over our city, and will only let us go if we solve a 
 
 Sadly, we here at stupidville can't count past 5!!! Please save us!!!
 
-# Input
+## Input
 
 Input will consist of two numbers separated by whitespace
 
@@ -14,7 +14,7 @@ Input will consist of two numbers separated by whitespace
 2 5
 ```
 
-# Output
+## Output
 
 Print the resulting number
 

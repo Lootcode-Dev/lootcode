@@ -19,7 +19,7 @@ export const codeRouter = createTRPCRouter({
 
       if (input.name !== "") {
         contents.description = await readFile(
-          `./src/problems/${input.name}/${input.name}.md`,
+          `./src/problems/${input.name}/problem.md`,
           "utf-8",
         );
 
