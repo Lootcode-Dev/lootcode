@@ -25,6 +25,7 @@ export const authRouter = createTRPCRouter({
         data: {
           id: user.id,
           email: user.emailAddresses[0].emailAddress,
+          problems: "000000000000000000000000000000000000000000000000000000000000000000000000000"
         },
       });
     }

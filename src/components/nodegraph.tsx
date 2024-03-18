@@ -7,6 +7,7 @@ interface Node {
 interface Graph {
   nodes: Node[] | undefined;
   nodeRadius: number;
+  nodeColor: any;
   getNode: number;
   setNode: any;
 }
@@ -17,6 +18,7 @@ const mapRes = [1280, 720];
 export default function NodeGraph({
   nodes,
   nodeRadius,
+  nodeColor,
   getNode,
   setNode,
 }: Graph) {
@@ -52,9 +54,10 @@ export default function NodeGraph({
             r={"" + nodeRadius}
             cx={"" + getNodeX(node.pos[0] ?? 0)}
             cy={"" + getNodeY(node.pos[1] ?? 0)}
-            stroke={getNode == index ? "orange" : "black"}
-            strokeWidth={getNode == index ? "4" : "1"}
-            className="fill-yellow-200 hover:fill-yellow-400"
+            stroke={getNode == index ? "orange" : "white"}
+            strokeWidth={(getNode == index ? "4" : "1")}
+            fill={nodeColor(node.name)}
+            className={"hover:stroke-[4px]"}
           ></circle>
           <text
             id={"nodeText" + index}
