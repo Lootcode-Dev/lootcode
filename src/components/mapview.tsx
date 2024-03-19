@@ -95,14 +95,14 @@ export default function MapView({ id, email, problems }: IUser) {
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-zinc-800 text-white sm:max-w-[425px]">
+                <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
                   <DialogHeader>
-                    <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle>
-                    <DialogDescription>
+                    {/* <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle> */}
+                    <DialogDescription className="w-full">
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
-                        className=" prose grow overflow-auto scroll-smooth 
-                        rounded-xl p-4 text-white prose-headings:text-white"
+                        className=" prose w-auto  max-w-none 
+                         scroll-smooth text-white prose-headings:text-white"
                       >
                         {desc}
                       </ReactMarkdown>
@@ -166,7 +166,7 @@ export default function MapView({ id, email, problems }: IUser) {
           <div className="flex h-[80vh] w-full justify-center">
             <NodeGraph
               nodes={mapFile.chapters}
-              nodeRadius={50}
+              nodeRadius={30}
               nodeColor={setNodeChapterColor}
               getNode={chapter}
               setNode={setChapter}
