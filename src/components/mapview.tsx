@@ -36,9 +36,18 @@ type IUser = {
   problems: string | undefined;
 };
 
+let dummyProblems =
+  "00000000000000000000000000000000000000000000000000000000000000000000000000";
+
 export default function MapView({ id, email, problems }: IUser) {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
+
+  //I know this is goofy but I don't want to query the user
+  //here and in the getColor functions, and I think having to pass
+  //a user string to the node graph for completion functions is
+  //dumb if we want to make the node graph component reusable.
+  if (problems) dummyProblems = problems;
 
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {
@@ -86,14 +95,14 @@ export default function MapView({ id, email, problems }: IUser) {
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+                <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
                   <DialogHeader>
-                    <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle>
-                    <DialogDescription>
+                    {/* <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle> */}
+                    <DialogDescription className="w-full">
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
-                        className="prose grow overflow-auto scroll-smooth 
-                        rounded-xl p-4"
+                        className=" prose w-auto  max-w-none 
+                         scroll-smooth text-white prose-headings:text-white"
                       >
                         {desc}
                       </ReactMarkdown>
@@ -119,6 +128,7 @@ export default function MapView({ id, email, problems }: IUser) {
               <NodeGraph
                 nodes={mapFile.chapters[chapter]?.nodes}
                 nodeRadius={25}
+                nodeColor={setNodeColor}
                 getNode={selNode}
                 setNode={setSelNode}
               />
@@ -156,7 +166,8 @@ export default function MapView({ id, email, problems }: IUser) {
           <div className="flex h-[80vh] w-full justify-center">
             <NodeGraph
               nodes={mapFile.chapters}
-              nodeRadius={50}
+              nodeRadius={30}
+              nodeColor={setNodeChapterColor}
               getNode={chapter}
               setNode={setChapter}
             />
@@ -180,4 +191,45 @@ function getNodeName(ch: number, i: number): string {
 
 function nameToFileName(name: string): string {
   return name.split(" ").join("-").toLowerCase();
+}
+
+//Restoring this to determine node colors
+//I know this was implemented into the getProblem query,
+//but I'd rather not run a TRPC query to get completion
+//for each node on mount just to change colors
+function checkCompletion(problem: string, user: string): boolean {
+  let res = false;
+  indFile.problems.map((prob, index) => {
+    if (nameToFileName(problem) === prob) {
+      res = user[index] === "1";
+      return;
+    }
+  });
+  return res;
+}
+
+//Returns true only if all problems in a chapter are completed
+function checkChapterCompletion(name: string, user: string): boolean {
+  let res = true;
+  mapFile.chapters.map((chapter, index) => {
+    if (chapter.name === name) {
+      mapFile.chapters[index]?.nodes.map((problem) => {
+        if (!checkCompletion(problem.name, user)) {
+          res = false;
+          return;
+        }
+      });
+    }
+  });
+  return res;
+}
+
+function setNodeColor(name: string): string {
+  if (checkCompletion(name, dummyProblems)) return "#10b981";
+  else return "#ef4444";
+}
+
+function setNodeChapterColor(name: string): string {
+  if (checkChapterCompletion(name, dummyProblems)) return "#10b981";
+  else return "#ef4444";
 }
