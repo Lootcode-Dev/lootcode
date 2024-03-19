@@ -134,9 +134,11 @@ export default function MapView({ id, email, problems }: IUser) {
               />
 
               <div className="flex w-[20vw] flex-col">
-                <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                  {problem?.solved ? "Completed" : "Not Completed"}
-                </div>
+                {problem && (
+                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                    {problem.solved ? "Completed" : "Not Completed"}
+                  </div>
+                )}
 
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}

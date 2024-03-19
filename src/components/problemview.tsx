@@ -32,7 +32,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import Stopwatch from "~/components/stopwatch";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -115,7 +114,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
               className="bg-[#282A36]"
             >
               <div className="flex flex-col">
-                <div className="mx-2 flex h-[5vh] items-center justify-between bg-zinc-800 p-1">
+                <div className="  mx-2 flex h-[5vh] justify-between bg-zinc-800 p-1">
                   <Select onValueChange={setLanguage}>
                     <SelectTrigger className="w-[180px] bg-purple-950">
                       <SelectValue placeholder="Python" />
@@ -130,7 +129,6 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  <Stopwatch />
                   <Button
                     className="border bg-purple-950"
                     onClick={() => {
