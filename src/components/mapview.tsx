@@ -37,7 +37,7 @@ type IUser = {
 };
 
 let dummyProblems =
-"00000000000000000000000000000000000000000000000000000000000000000000000000";
+  "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
 export default function MapView({ id, email, problems }: IUser) {
   const [chapter, setChapter] = useState(-1);
@@ -47,8 +47,7 @@ export default function MapView({ id, email, problems }: IUser) {
   //here and in the getColor functions, and I think having to pass
   //a user string to the node graph for completion functions is
   //dumb if we want to make the node graph component reusable.
-  if(problems)
-  dummyProblems = problems;
+  if (problems) dummyProblems = problems;
 
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {
@@ -96,14 +95,14 @@ export default function MapView({ id, email, problems }: IUser) {
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+                <DialogContent className="bg-zinc-800 text-white sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle>
                     <DialogDescription>
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
-                        className="prose grow overflow-auto scroll-smooth 
-                        rounded-xl p-4"
+                        className=" prose grow overflow-auto scroll-smooth 
+                        rounded-xl p-4 text-white prose-headings:text-white"
                       >
                         {desc}
                       </ReactMarkdown>
@@ -212,30 +211,25 @@ function checkCompletion(problem: string, user: string): boolean {
 //Returns true only if all problems in a chapter are completed
 function checkChapterCompletion(name: string, user: string): boolean {
   let res = true;
-  mapFile.chapters.map((chapter, index)=>{
-    if(chapter.name === name)
-    {
-      mapFile.chapters[index]?.nodes.map((problem)=>{
-        if(!checkCompletion(problem.name, user)) {
+  mapFile.chapters.map((chapter, index) => {
+    if (chapter.name === name) {
+      mapFile.chapters[index]?.nodes.map((problem) => {
+        if (!checkCompletion(problem.name, user)) {
           res = false;
           return;
         }
-      })
+      });
     }
   });
   return res;
 }
 
 function setNodeColor(name: string): string {
-  if(checkCompletion(name, dummyProblems))
-    return "#10b981"
-  else
-    return "#ef4444"
+  if (checkCompletion(name, dummyProblems)) return "#10b981";
+  else return "#ef4444";
 }
 
 function setNodeChapterColor(name: string): string {
-  if(checkChapterCompletion(name, dummyProblems))
-    return "#10b981"
-  else
-    return "#ef4444"
+  if (checkChapterCompletion(name, dummyProblems)) return "#10b981";
+  else return "#ef4444";
 }
