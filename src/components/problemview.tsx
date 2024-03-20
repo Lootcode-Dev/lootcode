@@ -143,7 +143,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                   <CodeMirrorNoSSR
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     theme={dracula}
-                    height={`${codeSize - 5}vh`}
+                    height={`${codeSize - 10}vh`}
                     extensions={[loadLanguage(language)]}
                     basicSetup={{
                       syntaxHighlighting: true,

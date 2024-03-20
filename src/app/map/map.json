@@ -7,13 +7,13 @@
             "next": [],
             "nodes": [
                 {
-                    "pos": [20,20],
-                    "name": "Trial",
-                    "next": ["Trial2"]
+                    "pos": [10,10],
+                    "name": "Leaking Letters",
+                    "next": []
                 },
                 {
-                    "pos": [50,30],
-                    "name": "Trial2",
+                    "pos": [10,50],
+                    "name": "Stable Words",
                     "next": []
                 }
             ]
@@ -22,25 +22,15 @@
             "name":"Vectara",
             "pos": [30,10],
             "next": [],
-            "nodes": [
+            "nodes" : [
                 {
-                    "pos": [10,10],
-                    "name": "No. 1",
-                    "next": ["No. 2", "No. 3"]
-                },
-                {
-                    "pos": [30,5],
-                    "name": "No. 2",
-                    "next": ["No. 4"]
-                },
-                {
-                    "pos": [20,40],
-                    "name": "No. 3",
-                    "next": ["No. 4"]
+                    "pos": [20,20],
+                    "name": "Trial",
+                    "next": ["Trial2"]
                 },
                 {
                     "pos": [50,30],
-                    "name": "No. 4",
+                    "name": "Trial2",
                     "next": []
                 }
             ]

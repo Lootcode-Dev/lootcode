@@ -1,6 +1,8 @@
 {
     "problems": [
         "trial",
-        "trial2"
+        "trial2",
+        "leaking-letters",
+        "stable-words"
     ]
 }

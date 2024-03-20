@@ -1,9 +1,10 @@
 {
     "lexica": [
+        "leaking-letters",
+        "stable-words"
+    ],
+    "vectara": [
         "trial",
         "trial2"
-    ],
-    "vectara":[
-        "no.-2"
     ]
 }

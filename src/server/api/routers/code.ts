@@ -92,6 +92,9 @@ export const codeRouter = createTRPCRouter({
         regFile[key as keyof typeof regFile].includes(input.name),
       );
 
+      console.log(region);
+      console.log(region === "lexica");
+
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
       const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
