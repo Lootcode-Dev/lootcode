@@ -23,16 +23,7 @@
             "pos": [30,10],
             "next": [],
             "nodes" : [
-                {
-                    "pos": [20,20],
-                    "name": "Trial",
-                    "next": ["Trial2"]
-                },
-                {
-                    "pos": [50,30],
-                    "name": "Trial2",
-                    "next": []
-                }
+                
             ]
         },
         {
