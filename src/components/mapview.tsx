@@ -102,7 +102,7 @@ export default function MapView({ id, email, problems }: IUser) {
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         className=" prose w-auto  max-w-none 
-                         scroll-smooth text-white prose-headings:text-white"
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                       >
                         {desc}
                       </ReactMarkdown>
