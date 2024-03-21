@@ -13,7 +13,16 @@ datasource db {
 }
 
 model User {
-    id       String @id @unique
-    email    String @unique
-    problems String
+    id        String @id @unique
+    email     String @unique
+    problems  String
+    items     String
+    gold      Int
+    armor     Int
+    accessory Int
+    weapon    Int
+    focus     Int
+    skill1    Int
+    skill2    Int
+    skill3    Int
 }

@@ -9,22 +9,26 @@
                 {
                     "pos": [10,10],
                     "name": "Leaking Letters",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [10,50],
                     "name": "Stable Words",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [10,90],
                     "name": "Refugees",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [50,10],
                     "name": "Engagement",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
@@ -36,7 +40,14 @@
                 {
                     "pos": [10,10],
                     "name": "Flooring",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Flooring",
+                    "next": [],
+                    "type": "encounter"
                 }
             ]
         },
@@ -48,32 +59,38 @@
                 {
                     "pos": [20,20],
                     "name": "1",
-                    "next": ["2"]
+                    "next": ["2"],
+                    "type": "problem"
                 },
                 {
                     "pos": [50,30],
                     "name": "2",
-                    "next": ["3", "4"]
+                    "next": ["3", "4"],
+                    "type": "problem"
                 },
                 {
                     "pos": [70,40],
                     "name": "3",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [30,50],
                     "name": "4",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [0,0],
                     "name": "TL",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 },
                 {
                     "pos": [100,100],
                     "name": "BR",
-                    "next": []
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
