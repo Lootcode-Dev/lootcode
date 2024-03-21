@@ -41,6 +41,12 @@
                     "name": "Merry Go Word",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50,70],
+                    "name": "Ichors Identifier",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
