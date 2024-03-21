@@ -1,8 +1,9 @@
 {
     "lexica": [
-        "leaking-letters",
-        "stable-words",
-        "refugees"
+        "leaking_letters",
+        "stable_words",
+        "refugees",
+        "engagement"
     ],
     "vectara": [
         "flooring"

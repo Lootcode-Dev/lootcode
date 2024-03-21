@@ -192,7 +192,7 @@ function getNodeName(ch: number, i: number): string {
 }
 
 function nameToFileName(name: string): string {
-  return name.split(" ").join("-").toLowerCase();
+  return name.split(" ").join("_").toLowerCase();
 }
 
 //Restoring this to determine node colors
