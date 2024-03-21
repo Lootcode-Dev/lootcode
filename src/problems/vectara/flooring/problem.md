@@ -7,3 +7,27 @@ We have some more tiles and we know **two** of them could combine to make the ti
 However, we're having trouble finding which ones.
 
 Normally the kitchen would reallocate itself, but not ever since...
+
+## Input
+
+The first line of input will be an integer, _n (1 ≤ n ≤ 100)_, which represents the number of tiles we have. Then follow two lines. 
+
+The next line contains _n_ space seperated integers representing the length of the tiles we have.
+
+The next line has a single integer representing the length of the tile we need.
+
+__There will always only be a single valid solution.__
+
+```
+5
+2 7 11 15 20
+9
+```
+
+## Output
+
+Print the position of the two tiles we need to combine to fill in our kitchen floor. The position should be printed in increasing order (e.g., the tile with the lower position should be printed first).
+
+```
+0 1
+```

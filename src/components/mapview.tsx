@@ -143,7 +143,7 @@ export default function MapView({ id, email, problems }: IUser) {
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                 >
                   {selNode != -1 ? problem?.description : desc}
                 </ReactMarkdown>
