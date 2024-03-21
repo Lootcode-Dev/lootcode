@@ -149,7 +149,13 @@ export default function MapView({ id, email, problems }: IUser) {
                 {selNode != -1 && problem != undefined ? (
                   <a
                     href={
-                      "/map/" + nameToFileName(getNodeName(chapter, selNode))
+                      "/" +
+                      (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                      "problem"
+                        ? "map"
+                        : "game") +
+                      "/" +
+                      nameToFileName(getNodeName(chapter, selNode))
                     }
                   >
                     <Button className="mt-2 w-full bg-purple-700">
@@ -189,7 +195,7 @@ function getNodeName(ch: number, i: number): string {
   return n.name;
 }
 
-function nameToFileName(name: string): string {
+export function nameToFileName(name: string): string {
   return name.split(" ").join("-").toLowerCase();
 }
 
