@@ -211,8 +211,10 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     </div>
                   ) : runData.current ? (
                     runData.current?.compileError ? (
-                      <div className="flex items-center justify-center font-extrabold text-red-500">
-                        {runData.current.compileError}
+                      <div className="flex h-full items-center justify-center">
+                        <div className="font-extrabold text-red-500">
+                          {runData.current.compileError}
+                        </div>
                       </div>
                     ) : (
                       runData.current?.cases.map((c, index) => (
@@ -220,7 +222,9 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                       ))
                     )
                   ) : (
-                    "Run code to see results"
+                    <div className=" flex h-full items-center justify-center font-thin text-yellow-200 opacity-60 ">
+                      Run code to see results...
+                    </div>
                   )}
                 </div>
               </div>

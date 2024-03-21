@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface Node {
   pos: number[];
   name: string;
@@ -12,7 +16,6 @@ interface Graph {
   setNode: any;
 }
 
-const nodeRad = 25;
 const mapRes = [1280, 720];
 
 export default function NodeGraph({
@@ -55,7 +58,7 @@ export default function NodeGraph({
             cx={"" + getNodeX(node.pos[0] ?? 0)}
             cy={"" + getNodeY(node.pos[1] ?? 0)}
             stroke={getNode == index ? "orange" : "white"}
-            strokeWidth={(getNode == index ? "4" : "1")}
+            strokeWidth={getNode == index ? "4" : "1"}
             fill={nodeColor(node.name)}
             className={"hover:stroke-[4px]"}
           ></circle>
