@@ -1,15 +1,9 @@
 {
     "problems": [
-<<<<<<< HEAD
         "leaking-letters",
         "stable-words",
         "refugees",
+        "engagement",
         "flooring"
-=======
-        "leaking_letters",
-        "stable_words",
-        "refugees",
-        "engagement"
->>>>>>> aeb08f5bbdc7d106451c16fece3c679f3ec0802f
     ]
 }
