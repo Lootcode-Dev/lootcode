@@ -1,7 +1,7 @@
 {
     "problems": [
-        "leaking-letters",
-        "stable-words",
+        "leaking_letters",
+        "stable_words",
         "refugees",
         "engagement"
     ]
