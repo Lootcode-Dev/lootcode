@@ -1,10 +1,11 @@
 {
     "problems": [
-        "leaking-letters",
-        "stable-words",
+        "leaking_letters",
+        "stable_words",
         "refugees",
         "engagement",
         "flooring",
-        "decryption"
+        "decryption",
+        "merry_go_word"
     ]
 }

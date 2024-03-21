@@ -35,6 +35,12 @@
                     "name": "Decryption",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50,50],
+                    "name": "Merry Go Word",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

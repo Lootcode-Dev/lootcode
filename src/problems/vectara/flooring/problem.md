@@ -10,13 +10,13 @@ Normally the kitchen would reallocate itself, but not ever since...
 
 ## Input
 
-The first line of input will be an integer, _n (1 ≤ n ≤ 100)_, which represents the number of tiles we have. Then follow two lines. 
+The first line of input will be an integer, _n (1 ≤ n ≤ 100)_, which represents the number of tiles we have. Then follow two lines.
 
 The next line contains _n_ space seperated integers representing the length of the tiles we have.
 
 The next line has a single integer representing the length of the tile we need.
 
-__There will always only be a single valid solution.__
+**There will always only be a single valid solution.**
 
 ```
 5
@@ -31,3 +31,5 @@ Print the position of the two tiles we need to combine to fill in our kitchen fl
 ```
 0 1
 ```
+
+_Output MUST be on its own line, without a trailing newline character_

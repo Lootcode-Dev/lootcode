@@ -27,3 +27,5 @@ leonard neloard
 dylan nylda
 luke
 ```
+
+_Output MUST be on its own line, without a trailing newline character_

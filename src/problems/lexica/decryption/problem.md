@@ -18,3 +18,5 @@ Output the decrypted word on its own line
 ```
 hello world
 ```
+
+_Output MUST be on its own line, without a trailing newline character_

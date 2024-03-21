@@ -29,3 +29,5 @@ Print the following statistics of the words on their own line in the respective 
 12
 2
 ```
+
+_Output MUST be on its own line, without a trailing newline character_
