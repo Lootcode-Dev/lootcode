@@ -63,7 +63,13 @@
                 },
                 {
                     "pos": [10,50],
-                    "name": "Trial2",
+                    "name": "Trial 2",
+                    "next": [],
+                    "type": "encounter"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Solo",
                     "next": [],
                     "type": "encounter"
                 }
