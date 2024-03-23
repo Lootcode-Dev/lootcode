@@ -7,20 +7,19 @@
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
-import mapFile from "~/util/map.json";
-import indFile from "~/util/index.json"
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "~/components/ui/dialog";
 
 interface Node {

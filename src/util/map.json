@@ -123,9 +123,15 @@
             "pos": [70,10],
             "next": [],
             "nodes":[
-                {
+            {
                 "pos": [10,10],
                 "name": "Construction",
+                "next": [],
+                "type": "problem"
+            },   
+            {
+                "pos": [10,30],
+                "name": "Construction II",
                 "next": [],
                 "type": "problem"
             }
