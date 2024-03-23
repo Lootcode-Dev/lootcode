@@ -4,8 +4,8 @@ import { nameToFileName } from "~/components/mapview";
 import { db } from "~/server/db";
 import { GUser, Entity, Stats, getUserStats } from "~/app/game/utility";
 
-import encounters from "~/app/game/encounters.json";
-import enemyList from "~/app/game/enemies.json";
+import encounters from "~/gameinfo/encounters.json";
+import enemyList from "~/gameinfo/enemies.json";
 import { useEffect } from "react";
 
 interface PageProps {

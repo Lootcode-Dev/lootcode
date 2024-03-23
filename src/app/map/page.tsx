@@ -21,11 +21,5 @@ export default async function Page() {
     redirect(`/auth-callback?origin=map`);
   }
 
-  return (
-    <MapView
-      id={dbUser?.id}
-      email={dbUser?.email}
-      problems={dbUser?.problems}
-    ></MapView>
-  );
+  return <MapView user={dbUser}></MapView>;
 }

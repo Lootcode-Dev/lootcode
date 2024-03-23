@@ -13,6 +13,7 @@ import indFile from "~/problems/index.json";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
+import { GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 
 import {
@@ -23,6 +24,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
+import Inventory from "./inventory";
 
 interface Node {
   pos: number[];
@@ -30,16 +32,14 @@ interface Node {
   next: string[];
 }
 
-type IUser = {
-  id: string | undefined;
-  email: string | undefined;
-  problems: string | undefined;
-};
+interface IParams {
+  user: GUser;
+}
 
 let dummyProblems =
   "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
-export default function MapView({ id, email, problems }: IUser) {
+export default function MapView({ user }: IParams) {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
@@ -47,7 +47,7 @@ export default function MapView({ id, email, problems }: IUser) {
   //here and in the getColor functions, and I think having to pass
   //a user string to the node graph for completion functions is
   //dumb if we want to make the node graph component reusable.
-  if (problems) dummyProblems = problems;
+  if (user.problems) dummyProblems = user.problems;
 
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {
@@ -83,7 +83,7 @@ export default function MapView({ id, email, problems }: IUser) {
   return (
     <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
-        {email + " " + id + " " + problems}
+        {user.email + " " + user.id + " " + user.problems}
       </div>
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
@@ -124,6 +124,15 @@ export default function MapView({ id, email, problems }: IUser) {
                 >
                   Back
                 </Button>
+                <Button
+                  className="mt-2 bg-purple-700"
+                  onClick={() => {
+                    setSelNode(-2);
+                    console.log(selNode);
+                  }}
+                >
+                  Inventory
+                </Button>
               </div>
               <NodeGraph
                 nodes={mapFile.chapters[chapter]?.nodes}
@@ -133,37 +142,43 @@ export default function MapView({ id, email, problems }: IUser) {
                 setNode={setSelNode}
               />
 
-              <div className="flex w-[20vw] flex-col">
-                <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                  {problem?.solved ? "Completed" : "Not Completed"}
-                </div>
-
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
-                >
-                  {selNode != -1 ? problem?.description : desc}
-                </ReactMarkdown>
-
-                {selNode != -1 && problem != undefined ? (
-                  <a
-                    href={
-                      "/" +
-                      (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                      "problem"
-                        ? "map"
-                        : "game") +
-                      "/" +
-                      nameToFileName(getNodeName(chapter, selNode))
-                    }
-                  >
-                    <Button className="mt-2 w-full bg-purple-700">
-                      Embark
-                    </Button>
-                  </a>
+              <div className="mx-2 flex w-[20vw]">
+                {selNode == -2 ? (
+                  <Inventory user={user} />
                 ) : (
-                  <div />
+                  <div className="flex flex-col">
+                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                      {problem?.solved ? "Completed" : "Not Completed"}
+                    </div>
+
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="prose grow overflow-auto scroll-smooth 
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                    >
+                      {selNode != -1 ? problem?.description : desc}
+                    </ReactMarkdown>
+
+                    {selNode != -1 && problem != undefined ? (
+                      <a
+                        href={
+                          "/" +
+                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                          "problem"
+                            ? "map"
+                            : "game") +
+                          "/" +
+                          nameToFileName(getNodeName(chapter, selNode))
+                        }
+                      >
+                        <Button className="mt-2 w-full bg-purple-700">
+                          Embark
+                        </Button>
+                      </a>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
                 )}
               </div>
             </div>
