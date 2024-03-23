@@ -10,18 +10,16 @@ Normally the kitchen would reallocate itself, but not ever since...
 
 ## Input
 
-The first line of input will be an integer, _n (1 ≤ n ≤ 100)_, which represents the number of tiles we have. Then follow two lines.
+The first line of input will be 2 integers, _n (1 ≤ n ≤ 100)_ and _t (1 ≤ t ≤ 1000)_, where n represents 
+the number of tiles we have and t represents the target length for the tile we want.
 
 The next line contains _n_ space seperated integers representing the length of the tiles we have.
-
-The next line has a single integer representing the length of the tile we need.
 
 **There will always only be a single valid solution.**
 
 ```
-5
+5 9
 2 7 11 15 20
-9
 ```
 
 ## Output
