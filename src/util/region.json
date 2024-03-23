@@ -12,5 +12,8 @@
         "flooring",
         "solo",
         "zeros"
+    ],
+    "stackspires": [
+        "construction"
     ]
 }

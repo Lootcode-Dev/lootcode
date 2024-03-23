@@ -6,8 +6,8 @@ import { readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
 import { $ } from "zx";
-import indFile from "~/problems/index.json";
-import regFile from "~/problems/region.json";
+import indFile from "~/util/index.json";
+import regFile from "~/util/region.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
@@ -91,7 +91,6 @@ export const codeRouter = createTRPCRouter({
       const region = Object.keys(regFile).find((key: string) =>
         regFile[key as keyof typeof regFile].includes(input.name),
       );
-
 
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
       const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code

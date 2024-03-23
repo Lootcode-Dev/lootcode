@@ -7,9 +7,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
-import mapFile from "~/app/map/map.json";
-import indFile from "~/problems/index.json";
-
+import mapFile from "~/util/map.json";
+import indFile from "~/util/index.json"
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
