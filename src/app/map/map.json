@@ -63,15 +63,15 @@
                 },
                 {
                     "pos": [10,50],
-                    "name": "Trial 2",
+                    "name": "Solo",
                     "next": [],
                     "type": "encounter"
                 },
                 {
-                    "pos": [10,70],
-                    "name": "Solo",
+                    "pos": [10,90],
+                    "name": "Zeros",
                     "next": [],
-                    "type": "encounter"
+                    "type": "problem"
                 }
             ]
         },
