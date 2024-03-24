@@ -60,7 +60,7 @@ export default function NodeGraph({
             stroke={getNode == index ? "orange" : "white"}
             strokeWidth={getNode == index ? "4" : "1"}
             fill={nodeColor(node.name)}
-            className={"hover:stroke-[4px]"}
+            className={"cursor-pointer duration-150 hover:stroke-[4px]"}
           ></circle>
           <text
             id={"nodeText" + index}

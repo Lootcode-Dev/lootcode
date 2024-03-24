@@ -19,7 +19,7 @@
             "name": "Training Sword",
             "desc": "A weak wooden sword used for training.",
             "image": "/enemies/rat.png",
-            "type": "armor",
+            "type": "weapon",
             "value": 1,
 
             "health": 0,

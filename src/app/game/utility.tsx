@@ -94,3 +94,45 @@ export function isEquipped(user: GUser, id: number) {
     user.skill3 == id
   );
 }
+
+export function fakeEquip(user: GUser, id: number) {
+  switch (itemList.items[id]?.type) {
+    case "armor":
+      if (user?.armor == id) user.armor = -1;
+      else user.armor = id;
+      break;
+
+    case "accessory":
+      if (user?.accessory == id) user.accessory = -1;
+      else user.accessory = id;
+      break;
+
+    case "weapon":
+      if (user?.weapon == id) user.weapon = -1;
+      else user.weapon = id;
+      break;
+
+    case "focus":
+      if (user?.focus == id) user.focus = -1;
+      else user.focus = id;
+      break;
+
+    case "skill1":
+      if (user?.skill1 == id) user.skill1 = -1;
+      else user.skill1 = id;
+      break;
+
+    case "skill2":
+      if (user?.skill2 == id) user.skill2 = -1;
+      else user.skill2 = id;
+      break;
+
+    case "skill3":
+      if (user?.skill3 == id) user.skill3 = -1;
+      else user.skill3 = id;
+      break;
+
+    default:
+      break;
+  }
+}
