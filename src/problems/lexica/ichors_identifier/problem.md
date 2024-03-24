@@ -24,4 +24,3 @@ Print the Ichor Identifier
 XXXXXYYYYYYYYYYXXXXX
 ```
 
-_Output MUST be on its own line, without a trailing newline character_

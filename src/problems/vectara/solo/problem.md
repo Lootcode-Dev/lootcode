@@ -18,5 +18,3 @@ Print the teams with a solo competitor, separated by spaces, in ascending order.
 ```
 5 6
 ```
-
-_Output MUST be on its own line, without a trailing newline character_

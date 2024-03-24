@@ -23,5 +23,3 @@ Print the corrected word on a single line
 ```
 trumbone
 ```
-
-_Output MUST be on its own line, without a trailing newline character_

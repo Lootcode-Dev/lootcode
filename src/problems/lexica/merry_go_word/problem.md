@@ -23,4 +23,3 @@ Print the resulting word, after rotating the original words _k_ times.
 esomeaw
 ```
 
-_Output MUST be on its own line, without a trailing newline character_

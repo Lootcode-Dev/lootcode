@@ -28,4 +28,3 @@ Print the length of the longest valid spire segment.
 6
 ```
 
-_Output MUST be on its own line, without a trailing newline character_

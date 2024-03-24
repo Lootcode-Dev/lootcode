@@ -29,5 +29,3 @@ Print the position of the two tiles we need to combine to fill in our kitchen fl
 ```
 0 1
 ```
-
-_Output MUST be on its own line, without a trailing newline character_

@@ -23,4 +23,3 @@ Print the stability of the building, which is represented as a percentage (to tw
 66.67%
 ```
 
-_Output MUST be on its own line, without a trailing newline character_

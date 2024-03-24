@@ -25,4 +25,3 @@ Print each possible configuration on its own line, sorted lexicographically
 3 2 1
 ```
 
-_Output MUST be on its own line, without a trailing newline character_

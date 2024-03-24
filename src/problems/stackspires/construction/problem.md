@@ -26,4 +26,3 @@ Print "All Steady!!!" if the building is a valid configuration. If not, print, "
 All Steady!!!
 ```
 
-_Output MUST be on its own line, without a trailing newline character_
