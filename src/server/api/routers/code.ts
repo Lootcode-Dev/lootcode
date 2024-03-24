@@ -123,7 +123,7 @@ export const codeRouter = createTRPCRouter({
       if (langObject.ext == "java") {
         const regex = /public\s+class\s+_?\w+/; //Regex to look for main class
         if (input.code.search(regex) == -1) {
-          //Simulate a compile time error in tthe case there is no main class
+          //Simulate a compile time error in the case there is no main class
           codeGradeResponse.compileError = "Compile Time Error";
           await $`rm -rf ${codePathRemoval}`; //Clean Up
           return codeGradeResponse;
@@ -216,9 +216,12 @@ export const codeRouter = createTRPCRouter({
 
         // console.log("Output: " + output.stdout);
         // console.log("Expected: " + expected.stdout);
-        thisCase.expected = expected.stdout;
-        thisCase.output = output.stdout;
-        if (output.stdout === expected.stdout) {
+        const expectedOutput = expected.stdout.replace(/\s+$/, "");
+        const userOutput = output.stdout.replace(/\s+$/, "");
+
+        thisCase.expected = expectedOutput;
+        thisCase.output = userOutput;
+        if (userOutput === expectedOutput) {
           // console.log("Correct answer\n");
           thisCase.result = true;
           codeGradeResponse.numPassed++;
