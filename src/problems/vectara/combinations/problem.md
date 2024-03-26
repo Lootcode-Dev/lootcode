@@ -6,9 +6,10 @@ All we really need help with is coming up with all of the possible variations of
 
 ## Input
 
-Input will consist of an array of _n (1 ≤ n ≤ 9)_ numbers, separated by spaces, which represent the identifier of a given home.
+Input will consist of an integer _n (1 ≤ n ≤ 9)_, representing the number of homes to be put into combinations. The next line will represent an array of _n_ numbers, separated by spaces, which represent the identifier of a given home.
 
 ```
+3
 1 2 3
 ```
 
@@ -24,4 +25,3 @@ Print each possible configuration on its own line, sorted lexicographically
 3 1 2
 3 2 1
 ```
-

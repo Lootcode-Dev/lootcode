@@ -65,7 +65,7 @@
                     "pos": [10,50],
                     "name": "Solo",
                     "next": [],
-                    "type": "encounter"
+                    "type": "problem"
                 },
                 {
                     "pos": [10,90],
@@ -82,6 +82,12 @@
                 {
                     "pos": [30,30],
                     "name": "Elections",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,50],
+                    "name": "Reallocation",
                     "next": [],
                     "type": "problem"
                 }
