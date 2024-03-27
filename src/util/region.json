@@ -17,7 +17,8 @@
         "reallocation"
     ],
     "chainbridge": [
-        "swapper"
+        "swapper",
+        "bigger_digits"
     ],
     "stackspires": [
         "construction",

@@ -103,6 +103,12 @@
                 "name": "Swapper",
                 "next": [],
                 "type": "problem"
+               },
+               {
+                "pos": [10, 50],
+                "name": "Bigger Digits",
+                "next": [],
+                "type": "problem"
                }
             ]
         },

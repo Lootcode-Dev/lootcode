@@ -15,6 +15,7 @@
         "combinations",
         "elections",
         "reallocation",
-        "swapper"
+        "swapper",
+        "bigger_digits"
     ]
 }
