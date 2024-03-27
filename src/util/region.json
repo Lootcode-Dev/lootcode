@@ -16,6 +16,9 @@
         "elections",
         "reallocation"
     ],
+    "chainbridge": [
+        "swapper"
+    ],
     "stackspires": [
         "construction",
         "construction_ii"
