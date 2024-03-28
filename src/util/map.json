@@ -92,7 +92,7 @@
                     "type": "problem"
                 },
                 {
-                    "pos": [30,50],
+                    "pos": [30,70],
                     "name": "Growth",
                     "next": [],
                     "type": "problem"
