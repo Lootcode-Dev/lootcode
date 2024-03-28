@@ -90,6 +90,12 @@
                     "name": "Reallocation",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,50],
+                    "name": "Growth",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

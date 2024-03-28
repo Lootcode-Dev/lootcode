@@ -14,7 +14,8 @@
         "zeros",
         "combinations",
         "elections",
-        "reallocation"
+        "reallocation",
+        "growth"
     ],
     "chainbridge": [
         "swapper",

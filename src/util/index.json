@@ -16,6 +16,7 @@
         "elections",
         "reallocation",
         "swapper",
-        "bigger_digits"
+        "bigger_digits",
+        "growth"
     ]
 }
