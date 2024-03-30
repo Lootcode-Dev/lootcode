@@ -1,0 +1,197 @@
+{
+    "chapters":
+    [
+        {
+            "name": "Lexica",
+            "pos": [10,10],
+            "next": [],
+            "nodes": [
+                {
+                    "pos": [10,10],
+                    "name": "Leaking Letters",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Stable Words",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Refugees",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50,10],
+                    "name": "Engagement",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50,30],
+                    "name": "Decryption",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50,50],
+                    "name": "Merry Go Word",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50,70],
+                    "name": "Ichors Identifier",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
+        },
+        {
+            "name":"Vectara",
+            "pos": [30,10],
+            "next": [],
+            "nodes" : [
+                {
+                    "pos": [10,10],
+                    "name": "Flooring",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Solo",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Zeros",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Combinations",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Elections",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,50],
+                    "name": "Reallocation",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,70],
+                    "name": "Growth",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
+        },
+        {
+            "name":"Chainbridge",
+            "pos": [50,10],
+            "next": [],
+            "nodes": [
+               {
+                "pos": [10, 10],
+                "name": "Swapper",
+                "next": [],
+                "type": "problem"
+               },
+               {
+                "pos": [10, 50],
+                "name": "Bigger Digits",
+                "next": [],
+                "type": "problem"
+               }
+            ]
+        },
+        {
+            "name":"Stackspires",
+            "pos": [70,10],
+            "next": [],
+            "nodes":[
+            {
+                "pos": [10,10],
+                "name": "Construction",
+                "next": [],
+                "type": "problem"
+            },   
+            {
+                "pos": [10,30],
+                "name": "Construction II",
+                "next": [],
+                "type": "problem"
+            }
+        ]
+        },
+        {
+            "name":"Queuesgard",
+            "pos": [90,10],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Arbonclave",
+            "pos": [10, 40],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Findara",
+            "pos": [30, 40],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Compendia",
+            "pos": [50, 40],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Nodak",
+            "pos": [70, 40],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Bitwise Bastion",
+            "pos": [90, 40],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Arithmend",
+            "pos": [10, 70],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"Dynamar",
+            "pos": [30, 70],
+            "next": [],
+            "nodes":[]
+        },
+        {
+            "name":"The Thicket",
+            "pos": [50, 70],
+            "next": [],
+            "nodes":[]
+        }
+        
+        
+    ]
+}

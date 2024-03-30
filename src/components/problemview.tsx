@@ -98,7 +98,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
           <div className="max-h-[92.5vh] overflow-auto">
             <ReactMarkdownNoSSR
               remarkPlugins={[remarkGfm]}
-              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200 prose-strong:text-yellow-200 prose-strong:font-bold"
             >
               {problem?.description}
             </ReactMarkdownNoSSR>
@@ -143,7 +143,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                   <CodeMirrorNoSSR
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     theme={dracula}
-                    height={`${codeSize - 5}vh`}
+                    height={`${codeSize - 10}vh`}
                     extensions={[loadLanguage(language)]}
                     basicSetup={{
                       syntaxHighlighting: true,

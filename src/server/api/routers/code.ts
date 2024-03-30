@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { writeFile, readFile } from "fs/promises";
-import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
-import { $ } from "zx";
-import { readdirSync } from "fs";
 import { TRPCError } from "@trpc/server";
-import indFile from "~/problems/index.json";
+import { readdirSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
+import { z } from "zod";
+import { $ } from "zx";
+import indFile from "~/util/index.json";
+import regFile from "~/util/region.json";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
-import { check } from "prettier";
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
@@ -17,14 +17,18 @@ export const codeRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const contents = { description: "", loot: "", solved: false };
 
+      const region = Object.keys(regFile).find((key: string) =>
+        regFile[key as keyof typeof regFile].includes(input.name),
+      );
+
       if (input.name !== "") {
         contents.description = await readFile(
-          `./src/problems/${input.name}/${input.name}.md`,
+          `./src/problems/${region}/${input.name}/problem.md`,
           "utf-8",
         );
 
         contents.loot = await readFile(
-          `./src/problems/${input.name}/loot.md`,
+          `./src/problems/${region}/${input.name}/loot.md`,
           "utf-8",
         );
 
@@ -84,10 +88,14 @@ export const codeRouter = createTRPCRouter({
         run: string;
       } //Our Interface for our dictionary
 
+      const region = Object.keys(regFile).find((key: string) =>
+        regFile[key as keyof typeof regFile].includes(input.name),
+      );
+
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
       const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
-      const problemPathInput = `./src/problems/${input.name}/input/`; //The path is based on the problem name
+      const problemPathInput = `./src/problems/${region}/${input.name}/input/`; //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
         python: { ext: "py", run: `python3 ${codePath}.py` },
@@ -124,7 +132,7 @@ export const codeRouter = createTRPCRouter({
       if (langObject.ext == "java") {
         const regex = /public\s+class\s+_?\w+/; //Regex to look for main class
         if (input.code.search(regex) == -1) {
-          //Simulate a compile time error in tthe case there is no main class
+          //Simulate a compile time error in the case there is no main class
           codeGradeResponse.compileError = "Compile Time Error";
           await $`rm -rf ${codePathRemoval}`; //Clean Up
           return codeGradeResponse;
@@ -191,13 +199,13 @@ export const codeRouter = createTRPCRouter({
 
           // Get the input
           const inputFile =
-            await $`cat ./src/problems/${input.name}/input/${file}`;
+            await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
           thisCase.input = inputFile.stdout;
 
           //Get the expected output
           const expectedFile = file.replace(".in", ".out");
           const expected =
-            await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+            await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
           thisCase.expected = expected.stdout;
 
           codeGradeResponse.cases.push(thisCase);
@@ -206,20 +214,23 @@ export const codeRouter = createTRPCRouter({
 
         // Get the input
         const inputFile =
-          await $`cat ./src/problems/${input.name}/input/${file}`;
+          await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
         thisCase.input = inputFile.stdout;
 
         // Test the output against the expected output
         const expectedFile = file.replace(".in", ".out");
         const output = await $`cat ${codePath}.txt`;
         const expected =
-          await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+          await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
 
         // console.log("Output: " + output.stdout);
         // console.log("Expected: " + expected.stdout);
-        thisCase.expected = expected.stdout;
-        thisCase.output = output.stdout;
-        if (output.stdout === expected.stdout) {
+        const expectedOutput = expected.stdout.replace(/\s+$/, "");
+        const userOutput = output.stdout.replace(/\s+$/, "");
+
+        thisCase.expected = expectedOutput;
+        thisCase.output = userOutput;
+        if (userOutput === expectedOutput) {
           // console.log("Correct answer\n");
           thisCase.result = true;
           codeGradeResponse.numPassed++;
@@ -243,6 +254,7 @@ export const codeRouter = createTRPCRouter({
         return index;
       }
 
+      // Check if the user has fully passed the problem for the first time, if so, reward them
       if (codeGradeResponse.numFailed === 0) {
         console.log(checkCompletion());
         if (checkCompletion() !== -1) {

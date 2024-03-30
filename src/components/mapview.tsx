@@ -7,21 +7,19 @@
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
-import mapFile from "~/app/map/map.json";
-import indFile from "~/problems/index.json";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
 import { GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
 import Inventory from "./inventory";
@@ -102,7 +100,7 @@ export default function MapView({ user }: IParams) {
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         className=" prose w-auto  max-w-none 
-                         scroll-smooth text-white prose-headings:text-white"
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                       >
                         {desc}
                       </ReactMarkdown>
@@ -210,8 +208,8 @@ function getNodeName(ch: number, i: number): string {
   return n.name;
 }
 
-export function nameToFileName(name: string): string {
-  return name.split(" ").join("-").toLowerCase();
+function nameToFileName(name: string): string {
+  return name.split(" ").join("_").toLowerCase();
 }
 
 //Restoring this to determine node colors
