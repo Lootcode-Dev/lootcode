@@ -71,4 +71,24 @@ export const gameRouter = createTRPCRouter({
       return user;
 
     }),
+
+  addGold: protectedProcedure
+    .input(z.object({amount: z.number()}))
+    .query(async ({ input, ctx }) => {
+      const user = await db.user.findFirst({
+        where: { id: ctx.userId },
+      });
+
+      if(!user) return;
+
+      user.gold += input.amount;
+      
+      await db.user.update({
+        where: { id: ctx.userId },
+        data: user,
+      });
+
+      return user;
+
+    }),
 });
