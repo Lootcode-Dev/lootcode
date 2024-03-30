@@ -17,6 +17,7 @@
         "reallocation",
         "swapper",
         "bigger_digits",
-        "growth"
+        "growth",
+        "layered"
     ]
 }
