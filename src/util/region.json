@@ -24,6 +24,7 @@
     "stackspires": [
         "construction",
         "construction_ii",
-        "layered"
+        "layered",
+        "layered_ii"
     ]
 }
