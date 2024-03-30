@@ -27,7 +27,7 @@ export default function NodeGraph({
 }: Graph) {
   if (nodes == undefined)
     return (
-      <div className="mx-2 rounded-xl border-2 border-yellow-200 p-4 shadow-xl">
+      <div className="rounded-xl border border-[#15162c] bg-indigo-950 p-4">
         Error in finding node list
       </div>
     );
@@ -35,7 +35,7 @@ export default function NodeGraph({
   return (
     <svg
       viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
-      className="mx-2 rounded-xl border-2 border-yellow-200 p-4 shadow-xl"
+      className="rounded-xl border-4 border-[#15162c] bg-indigo-950 p-4"
     >
       {nodes.map((node: Node, index) => (
         <g key={index} id={"node-" + node.name}>

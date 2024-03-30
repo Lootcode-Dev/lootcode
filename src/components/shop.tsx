@@ -16,4 +16,10 @@ interface IParams {
   user: GUser;
 }
 
-export default function Shop({ user }: IParams) {}
+export default function Shop({ user }: IParams) {
+  return (
+    <div className="mb-2 grow rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+      <div></div>
+    </div>
+  );
+}

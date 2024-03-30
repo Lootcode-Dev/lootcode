@@ -15,6 +15,21 @@ export interface GUser {
   skill3: number;
 }
 
+export interface Item {
+  name: string;
+  desc: string;
+  image: string;
+  type: string;
+  value: number;
+  health: number;
+  armor: number;
+  resist: number;
+  mana: number;
+  strength: number;
+  intelligence: number;
+  wisdom: number;
+}
+
 export type Stats = {
   health: number;
   mana: number;
@@ -135,4 +150,22 @@ export function fakeEquip(user: GUser, id: number) {
     default:
       break;
   }
+}
+
+export function getItemName(id: number): string {
+  var ret = "";
+  itemList.items.map((value, index) => {
+    if (index == id) ret = value.name;
+  });
+
+  return ret;
+}
+
+export function getItem(id: number): Item | undefined {
+  var ret;
+  itemList.items.map((value, index) => {
+    if (index == id) ret = value;
+  });
+
+  return ret;
 }

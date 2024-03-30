@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import Inventory from "./inventory";
+import { ArrowLeft } from "lucide-react";
 
 interface Node {
   pos: number[];
@@ -85,11 +86,19 @@ export default function MapView({ user }: IParams) {
       </div>
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
-          <div className="grow">
-            <div className="grid justify-items-center">
+          <div className="w-[85vw]">
+            <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
+              <ArrowLeft
+                className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
+                onClick={() => {
+                  setSelNode(-1);
+                  setChapter(-1);
+                  console.log(selNode);
+                }}
+              ></ArrowLeft>
               <Dialog>
                 <DialogTrigger>
-                  <Button className="mb-4 bg-purple-700 text-center text-2xl font-bold">
+                  <Button className="m-2 bg-purple-700 text-center text-2xl font-bold">
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
@@ -111,27 +120,6 @@ export default function MapView({ user }: IParams) {
             </div>
 
             <div className="flex h-[75vh] w-full justify-center">
-              <div className="items-top mx-2 flex flex-col rounded-xl bg-[#15162c] p-4">
-                <Button
-                  className="mt-2 bg-purple-700"
-                  onClick={() => {
-                    setSelNode(-1);
-                    setChapter(-1);
-                    console.log(selNode);
-                  }}
-                >
-                  Back
-                </Button>
-                <Button
-                  className="mt-2 bg-purple-700"
-                  onClick={() => {
-                    setSelNode(-2);
-                    console.log(selNode);
-                  }}
-                >
-                  Inventory
-                </Button>
-              </div>
               <NodeGraph
                 nodes={mapFile.chapters[chapter]?.nodes}
                 nodeRadius={25}
@@ -140,7 +128,7 @@ export default function MapView({ user }: IParams) {
                 setNode={setSelNode}
               />
 
-              <div className="mx-2 flex w-[20vw]">
+              <div className="ml-4 flex w-[20vw]">
                 {selNode == -2 ? (
                   <Inventory user={user} />
                 ) : (
@@ -152,7 +140,7 @@ export default function MapView({ user }: IParams) {
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                     >
                       {selNode != -1 ? problem?.description : desc}
                     </ReactMarkdown>
@@ -182,7 +170,10 @@ export default function MapView({ user }: IParams) {
             </div>
           </div>
         ) : (
-          <div className="flex h-[80vh] w-full justify-center">
+          <div className="flex h-[80vh] w-[60vw] flex-col justify-center">
+            <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+              Regions
+            </div>
             <NodeGraph
               nodes={mapFile.chapters}
               nodeRadius={30}
@@ -208,7 +199,7 @@ function getNodeName(ch: number, i: number): string {
   return n.name;
 }
 
-function nameToFileName(name: string): string {
+export function nameToFileName(name: string): string {
   return name.split(" ").join("_").toLowerCase();
 }
 
