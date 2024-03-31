@@ -64,7 +64,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
   const [language, setLanguage] = useState<string>("python");
   const [codeSize, setCodeSize] = useState<number>(0);
   const [runningCode, setRunningCode] = useState<boolean>(false);
-  const runData = useRef<codeGradeResult>();
+  const [runData, setRunData] = useState<codeGradeResult>();
   const [code, setCode] = useState<string>("");
   const [firstSolve, setFirstSolve] = useState<boolean>(false);
 
@@ -80,16 +80,6 @@ export default function ProblemView({ problemid }: { problemid: string }) {
     },
     { enabled: false },
   );
-
-  useEffect(() => {
-    if (runResponse) {
-      runData.current = runResponse;
-    }
-    if (runResponse?.reward === true) {
-      setFirstSolve(true);
-    }
-    setRunningCode(false);
-  }, [runResponse]);
 
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
@@ -135,7 +125,15 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     className="border bg-purple-950"
                     onClick={() => {
                       setRunningCode(true);
-                      void codeRun();
+                      void codeRun().then(response => {
+                        //Set stateful data to our data to propagate changes 
+                        setRunData(response.data);
+                        
+                        //When setFirstSolve is true we solved the problem (not necessarily the first time)
+                        if (response.data?.reward === true) setFirstSolve(true);
+                    
+                        setRunningCode(false);
+                      });
                     }}
                   >
                     {runningCode ? "Running..." : "Run"}
@@ -146,7 +144,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     theme={dracula}
                     height={`${codeSize - 5}vh`}
-                    extensions={[loadLanguage(language)]}
+                    extensions={[loadLanguage(language as "java" | "python" | "cpp" | "c")!]} //Typescript shenanigans 
                     basicSetup={{
                       syntaxHighlighting: true,
                       closeBrackets: true,
@@ -170,22 +168,21 @@ export default function ProblemView({ problemid }: { problemid: string }) {
             >
               <div className={`flex h-full flex-col items-center`}>
                 <div className="flex h-[5vh] w-full items-center bg-zinc-800 p-1 px-4">
-                  {!runningCode && runData.current && (
+                  {!runningCode && runData && (
                     <div className="flex gap-4">
                       <div>Total: </div>
                       <div>
-                        {runData.current?.numFailed +
-                          runData.current?.numPassed}
+                        {runData?.numFailed +
+                          runData?.numPassed}
                       </div>
                       <div>Passed: </div>
-                      <div>{runData.current?.numPassed} </div>
+                      <div>{runData?.numPassed} </div>
                       <div>Failed:</div>
-                      <div> {runData.current?.numFailed} </div>
+                      <div> {runData?.numFailed} </div>
                     </div>
                   )}
                   <div className="flex w-full items-center justify-end">
-                    {runData.current?.solved === true ||
-                    runData.current?.reward === true ? (
+                    {runData?.solved === true ? (
                       <>
                         <Dialog open={firstSolve} onOpenChange={setFirstSolve}>
                           <DialogTrigger asChild>
@@ -211,15 +208,15 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     <div className="flex h-full items-center justify-center font-extrabold text-yellow-200">
                       <Loader2 className="h-10 w-10 animate-spin" />
                     </div>
-                  ) : runData.current ? (
-                    runData.current?.compileError ? (
+                  ) : runData ? (
+                    runData?.compileError ? (
                       <div className="flex h-full items-center justify-center">
                         <div className="font-extrabold text-red-500">
-                          {runData.current.compileError}
+                          {runData.compileError}
                         </div>
                       </div>
                     ) : (
-                      runData.current?.cases.map((c, index) => (
+                      runData?.cases.map((c, index) => (
                         <CodeCase c={c} key={`${c.num}-${index}`} />
                       ))
                     )
