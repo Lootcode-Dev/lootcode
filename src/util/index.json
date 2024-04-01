@@ -19,6 +19,7 @@
         "bigger_digits",
         "growth",
         "layered",
-        "layered_ii"
+        "layered_ii",
+        "collision"
     ]
 }

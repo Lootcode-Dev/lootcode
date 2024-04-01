@@ -25,6 +25,7 @@
         "construction",
         "construction_ii",
         "layered",
-        "layered_ii"
+        "layered_ii",
+        "collision"
     ]
 }
