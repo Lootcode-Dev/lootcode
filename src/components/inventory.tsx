@@ -16,6 +16,7 @@ import {
   BrainIcon,
   CoinsIcon,
   FlaskRound,
+  LoaderIcon,
   PlusIcon,
   ShieldIcon,
   SparkleIcon,
@@ -31,7 +32,6 @@ interface IParams {
 }
 
 export default function Inventory({ name, user }: IParams) {
-  const [stats, setStats] = useState<Stats>(getUserStats(user));
   const [getUser, setUser] = useState<GUser>(user);
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
@@ -46,18 +46,14 @@ export default function Inventory({ name, user }: IParams) {
 
   useEffect(() => {
     if (selItem != -1) {
-      //nightmare fire and brimstone race condition
-      //if ppl swap items too fast (display desyncs)
-
-      //Will fix when I figure out a better way to do this
-      let temp = getUser;
-      fakeEquip(temp, selItem);
-
-      setUser(temp);
-      setStats(getUserStats(temp));
-
-      equipCallback();
-      setSelItem(-1);
+      setFetching(true);
+      equipCallback().then((response) => {
+        if (response != undefined) {
+          setUser(response.data ?? getUser);
+          setSelItem(-1);
+          setFetching(false);
+        }
+      });
     }
   }, [selItem]);
 
@@ -66,7 +62,10 @@ export default function Inventory({ name, user }: IParams) {
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 h-[80vh] w-[70vw] rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
-          Items
+          <div className="flex items-center gap-2">
+            Items
+            {fetching ? <LoaderIcon /> : <div />}
+          </div>
           <div className="my-4 grid auto-cols-max grid-flow-col gap-4">
             {itemList.items.map((value, index) =>
               getUser.items[index] == "1" ? (
