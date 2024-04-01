@@ -21,6 +21,7 @@ export interface Item {
   image: string;
   type: string;
   value: number;
+  level: number;
   health: number;
   armor: number;
   resist: number;
@@ -152,6 +153,16 @@ export function fakeEquip(user: GUser, id: number) {
   }
 }
 
+export function fakeBuy(user: GUser, id: number) {
+  var item = getItem(id);
+  if (user.gold >= item?.value) {
+    user.gold -= item?.value;
+    var temp = user.items.split("");
+    temp[id] = "1";
+    user.items = temp.join("");
+  }
+}
+
 export function getItemName(id: number): string {
   var ret = "";
   itemList.items.map((value, index) => {
@@ -168,4 +179,32 @@ export function getItem(id: number): Item | undefined {
   });
 
   return ret;
+}
+
+export function getItemIDFromName(name: string): number {
+  var ret = -1;
+  itemList.items.map((value, index) => {
+    if (name == value.name) ret = index;
+  });
+
+  return ret;
+}
+
+export function getProblemsCompleted(user: GUser): number {
+  var sum = 0;
+  for (var i = 0; i < user.problems.length; i++)
+    if (user.problems[i] == "1") sum++;
+
+  return sum;
+}
+
+//Users start at level 1.
+//Add a level for every 10 problems completed.
+//i.e. a user with 25 problems completed would be level 3.
+//Levels determine game difficulty scaling
+//and what items are avaliable in the shop
+export function getLevel(user: GUser): number {
+  var sum = getProblemsCompleted(user);
+
+  return Math.floor(sum / 10) + 1;
 }

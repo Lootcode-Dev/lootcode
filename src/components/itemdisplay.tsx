@@ -20,48 +20,60 @@ export default function ItemDisplay({ id }: IParams) {
       <div className="text-center text-2xl">{item?.name}</div>
       <div className="flex flex-row justify-center">
         {item?.armor != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <ShieldIcon></ShieldIcon>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <ShieldIcon size={20}></ShieldIcon>
+            </div>
             {"" + item?.armor}
           </div>
         ) : (
           <div />
         )}
         {item?.resist != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <SparkleIcon></SparkleIcon>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <SparkleIcon size={20}></SparkleIcon>
+            </div>
             {"" + item?.resist}
           </div>
         ) : (
           <div />
         )}
         {item?.mana != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <FlaskRound></FlaskRound>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <FlaskRound size={20}></FlaskRound>
+            </div>
             {"" + item?.mana}
           </div>
         ) : (
           <div />
         )}
         {item?.strength != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <Sword></Sword>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <Sword size={20}></Sword>
+            </div>
             {"" + item?.strength}
           </div>
         ) : (
           <div />
         )}
         {item?.intelligence != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <Wand2></Wand2>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <Wand2 size={20}></Wand2>
+            </div>
             {"" + item?.intelligence}
           </div>
         ) : (
           <div />
         )}
         {item?.wisdom != 0 ? (
-          <div className="mr-1 flex size-6 items-center text-base">
-            <BrainIcon></BrainIcon>
+          <div className="mr-1 flex items-center text-base">
+            <div>
+              <BrainIcon size={20}></BrainIcon>
+            </div>
             {"" + item?.wisdom}
           </div>
         ) : (

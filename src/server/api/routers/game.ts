@@ -3,7 +3,7 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
 import itemList from "~/gameinfo/items.json"
-import { fakeEquip } from "~/app/game/utility";
+import { fakeBuy, fakeEquip } from "~/app/game/utility";
 
 export const gameRouter = createTRPCRouter({
   giveItem: protectedProcedure
@@ -91,4 +91,24 @@ export const gameRouter = createTRPCRouter({
       return user;
 
     }),
+
+  buyItem: protectedProcedure
+  .input(z.object({item: z.number()}))
+  .query(async ({ input, ctx }) => {
+    const user = await db.user.findFirst({
+      where: { id: ctx.userId },
+    });
+
+    if(!user) return;
+
+    fakeBuy(user, input.item);
+
+    await db.user.update({
+      where: { id: ctx.userId },
+      data: user,
+    });
+
+    return user;
+
+  }),
 });
