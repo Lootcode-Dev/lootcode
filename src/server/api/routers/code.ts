@@ -4,11 +4,13 @@
 import { TRPCError } from "@trpc/server";
 import { readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import { z } from "zod";
+import { boolean, string, z } from "zod";
 import { $ } from "zx";
 import indFile from "~/problems/index.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
+import { spawn } from 'child_process';
+
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
@@ -84,26 +86,26 @@ export const codeRouter = createTRPCRouter({
       } //Our Interface for our dictionary
 
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
-      const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
+      const codePathFolder = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
       const problemPathInput = `./src/problems/${input.name}/input/`; //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
-        python: { ext: "py", run: `python3 ${codePath}.py` },
+        python: { ext: "py", run: `python3 ${ctx.userId}${input.name}.py` },
         java: {
           ext: "java",
           compile: `javac ${codePath}.java`,
-          run: `java -classpath ./temp/${ctx.userId}${input.name} ${ctx.userId}${input.name}`,
+          run: `java ${ctx.userId}${input.name}`,
         },
         c: {
           ext: "c",
           compile: `gcc ${codePath}.c -o ${codePath}.out -lm`,
-          run: `${codePath}.out`,
+          run: `./${ctx.userId}${input.name}.out`,
         },
         cpp: {
           ext: "cpp",
           compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`,
-          run: `${codePath}.out`,
+          run: `./${ctx.userId}${input.name}.out`,
         },
       };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
@@ -125,7 +127,7 @@ export const codeRouter = createTRPCRouter({
         if (input.code.search(regex) == -1) {
           //Simulate a compile time error in the case there is no main class
           codeGradeResponse.compileError = "Compile Time Error";
-          await $`rm -rf ${codePathRemoval}`; //Clean Up
+          await $`rm -rf ${codePathFolder}`; //Clean Up
           return codeGradeResponse;
         }
         input.code = input.code.replace(
@@ -145,7 +147,7 @@ export const codeRouter = createTRPCRouter({
           codeGradeResponse.compileError = "Compile Time Error";
           // console.log(error);
 
-          await $`rm -rf ${codePathRemoval}`; //Clean Up
+          await $`rm -rf ${codePathFolder}`; //Clean Up
           return codeGradeResponse; //Our code didn't compile no need to test the cases
         }
       } // END COMPILE PIPELINE
@@ -166,11 +168,50 @@ export const codeRouter = createTRPCRouter({
         // START RUNTIME ERROR PIPELINE
         // Run the code with the input and write the output to a temp file
         try {
-          const IO = `< ${problemPathInput}${file} > ${codePath}.txt`;
-          await $withoutEscaping`timeout 1s ${langObject.run} ${IO}`;
+
+          //Start a promise so we can wait for our docker instance to response
+          await new Promise((resolve, reject) => {
+
+            //Spwan a docker process for security reasons
+            const dockerProcess = spawn('docker', [
+              'run', //Run process
+              '--rm', //Remove process after use
+              '-v', `${codePathFolder}:/app/`, //Mount codePathFolder directory
+              '-v', `${problemPathInput}${file}:/app/input.in`, //Mount Input
+              'code-runner', //code-runner docker image
+              '-c', `timeout 1s ${langObject.run} < input.in`,
+            ]);
+            let wroteData = false; //Track if we wrote a users output
+
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            dockerProcess.stdout.on('data', async (data) => {
+              console.log(`Container output: ${data}`);
+              await writeFile(`${codePath}.txt`, data as string);
+              wroteData = true;
+            });
+
+            dockerProcess.stderr.on('data', (data) => {
+              console.error(`Container error: ${data}`);
+            });
+
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            dockerProcess.on('close', async (code) => {
+              console.log(`Container exited with code ${code}`);
+
+              //User didn't output anything in their program
+              if (!wroteData) await writeFile(`${codePath}.txt`, "Hey you! Yeah you! Output something :(");
+
+              //Resolve or Reject the promise
+              if (code != 0) reject(Object.assign(new Error('Error'), { exitCode: code }));
+              else resolve(code);
+            });
+
+          }).catch(error => {
+            throw error;
+          });
         } catch (error: any) {
           //Error with running the code
-          if (error.exitCode === 124) {
+          if (error.exitCode === 143) {
             //Time Limit Exceeded
             //TLE exist code is 124
             // console.log("Time limit exceeded");
@@ -234,7 +275,7 @@ export const codeRouter = createTRPCRouter({
       }
 
       // Cleanup
-      await $`rm -rf ${codePathRemoval}`; //Remove all the user files in temp
+      await $`rm -rf ${codePathFolder}`; //Remove all the user files in temp
 
       // Check if the user has fully passed the problem for the first time, if so, reward them
       function checkCompletion(): number {
