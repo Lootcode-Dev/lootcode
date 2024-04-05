@@ -1,0 +1,9 @@
+{
+    "encounters":
+    [
+        {
+            "name": "Trial2",
+            "enemies": ["Rat", "Rat"]
+        }
+    ]
+}

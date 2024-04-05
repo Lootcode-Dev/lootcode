@@ -7,21 +7,19 @@
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
-import mapFile from "~/app/map/map.json";
-import indFile from "~/problems/index.json";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "~/components/ui/dialog";
 
 interface Node {
@@ -102,7 +100,7 @@ export default function MapView({ id, email, problems }: IUser) {
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         className=" prose w-auto  max-w-none 
-                         scroll-smooth text-white prose-headings:text-white"
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                       >
                         {desc}
                       </ReactMarkdown>
@@ -134,14 +132,16 @@ export default function MapView({ id, email, problems }: IUser) {
               />
 
               <div className="flex w-[20vw] flex-col">
-                <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                  {problem?.solved ? "Completed" : "Not Completed"}
-                </div>
+                {problem && (
+                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                    {problem.solved ? "Completed" : "Not Completed"}
+                  </div>
+                )}
 
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                 >
                   {selNode != -1 ? problem?.description : desc}
                 </ReactMarkdown>
@@ -149,7 +149,13 @@ export default function MapView({ id, email, problems }: IUser) {
                 {selNode != -1 && problem != undefined ? (
                   <a
                     href={
-                      "/map/" + nameToFileName(getNodeName(chapter, selNode))
+                      "/" +
+                      (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                      "problem"
+                        ? "map"
+                        : "game") +
+                      "/" +
+                      nameToFileName(getNodeName(chapter, selNode))
                     }
                   >
                     <Button className="mt-2 w-full bg-purple-700">
@@ -190,7 +196,7 @@ function getNodeName(ch: number, i: number): string {
 }
 
 function nameToFileName(name: string): string {
-  return name.split(" ").join("-").toLowerCase();
+  return name.split(" ").join("_").toLowerCase();
 }
 
 //Restoring this to determine node colors

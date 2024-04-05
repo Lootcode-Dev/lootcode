@@ -11,5 +11,5 @@ export const mapRouter = createTRPCRouter({
         "utf-8",
       );
       return contents;
-    })
+    }),
 });

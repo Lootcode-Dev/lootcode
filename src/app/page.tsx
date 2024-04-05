@@ -17,7 +17,7 @@ export default async function Home() {
             <p className="text-lg">
               Embark on a journey to learn and master the art of programming by
               looting dungeons, fighting enemies, and uncovering the mystery of
-              the world of (TBD)
+              the world of Algorion
             </p>
             <div className="flex space-x-4">
               <Button className="bg-purple-700 text-white">

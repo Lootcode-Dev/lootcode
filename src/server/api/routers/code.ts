@@ -6,7 +6,8 @@ import { readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { boolean, string, z } from "zod";
 import { $ } from "zx";
-import indFile from "~/problems/index.json";
+import indFile from "~/util/index.json";
+import regFile from "~/util/region.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 import { spawn } from 'child_process';
@@ -18,14 +19,18 @@ export const codeRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const contents = { description: "", loot: "", solved: false };
 
+      const region = Object.keys(regFile).find((key: string) =>
+        regFile[key as keyof typeof regFile].includes(input.name),
+      );
+
       if (input.name !== "") {
         contents.description = await readFile(
-          `./src/problems/${input.name}/problem.md`,
+          `./src/problems/${region}/${input.name}/problem.md`,
           "utf-8",
         );
 
         contents.loot = await readFile(
-          `./src/problems/${input.name}/loot.md`,
+          `./src/problems/${region}/${input.name}/loot.md`,
           "utf-8",
         );
 
@@ -85,10 +90,14 @@ export const codeRouter = createTRPCRouter({
         run: string;
       } //Our Interface for our dictionary
 
+      const region = Object.keys(regFile).find((key: string) =>
+        regFile[key as keyof typeof regFile].includes(input.name),
+      );
+
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
       const codePathFolder = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
-      const problemPathInput = `./src/problems/${input.name}/input/`; //The path is based on the problem name
+      const problemPathInput = `./src/problems/${region}/${input.name}/input/`; //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
         python: { ext: "py", run: `python3 ${ctx.userId}${input.name}.py` },
@@ -231,13 +240,13 @@ export const codeRouter = createTRPCRouter({
 
           // Get the input
           const inputFile =
-            await $`cat ./src/problems/${input.name}/input/${file}`;
+            await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
           thisCase.input = inputFile.stdout;
 
           //Get the expected output
           const expectedFile = file.replace(".in", ".out");
           const expected =
-            await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+            await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
           thisCase.expected = expected.stdout;
 
           codeGradeResponse.cases.push(thisCase);
@@ -246,14 +255,14 @@ export const codeRouter = createTRPCRouter({
 
         // Get the input
         const inputFile =
-          await $`cat ./src/problems/${input.name}/input/${file}`;
+          await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
         thisCase.input = inputFile.stdout;
 
         // Test the output against the expected output
         const expectedFile = file.replace(".in", ".out");
         const output = await $`cat ${codePath}.txt`;
         const expected =
-          await $`cat ./src/problems/${input.name}/output/${expectedFile}`;
+          await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
 
         // console.log("Output: " + output.stdout);
         // console.log("Expected: " + expected.stdout);
