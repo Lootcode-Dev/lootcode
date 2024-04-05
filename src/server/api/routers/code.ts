@@ -208,7 +208,7 @@ export const codeRouter = createTRPCRouter({
               console.log(`Container exited with code ${code}`);
 
               //User didn't output anything in their program
-              if (!wroteData) await writeFile(`${codePath}.txt`, "Hey you! Yeah you! Output something :(");
+              if (!wroteData) await writeFile(`${codePath}.txt`, "");
 
               //Resolve or Reject the promise
               if (code != 0) reject(Object.assign(new Error('Error'), { exitCode: code }));
