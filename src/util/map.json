@@ -189,7 +189,14 @@
             "name":"Bitwise Bastion",
             "pos": [90, 40],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "AWOL",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Arithmend",

@@ -27,5 +27,9 @@
         "layered",
         "layered_ii",
         "collision"
+    ],
+    "bitwise-bastion": [
+        "awol"
     ]
+    
 }
