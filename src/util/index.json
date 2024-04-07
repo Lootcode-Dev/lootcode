@@ -23,6 +23,7 @@
         "collision",
         "awol",
         "ranking",
-        "blind_spot"
+        "blind_spot",
+        "assemble"
     ]
 }
