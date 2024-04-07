@@ -22,6 +22,7 @@
         "layered_ii",
         "collision",
         "awol",
-        "ranking"
+        "ranking",
+        "blind_spot"
     ]
 }

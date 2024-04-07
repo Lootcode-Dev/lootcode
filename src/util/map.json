@@ -194,6 +194,12 @@
                     "name": "Ranking",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Blind Spot",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
