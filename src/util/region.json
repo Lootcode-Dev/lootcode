@@ -15,9 +15,7 @@
         "combinations",
         "elections",
         "reallocation",
-        "growth"
-    ],
-    "chainbridge": [
+        "growth",
         "swapper",
         "bigger_digits"
     ],

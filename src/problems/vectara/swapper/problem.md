@@ -1,6 +1,6 @@
 # Swapper
 
-We've been noticing some really indescribable issues lately... Our beautiful nation of Chainbridge is assembled in - you guessed it - chains of bridges. However, some of us have been waking up, with entire homes, buildings, and parks swapped with their neighbors. And now that we're all out of order, our bridges, they're just all wrong!
+We've been noticing some really indescribable issues lately... Our beautiful nation of Vectara is assembled in segments, with each house having a specific address. However, some of us have been waking up, with entire homes, buildings, and parks swapped with their neighbors. And now that we're all out of order, our bridges, they're just all wrong!
 
 We need your help to swap everyone back to their original positions, and we need help fast! Things like these can't be left unattended for long, or we'll have a real mess on our hands.
 

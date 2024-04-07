@@ -96,26 +96,19 @@
                     "name": "Growth",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30, 90],
+                    "name": "Swapper",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50, 10],
+                    "name": "Bigger Digits",
+                    "next": [],
+                    "type": "problem"
                 }
-            ]
-        },
-        {
-            "name":"Chainbridge",
-            "pos": [50,10],
-            "next": [],
-            "nodes": [
-               {
-                "pos": [10, 10],
-                "name": "Swapper",
-                "next": [],
-                "type": "problem"
-               },
-               {
-                "pos": [10, 50],
-                "name": "Bigger Digits",
-                "next": [],
-                "type": "problem"
-               }
             ]
         },
         {
