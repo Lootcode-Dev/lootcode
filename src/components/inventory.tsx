@@ -47,7 +47,7 @@ export default function Inventory({ name, user }: IParams) {
   useEffect(() => {
     if (selItem != -1) {
       setFetching(true);
-      equipCallback().then((response) => {
+      void equipCallback().then((response) => {
         if (response != undefined) {
           setUser(response.data ?? getUser);
           setSelItem(-1);
@@ -55,7 +55,7 @@ export default function Inventory({ name, user }: IParams) {
         }
       });
     }
-  }, [selItem]);
+  }, [equipCallback, getUser, selItem]);
 
   return (
     <div className="flex flex-row">
@@ -87,7 +87,7 @@ export default function Inventory({ name, user }: IParams) {
                   </div>
                 )
               ) : (
-                <div />
+                <div key={index} />
               ),
             )}
           </div>
@@ -104,7 +104,7 @@ export default function Inventory({ name, user }: IParams) {
                   Collectible
                 </div>
               ) : (
-                <div />
+                <div key={index} />
               ),
             )}
           </div>

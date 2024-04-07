@@ -86,7 +86,7 @@ export default function MapView({ user }: IParams) {
       </div>
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
-          <div className="w-[85vw]">
+          <div className="w-[87.5vw]">
             <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
               <ArrowLeft
                 className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
@@ -130,9 +130,9 @@ export default function MapView({ user }: IParams) {
 
               <div className="ml-4 flex w-[20vw]">
                 {selNode == -2 ? (
-                  <Inventory user={user} />
+                  <Inventory user={user} name={""} />
                 ) : (
-                  <div className="flex flex-col">
+                  <div className="flex min-w-full flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem?.solved ? "Completed" : "Not Completed"}
                     </div>
