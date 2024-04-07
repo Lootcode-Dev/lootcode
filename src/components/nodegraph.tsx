@@ -64,8 +64,10 @@ export default function NodeGraph({
           ></circle>
           <text
             id={"nodeText" + index}
-            x={"" + (getNodeX(node.pos[0] ?? 0) - node.name.length * 5)}
+            x={"" + getNodeX(node.pos[0] ?? 0)}
             y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRadius * 2)}
+            textAnchor="middle"
+            dominantBaseline="middle" 
             className="border fill-white stroke-black stroke-1 text-xl font-bold"
           >
             {node.name}
