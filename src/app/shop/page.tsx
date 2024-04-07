@@ -3,9 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { currentUser } from "@clerk/nextjs";
-import MapView from "~/components/mapview";
 import { redirect } from "next/navigation";
 import { db } from "~/server/db";
+import Inventory from "~/components/inventory";
+import Shop from "~/components/shop";
 
 export default async function Page() {
   const user = await currentUser();
@@ -20,5 +21,9 @@ export default async function Page() {
     redirect(`/auth-callback?origin=map`);
   }
 
-  return <MapView user={dbUser}></MapView>;
+  return (
+    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <Shop name={user.firstName} user={dbUser}></Shop>
+    </main>
+  );
 }
