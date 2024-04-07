@@ -23,7 +23,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import Inventory from "./inventory";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 interface Node {
   pos: number[];
@@ -134,7 +134,17 @@ export default function MapView({ user }: IParams) {
                 ) : (
                   <div className="flex min-w-full flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                      {problem?.solved ? "Completed" : "Not Completed"}
+                      {problem ? (
+                        problem?.solved ? (
+                          <span className="text-yellow-200">Completed</span>
+                        ) : (
+                          <span className="text-red-500">Not Completed</span>
+                        )
+                      ) : (
+                        <div className="flex items-center justify-center">
+                          <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                        </div>
+                      )}
                     </div>
 
                     <ReactMarkdown
