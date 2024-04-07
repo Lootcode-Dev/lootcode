@@ -77,7 +77,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
       code: code,
       lang: language,
     },
-    { enabled: false },
+    { enabled: false, retry: false },
   );
 
   return (
@@ -88,7 +88,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
           <div className="max-h-[92.5vh] overflow-auto">
             <ReactMarkdownNoSSR
               remarkPlugins={[remarkGfm]}
-              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200 prose-strong:text-yellow-200 prose-strong:font-bold"
+              className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
             >
               {problem?.description}
             </ReactMarkdownNoSSR>
