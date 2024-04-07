@@ -80,10 +80,10 @@ export default function MapView({ user }: IParams) {
     );
 
   return (
-    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
+    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
-      </div>
+      </div> */}
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
           <div className="w-[87.5vw]">
@@ -170,7 +170,7 @@ export default function MapView({ user }: IParams) {
             </div>
           </div>
         ) : (
-          <div className="flex h-[80vh] w-[60vw] flex-col justify-center">
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
             <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
               Regions
             </div>
