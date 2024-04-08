@@ -28,6 +28,7 @@
         "merger",
         "beauty",
         "disgust",
-        "trailing_zeroes"
+        "trailing_zeroes",
+        "elapsed"
     ]
 }
