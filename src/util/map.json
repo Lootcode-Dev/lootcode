@@ -219,7 +219,14 @@
             "name":"Arithmend",
             "pos": [10, 70],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Beauty",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Dynamar",
