@@ -161,6 +161,9 @@ export const codeRouter = createTRPCRouter({
         }
       } // END COMPILE PIPELINE
 
+      //Spwan a docker process for security reasons
+      await $`docker run --name ${ctx.userId}${input.name} --rm -i -d -v ${codePathFolder}:/app/ -v ${problemPathInput}:/app/inputs/:ro code-runner`;
+
       // Iterate through the input files
       let i = 1;
       for (const file of filenames) {
@@ -177,50 +180,11 @@ export const codeRouter = createTRPCRouter({
         // START RUNTIME ERROR PIPELINE
         // Run the code with the input and write the output to a temp file
         try {
-
-          //Start a promise so we can wait for our docker instance to response
-          await new Promise((resolve, reject) => {
-
-            //Spwan a docker process for security reasons
-            const dockerProcess = spawn('docker', [
-              'run', //Run process
-              '--rm', //Remove process after use
-              '-v', `${codePathFolder}:/app/`, //Mount codePathFolder directory
-              '-v', `${problemPathInput}${file}:/app/input.in`, //Mount Input
-              'code-runner', //code-runner docker image
-              '-c', `timeout 1s ${langObject.run} < input.in`,
-            ]);
-            let wroteData = false; //Track if we wrote a users output
-
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            dockerProcess.stdout.on('data', async (data) => {
-              console.log(`Container output: ${data}`);
-              await writeFile(`${codePath}.txt`, data as string);
-              wroteData = true;
-            });
-
-            dockerProcess.stderr.on('data', (data) => {
-              console.error(`Container error: ${data}`);
-            });
-
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            dockerProcess.on('close', async (code) => {
-              console.log(`Container exited with code ${code}`);
-
-              //User didn't output anything in their program
-              if (!wroteData) await writeFile(`${codePath}.txt`, "");
-
-              //Resolve or Reject the promise
-              if (code != 0) reject(Object.assign(new Error('Error'), { exitCode: code }));
-              else resolve(code);
-            });
-
-          }).catch(error => {
-            throw error;
-          });
+          await writeFile(`${codePath}.sh`, `timeout 1s ${langObject.run} < inputs/${file}`);
+          await $`docker exec -i ${ctx.userId}${input.name} timeout 1s /bin/bash < ${codePath}.sh > ${codePath}.txt`;
         } catch (error: any) {
           //Error with running the code
-          if (error.exitCode === 143) {
+          if (error.exitCode === 124) {
             //Time Limit Exceeded
             //TLE exist code is 124
             // console.log("Time limit exceeded");
@@ -284,6 +248,7 @@ export const codeRouter = createTRPCRouter({
       }
 
       // Cleanup
+      await $`docker rm ${ctx.userId}${input.name} -f`;
       await $`rm -rf ${codePathFolder}`; //Remove all the user files in temp
 
       // Check if the user has fully passed the problem for the first time, if so, reward them
