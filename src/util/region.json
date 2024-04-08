@@ -35,7 +35,8 @@
     ],
     "arithmend": [
         "beauty",
-        "disgust"
+        "disgust",
+        "trailing_zeroes"
     ]
     
 }

@@ -231,6 +231,12 @@
                     "name": "Disgust",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Trailing Zeroes",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
