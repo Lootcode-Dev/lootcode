@@ -225,6 +225,12 @@
                     "name": "Beauty",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Disgust",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
