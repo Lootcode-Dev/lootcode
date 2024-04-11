@@ -11,7 +11,6 @@ import regFile from "~/util/region.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
-
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
     .input(z.object({ name: z.string() }))
@@ -176,7 +175,10 @@ export const codeRouter = createTRPCRouter({
         // START RUNTIME ERROR PIPELINE
         // Run the code with the input and write the output to a temp file
         try {
-          await writeFile(`${codePath}.sh`, `timeout 1s ${langObject.run} < inputs/${file}`);
+          await writeFile(
+            `${codePath}.sh`,
+            `timeout 1s ${langObject.run} < inputs/${file}`,
+          );
           await $`docker exec -i ${ctx.userId}${input.name} /bin/bash < ${codePath}.sh > ${codePath}.txt`;
         } catch (error: any) {
           //Error with running the code

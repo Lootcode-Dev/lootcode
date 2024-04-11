@@ -84,7 +84,7 @@ export default function MapView({ user }: IParams) {
       {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
       </div> */}
-      <div className="flex size-full items-center justify-center p-4">
+      <div className="mt-[-2.5vh] flex size-full items-center justify-center">
         {chapter != -1 ? (
           <div className="w-[87.5vw]">
             <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
