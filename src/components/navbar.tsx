@@ -1,6 +1,12 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { ArrowRight, SwordIcon } from "lucide-react";
+import {
+  ArrowRight,
+  BackpackIcon,
+  CoinsIcon,
+  MapIcon,
+  SwordIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 export default async function Navbar() {
@@ -20,7 +26,21 @@ export default async function Navbar() {
             <Link href="/map">
               <Button className="bg-purple-700 text-white">
                 <div className="flex items-center gap-2">
-                  Adventure <SwordIcon className="h-5 w-5" />
+                  Map <MapIcon className="h-5 w-5" />
+                </div>
+              </Button>
+            </Link>
+            <Link href="/inventory">
+              <Button className="bg-purple-700 text-white">
+                <div className="flex items-center gap-2">
+                  Inventory <BackpackIcon className="h-5 w-5" />
+                </div>
+              </Button>
+            </Link>
+            <Link href="/shop">
+              <Button className="bg-purple-700 text-white">
+                <div className="flex items-center gap-2">
+                  Shop <CoinsIcon className="h-5 w-5" />
                 </div>
               </Button>
             </Link>

@@ -15,9 +15,7 @@
         "combinations",
         "elections",
         "reallocation",
-        "growth"
-    ],
-    "chainbridge": [
+        "growth",
         "swapper",
         "bigger_digits"
     ],
@@ -27,5 +25,20 @@
         "layered",
         "layered_ii",
         "collision"
+    ],
+    "bitwise-bastion": [
+        "awol",
+        "ranking",
+        "blind_spot",
+        "assemble",
+        "merger"
+    ],
+    "arithmend": [
+        "beauty",
+        "disgust",
+        "trailing_zeroes",
+        "elapsed",
+        "gargantuan"
     ]
+    
 }

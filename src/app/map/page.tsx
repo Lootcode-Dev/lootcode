@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// TODO: EXTRACT TO COMPONENT TO WRAP WITH AUTH CALLBACK
 
 import { currentUser } from "@clerk/nextjs";
 import MapView from "~/components/mapview";
@@ -21,11 +20,5 @@ export default async function Page() {
     redirect(`/auth-callback?origin=map`);
   }
 
-  return (
-    <MapView
-      id={dbUser?.id}
-      email={dbUser?.email}
-      problems={dbUser?.problems}
-    ></MapView>
-  );
+  return <MapView user={dbUser}></MapView>;
 }

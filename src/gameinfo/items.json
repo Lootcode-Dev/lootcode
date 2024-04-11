@@ -1,0 +1,68 @@
+{
+    "items": [
+        {
+            "name": "Peasant Garb",
+            "desc": "A basic set of leather clothing. Provides very little protection.",
+            "image": "/enemies/rat.png",
+            "type": "armor",
+            "value": 5,
+            "level": 1,
+
+            "health": 0,
+            "armor": 1,
+            "resist": 0,
+            "mana": 0,
+            "strength": 0,
+            "intelligence": 0,
+            "wisdom": 0
+        },
+        {
+            "name": "Training Sword",
+            "desc": "A weak wooden sword used for training.",
+            "image": "/enemies/rat.png",
+            "type": "weapon",
+            "value": 5,
+            "level": 1,
+
+            "health": 0,
+            "armor": 0,
+            "resist": 0,
+            "mana": 0,
+            "strength": 2,
+            "intelligence": 0,
+            "wisdom": 0
+        },
+        {
+            "name": "Rotten Staff",
+            "desc": "Though rotting and worn, this oak staff still holds some attunement.",
+            "image": "/enemies/rat.png",
+            "type": "focus",
+            "value": 5,
+            "level": 1,
+
+            "health": 0,
+            "armor": 0,
+            "resist": 0,
+            "mana": 0,
+            "strength": 0,
+            "intelligence": 2,
+            "wisdom": 0
+        },
+        {
+            "name": "Bronze Daggers",
+            "desc": "A set of dull bronze daggers.",
+            "image": "/enemies/rat.png",
+            "type": "weapon",
+            "value": 10,
+            "level": 2,
+
+            "health": 0,
+            "armor": -1,
+            "resist": 0,
+            "mana": 0,
+            "strength": 3,
+            "intelligence": 0,
+            "wisdom": 0
+        }
+    ]
+}

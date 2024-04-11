@@ -20,6 +20,16 @@
         "growth",
         "layered",
         "layered_ii",
-        "collision"
+        "collision",
+        "awol",
+        "ranking",
+        "blind_spot",
+        "assemble",
+        "merger",
+        "beauty",
+        "disgust",
+        "trailing_zeroes",
+        "elapsed",
+        "gargantuan"
     ]
 }

@@ -3,6 +3,7 @@ import { authRouter } from "./routers/auth";
 import { codeRouter } from "./routers/code";
 import { mapRouter } from "./routers/map";
 import { dockerRouter } from "./routers/docker";
+import { gameRouter } from "./routers/game";
 
 /**
  * This is the primary router for your server.
@@ -13,7 +14,8 @@ export const appRouter = createTRPCRouter({
   auth: authRouter,
   code: codeRouter,
   docker: dockerRouter,
-  map: mapRouter
+  map: mapRouter,
+  game: gameRouter,
 });
 
 // export type definition of API

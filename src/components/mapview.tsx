@@ -10,6 +10,7 @@ import { Button } from "~/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NodeGraph from "~/components/nodegraph";
+import { GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
@@ -19,8 +20,10 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTrigger
+  DialogTrigger,
 } from "~/components/ui/dialog";
+import Inventory from "./inventory";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 interface Node {
   pos: number[];
@@ -28,16 +31,14 @@ interface Node {
   next: string[];
 }
 
-type IUser = {
-  id: string | undefined;
-  email: string | undefined;
-  problems: string | undefined;
-};
+interface IParams {
+  user: GUser;
+}
 
 let dummyProblems =
   "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
-export default function MapView({ id, email, problems }: IUser) {
+export default function MapView({ user }: IParams) {
   const [chapter, setChapter] = useState(-1);
   const [selNode, setSelNode] = useState(-1);
 
@@ -45,7 +46,7 @@ export default function MapView({ id, email, problems }: IUser) {
   //here and in the getColor functions, and I think having to pass
   //a user string to the node graph for completion functions is
   //dumb if we want to make the node graph component reusable.
-  if (problems) dummyProblems = problems;
+  if (user.problems) dummyProblems = user.problems;
 
   const { data: problem, refetch: getProblem } = api.code.getProblem.useQuery(
     {
@@ -79,17 +80,25 @@ export default function MapView({ id, email, problems }: IUser) {
     );
 
   return (
-    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
-        {email + " " + id + " " + problems}
-      </div>
+    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
+        {user.email + " " + user.id + " " + user.problems}
+      </div> */}
       <div className="flex size-full items-center justify-center p-4">
         {chapter != -1 ? (
-          <div className="grow">
-            <div className="grid justify-items-center">
+          <div className="w-[87.5vw]">
+            <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
+              <ArrowLeft
+                className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
+                onClick={() => {
+                  setSelNode(-1);
+                  setChapter(-1);
+                  console.log(selNode);
+                }}
+              ></ArrowLeft>
               <Dialog>
                 <DialogTrigger>
-                  <Button className="mb-4 bg-purple-700 text-center text-2xl font-bold">
+                  <Button className="m-2 bg-purple-700 text-center text-2xl font-bold">
                     {mapFile.chapters[chapter]?.name}
                   </Button>
                 </DialogTrigger>
@@ -111,18 +120,6 @@ export default function MapView({ id, email, problems }: IUser) {
             </div>
 
             <div className="flex h-[75vh] w-full justify-center">
-              <div className="items-top mx-2 flex flex-col rounded-xl bg-[#15162c] p-4">
-                <Button
-                  className="mt-2 bg-purple-700"
-                  onClick={() => {
-                    setSelNode(-1);
-                    setChapter(-1);
-                    console.log(selNode);
-                  }}
-                >
-                  Back
-                </Button>
-              </div>
               <NodeGraph
                 nodes={mapFile.chapters[chapter]?.nodes}
                 nodeRadius={25}
@@ -131,45 +128,62 @@ export default function MapView({ id, email, problems }: IUser) {
                 setNode={setSelNode}
               />
 
-              <div className="flex w-[20vw] flex-col">
-                {problem && (
-                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                    {problem.solved ? "Completed" : "Not Completed"}
-                  </div>
-                )}
-
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                >
-                  {selNode != -1 ? problem?.description : desc}
-                </ReactMarkdown>
-
-                {selNode != -1 && problem != undefined ? (
-                  <a
-                    href={
-                      "/" +
-                      (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                      "problem"
-                        ? "map"
-                        : "game") +
-                      "/" +
-                      nameToFileName(getNodeName(chapter, selNode))
-                    }
-                  >
-                    <Button className="mt-2 w-full bg-purple-700">
-                      Embark
-                    </Button>
-                  </a>
+              <div className="ml-4 flex w-[20vw]">
+                {selNode == -2 ? (
+                  <Inventory user={user} name={""} />
                 ) : (
-                  <div />
+                  <div className="flex min-w-full flex-col">
+                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                      {problem ? (
+                        problem?.solved ? (
+                          <span className="text-yellow-200">Completed</span>
+                        ) : (
+                          <span className="text-red-500">Not Completed</span>
+                        )
+                      ) : (
+                        <div className="flex items-center justify-center">
+                          <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                        </div>
+                      )}
+                    </div>
+
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="prose grow overflow-auto scroll-smooth 
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                    >
+                      {selNode != -1 ? problem?.description : desc}
+                    </ReactMarkdown>
+
+                    {selNode != -1 && problem != undefined ? (
+                      <a
+                        href={
+                          "/" +
+                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                          "problem"
+                            ? "map"
+                            : "game") +
+                          "/" +
+                          nameToFileName(getNodeName(chapter, selNode))
+                        }
+                      >
+                        <Button className="mt-2 w-full bg-purple-700">
+                          Embark
+                        </Button>
+                      </a>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
                 )}
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex h-[80vh] w-full justify-center">
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
+            <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+              Regions
+            </div>
             <NodeGraph
               nodes={mapFile.chapters}
               nodeRadius={30}
@@ -195,7 +209,7 @@ function getNodeName(ch: number, i: number): string {
   return n.name;
 }
 
-function nameToFileName(name: string): string {
+export function nameToFileName(name: string): string {
   return name.split(" ").join("_").toLowerCase();
 }
 
