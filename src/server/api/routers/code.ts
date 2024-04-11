@@ -4,13 +4,12 @@
 import { TRPCError } from "@trpc/server";
 import { readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import { boolean, string, z } from "zod";
+import { z } from "zod";
 import { $ } from "zx";
 import indFile from "~/util/index.json";
 import regFile from "~/util/region.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
-import { spawn } from 'child_process';
 
 
 export const codeRouter = createTRPCRouter({
@@ -161,9 +160,6 @@ export const codeRouter = createTRPCRouter({
         }
       } // END COMPILE PIPELINE
 
-      //Spwan a docker process for security reasons
-      await $`docker run --name ${ctx.userId}${input.name} --rm -i -d -v ${codePathFolder}:/app/ -v ${problemPathInput}:/app/inputs/:ro code-runner`;
-
       // Iterate through the input files
       let i = 1;
       for (const file of filenames) {
@@ -181,7 +177,7 @@ export const codeRouter = createTRPCRouter({
         // Run the code with the input and write the output to a temp file
         try {
           await writeFile(`${codePath}.sh`, `timeout 1s ${langObject.run} < inputs/${file}`);
-          await $`docker exec -i ${ctx.userId}${input.name} timeout 1s /bin/bash < ${codePath}.sh > ${codePath}.txt`;
+          await $`docker exec -i ${ctx.userId}${input.name} /bin/bash < ${codePath}.sh > ${codePath}.txt`;
         } catch (error: any) {
           //Error with running the code
           if (error.exitCode === 124) {

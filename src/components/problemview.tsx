@@ -80,6 +80,11 @@ export default function ProblemView({ problemid }: { problemid: string }) {
     { enabled: false, retry: false },
   );
 
+  const { data: s, refetch: dockerCreate } = api.docker.createDockerContainer.useQuery(
+    { name: problemid },
+    { enabled: false, retry: false },
+  );
+
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <ResizablePanelGroup direction="horizontal" className="border">
@@ -123,14 +128,15 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     className="border bg-purple-950"
                     onClick={() => {
                       setRunningCode(true);
-                      void codeRun().then(response => {
-                        //Set stateful data to our data to propagate changes 
-                        setRunData(response.data);
-                        
-                        //When setFirstSolve is true we solved the problem (not necessarily the first time)
-                        if (response.data?.reward === true) setFirstSolve(true);
-                    
-                        setRunningCode(false);
+                      void dockerCreate().then(() => {
+                        void codeRun().then(response => {
+                          //Set stateful data to our data to propagate changes 
+                          setRunData(response.data);
+
+                          //When setFirstSolve is true we solved the problem (not necessarily the first time)
+                          if (response.data?.reward === true) setFirstSolve(true);
+                          setRunningCode(false);
+                        });
                       });
                     }}
                   >
