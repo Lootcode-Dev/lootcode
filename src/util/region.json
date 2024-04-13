@@ -26,6 +26,9 @@
         "layered_ii",
         "collision"
     ],
+    "findara": [
+        "alphacount"
+    ],
     "bitwise-bastion": [
         "awol",
         "ranking",

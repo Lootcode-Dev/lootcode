@@ -113,7 +113,7 @@
         },
         {
             "name":"Stackspires",
-            "pos": [70,10],
+            "pos": [50,10],
             "next": [],
             "nodes":[
             {
@@ -150,37 +150,44 @@
         },
         {
             "name":"Queuesgard",
-            "pos": [90,10],
+            "pos": [70,10],
             "next": [],
             "nodes":[]
         },
         {
             "name":"Arbonclave",
-            "pos": [10, 40],
+            "pos": [90, 10],
             "next": [],
             "nodes":[]
         },
         {
             "name":"Findara",
+            "pos": [10, 40],
+            "next": [],
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Alphacount",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
+        },
+        {
+            "name":"Compendia",
             "pos": [30, 40],
             "next": [],
             "nodes":[]
         },
         {
-            "name":"Compendia",
+            "name":"Nodak",
             "pos": [50, 40],
             "next": [],
             "nodes":[]
         },
         {
-            "name":"Nodak",
-            "pos": [70, 40],
-            "next": [],
-            "nodes":[]
-        },
-        {
             "name":"Bitwise Bastion",
-            "pos": [90, 40],
+            "pos": [70, 40],
             "next": [],
             "nodes":[
                 {
@@ -217,7 +224,7 @@
         },
         {
             "name":"Arithmend",
-            "pos": [10, 70],
+            "pos": [90, 40],
             "next": [],
             "nodes":[
                 {
@@ -254,13 +261,13 @@
         },
         {
             "name":"Dynamar",
-            "pos": [30, 70],
+            "pos": [10, 70],
             "next": [],
             "nodes":[]
         },
         {
             "name":"The Thicket",
-            "pos": [50, 70],
+            "pos": [30, 70],
             "next": [],
             "nodes":[]
         }
