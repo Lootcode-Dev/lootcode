@@ -5,8 +5,7 @@
         "refugees",
         "engagement",
         "decryption",
-        "merry_go_word",
-        "ichors_identifier"
+        "merry_go_word"
     ],
     "vectara": [
         "flooring",
@@ -28,7 +27,8 @@
     ],
     "findara": [
         "alphacount",
-        "cooking"
+        "cooking",
+        "triangulation"
     ],
     "bitwise-bastion": [
         "awol",

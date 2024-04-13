@@ -41,12 +41,6 @@
                     "name": "Merry Go Word",
                     "next": [],
                     "type": "problem"
-                },
-                {
-                    "pos": [50,70],
-                    "name": "Ichors Identifier",
-                    "next": [],
-                    "type": "problem"
                 }
             ]
         },
@@ -174,6 +168,12 @@
                 {
                     "pos": [10,30],
                     "name": "Cooking",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Triangulation",
                     "next": [],
                     "type": "problem"
                 }
