@@ -176,6 +176,12 @@
                     "name": "Triangulation",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Stone Circle",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

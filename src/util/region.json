@@ -28,7 +28,8 @@
     "findara": [
         "alphacount",
         "cooking",
-        "triangulation"
+        "triangulation",
+        "stone_circle"
     ],
     "bitwise-bastion": [
         "awol",
