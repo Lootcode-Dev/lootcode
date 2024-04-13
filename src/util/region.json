@@ -29,7 +29,8 @@
         "alphacount",
         "cooking",
         "triangulation",
-        "stone_circle"
+        "stone_circle",
+        "twinned"
     ],
     "bitwise-bastion": [
         "awol",
