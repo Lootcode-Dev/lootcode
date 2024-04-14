@@ -152,7 +152,20 @@
             "name":"Arbonclave",
             "pos": [90, 10],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Traversal I",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Traversal II",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Findara",

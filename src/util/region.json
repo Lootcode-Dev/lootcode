@@ -25,6 +25,10 @@
         "layered_ii",
         "collision"
     ],
+    "arbonclave": [
+        "traversal_i",
+        "traversal_ii"
+    ],
     "findara": [
         "alphacount",
         "cooking",
