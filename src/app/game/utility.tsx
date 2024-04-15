@@ -33,11 +33,11 @@ export interface Item {
 
 export type Stats = {
   health: number;
-  mana: number;
-  wisdom: number;
+  attackSpeed: number;
+  critChance: number;
   strength: number;
-  intelligence: number;
   armor: number;
+  magic: number;
   resist: number;
 };
 
@@ -46,32 +46,22 @@ export type Entity = {
   name: string;
 
   health: number;
-  maxHealth: number;
-
-  //true if entity is the player
-  player: boolean;
-
-  //mana is used for spells
-  mana: number;
-  maxMana: number;
-
-  strength: number; //physical damage
-  intelligence: number; //magic damage
-
-  wisdom: number; //mana regen
-
-  armor: number; //resist physical damage
-  resist: number; //resist magical damage
+  attackSpeed: number;
+  critChance: number;
+  strength: number;
+  armor: number;
+  magic: number;
+  resist: number;
 };
 
 export function getUserStats(user: GUser): Stats {
-  let statBlock: Stats = {
+  const statBlock: Stats = {
     health: 10,
-    mana: 10,
-    wisdom: 1,
+    attackSpeed: 1,
+    critChance: 0,
     strength: 0,
-    intelligence: 0,
     armor: 0,
+    magic: 0,
     resist: 0,
   };
 

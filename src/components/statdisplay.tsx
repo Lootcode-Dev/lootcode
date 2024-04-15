@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
 import {
   BrainIcon,
+  ChevronsUp,
+  CloverIcon,
   CoinsIcon,
   FlaskRound,
   PlusIcon,
@@ -70,10 +72,10 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <FlaskRound></FlaskRound>
-            {"" + stats.mana}
+            <Wand2></Wand2>
+            {"" + stats.magic}
           </div>
-          <div className="text-sm">Mana</div>
+          <div className="text-sm">Magic</div>
         </div>
 
         <div className="flex flex-col items-center text-2xl">
@@ -86,22 +88,22 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <Wand2></Wand2>
-            {"" + stats.intelligence}
+            <ChevronsUp></ChevronsUp>
+            {"" + stats.attackSpeed}
           </div>
-          <div className="text-sm">Intelligence</div>
+          <div className="text-sm">Attack Speed</div>
         </div>
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <BrainIcon></BrainIcon>
-            {"" + stats.wisdom}
+            <CloverIcon></CloverIcon>
+            {"" + stats.critChance}
           </div>
-          <div className="text-sm">Wisdom</div>
+          <div className="text-sm">Critical Strike</div>
         </div>
       </div>
       <div className="m-2 my-4 text-center text-2xl font-bold">Equipped</div>
-      <div className="flex grid grid-cols-1 gap-2 overflow-auto scroll-smooth">
+      <div className="grid grid-cols-1 gap-2 overflow-auto scroll-smooth">
         {user.armor != -1 ? <ItemDisplay id={user.armor} /> : <div />}
         {user.accessory != -1 ? <ItemDisplay id={user.accessory} /> : <div />}
         {user.weapon != -1 ? <ItemDisplay id={user.weapon} /> : <div />}
