@@ -19,11 +19,13 @@ export default function Testgame() {
   const [enemies, setEnemies] = useState<Enemy[] | null>(null);
 
   const { data } = api.game.getEncounter.useQuery({
-    encounterid: "test",
+    encounterid: "fortnite",
   });
 
   useEffect(() => {
-    setEnemies(data);
+    if (data) {
+      setEnemies(data);
+    }
   }, [data]);
 
   function gameLoop() {
@@ -31,10 +33,15 @@ export default function Testgame() {
       const interval = setInterval(() => {
         setEnemies((prevEnemies) => {
           if (prevEnemies) {
-            const updatedEnemies = prevEnemies.map((enemy) => ({
-              ...enemy,
-              health: enemy.health - 5,
-            }));
+            const updatedEnemies = prevEnemies.map((enemy) => {
+              const newHealth = enemy.health - 5;
+              const health = newHealth < 0 ? 0 : newHealth;
+
+              return {
+                ...enemy,
+                health,
+              };
+            });
 
             const allEnemiesDead = updatedEnemies.every(
               (enemy) => enemy.health <= 0,
@@ -48,7 +55,7 @@ export default function Testgame() {
 
           return prevEnemies;
         });
-      }, 1000);
+      }, 100);
     }
   }
 
