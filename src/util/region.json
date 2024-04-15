@@ -49,6 +49,10 @@
         "trailing_zeroes",
         "elapsed",
         "gargantuan"
+    ],
+    "dynamar": [
+        "partitions",
+        "weaving"
     ]
     
 }

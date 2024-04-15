@@ -36,6 +36,8 @@
         "stone_circle",
         "twinned",
         "traversal_i",
-        "traversal_ii"
+        "traversal_ii",
+        "partitions",
+        "weaving"
     ]
 }

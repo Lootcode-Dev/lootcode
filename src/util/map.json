@@ -294,7 +294,20 @@
             "name":"Dynamar",
             "pos": [10, 70],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Partitions",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Weaving",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"The Thicket",
