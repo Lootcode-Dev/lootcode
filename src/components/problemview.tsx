@@ -80,6 +80,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
     { enabled: false, retry: false },
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   const { data: s, refetch: dockerCreate } = api.docker.createDockerContainer.useQuery(
     { name: problemid },
     { enabled: false, retry: false },
@@ -128,6 +129,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     className="border bg-purple-950"
                     onClick={() => {
                       setRunningCode(true);
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                       void dockerCreate().then(() => {
                         void codeRun().then(response => {
                           //Set stateful data to our data to propagate changes 

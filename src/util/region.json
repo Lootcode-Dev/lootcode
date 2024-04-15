@@ -52,7 +52,8 @@
     ],
     "dynamar": [
         "partitions",
-        "weaving"
+        "weaving",
+        "jacked"
     ]
     
 }

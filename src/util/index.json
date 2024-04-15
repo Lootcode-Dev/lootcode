@@ -38,6 +38,7 @@
         "traversal_i",
         "traversal_ii",
         "partitions",
-        "weaving"
+        "weaving",
+        "jacked"
     ]
 }
