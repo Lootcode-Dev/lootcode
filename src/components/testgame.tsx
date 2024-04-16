@@ -118,7 +118,7 @@ export default function Testgame({ user, name }: Props) {
             // Enemy incoming damage updates
             if (currentEnemy) {
               let damage =
-                Math.max(0, userStats.strength - currentEnemy.armor) -
+                Math.max(0, userStats.strength - currentEnemy.armor) +
                 Math.max(0, userStats.magic - currentEnemy.resist);
 
               if (Math.random() * 100 <= userStats.critChance) {
@@ -169,7 +169,7 @@ export default function Testgame({ user, name }: Props) {
             const currentEnemy = enemies[currentEnemyIndex];
             if (currentEnemy) {
               let damage =
-                Math.max(0, currentEnemy.strength - userStats.armor) -
+                Math.max(0, currentEnemy.strength - userStats.armor) +
                 Math.max(0, currentEnemy.magic - userStats.resist);
 
               if (Math.random() * 100 <= currentEnemy.critChance) {
