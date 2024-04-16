@@ -43,6 +43,7 @@ let dummyProblems =
 export default function MapView({ user, chapterid }: IParams) {
   const chapter = chapterToIndex(chapterid);
   const [selNode, setSelNode] = useState(-1);
+  const [progress, setProgress] = useState(-1);
 
   //I know this is goofy but I don't want to query the user
   //here and in the getColor functions, and I think having to pass
@@ -81,7 +82,10 @@ export default function MapView({ user, chapterid }: IParams) {
   }, [chapter, getChDesc]);
 
   useEffect(() => {
-    void getHomeChDesc();
+    if (chapter == -1) {
+      void getHomeChDesc();
+      setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
+    }
   }, [selNode, getHomeChDesc]);
 
   if (chapter != -1 && !mapFile.chapters[0])
@@ -199,6 +203,24 @@ export default function MapView({ user, chapterid }: IParams) {
               />
               <div className="ml-4 flex w-[20vw]">
                 <div className="flex min-w-full flex-col">
+                  {selNode != -1 ? (
+                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                      {progress >=
+                      (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
+                        <span className="text-yellow-200">Completed</span>
+                      ) : (
+                        <span className="text-red-500">
+                          {"" +
+                            progress +
+                            " / " +
+                            (mapFile.chapters[selNode]?.nodes.length ?? 0)}
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     className="prose grow overflow-auto scroll-smooth 
@@ -264,6 +286,21 @@ function checkChapterCompletion(name: string, user: string): boolean {
       mapFile.chapters[index]?.nodes.map((problem) => {
         if (!checkCompletion(problem.name, user)) {
           res = false;
+          return;
+        }
+      });
+    }
+  });
+  return res;
+}
+
+function completionsInChapter(name: string, user: string): number {
+  let res = 0;
+  mapFile.chapters.map((chapter, index) => {
+    if (chapter.name === name) {
+      mapFile.chapters[index]?.nodes.map((problem) => {
+        if (checkCompletion(problem.name, user)) {
+          res++;
           return;
         }
       });
