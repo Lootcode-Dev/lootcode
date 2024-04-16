@@ -14,6 +14,7 @@ import { GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
+import { redirect } from "next/navigation";
 
 import {
   Dialog,
@@ -33,15 +34,17 @@ interface Node {
 
 interface IParams {
   user: GUser;
+  chapterid: string;
 }
 
 let dummyProblems =
   "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
-export default function MapView({ user }: IParams) {
-  const [chapter, setChapter] = useState(-1);
+export default function MapView({ user, chapterid }: IParams) {
+  const chapter = chapterToIndex(chapterid);
   const [selNode, setSelNode] = useState(-1);
 
+  
   //I know this is goofy but I don't want to query the user
   //here and in the getColor functions, and I think having to pass
   //a user string to the node graph for completion functions is
@@ -62,6 +65,13 @@ export default function MapView({ user }: IParams) {
     { enabled: false, retry: false },
   );
 
+  const { data: homedesc, refetch: getHomeChDesc } = api.map.getDescription.useQuery(
+    {
+      name: nameToFileName(mapFile.chapters[selNode]?.name ?? "failure"),
+    },
+    { enabled: false, retry: false },
+  );
+
   useEffect(() => {
     void getProblem();
   }, [chapter, getProblem, selNode]);
@@ -69,6 +79,10 @@ export default function MapView({ user }: IParams) {
   useEffect(() => {
     void getChDesc();
   }, [chapter, getChDesc]);
+
+  useEffect(() => {
+    void getHomeChDesc();
+  }, [selNode, getHomeChDesc]);
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -88,14 +102,11 @@ export default function MapView({ user }: IParams) {
         {chapter != -1 ? (
           <div className="w-[87.5vw]">
             <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
-              <ArrowLeft
-                className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
-                onClick={() => {
-                  setSelNode(-1);
-                  setChapter(-1);
-                  console.log(selNode);
-                }}
-              ></ArrowLeft>
+              <a href="/map/home">
+                <ArrowLeft
+                  className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
+                ></ArrowLeft>
+              </a>
               <Dialog>
                 <DialogTrigger>
                   <Button className="m-2 bg-purple-700 text-center text-2xl font-bold">
@@ -129,58 +140,82 @@ export default function MapView({ user }: IParams) {
               />
 
               <div className="ml-4 flex w-[20vw]">
-                {selNode == -2 ? (
-                  <Inventory user={user} name={""} />
-                ) : (
-                  <div className="flex min-w-full flex-col">
-                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                      {problem?.solved ? "Completed" : "Not Completed"}
-                    </div>
-
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                    >
-                      {selNode != -1 ? problem?.description : desc}
-                    </ReactMarkdown>
-
-                    {selNode != -1 && problem != undefined ? (
-                      <a
-                        href={
-                          "/" +
-                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                          "problem"
-                            ? "map"
-                            : "game") +
-                          "/" +
-                          nameToFileName(getNodeName(chapter, selNode))
-                        }
-                      >
-                        <Button className="mt-2 w-full bg-purple-700">
-                          Embark
-                        </Button>
-                      </a>
-                    ) : (
-                      <div />
-                    )}
+                <div className="flex min-w-full flex-col">
+                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                    {problem?.solved ? "Completed" : "Not Completed"}
                   </div>
-                )}
+
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className="prose grow overflow-auto scroll-smooth 
+                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                  >
+                    {selNode != -1 ? problem?.description : desc}
+                  </ReactMarkdown>
+
+                  {selNode != -1 && problem != undefined ? (
+                    <a
+                      href={
+                        "/" +
+                        (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                        "problem"
+                          ? ("map/"+nameToFileName(chapterid))
+                          : "game") +
+                        "/" +
+                        nameToFileName(getNodeName(chapter, selNode))
+                      }
+                    >
+                      <Button className="mt-2 w-full bg-purple-700">
+                        Embark
+                      </Button>
+                    </a>
+                  ) : (
+                    <div />
+                  )}
+                </div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex h-[80vh] w-[60vw] flex-col justify-center">
+          <div className="w-[87.5vw]">
             <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
               Regions
             </div>
+            <div className="flex h-[75vh] w-full justify-center">
             <NodeGraph
               nodes={mapFile.chapters}
               nodeRadius={30}
               nodeColor={setNodeChapterColor}
-              getNode={chapter}
-              setNode={setChapter}
+              getNode={selNode}
+              setNode={setSelNode}
             />
+            <div className="ml-4 flex w-[20vw]">
+                <div className="flex min-w-full flex-col">
+                  
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className="prose grow overflow-auto scroll-smooth 
+                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                  >
+                    {selNode != -1 ? homedesc : "# Select a chapter..."}
+                  </ReactMarkdown>
+
+                  {selNode != -1 ? (
+                    <a
+                      href={
+                        "/map/"+nameToFileName(indexToChapter(selNode))
+                      }
+                    >
+                      <Button className="mt-2 w-full bg-purple-700">
+                        Embark
+                      </Button>
+                    </a>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -242,4 +277,23 @@ function setNodeColor(name: string): string {
 function setNodeChapterColor(name: string): string {
   if (checkChapterCompletion(name, dummyProblems)) return "#10b981";
   else return "#ef4444";
+}
+
+export function indexToChapter(id: number): string
+{
+  if(mapFile.chapters[id]?.name != undefined)
+    return mapFile.chapters[id]?.name;
+  else
+    return "error";
+}
+
+export function chapterToIndex(name: string): number
+{
+  let ret = -1;
+  mapFile.chapters.map((value, index)=>{
+    if(nameToFileName(value.name) == nameToFileName(name))
+      ret = index;
+  })
+
+  return ret;
 }
