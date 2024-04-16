@@ -24,7 +24,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import Inventory from "./inventory";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 interface Node {
   pos: number[];
@@ -94,14 +94,14 @@ export default function MapView({ user, chapterid }: IParams) {
     );
 
   return (
-    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
+    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
-      </div>
-      <div className="flex size-full items-center justify-center p-4">
+      </div> */}
+      <div className="mt-[-2.5vh] flex size-full items-center justify-center">
         {chapter != -1 ? (
-          <div className="w-[87.5vw]">
-            <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
+            <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold grid grid-cols-3">
               <a href="/map/home">
                 <ArrowLeft
                   className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
@@ -109,9 +109,9 @@ export default function MapView({ user, chapterid }: IParams) {
               </a>
               <Dialog>
                 <DialogTrigger>
-                  <Button className="m-2 bg-purple-700 text-center text-2xl font-bold">
+                  <div className="m-2 bg-purple-700 rounded-lg p-1 cursor-pointer duration-150 hover:bg-[#15162c] text-center text-2xl font-bold">
                     {mapFile.chapters[chapter]?.name}
-                  </Button>
+                  </div>
                 </DialogTrigger>
                 <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
                   <DialogHeader>
@@ -140,56 +140,67 @@ export default function MapView({ user, chapterid }: IParams) {
               />
 
               <div className="ml-4 flex w-[20vw]">
-                <div className="flex min-w-full flex-col">
-                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                    {problem?.solved ? "Completed" : "Not Completed"}
+                  <div className="flex min-w-full flex-col">
+                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                      {problem ? (
+                        problem?.solved ? (
+                          <span className="text-yellow-200">Completed</span>
+                        ) : (
+                          <span className="text-red-500">Not Completed</span>
+                        )
+                      ) : (
+                        <div className="flex items-center justify-center">
+                          <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                        </div>
+                      )}
+                    </div>
+
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="prose grow overflow-auto scroll-smooth 
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                    >
+                      {selNode != -1 ? problem?.description : desc}
+                    </ReactMarkdown>
+
+                    {selNode != -1 && problem != undefined ? (
+                      <a
+                        href={
+                          "/" +
+                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                          "problem"
+                            ? "map"
+                            : "game") +
+                          "/" +
+                          nameToFileName(getNodeName(chapter, selNode))
+                        }
+                      >
+                        <Button className="mt-2 w-full bg-purple-700">
+                          Embark
+                        </Button>
+                      </a>
+                    ) : (
+                      <div />
+                    )}
                   </div>
 
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    className="prose grow overflow-auto scroll-smooth 
-                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                  >
-                    {selNode != -1 ? problem?.description : desc}
-                  </ReactMarkdown>
-
-                  {selNode != -1 && problem != undefined ? (
-                    <a
-                      href={
-                        "/" +
-                        (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                        "problem"
-                          ? ("map/"+nameToFileName(chapterid))
-                          : "game") +
-                        "/" +
-                        nameToFileName(getNodeName(chapter, selNode))
-                      }
-                    >
-                      <Button className="mt-2 w-full bg-purple-700">
-                        Embark
-                      </Button>
-                    </a>
-                  ) : (
-                    <div />
-                  )}
                 </div>
               </div>
             </div>
-          </div>
         ) : (
-          <div className="w-[87.5vw]">
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
             <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
               Regions
             </div>
             <div className="flex h-[75vh] w-full justify-center">
-            <NodeGraph
-              nodes={mapFile.chapters}
-              nodeRadius={30}
-              nodeColor={setNodeChapterColor}
-              getNode={selNode}
-              setNode={setSelNode}
-            />
-            <div className="ml-4 flex w-[20vw]">
+              <NodeGraph
+                nodes={mapFile.chapters}
+                nodeRadius={30}
+                nodeColor={setNodeChapterColor}
+                getNode={selNode}
+                setNode={setSelNode}
+              />
+              <div className="ml-4 flex w-[20vw]">
                 <div className="flex min-w-full flex-col">
                   
                   <ReactMarkdown

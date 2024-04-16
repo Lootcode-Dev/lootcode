@@ -93,26 +93,26 @@ export const codeRouter = createTRPCRouter({
       );
 
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
-      const codePathRemoval = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
+      const codePathFolder = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
       const problemPathInput = `./src/problems/${region}/${input.name}/input/`; //The path is based on the problem name
 
       const langSearch: Record<string, langType> = {
-        python: { ext: "py", run: `python3 ${codePath}.py` },
+        python: { ext: "py", run: `python3 ${ctx.userId}${input.name}.py` },
         java: {
           ext: "java",
           compile: `javac ${codePath}.java`,
-          run: `java -classpath ./temp/${ctx.userId}${input.name} ${ctx.userId}${input.name}`,
+          run: `java ${ctx.userId}${input.name}`,
         },
         c: {
           ext: "c",
           compile: `gcc ${codePath}.c -o ${codePath}.out -lm`,
-          run: `${codePath}.out`,
+          run: `./${ctx.userId}${input.name}.out`,
         },
         cpp: {
           ext: "cpp",
           compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`,
-          run: `${codePath}.out`,
+          run: `./${ctx.userId}${input.name}.out`,
         },
       };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
@@ -134,7 +134,7 @@ export const codeRouter = createTRPCRouter({
         if (input.code.search(regex) == -1) {
           //Simulate a compile time error in the case there is no main class
           codeGradeResponse.compileError = "Compile Time Error";
-          await $`rm -rf ${codePathRemoval}`; //Clean Up
+          await $`rm -rf ${codePathFolder}`; //Clean Up
           return codeGradeResponse;
         }
         input.code = input.code.replace(
@@ -154,7 +154,7 @@ export const codeRouter = createTRPCRouter({
           codeGradeResponse.compileError = "Compile Time Error";
           // console.log(error);
 
-          await $`rm -rf ${codePathRemoval}`; //Clean Up
+          await $`rm -rf ${codePathFolder}`; //Clean Up
           return codeGradeResponse; //Our code didn't compile no need to test the cases
         }
       } // END COMPILE PIPELINE
@@ -175,8 +175,11 @@ export const codeRouter = createTRPCRouter({
         // START RUNTIME ERROR PIPELINE
         // Run the code with the input and write the output to a temp file
         try {
-          const IO = `< ${problemPathInput}${file} > ${codePath}.txt`;
-          await $withoutEscaping`timeout 1s ${langObject.run} ${IO}`;
+          await writeFile(
+            `${codePath}.sh`,
+            `timeout 1s ${langObject.run} < inputs/${file}`,
+          );
+          await $`docker exec -i ${ctx.userId}${input.name} /bin/bash < ${codePath}.sh > ${codePath}.txt`;
         } catch (error: any) {
           //Error with running the code
           if (error.exitCode === 124) {
@@ -243,7 +246,8 @@ export const codeRouter = createTRPCRouter({
       }
 
       // Cleanup
-      await $`rm -rf ${codePathRemoval}`; //Remove all the user files in temp
+      await $`docker rm ${ctx.userId}${input.name} -f`;
+      await $`rm -rf ${codePathFolder}`; //Remove all the user files in temp
 
       // Check if the user has fully passed the problem for the first time, if so, reward them
       function checkCompletion(): number {

@@ -17,6 +17,19 @@
         "reallocation",
         "swapper",
         "bigger_digits",
-        "growth"
+        "growth",
+        "layered",
+        "layered_ii",
+        "collision",
+        "awol",
+        "ranking",
+        "blind_spot",
+        "assemble",
+        "merger",
+        "beauty",
+        "disgust",
+        "trailing_zeroes",
+        "elapsed",
+        "gargantuan"
     ]
 }
