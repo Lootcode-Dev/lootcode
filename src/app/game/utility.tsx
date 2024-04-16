@@ -22,13 +22,13 @@ export interface Item {
   type: string;
   value: number;
   level: number;
+
   health: number;
   armor: number;
   resist: number;
-  mana: number;
+  critChance: number;
   strength: number;
-  intelligence: number;
-  wisdom: number;
+  magic: number;
 }
 
 export type Stats = {
@@ -56,9 +56,9 @@ export type Entity = {
 
 export function getUserStats(user: GUser): Stats {
   const statBlock: Stats = {
-    health: 10,
+    health: 1000,
     attackSpeed: 1,
-    critChance: 0,
+    critChance: 3,
     strength: 0,
     armor: 0,
     magic: 0,
@@ -76,16 +76,15 @@ export function getUserStats(user: GUser): Stats {
 function applyItemStats(statBlock: Stats, id: number) {
   if (id == -1) return;
 
-  let item = itemList.items[id];
+  const item = itemList.items[id];
 
   if (item) {
     statBlock.health += item.health;
     statBlock.armor += item.armor;
     statBlock.resist += item.resist;
-    statBlock.mana += item.mana;
+    statBlock.magic += item.magic;
     statBlock.strength += item.strength;
-    statBlock.intelligence += item.intelligence;
-    statBlock.wisdom += item.wisdom;
+    statBlock.critChance += item.critChance;
   }
 }
 
@@ -144,17 +143,17 @@ export function fakeEquip(user: GUser, id: number) {
 }
 
 export function fakeBuy(user: GUser, id: number) {
-  var item = getItem(id);
-  if (user.gold >= item?.value) {
-    user.gold -= item?.value;
-    var temp = user.items.split("");
+  const item = getItem(id);
+  if (user.gold >= item?.value ?? 0) {
+    user.gold -= item?.value ?? 0;
+    const temp = user.items.split("");
     temp[id] = "1";
     user.items = temp.join("");
   }
 }
 
 export function getItemName(id: number): string {
-  var ret = "";
+  let ret = "";
   itemList.items.map((value, index) => {
     if (index == id) ret = value.name;
   });
@@ -163,7 +162,7 @@ export function getItemName(id: number): string {
 }
 
 export function getItem(id: number): Item | undefined {
-  var ret;
+  let ret;
   itemList.items.map((value, index) => {
     if (index == id) ret = value;
   });
@@ -172,7 +171,7 @@ export function getItem(id: number): Item | undefined {
 }
 
 export function getItemIDFromName(name: string): number {
-  var ret = -1;
+  let ret = -1;
   itemList.items.map((value, index) => {
     if (name == value.name) ret = index;
   });
@@ -181,9 +180,12 @@ export function getItemIDFromName(name: string): number {
 }
 
 export function getProblemsCompleted(user: GUser): number {
-  var sum = 0;
-  for (var i = 0; i < user.problems.length; i++)
-    if (user.problems[i] == "1") sum++;
+  let sum = 0;
+  for (const problem of user.problems) {
+    if (problem === "1") {
+      sum++;
+    }
+  }
 
   return sum;
 }
@@ -194,7 +196,7 @@ export function getProblemsCompleted(user: GUser): number {
 //Levels determine game difficulty scaling
 //and what items are avaliable in the shop
 export function getLevel(user: GUser): number {
-  var sum = getProblemsCompleted(user);
+  const sum = getProblemsCompleted(user);
 
   return Math.floor(sum / 10) + 1;
 }

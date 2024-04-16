@@ -2,14 +2,23 @@
     "enemies": [
         {
             "name": "Rat",
-            "image": "/enemies/rat.png",
-            "health": 5,
+            "image": "/rat.png",
+            "health": 10,
+            "critChance": 0.1,
+            "strength": 30,
             "armor": 0,
-            "resist": 0,
-            "mana": 0,
+            "magic": 0,
+            "resist": 0
+        },
+        {
+            "name": "Goblin",
+            "image": "/goblin.png",
+            "health": 200,
+            "critChance": 0.1,
             "strength": 1,
-            "intelligence": 0,
-            "wisdom": 0
+            "armor": 0,
+            "magic": 0,
+            "resist": 0
         }
     ]
 }

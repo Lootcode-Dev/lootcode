@@ -22,7 +22,7 @@ export default async function Page() {
 
   return (
     <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <Inventory name={user.firstName} user={dbUser}></Inventory>
+      <Inventory name={user.firstName ?? ""} user={dbUser}></Inventory>
     </main>
   );
 }

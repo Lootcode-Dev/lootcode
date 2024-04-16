@@ -8,7 +8,9 @@ import { db } from "~/server/db";
 
 import itemList from "~/gameinfo/items.json";
 import { fakeBuy, fakeEquip } from "~/app/game/utility";
+import enemies from "~/util/enemies";
 import encounters from "~/util/encounters";
+import { Enemy } from "~/util/enemies";
 
 export const gameRouter = createTRPCRouter({
   giveItem: protectedProcedure
@@ -114,8 +116,18 @@ export const gameRouter = createTRPCRouter({
   getEncounter: protectedProcedure
     .input(z.object({ encounterid: z.string() }))
     .query(async ({ input, ctx }) => {
-      // Get the entities in the encounter with the encounterid
-      const entities = encounters[input.encounterid];
+      // Get the entity names in the encounter with the encounterid
+      const entList = encounters[input.encounterid];
+      const entities: Enemy[] = [];
+      // Access enemy object from list based on name in entList
+      entList?.map((value) => {
+        if (value) {
+          const enemy = enemies[value];
+          if (enemy) {
+            entities.push(enemy);
+          }
+        }
+      });
       return entities;
     }),
 });

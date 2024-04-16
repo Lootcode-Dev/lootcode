@@ -19,6 +19,8 @@ import {
   CloverIcon,
   CoinsIcon,
   FlaskRound,
+  Heart,
+  HeartIcon,
   PlusIcon,
   ShieldIcon,
   SparkleIcon,
@@ -37,26 +39,21 @@ export default function StatDisplay({ name, user }: IParams) {
 
   return (
     <div className="m-4 flex flex-col rounded-xl bg-[#15162c] p-2">
+      <div className="flex items-center justify-center pb-6 text-2xl font-bold">
+        {name}
+      </div>
       <div className="grid grid-cols-2 justify-items-center">
-        <div>
-          <div className="flex items-center text-2xl font-bold">{name}</div>
-          <div className="flex items-center text-2xl">
-            {"Lvl. " + getLevel(user)}
-          </div>
+        <div className="flex items-center text-2xl">
+          {"Lvl. " + getLevel(user)}
         </div>
-        <div>
-          <div className="flex items-center text-2xl">
-            <PlusIcon></PlusIcon> {"" + stats.health}
-          </div>
-          <div className="flex items-center text-2xl">
-            <CoinsIcon></CoinsIcon> {"" + user.gold}
-          </div>
+        <div className="flex items-center text-2xl">
+          <CoinsIcon className="mr-1"></CoinsIcon> {"" + user.gold}
         </div>
       </div>
       <div className="my-4 grid grid-cols-3 justify-around gap-4">
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <ShieldIcon></ShieldIcon>
+            <ShieldIcon className="mr-1"></ShieldIcon>
             {"" + stats.armor}
           </div>
           <div className="text-sm">Armor</div>
@@ -64,7 +61,7 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <SparkleIcon></SparkleIcon>
+            <SparkleIcon className="mr-1"></SparkleIcon>
             {"" + stats.resist}
           </div>
           <div className="text-sm">Resist</div>
@@ -72,7 +69,7 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <Wand2></Wand2>
+            <Wand2 className="mr-1"></Wand2>
             {"" + stats.magic}
           </div>
           <div className="text-sm">Magic</div>
@@ -80,7 +77,7 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <SwordIcon></SwordIcon>
+            <SwordIcon className="mr-1"></SwordIcon>
             {"" + stats.strength}
           </div>
           <div className="text-sm">Strength</div>
@@ -88,15 +85,15 @@ export default function StatDisplay({ name, user }: IParams) {
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <ChevronsUp></ChevronsUp>
-            {"" + stats.attackSpeed}
+            <HeartIcon className="mr-1"></HeartIcon>
+            {"" + stats.health}
           </div>
-          <div className="text-sm">Attack Speed</div>
+          <div className="text-sm">Health</div>
         </div>
 
         <div className="flex flex-col items-center text-2xl">
           <div className="flex items-center text-2xl">
-            <CloverIcon></CloverIcon>
+            <CloverIcon className="mr-1"></CloverIcon>
             {"" + stats.critChance}
           </div>
           <div className="text-sm">Critical Strike</div>

@@ -64,7 +64,7 @@ export default function Inventory({ name, user }: IParams) {
         <div className="m-2 text-left text-3xl">
           <div className="flex items-center gap-2">
             Items
-            {fetching ? <LoaderIcon /> : <div />}
+            {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
           </div>
           <div className="my-4 grid auto-cols-max grid-flow-col gap-4">
             {itemList.items.map((value, index) =>
@@ -79,7 +79,7 @@ export default function Inventory({ name, user }: IParams) {
                   </div>
                 ) : (
                   <div
-                    className="cursor-pointer rounded border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
+                    className="cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() => setSelItem(index)}
                     key={index}
                   >
