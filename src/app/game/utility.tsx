@@ -144,7 +144,7 @@ export function fakeEquip(user: GUser, id: number) {
 
 export function fakeBuy(user: GUser, id: number) {
   const item = getItem(id);
-  if (user.gold >= item?.value ?? 0) {
+  if (item && user.gold >= item.value) {
     user.gold -= item?.value ?? 0;
     const temp = user.items.split("");
     temp[id] = "1";

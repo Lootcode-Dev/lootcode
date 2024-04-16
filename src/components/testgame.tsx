@@ -3,6 +3,23 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "~/trpc/react";
 import { Button } from "./ui/button";
 import { GUser, getLevel, getUserStats } from "~/app/game/utility";
+import { Card } from "./ui/card";
+import { Progress } from "./ui/progress";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import {
+  Clover,
+  CloverIcon,
+  HeartIcon,
+  ShieldIcon,
+  SparkleIcon,
+  SwordIcon,
+  Wand2,
+} from "lucide-react";
 
 interface Entity {
   image: string;
@@ -195,67 +212,113 @@ export default function Testgame({ user, name }: Props) {
   }
 
   return (
-    <div className="h-[92.5vh] bg-[#282A36] text-white">
-      <div className="grid grid-cols-2 items-center justify-center pt-2">
-        <Button onClick={gameLoop} className="w-24">
-          Start
-        </Button>
-        <Button onClick={reset} className="w-24">
-          Reset
-        </Button>
-      </div>
-      <div className="grid h-full grid-cols-2">
-        <div className="flex items-center justify-center">
-          <div className="flex flex-col items-center space-y-12">
-            <div>Player</div>
-            <div
-              className={player?.dead ? "" : "animate-wiggle animate-infinite"}
-            >
-              <div
-                style={{
-                  color: player?.dead
-                    ? "black"
-                    : player?.critHit
-                      ? "red"
-                      : "inherit",
-                }}
-              >
-                <div>{player?.name}</div>
-                <div>{player?.health}</div>
-                <div>{player?.health}</div>
-                <div>{player?.armor}</div>
-              </div>
-            </div>
-          </div>
+    <TooltipProvider>
+      <div className="h-[92.5vh] bg-[#282A36] text-white">
+        <div className="grid grid-cols-2 items-center justify-center pt-2">
+          <Button onClick={gameLoop} className="w-24">
+            Start
+          </Button>
+          <Button onClick={reset} className="w-24">
+            Reset
+          </Button>
         </div>
-        <div className="flex items-center justify-center">
-          <div className="flex flex-col items-center space-y-12">
-            <div>Enemy</div>
-            <div>Enemy 2</div>
-            {enemies?.map((enemy, index) => (
+        <div className="grid h-full grid-cols-2">
+          <div className="flex items-center justify-center">
+            <div className="flex flex-col items-center space-y-12">
+              <div>Player</div>
               <div
-                key={index}
-                className={enemy.dead ? "" : "animate-wiggle animate-infinite"}
+                className={
+                  player?.dead ? "" : "animate-wiggle animate-infinite"
+                }
               >
                 <div
                   style={{
-                    color: enemy.dead
+                    color: player?.dead
                       ? "black"
-                      : enemy.critHit
+                      : player?.critHit
                         ? "red"
                         : "inherit",
                   }}
                 >
-                  <div>{enemy.name}</div>
-                  <div>{enemy.health}</div>
-                  <div>{enemy.health}</div>
-                  <div>{enemy.armor}</div>
+                  <div>{player?.name}</div>
+                  <div>{player?.health}</div>
+                  <div>{player?.health}</div>
+                  <div>{player?.armor}</div>
                 </div>
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="flex flex-col items-center space-y-12">
+              <div>Enemy</div>
+              <div>Enemy 2</div>
+              {enemies?.map((enemy, index) => (
+                <Tooltip key={index}>
+                  <TooltipTrigger>
+                    <Card
+                      className={`${
+                        enemy.dead
+                          ? ""
+                          : enemy.critHit
+                            ? "animate-wiggle-more animate-infinite"
+                            : "animate-wiggle animate-infinite"
+                      } w-[250px] bg-purple-950 p-4 text-white`}
+                    >
+                      <div
+                        style={{
+                          color: enemy.dead
+                            ? "black"
+                            : enemy.critHit
+                              ? "red"
+                              : "inherit",
+                        }}
+                      >
+                        <div className="grid grid-cols-2 p-2">
+                          <div>{enemy.name}</div>
+                          <div>{enemy.health}</div>
+                        </div>
+                        <Progress
+                          value={(enemy.health / enemy.maxHealth) * 100}
+                        ></Progress>
+                      </div>
+                    </Card>
+                  </TooltipTrigger>
+                  <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
+                    <div className="flex flex-col ">
+                      <div className="grid grid-cols-3 grid-rows-2">
+                        <div className="p-2">
+                          {enemy.maxHealth}
+                          <HeartIcon></HeartIcon>
+                        </div>
+                        <div className="p-2">
+                          {enemy.strength}
+                          <SwordIcon></SwordIcon>
+                        </div>
+                        <div className="p-2">
+                          {enemy.armor}
+                          <ShieldIcon></ShieldIcon>
+                        </div>
+                        <div className="p-2">
+                          {enemy.magic}
+                          <Wand2></Wand2>
+                        </div>
+                        <div className="p-2">
+                          {enemy.resist}
+                          <SparkleIcon></SparkleIcon>
+                        </div>
+                        <div className="p-2">
+                          {enemy.critChance}
+                          <CloverIcon></CloverIcon>
+                        </div>
+                      </div>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
