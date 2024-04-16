@@ -174,6 +174,8 @@ export default function MapView({ user, chapterid }: IParams) {
                           ? "map"
                           : "game") +
                         "/" +
+                        chapterid +
+                        "/" +
                         nameToFileName(getNodeName(chapter, selNode))
                       }
                     >
