@@ -326,7 +326,14 @@
             "name":"The Thicket",
             "pos": [30, 70],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Correction",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         }
         
         
