@@ -49,9 +49,10 @@ interface Enemy {
 interface Props {
   name: string;
   user: GUser;
+  enc: string;
 }
 
-export default function Testgame({ user, name }: Props) {
+export default function Testgame({ user, name, enc }: Props) {
   const [enemies, setEnemies] = useState<Entity[] | null>(null);
   const [player, setPlayer] = useState<Entity | null>(null);
   const [originalPlayer, setOriginalPlayer] = useState<Entity | null>(null);
@@ -59,7 +60,7 @@ export default function Testgame({ user, name }: Props) {
   const userStats = getUserStats(user);
 
   const { data } = api.game.getEncounter.useQuery({
-    encounterid: "test",
+    encounterid: enc,
   });
 
   useEffect(() => {

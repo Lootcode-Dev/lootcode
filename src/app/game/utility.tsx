@@ -1,4 +1,4 @@
-import itemList from "~/gameinfo/items.json";
+import itemList from "~/util/items.json";
 
 export interface GUser {
   id: string;
