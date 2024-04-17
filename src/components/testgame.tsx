@@ -241,43 +241,88 @@ export default function Testgame({ user, name, enc }: Props) {
     <TooltipProvider>
       <div className="h-[92.5vh] bg-[#282A36] text-white">
         <div className="grid grid-cols-2 items-center justify-center pt-2">
-          <Button onClick={gameLoop} className="w-24">
-            Start
-          </Button>
-          <Button onClick={reset} className="w-24">
-            Reset
-          </Button>
+          <div className="flex items-center justify-center">
+            <Button onClick={gameLoop} className="w-24">
+              Start
+            </Button>
+          </div>
+          <div className="flex items-center justify-center">
+            <Button onClick={reset} className="w-24">
+              Reset
+            </Button>
+          </div>
         </div>
-        <div className="grid h-full grid-cols-2">
+        <div className="grid h-[50vh] grid-cols-2">
           <div className="flex items-center justify-center">
             <div className="flex flex-col items-center space-y-12">
-              <div>Player</div>
-              <div
-                className={
-                  player?.dead ? "" : "animate-wiggle animate-infinite"
-                }
-              >
-                <div
-                  style={{
-                    color: player?.dead
-                      ? "black"
-                      : player?.critHit
-                        ? "red"
-                        : "inherit",
-                  }}
-                >
-                  <div>{player?.name}</div>
-                  <div>{player?.health}</div>
-                  <div>{player?.health}</div>
-                  <div>{player?.armor}</div>
-                </div>
-              </div>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Card
+                    className={`${
+                      player?.dead
+                        ? ""
+                        : player?.critHit
+                          ? "animate-wiggle-more animate-infinite"
+                          : "animate-wiggle animate-infinite"
+                    } w-[250px] bg-purple-950 p-4 text-white`}
+                  >
+                    <div
+                      style={{
+                        color: player?.dead
+                          ? "black"
+                          : player?.critHit
+                            ? "red"
+                            : "inherit",
+                      }}
+                    >
+                      <div className="grid grid-cols-2 p-2">
+                        <div>{player?.name}</div>
+                        <div>{player?.health}</div>
+                      </div>
+                      <Progress
+                        value={
+                          ((player?.health ?? 0) / (player?.maxHealth ?? 1)) *
+                          100
+                        }
+                      ></Progress>
+                    </div>
+                  </Card>
+                </TooltipTrigger>
+                <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
+                  <div className="flex flex-col justify-center">
+                    <div className="grid grid-cols-3 grid-rows-2">
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <HeartIcon></HeartIcon>
+                        {player?.maxHealth}
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <SwordIcon></SwordIcon>
+                        {player?.strength}
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <ShieldIcon></ShieldIcon>
+                        {player?.armor}
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <CloverIcon></CloverIcon>
+                        {player?.critChance}
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <Wand2></Wand2>
+                        {player?.magic}
+                      </div>
+                      <div className="flex flex-col items-center justify-center p-2">
+                        <SparkleIcon></SparkleIcon>
+                        {player?.resist}
+                      </div>
+                    </div>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
           <div className="flex items-center justify-center">
             <div className="flex flex-col items-center space-y-12">
-              <div>Enemy</div>
-              <div>Enemy 2</div>
               {enemies?.map((enemy, index) => (
                 <Tooltip key={index}>
                   <TooltipTrigger>
@@ -312,29 +357,29 @@ export default function Testgame({ user, name, enc }: Props) {
                   <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
                     <div className="flex flex-col ">
                       <div className="grid grid-cols-3 grid-rows-2">
-                        <div className="p-2">
-                          {enemy.maxHealth}
+                        <div className="flex flex-col items-center justify-center p-2">
                           <HeartIcon></HeartIcon>
+                          {enemy.maxHealth}
                         </div>
-                        <div className="p-2">
-                          {enemy.strength}
+                        <div className="flex flex-col items-center justify-center p-2">
                           <SwordIcon></SwordIcon>
+                          {enemy.strength}
                         </div>
-                        <div className="p-2">
-                          {enemy.armor}
+                        <div className="flex flex-col items-center justify-center p-2">
                           <ShieldIcon></ShieldIcon>
+                          {enemy.armor}
                         </div>
-                        <div className="p-2">
-                          {enemy.magic}
-                          <Wand2></Wand2>
-                        </div>
-                        <div className="p-2">
-                          {enemy.resist}
-                          <SparkleIcon></SparkleIcon>
-                        </div>
-                        <div className="p-2">
-                          {enemy.critChance}
+                        <div className="flex flex-col items-center justify-center p-2">
                           <CloverIcon></CloverIcon>
+                          {enemy.critChance}
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-2">
+                          <Wand2></Wand2>
+                          {enemy.magic}
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-2">
+                          <SparkleIcon></SparkleIcon>
+                          {enemy.resist}
                         </div>
                       </div>
                     </div>
