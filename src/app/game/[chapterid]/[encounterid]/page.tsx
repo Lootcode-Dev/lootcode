@@ -5,6 +5,7 @@ import { db } from "~/server/db";
 
 interface PageProps {
   params: {
+    chapterid: string;
     encounterid: string;
   };
 }
@@ -28,6 +29,7 @@ export default async function GamePage({ params }: PageProps) {
         user={dbUser}
         name={user.firstName ?? ""}
         enc={params.encounterid}
+        reg={params.chapterid}
       />
     </div>
   );

@@ -15,7 +15,7 @@ const enemies: Enemies = {
   Rat: {
     name: "Rat",
     image: "/rat.png",
-    health: 100,
+    health: 25,
     critChance: 1,
     strength: 10,
     armor: 0,
@@ -25,7 +25,7 @@ const enemies: Enemies = {
   Goblin: {
     name: "Goblin",
     image: "/goblin.png",
-    health: 200,
+    health: 135,
     critChance: 1,
     strength: 5,
     armor: 0,

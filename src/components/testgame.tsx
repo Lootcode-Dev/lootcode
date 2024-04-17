@@ -20,6 +20,7 @@ import {
   SwordIcon,
   Wand2,
 } from "lucide-react";
+import Link from "next/link";
 
 interface Entity {
   image: string;
@@ -50,9 +51,10 @@ interface Props {
   name: string;
   user: GUser;
   enc: string;
+  reg: string;
 }
 
-export default function Testgame({ user, name, enc }: Props) {
+export default function Testgame({ user, name, enc, reg }: Props) {
   const [enemies, setEnemies] = useState<Entity[] | null>(null);
   const [player, setPlayer] = useState<Entity | null>(null);
   const [originalPlayer, setOriginalPlayer] = useState<Entity | null>(null);
@@ -240,19 +242,26 @@ export default function Testgame({ user, name, enc }: Props) {
   return (
     <TooltipProvider>
       <div className="h-[92.5vh] bg-[#282A36] text-white">
-        <div className="grid grid-cols-2 items-center justify-center pt-2">
-          <div className="flex items-center justify-center">
+        <div className="flex justify-center space-x-4 pt-2">
+          <div>
+            <Link href={`/map/${reg}`}>
+              <Button onClick={reset} className="w-24">
+                Back
+              </Button>
+            </Link>
+          </div>
+          <div>
             <Button onClick={gameLoop} className="w-24">
               Start
             </Button>
           </div>
-          <div className="flex items-center justify-center">
+          <div>
             <Button onClick={reset} className="w-24">
               Reset
             </Button>
           </div>
         </div>
-        <div className="grid h-[50vh] grid-cols-2">
+        <div className="grid h-[75vh] grid-cols-2">
           <div className="flex items-center justify-center">
             <div className="flex flex-col items-center space-y-12">
               <Tooltip>
@@ -321,8 +330,8 @@ export default function Testgame({ user, name, enc }: Props) {
               </Tooltip>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <div className="flex flex-col items-center space-y-12">
+          <div className="flex items-center justify-center p-12">
+            <div className="flex flex-wrap items-center gap-12">
               {enemies?.map((enemy, index) => (
                 <Tooltip key={index}>
                   <TooltipTrigger>
