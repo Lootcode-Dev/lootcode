@@ -6,7 +6,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
-import itemList from "~/gameinfo/items.json";
+import itemList from "~/util/items.json";
 import { fakeBuy, fakeEquip } from "~/app/game/utility";
 import enemies from "~/util/enemies";
 import encounters from "~/util/encounters";

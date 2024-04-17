@@ -8,7 +8,7 @@ import {
   getUserStats,
   isEquipped,
 } from "~/app/game/utility";
-import itemList from "~/gameinfo/items.json";
+import itemList from "~/util/items.json";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";

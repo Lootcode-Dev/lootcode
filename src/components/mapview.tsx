@@ -14,6 +14,7 @@ import { GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
+import { redirect } from "next/navigation";
 
 import {
   Dialog,
@@ -23,7 +24,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import Inventory from "./inventory";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 interface Node {
   pos: number[];
@@ -33,14 +34,16 @@ interface Node {
 
 interface IParams {
   user: GUser;
+  chapterid: string;
 }
 
 let dummyProblems =
   "00000000000000000000000000000000000000000000000000000000000000000000000000";
 
-export default function MapView({ user }: IParams) {
-  const [chapter, setChapter] = useState(-1);
+export default function MapView({ user, chapterid }: IParams) {
+  const chapter = chapterToIndex(chapterid);
   const [selNode, setSelNode] = useState(-1);
+  const [progress, setProgress] = useState(-1);
 
   //I know this is goofy but I don't want to query the user
   //here and in the getColor functions, and I think having to pass
@@ -62,6 +65,14 @@ export default function MapView({ user }: IParams) {
     { enabled: false, retry: false },
   );
 
+  const { data: homedesc, refetch: getHomeChDesc } =
+    api.map.getDescription.useQuery(
+      {
+        name: nameToFileName(mapFile.chapters[selNode]?.name ?? "failure"),
+      },
+      { enabled: false, retry: false },
+    );
+
   useEffect(() => {
     void getProblem();
   }, [chapter, getProblem, selNode]);
@@ -69,6 +80,13 @@ export default function MapView({ user }: IParams) {
   useEffect(() => {
     void getChDesc();
   }, [chapter, getChDesc]);
+
+  useEffect(() => {
+    if (chapter == -1) {
+      void getHomeChDesc();
+      setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
+    }
+  }, [selNode, getHomeChDesc]);
 
   if (chapter != -1 && !mapFile.chapters[0])
     return (
@@ -80,27 +98,22 @@ export default function MapView({ user }: IParams) {
     );
 
   return (
-    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
+    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
-      </div>
-      <div className="flex size-full items-center justify-center p-4">
+      </div> */}
+      <div className="mt-[-2.5vh] flex size-full items-center justify-center">
         {chapter != -1 ? (
-          <div className="w-[87.5vw]">
-            <div className="m-4 grid grid-cols-3 justify-between rounded-xl bg-[#15162c] p-2">
-              <ArrowLeft
-                className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"
-                onClick={() => {
-                  setSelNode(-1);
-                  setChapter(-1);
-                  console.log(selNode);
-                }}
-              ></ArrowLeft>
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
+            <div className="my-4 grid grid-cols-3 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+              <a href="/map/home">
+                <ArrowLeft className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
+              </a>
               <Dialog>
                 <DialogTrigger>
-                  <Button className="m-2 bg-purple-700 text-center text-2xl font-bold">
+                  <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
                     {mapFile.chapters[chapter]?.name}
-                  </Button>
+                  </div>
                 </DialogTrigger>
                 <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
                   <DialogHeader>
@@ -129,58 +142,107 @@ export default function MapView({ user }: IParams) {
               />
 
               <div className="ml-4 flex w-[20vw]">
-                {selNode == -2 ? (
-                  <Inventory user={user} name={""} />
-                ) : (
-                  <div className="flex min-w-full flex-col">
-                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                      {problem?.solved ? "Completed" : "Not Completed"}
-                    </div>
-
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose grow overflow-auto scroll-smooth 
-                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                    >
-                      {selNode != -1 ? problem?.description : desc}
-                    </ReactMarkdown>
-
-                    {selNode != -1 && problem != undefined ? (
-                      <a
-                        href={
-                          "/" +
-                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                          "problem"
-                            ? "map"
-                            : "game") +
-                          "/" +
-                          nameToFileName(getNodeName(chapter, selNode))
-                        }
-                      >
-                        <Button className="mt-2 w-full bg-purple-700">
-                          Embark
-                        </Button>
-                      </a>
+                <div className="flex min-w-full flex-col">
+                  <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                    {problem ? (
+                      problem?.solved ? (
+                        <span className="text-yellow-200">Completed</span>
+                      ) : (
+                        <span className="text-red-500">Not Completed</span>
+                      )
                     ) : (
-                      <div />
+                      <div className="flex items-center justify-center">
+                        <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                      </div>
                     )}
                   </div>
-                )}
+
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className="prose grow overflow-auto scroll-smooth 
+                    rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                  >
+                    {selNode != -1 ? problem?.description : desc}
+                  </ReactMarkdown>
+
+                  {selNode != -1 && problem != undefined ? (
+                    <a
+                      href={
+                        "/" +
+                        (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                        "problem"
+                          ? "map"
+                          : "game") +
+                        "/" +
+                        chapterid +
+                        "/" +
+                        nameToFileName(getNodeName(chapter, selNode))
+                      }
+                    >
+                      <Button className="mt-2 w-full bg-purple-700">
+                        Embark
+                      </Button>
+                    </a>
+                  ) : (
+                    <div />
+                  )}
+                </div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex h-[80vh] w-[60vw] flex-col justify-center">
+          <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
             <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
               Regions
             </div>
-            <NodeGraph
-              nodes={mapFile.chapters}
-              nodeRadius={30}
-              nodeColor={setNodeChapterColor}
-              getNode={chapter}
-              setNode={setChapter}
-            />
+            <div className="flex h-[75vh] w-full justify-center">
+              <NodeGraph
+                nodes={mapFile.chapters}
+                nodeRadius={30}
+                nodeColor={setNodeChapterColor}
+                getNode={selNode}
+                setNode={setSelNode}
+              />
+              <div className="ml-4 flex w-[20vw]">
+                <div className="flex min-w-full flex-col">
+                  {selNode != -1 ? (
+                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                      {progress >=
+                      (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
+                        <span className="text-yellow-200">Completed</span>
+                      ) : (
+                        <span className="text-red-500">
+                          {"" +
+                            progress +
+                            " / " +
+                            (mapFile.chapters[selNode]?.nodes.length ?? 0)}
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className="prose grow overflow-auto scroll-smooth 
+                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                  >
+                    {selNode != -1 ? homedesc : "# Select a region..."}
+                  </ReactMarkdown>
+
+                  {selNode != -1 ? (
+                    <a href={"/map/" + nameToFileName(indexToChapter(selNode))}>
+                      <Button className="mt-2 w-full bg-purple-700">
+                        Embark
+                      </Button>
+                    </a>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -234,6 +296,21 @@ function checkChapterCompletion(name: string, user: string): boolean {
   return res;
 }
 
+function completionsInChapter(name: string, user: string): number {
+  let res = 0;
+  mapFile.chapters.map((chapter, index) => {
+    if (chapter.name === name) {
+      mapFile.chapters[index]?.nodes.map((problem) => {
+        if (checkCompletion(problem.name, user)) {
+          res++;
+          return;
+        }
+      });
+    }
+  });
+  return res;
+}
+
 function setNodeColor(name: string): string {
   if (checkCompletion(name, dummyProblems)) return "#10b981";
   else return "#ef4444";
@@ -242,4 +319,19 @@ function setNodeColor(name: string): string {
 function setNodeChapterColor(name: string): string {
   if (checkChapterCompletion(name, dummyProblems)) return "#10b981";
   else return "#ef4444";
+}
+
+export function indexToChapter(id: number): string {
+  if (mapFile.chapters[id]?.name != undefined)
+    return mapFile.chapters[id]?.name;
+  else return "error";
+}
+
+export function chapterToIndex(name: string): number {
+  let ret = -1;
+  mapFile.chapters.map((value, index) => {
+    if (nameToFileName(value.name) == nameToFileName(name)) ret = index;
+  });
+
+  return ret;
 }

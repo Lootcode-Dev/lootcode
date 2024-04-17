@@ -96,26 +96,19 @@
                     "name": "Growth",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30, 90],
+                    "name": "Swapper",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50, 10],
+                    "name": "Bigger Digits",
+                    "next": [],
+                    "type": "problem"
                 }
-            ]
-        },
-        {
-            "name":"Chainbridge",
-            "pos": [50,10],
-            "next": [],
-            "nodes": [
-               {
-                "pos": [10, 10],
-                "name": "Swapper",
-                "next": [],
-                "type": "problem"
-               },
-               {
-                "pos": [10, 50],
-                "name": "Bigger Digits",
-                "next": [],
-                "type": "problem"
-               }
             ]
         },
         {
@@ -132,6 +125,24 @@
             {
                 "pos": [10,30],
                 "name": "Construction II",
+                "next": [],
+                "type": "problem"
+            },
+            {
+                "pos": [10,50],
+                "name": "Layered",
+                "next": [],
+                "type": "problem"
+            },
+            {
+                "pos": [10,70],
+                "name": "Layered II",
+                "next": [],
+                "type": "problem"
+            },
+            {
+                "pos": [10,90],
+                "name": "Collision",
                 "next": [],
                 "type": "problem"
             }
@@ -171,13 +182,75 @@
             "name":"Bitwise Bastion",
             "pos": [90, 40],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "AWOL",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Ranking",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Blind Spot",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Assemble",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Merger",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Arithmend",
             "pos": [10, 70],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Beauty",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Disgust",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Trailing Zeroes",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Elapsed",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Gargantuan",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Dynamar",
