@@ -123,7 +123,9 @@ export default function Testgame({ user, name }: Props) {
 
               if (Math.random() * 100 <= userStats.critChance) {
                 damage *= 3;
-                currentEnemy.critHit = true;
+                if (damage > 0) {
+                  currentEnemy.critHit = true;
+                }
               } else {
                 currentEnemy.critHit = false;
               }
@@ -174,7 +176,9 @@ export default function Testgame({ user, name }: Props) {
 
               if (Math.random() * 100 <= currentEnemy.critChance) {
                 damage *= 3;
-                updatedPlayer.critHit = true;
+                if (damage > 0) {
+                  updatedPlayer.critHit = true;
+                }
               } else {
                 updatedPlayer.critHit = false;
               }
@@ -209,6 +213,27 @@ export default function Testgame({ user, name }: Props) {
     clearInterval(intervalRef.current ?? 0);
     setPlayer(originalPlayer);
     setEnemies(originalEnemies);
+    // Remove the critHit condition
+    setPlayer((prevPlayer) => {
+      if (prevPlayer) {
+        return {
+          ...prevPlayer,
+          critHit: false,
+        };
+      }
+      return prevPlayer;
+    });
+
+    // Remove the critHit condition
+    setEnemies((prevEnemies) => {
+      if (prevEnemies) {
+        return prevEnemies.map((enemy) => ({
+          ...enemy,
+          critHit: false,
+        }));
+      }
+      return prevEnemies;
+    });
   }
 
   return (
