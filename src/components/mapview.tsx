@@ -164,7 +164,7 @@ export default function MapView({ user, chapterid }: IParams) {
                 <div className="ml-4 flex w-[20vw]">
                   <div className="flex h-[73.5vh] w-[20vw] flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                      {problem ? (
+                      {selNode != -1 && problem ? (
                         problem?.solved ? (
                           <span className="text-yellow-200">Completed</span>
                         ) : (
@@ -369,7 +369,7 @@ function checkCompletion(problem: string, user: string): boolean {
 function checkChapterCompletion(name: string, user: string): boolean {
   let res = true;
   mapFile.chapters.map((chapter, index) => {
-    if (chapter.name === name) {
+    if (nameToFileName(chapter.name) === nameToFileName(name)) {
       mapFile.chapters[index]?.nodes.map((problem) => {
         if (!checkCompletion(problem.name, user)) {
           res = false;
