@@ -53,7 +53,8 @@
     "dynamar": [
         "partitions",
         "weaving",
-        "jacked"
+        "jacked",
+        "wordy"
     ],
     "nodak": [
         "answer"
