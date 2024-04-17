@@ -1,1 +1,0 @@
-timeout 1s python3 user_2d4T1Cj4g07LK0gTz0uirz4mDVnleaking_letters.py < inputs/j.in

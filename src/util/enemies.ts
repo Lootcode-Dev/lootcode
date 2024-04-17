@@ -32,6 +32,16 @@ const enemies: Enemies = {
     magic: 0,
     resist: 0,
   },
+  Toilet: {
+    name: "Toilet",
+    image: "/goblin.png",
+    health: 90,
+    critChance: 1,
+    strength: 20,
+    armor: 1,
+    magic: 0,
+    resist: 1,
+  },
 };
 
 export default enemies;

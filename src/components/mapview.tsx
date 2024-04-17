@@ -164,13 +164,17 @@ export default function MapView({ user, chapterid }: IParams) {
                 <div className="ml-4 flex w-[20vw]">
                   <div className="flex h-[73.5vh] w-[20vw] flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                      {selNode != -1 && problem ? (
+                      {problem ? (
                         problem?.solved ? (
                           <span className="text-yellow-200">Completed</span>
                         ) : (
                           <span className="text-red-500">Not Completed</span>
                         )
-                      ) : checkChapterCompletion(chapterid, user.problems) ? (
+                      ) : selNode != -1 ? 
+                      (<div className="flex items-center justify-center">
+                      <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                    </div>) 
+                      : checkChapterCompletion(chapterid, user.problems) ? (
                         <span className="text-yellow-200">Completed</span>
                       ) : (
                         <span className="text-red-500">Not Completed</span>
@@ -237,7 +241,9 @@ export default function MapView({ user, chapterid }: IParams) {
                           </Tooltip>
                         ))}
                       </div>
-                    ) : (
+                    ) : selNode != -1 && !problem ? <div className="flex items-center justify-center rounded-xl bg-[#15162c] h-full">
+                    <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                  </div> : (
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         className="prose grow overflow-auto scroll-smooth 
