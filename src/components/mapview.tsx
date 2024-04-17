@@ -142,7 +142,7 @@ export default function MapView({ user, chapterid }: IParams) {
               />
 
               <div className="ml-4 flex w-[20vw]">
-                <div className="flex min-w-full flex-col">
+                <div className="flex w-[20vw] flex-col">
                   <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                     {problem ? (
                       problem?.solved ? (
@@ -204,7 +204,7 @@ export default function MapView({ user, chapterid }: IParams) {
                 setNode={setSelNode}
               />
               <div className="ml-4 flex w-[20vw]">
-                <div className="flex min-w-full flex-col">
+                <div className="flex w-[20vw] flex-col">
                   {selNode != -1 ? (
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {progress >=
