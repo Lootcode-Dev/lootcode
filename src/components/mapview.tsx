@@ -107,6 +107,27 @@ export default function MapView({ user, chapterid }: IParams) {
     }
   }, [selNode, getHomeChDesc]);
 
+  function setNodeColor(name: string): string {
+    let ntype = "";
+    mapFile.chapters[chapter]?.nodes.map((value) => {
+      if (nameToFileName(value.name) == nameToFileName(name)) {
+        ntype = value.type;
+        return;
+      }
+    });
+
+    if (!isNodeUnlocked(name, chapter)) return "#374151";
+    if (checkCompletion(name, user.problems)) return "#10b981";
+    else if (ntype == "game") return "#FACC15";
+    return "#ef4444";
+  }
+
+  function setNodeChapterColor(name: string): string {
+    if (!isRegionUnlocked(name)) return "#374151";
+    if (checkChapterCompletion(name, user.problems)) return "#10b981";
+    else return "#ef4444";
+  }
+
   if (chapter != -1 && !mapFile.chapters[0])
     return (
       <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-red-800 to-red-900 text-white">
@@ -152,17 +173,19 @@ export default function MapView({ user, chapterid }: IParams) {
                 </Dialog>
               </div>
 
-              <div className="flex h-[75vh] w-full justify-center">
-                <NodeGraph
-                  nodes={mapFile.chapters[chapter]?.nodes}
-                  nodeRadius={25}
-                  nodeColor={setNodeColor}
-                  getNode={selNode}
-                  setNode={setSelNode}
-                />
-
-                <div className="ml-4 flex w-[20vw]">
-                  <div className="flex h-[73.5vh] w-[20vw] flex-col">
+              <div className="flex h-fit w-full shrink flex-row justify-center">
+                <div className="flex h-fit w-full shrink">
+                  <NodeGraph
+                    nodes={mapFile.chapters[chapter]?.nodes}
+                    nodeRadius={25}
+                    nodeColor={setNodeColor}
+                    getNode={selNode}
+                    setNode={setSelNode}
+                  />
+                </div>
+                {/*fixing height for now*/}
+                <div className="ml-4 flex h-[40vh] w-[20vw] grow">
+                  <div className="flex w-[20vw] shrink flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem ? (
                         problem?.solved ? (
@@ -170,11 +193,11 @@ export default function MapView({ user, chapterid }: IParams) {
                         ) : (
                           <span className="text-red-500">Not Completed</span>
                         )
-                      ) : selNode != -1 ? 
-                      (<div className="flex items-center justify-center">
-                      <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
-                    </div>) 
-                      : checkChapterCompletion(chapterid, user.problems) ? (
+                      ) : selNode != -1 ? (
+                        <div className="flex items-center justify-center">
+                          <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                        </div>
+                      ) : checkChapterCompletion(chapterid, user.problems) ? (
                         <span className="text-yellow-200">Completed</span>
                       ) : (
                         <span className="text-red-500">Not Completed</span>
@@ -193,7 +216,7 @@ export default function MapView({ user, chapterid }: IParams) {
                       <div className="flex h-full flex-col overflow-auto rounded-xl bg-[#15162c]">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
-                          className="prose grow scroll-smooth 
+                          className="prose grow scroll-smooth  
                       rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-700 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                         >
                           {problem?.description}
@@ -241,12 +264,14 @@ export default function MapView({ user, chapterid }: IParams) {
                           </Tooltip>
                         ))}
                       </div>
-                    ) : selNode != -1 && !problem ? <div className="flex items-center justify-center rounded-xl bg-[#15162c] h-full">
-                    <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
-                  </div> : (
+                    ) : selNode != -1 && !problem ? (
+                      <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
+                        <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                      </div>
+                    ) : (
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
-                        className="prose grow overflow-auto scroll-smooth 
+                        className="prose h-full overflow-auto scroll-smooth 
                       rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-700 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                       >
                         {desc}
@@ -254,23 +279,32 @@ export default function MapView({ user, chapterid }: IParams) {
                     )}
 
                     {selNode != -1 && problem != undefined ? (
-                      <a
-                        href={
-                          "/" +
-                          (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
-                          "problem"
-                            ? "map"
-                            : "game") +
-                          "/" +
-                          chapterid +
-                          "/" +
-                          nameToFileName(getNodeName(chapter, selNode))
-                        }
-                      >
-                        <Button className="mt-2 w-full bg-purple-700">
-                          Embark
+                      !isNodeUnlocked(
+                        getNodeName(chapter, selNode),
+                        chapter,
+                      ) ? (
+                        <Button className="mt-2 w-full bg-gray-700">
+                          Locked
                         </Button>
-                      </a>
+                      ) : (
+                        <a
+                          href={
+                            "/" +
+                            (mapFile.chapters[chapter]?.nodes[selNode]?.type ==
+                            "problem"
+                              ? "map"
+                              : "game") +
+                            "/" +
+                            chapterid +
+                            "/" +
+                            nameToFileName(getNodeName(chapter, selNode))
+                          }
+                        >
+                          <Button className="mt-2 w-full bg-purple-700">
+                            Embark
+                          </Button>
+                        </a>
+                      )
                     ) : (
                       <div />
                     )}
@@ -341,7 +375,7 @@ export default function MapView({ user, chapterid }: IParams) {
   );
 }
 
-function getNode(ch: number, i: number): Node | undefined {
+function getNode(ch: number, i: number): any {
   return mapFile.chapters[ch]?.nodes[i];
 }
 
@@ -363,7 +397,7 @@ export function nameToFileName(name: string): string {
 function checkCompletion(problem: string, user: string): boolean {
   let res = false;
   indFile.problems.map((prob, index) => {
-    if (nameToFileName(problem) === prob) {
+    if (nameToFileName(problem) === nameToFileName(prob)) {
       res = user[index] === "1";
       return;
     }
@@ -402,16 +436,6 @@ function completionsInChapter(name: string, user: string): number {
   return res;
 }
 
-function setNodeColor(name: string): string {
-  if (checkCompletion(name, dummyProblems)) return "#10b981";
-  else return "#ef4444";
-}
-
-function setNodeChapterColor(name: string): string {
-  if (checkChapterCompletion(name, dummyProblems)) return "#10b981";
-  else return "#ef4444";
-}
-
 export function indexToChapter(id: number): string {
   return mapFile.chapters[id]?.name ?? "error";
 }
@@ -420,6 +444,53 @@ export function chapterToIndex(name: string): number {
   let ret = -1;
   mapFile.chapters.map((value, index) => {
     if (nameToFileName(value.name) == nameToFileName(name)) ret = index;
+  });
+
+  return ret;
+}
+
+function isRegionUnlocked(name: string): boolean {
+  //make a fake node so the linter stops being pissy
+  let n: Node = { name: "null", pos: [0, 0], next: [] };
+  mapFile.chapters.map((value, index) => {
+    if (nameToFileName(value.name) == nameToFileName(name)) {
+      n = value;
+      return;
+    }
+  });
+
+  if (n.name == "null") return false; //if for whatever reason we pass a false node
+
+  let ret = true;
+  n.next.map((value) => {
+    if (!checkChapterCompletion(value, dummyProblems)) {
+      ret = false;
+      return;
+    }
+  });
+
+  return ret;
+}
+
+function isNodeUnlocked(name: string, ch: number): boolean {
+  //make a fake node so the linter stops being pissy
+  let n: Node = { name: "null", pos: [0, 0], next: [] };
+  mapFile.chapters[ch]?.nodes.map((value, index) => {
+    if (nameToFileName(value.name) == nameToFileName(name)) {
+      n = value;
+      return;
+    }
+  });
+
+  if (n.name == "null") return false; //if for whatever reason we pass a false node
+
+  let ret = true;
+  n.next.map((value) => {
+    if (!checkCompletion(nameToFileName(value), dummyProblems)) {
+      console.log(value + " was not completed");
+      ret = false;
+      return;
+    }
   });
 
   return ret;

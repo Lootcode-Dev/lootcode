@@ -19,6 +19,12 @@
                     "type": "problem"
                 },
                 {
+                    "pos": [20,30],
+                    "name": "Lexica1",
+                    "next": ["Leaking Letters", "Stable Words"],
+                    "type": "game"
+                },
+                {
                     "pos": [10,90],
                     "name": "Refugees",
                     "next": [],
@@ -27,7 +33,7 @@
                 {
                     "pos": [50,10],
                     "name": "Engagement",
-                    "next": [],
+                    "next": ["Lexica1"],
                     "type": "problem"
                 },
                 {
