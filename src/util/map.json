@@ -208,7 +208,14 @@
             "name":"Compendia",
             "pos": [30, 40],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Wordup",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Nodak",
