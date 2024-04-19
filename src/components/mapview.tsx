@@ -315,7 +315,7 @@ export default function MapView({ user, chapterid }: IParams) {
             </div>
           ) : (
             <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
-              <div className="my-4 rounded-xl bg-[#15162c] p-4 text-center text-3xl font-bold">
+              <div className="my-4 rounded-xl bg-[#15162c] p-5 text-center text-2xl font-bold">
                 Algorion
               </div>
               <div className="flex h-[75vh] w-full justify-center">
