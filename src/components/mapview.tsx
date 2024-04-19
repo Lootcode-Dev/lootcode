@@ -145,7 +145,7 @@ export default function MapView({ user, chapterid }: IParams) {
       </div> */}
         <div className="mt-[-2.5vh] flex size-full items-center justify-center">
           {chapter != -1 ? (
-            <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
+            <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
               <div className="my-4 grid grid-cols-3 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
                 <a href="/map/home">
                   <ArrowLeft className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
@@ -184,7 +184,7 @@ export default function MapView({ user, chapterid }: IParams) {
                   />
                 </div>
                 {/*fixing height for now*/}
-                <div className="ml-4 flex h-[40vh] w-[20vw] grow">
+                <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
                   <div className="flex w-[20vw] shrink flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem ? (
@@ -375,6 +375,7 @@ export default function MapView({ user, chapterid }: IParams) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getNode(ch: number, i: number): any {
   return mapFile.chapters[ch]?.nodes[i];
 }

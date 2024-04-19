@@ -38,7 +38,7 @@ export default function NodeGraph({
   return (
     <svg
       viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
-      className="rounded-xl border-4 border-[#15162c] bg-[url('/test_bg.png')] bg-cover bg-center p-4"
+      className="aspect-video rounded-xl border-4 border-[#15162c] bg-[url('/test_bg.png')] bg-cover bg-center p-4"
     >
       <defs>
         <marker
