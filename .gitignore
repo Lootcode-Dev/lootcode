@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+# obsidian 
+/.obsidian
+.obsidian/*
+.obsidian
+
 # testing
 /coverage
 
