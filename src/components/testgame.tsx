@@ -59,6 +59,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   const [player, setPlayer] = useState<Entity | null>(null);
   const [originalPlayer, setOriginalPlayer] = useState<Entity | null>(null);
   const [originalEnemies, setOriginalEnemies] = useState<Entity[] | null>(null);
+  const [loopRunning, setLoopRunning] = useState<boolean>(false);
   const userStats = getUserStats(user);
 
   const { data } = api.game.getEncounter.useQuery({
@@ -109,8 +110,9 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   const intervalRef = useRef<number | null>(null);
 
   function gameLoop() {
-    if (enemies) {
+    if (enemies && !loopRunning) {
       let currentEnemyIndex = 0;
+      setLoopRunning(true);
       intervalRef.current = setInterval(() => {
         // Update Enemy health for each player attack
         setEnemies((prevEnemies) => {
@@ -157,6 +159,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             const allEnemiesDead = updatedEnemies.every((enemy) => enemy.dead);
             if (allEnemiesDead) {
               clearInterval(intervalRef.current ?? 0);
+              setLoopRunning(false);
               console.log("You win!");
             }
 
@@ -196,6 +199,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
               // Check if player is dead
               if (updatedPlayer.health <= 0) {
                 clearInterval(intervalRef.current ?? 0);
+                setLoopRunning(false);
                 console.log("You lose!");
               }
 
@@ -237,6 +241,8 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       }
       return prevEnemies;
     });
+
+    setLoopRunning(false);
   }
 
   return (
@@ -330,7 +336,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
               </Tooltip>
             </div>
           </div>
-          <div className="flex items-center justify-center p-12">
+          <div className="flex flex-col items-center justify-center p-12">
             <div className="flex flex-wrap items-center gap-12">
               {enemies?.map((enemy, index) => (
                 <Tooltip key={index}>
