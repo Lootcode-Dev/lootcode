@@ -21,6 +21,8 @@ import {
   Wand2,
 } from "lucide-react";
 import Link from "next/link";
+import { Dialog, DialogContent } from "./ui/dialog";
+import ReactMarkdown from "react-markdown";
 
 interface Entity {
   image: string;
@@ -60,15 +62,21 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   const [originalPlayer, setOriginalPlayer] = useState<Entity | null>(null);
   const [originalEnemies, setOriginalEnemies] = useState<Entity[] | null>(null);
   const [loopRunning, setLoopRunning] = useState<boolean>(false);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const userStats = getUserStats(user);
 
-  const { data } = api.game.getEncounter.useQuery({
-    encounterid: enc,
+  const { data } = api.code.getProblem.useQuery({
+    name: enc,
+    region: reg,
   });
 
+  const { data: won, mutate: beatGame } = api.game.beatEncounter.useMutation(
+    {},
+  );
+
   useEffect(() => {
-    if (data) {
-      const convertedEnemies = (data as Enemy[]).map((encounter) => ({
+    if (data?.enemies) {
+      const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
         image: encounter.image,
         name: encounter.name,
         health: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
@@ -160,7 +168,12 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             if (allEnemiesDead) {
               clearInterval(intervalRef.current ?? 0);
               setLoopRunning(false);
-              console.log("You win!");
+
+              // Handle win
+              beatGame({ encounterid: enc });
+
+              // Dialog to show loot
+              setDialogOpen(true);
             }
 
             return updatedEnemies;
@@ -247,6 +260,13 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
   return (
     <TooltipProvider>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+          <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
+            {data?.loot}
+          </ReactMarkdown>
+        </DialogContent>
+      </Dialog>
       <div className="h-[92.5vh] bg-[#282A36] text-white">
         <div className="flex justify-center space-x-4 pt-2">
           <div>
