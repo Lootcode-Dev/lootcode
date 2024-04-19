@@ -92,6 +92,14 @@ export default function MapView({ user, chapterid }: IParams) {
       { enabled: false, retry: false },
     );
 
+  const { data: algdesc, refetch: getAlgDesc } =
+    api.map.getDescription.useQuery(
+      {
+        name: nameToFileName("algorion"),
+      },
+      { enabled: true, retry: false },
+    );
+
   useEffect(() => {
     void getProblem();
   }, [chapter, getProblem, selNode]);
@@ -315,8 +323,29 @@ export default function MapView({ user, chapterid }: IParams) {
             </div>
           ) : (
             <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
-              <div className="my-4 rounded-xl bg-[#15162c] p-5 text-center text-2xl font-bold">
-                Algorion
+              <div className="my-4 grid grid-cols-3 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+                <div />
+                <Dialog>
+                  <DialogTrigger>
+                    <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
+                      Algorion
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
+                    <DialogHeader>
+                      {/* <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle> */}
+                      <DialogDescription className="w-full">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          className=" prose w-auto  max-w-none 
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                        >
+                          {algdesc}
+                        </ReactMarkdown>
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </div>
               <div className="flex h-[75vh] w-full justify-center">
                 <NodeGraph
@@ -331,8 +360,12 @@ export default function MapView({ user, chapterid }: IParams) {
                   <div className="flex w-[20vw] flex-col">
                     {selNode != -1 ? (
                       <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                        {progress >=
-                        (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
+                        {!homedesc ? (
+                          <div className="flex items-center justify-center">
+                            <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                          </div>
+                        ) : progress >=
+                          (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
                           <span className="text-yellow-200">Completed</span>
                         ) : (
                           <span className="text-red-500">
@@ -347,13 +380,19 @@ export default function MapView({ user, chapterid }: IParams) {
                       <div />
                     )}
 
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose grow overflow-auto scroll-smooth 
+                    {!homedesc ? (
+                      <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
+                        <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                      </div>
+                    ) : (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        className="prose grow overflow-auto scroll-smooth 
                   rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                    >
-                      {selNode != -1 ? homedesc : "# Select a region..."}
-                    </ReactMarkdown>
+                      >
+                        {selNode != -1 ? homedesc : "# Select a region..."}
+                      </ReactMarkdown>
+                    )}
 
                     {selNode != -1 ? (
                       <a
