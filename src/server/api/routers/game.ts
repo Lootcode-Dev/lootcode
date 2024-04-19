@@ -1,9 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
-import itemList from "~/gameinfo/items.json";
+import itemList from "~/util/items.json";
 import { fakeBuy, fakeEquip } from "~/app/game/utility";
+import enemies from "~/util/enemies";
+import encounters from "~/util/encounters";
+import { Enemy } from "~/util/enemies";
+import indFile from "~/util/index.json";
+import regFile from "~/util/region.json";
+import mapFile from "~/util/map.json";
+import goldFile from "~/util/gold.json";
+import { readFile } from "fs/promises";
+import { existsSync } from "fs";
 
 export const gameRouter = createTRPCRouter({
   giveItem: protectedProcedure
@@ -28,7 +41,6 @@ export const gameRouter = createTRPCRouter({
           data: user,
         });
     }),
-
   giveItemID: protectedProcedure
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -48,7 +60,6 @@ export const gameRouter = createTRPCRouter({
           });
       }
     }),
-
   equipItemID: protectedProcedure
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -67,7 +78,6 @@ export const gameRouter = createTRPCRouter({
 
       return user;
     }),
-
   addGold: protectedProcedure
     .input(z.object({ amount: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -86,7 +96,6 @@ export const gameRouter = createTRPCRouter({
 
       return user;
     }),
-
   buyItem: protectedProcedure
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -105,4 +114,82 @@ export const gameRouter = createTRPCRouter({
 
       return user;
     }),
+  getEncounter: protectedProcedure
+    .input(z.object({ encounterid: z.string() }))
+    .query(async ({ input, ctx }) => {
+      // Get the entity names in the encounter with the encounterid
+      const entList = encounters[input.encounterid];
+      const entities: Enemy[] = [];
+      // Access enemy object from list based on name in entList
+      entList?.map((value) => {
+        if (value) {
+          const enemy = enemies[value];
+          if (enemy) {
+            entities.push(enemy);
+          }
+        }
+      });
+      return entities;
+    }),
+  beatEncounter: protectedProcedure
+    .input(z.object({ encounterid: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const user = await db.user.findFirst({
+        where: { id: ctx.userId },
+      });
+
+      if (!user) return;
+
+      // Add the reward to the user's gold
+
+      // Check if they've already beaten the encounter
+      const problems = user.problems.split("");
+      if (problems[indFile.problems.indexOf(input.encounterid)] == "1") {
+        return user;
+      }
+
+      // Add the gold to the user's account and solve the problem
+      user.gold += goldFile[input.encounterid as keyof typeof goldFile];
+      problems[indFile.problems.indexOf(input.encounterid)] = "1";
+      user.problems = problems.join("");
+
+      // Update the user's data
+      await db.user.update({
+        where: { id: ctx.userId },
+        data: user,
+      });
+
+      return user;
+    }),
+  getLoreCollection: protectedProcedure.query(async ({ ctx }) => {
+    const user = await db.user.findFirst({
+      where: { id: ctx.userId },
+    });
+
+    if (!user) return;
+
+    const problems = user.problems.split("");
+    const loreCollection = [];
+    for (let i = 0; i < problems.length; i++) {
+      if (problems[i] === "1") {
+        const problem = indFile.problems[i];
+        if (problem) {
+          const region = Object.keys(regFile).find((key: string) =>
+            (regFile[key as keyof typeof regFile] as string[]).includes(
+              problem,
+            ),
+          );
+
+          if (existsSync(`./src/problems/${region}/${problem}/lore.md`)) {
+            const loreContent = await readFile(
+              `./src/problems/${region}/${problem}/lore.md`,
+              "utf-8",
+            );
+            loreCollection.push(loreContent);
+          }
+        }
+      }
+    }
+    return loreCollection;
+  }),
 });

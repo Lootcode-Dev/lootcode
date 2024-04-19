@@ -1,9 +1,15 @@
 import {
   BrainIcon,
+  ChevronsUp,
+  CloverIcon,
+  CoinsIcon,
   FlaskRound,
+  Heart,
+  HeartIcon,
+  PlusIcon,
   ShieldIcon,
   SparkleIcon,
-  Sword,
+  SwordIcon,
   Wand2,
 } from "lucide-react";
 import { getItem } from "~/app/game/utility";
@@ -39,12 +45,12 @@ export default function ItemDisplay({ id }: IParams) {
         ) : (
           <div />
         )}
-        {item?.mana != 0 ? (
+        {item?.magic != 0 ? (
           <div className="mr-1 flex items-center text-base">
             <div>
-              <FlaskRound size={20}></FlaskRound>
+              <Wand2 size={20}></Wand2>
             </div>
-            {"" + item?.mana}
+            {"" + item?.magic}
           </div>
         ) : (
           <div />
@@ -52,29 +58,29 @@ export default function ItemDisplay({ id }: IParams) {
         {item?.strength != 0 ? (
           <div className="mr-1 flex items-center text-base">
             <div>
-              <Sword size={20}></Sword>
+              <SwordIcon size={20}></SwordIcon>
             </div>
             {"" + item?.strength}
           </div>
         ) : (
           <div />
         )}
-        {item?.intelligence != 0 ? (
+        {item?.health != 0 ? (
           <div className="mr-1 flex items-center text-base">
             <div>
-              <Wand2 size={20}></Wand2>
+              <HeartIcon size={20}></HeartIcon>
             </div>
-            {"" + item?.intelligence}
+            {"" + item?.health}
           </div>
         ) : (
           <div />
         )}
-        {item?.wisdom != 0 ? (
+        {item?.critChance != 0 ? (
           <div className="mr-1 flex items-center text-base">
             <div>
-              <BrainIcon size={20}></BrainIcon>
+              <CloverIcon size={20}></CloverIcon>
             </div>
-            {"" + item?.wisdom}
+            {"" + item?.critChance}
           </div>
         ) : (
           <div />

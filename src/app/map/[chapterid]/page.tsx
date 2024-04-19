@@ -3,11 +3,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { currentUser } from "@clerk/nextjs";
+import MapView from "~/components/mapview";
 import { redirect } from "next/navigation";
 import { db } from "~/server/db";
-import Inventory from "~/components/inventory";
 
-export default async function Page() {
+interface PageProps {
+  params: {
+    chapterid: string;
+  };
+}
+
+export default async function Page({params}:PageProps) {
   const user = await currentUser();
 
   if (!user?.id) redirect(`/auth-callback?origin=map`);
@@ -20,9 +26,5 @@ export default async function Page() {
     redirect(`/auth-callback?origin=map`);
   }
 
-  return (
-    <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <Inventory name={user.firstName ?? ""} user={dbUser}></Inventory>
-    </main>
-  );
+  return <MapView user={dbUser} chapterid={params.chapterid}></MapView>;
 }

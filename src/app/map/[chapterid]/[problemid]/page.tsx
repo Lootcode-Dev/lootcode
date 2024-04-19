@@ -1,4 +1,5 @@
 import { currentUser } from "@clerk/nextjs";
+import { StringLike } from "bun";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import { db } from "~/server/db";
@@ -10,6 +11,7 @@ const ProblemViewWithNoSSR = dynamic(() => import("~/components/problemview"), {
 
 interface PageProps {
   params: {
+    chapterid: string;
     problemid: string;
   };
 }
@@ -28,6 +30,9 @@ export default async function Problem({ params }: PageProps) {
   }
 
   return (
-    <ProblemViewWithNoSSR problemid={params.problemid}></ProblemViewWithNoSSR>
+    <ProblemViewWithNoSSR
+      problemid={params.problemid}
+      chapterid={params.chapterid}
+    ></ProblemViewWithNoSSR>
   );
 }

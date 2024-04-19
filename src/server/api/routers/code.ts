@@ -7,41 +7,98 @@ import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
 import { $ } from "zx";
 import indFile from "~/util/index.json";
-import regFile from "~/util/region.json";
+import goldFile from "~/util/gold.json";
+import mapFile from "~/util/map.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
+import { api } from "~/trpc/server";
+
+export interface Enemy {
+  name: string;
+  image: string;
+  health: number;
+  critChance: number;
+  strength: number;
+  armor: number;
+  magic: number;
+  resist: number;
+}
 
 export const codeRouter = createTRPCRouter({
   getProblem: protectedProcedure
-    .input(z.object({ name: z.string() }))
+    .input(z.object({ name: z.string(), region: z.string() }))
     .query(async ({ input, ctx }) => {
-      const contents = { description: "", loot: "", solved: false };
+      const contents = {
+        description: "",
+        loot: "",
+        solved: false,
+        type: "",
+        enemies: [] as Enemy[],
+      };
+      const region = input.region;
 
-      const region = Object.keys(regFile).find((key: string) =>
-        regFile[key as keyof typeof regFile].includes(input.name),
-      );
+      const type = findNodeType(region ?? "", input.name);
+      console.log(type);
 
-      if (input.name !== "") {
-        contents.description = await readFile(
-          `./src/problems/${region}/${input.name}/problem.md`,
-          "utf-8",
-        );
+      // Detect if the node is of type problem
+      if (type === "problem") {
+        if (input.name !== "") {
+          contents.type = "problem";
 
-        contents.loot = await readFile(
-          `./src/problems/${region}/${input.name}/loot.md`,
-          "utf-8",
-        );
+          contents.description = await readFile(
+            `./src/problems/${region}/${input.name}/problem.md`,
+            "utf-8",
+          );
 
-        const currentProblems = indFile.problems;
-        const index = currentProblems.findIndex(
-          (problem) => problem === input.name,
-        );
-        if (index !== -1) {
-          const user = await db.user.findFirst({
-            where: { id: ctx.userId },
+          contents.loot = await readFile(
+            `./src/problems/${region}/${input.name}/loot.md`,
+            "utf-8",
+          );
+
+          const currentProblems = indFile.problems;
+          const index = currentProblems.findIndex(
+            (problem) => problem === input.name,
+          );
+          if (index !== -1) {
+            const user = await db.user.findFirst({
+              where: { id: ctx.userId },
+            });
+            if (user?.problems[index] === "1") {
+              contents.solved = true;
+            }
+          }
+        }
+        // Game
+      } else {
+        if (input.name !== "") {
+          contents.type = "game";
+
+          contents.description = await readFile(
+            `./src/problems/${region}/${input.name}/problem.md`,
+            "utf-8",
+          );
+
+          contents.loot = await readFile(
+            `./src/problems/${region}/${input.name}/loot.md`,
+            "utf-8",
+          );
+
+          const enemies = await api.game.getEncounter.query({
+            encounterid: input.name,
           });
-          if (user?.problems[index] === "1") {
-            contents.solved = true;
+          contents.enemies = enemies;
+
+          const currentProblems = indFile.problems;
+          const index = currentProblems.findIndex(
+            (problem) => problem === input.name,
+          );
+          if (index !== -1) {
+            const user = await db.user.findFirst({
+              where: { id: ctx.userId },
+            });
+            if (user?.problems[index] === "1") {
+              contents.solved = true;
+            }
           }
         }
       }
@@ -50,7 +107,14 @@ export const codeRouter = createTRPCRouter({
     }),
 
   runProblem: protectedProcedure
-    .input(z.object({ name: z.string(), code: z.string(), lang: z.string() }))
+    .input(
+      z.object({
+        name: z.string(),
+        code: z.string(),
+        lang: z.string(),
+        region: z.string(),
+      }),
+    )
     .query(async ({ input, ctx }) => {
       // Zx setup
       $.verbose = false;
@@ -88,9 +152,7 @@ export const codeRouter = createTRPCRouter({
         run: string;
       } //Our Interface for our dictionary
 
-      const region = Object.keys(regFile).find((key: string) =>
-        regFile[key as keyof typeof regFile].includes(input.name),
-      );
+      const region = input.region;
 
       await $`mkdir -p ./temp/${ctx.userId}${input.name}`; //Create a temp folder for the user in the temp space
       const codePathFolder = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
@@ -274,6 +336,10 @@ export const codeRouter = createTRPCRouter({
             // Join the array back into a string
             user.problems = currentProblems.join("");
             console.log(user.problems);
+
+            // Update the gold woohoo!!!
+            user.gold += goldFile[input.name as keyof typeof goldFile];
+
             await db.user.update({
               where: { id: ctx.userId },
               data: user,
@@ -313,4 +379,23 @@ export function $withoutEscaping(
   } finally {
     $.quote = origQuote; //Set the functionality of quote back to being able to escape (without changing our return, so our return returned an unescaped sequence fixing our compilation problems)
   }
+}
+
+function findNodeType(regionName: string, problemName: string) {
+  // Convert inputs to lowercase to make comparison case-insensitive
+  const lowerRegionName = regionName.toLowerCase().replace(/ /g, "_");
+  const lowerProblemName = problemName.toLowerCase().replace(/ /g, "_");
+
+  // Iterate through each chapter
+  for (const chapter of mapFile.chapters) {
+    if (chapter.name.toLowerCase().replace(/ /g, "_") === lowerRegionName) {
+      // Iterate through each node in the chapter
+      for (const node of chapter.nodes) {
+        if (node.name.toLowerCase().replace(/ /g, "_") === lowerProblemName) {
+          return node.type; // Return the type of the node
+        }
+      }
+    }
+  }
+  return null; // Return null if no match is found
 }

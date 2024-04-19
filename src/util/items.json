@@ -11,10 +11,9 @@
             "health": 0,
             "armor": 1,
             "resist": 0,
-            "mana": 0,
+            "critChance": 0,
             "strength": 0,
-            "intelligence": 0,
-            "wisdom": 0
+            "magic": 0
         },
         {
             "name": "Training Sword",
@@ -27,10 +26,9 @@
             "health": 0,
             "armor": 0,
             "resist": 0,
-            "mana": 0,
+            "critChance": 0,
             "strength": 2,
-            "intelligence": 0,
-            "wisdom": 0
+            "magic": 0
         },
         {
             "name": "Rotten Staff",
@@ -43,10 +41,9 @@
             "health": 0,
             "armor": 0,
             "resist": 0,
-            "mana": 0,
+            "critChance": 0,
             "strength": 0,
-            "intelligence": 2,
-            "wisdom": 0
+            "magic": 2
         },
         {
             "name": "Bronze Daggers",
@@ -59,10 +56,9 @@
             "health": 0,
             "armor": -1,
             "resist": 0,
-            "mana": 0,
+            "critChance": 0,
             "strength": 3,
-            "intelligence": 0,
-            "wisdom": 0
+            "magic": 0
         }
     ]
 }

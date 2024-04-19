@@ -23,7 +23,7 @@ export default async function Navbar() {
       <div>
         <SignedIn>
           <div className="flex items-center gap-8">
-            <Link href="/map">
+            <Link href="/map/home">
               <Button className="bg-purple-700 text-white">
                 <div className="flex items-center gap-2">
                   Map <MapIcon className="h-5 w-5" />

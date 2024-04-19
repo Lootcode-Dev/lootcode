@@ -59,7 +59,13 @@ interface codeGradeResult {
   solved: boolean;
 } //Code Grade Interface
 
-export default function ProblemView({ problemid }: { problemid: string }) {
+export default function ProblemView({
+  problemid,
+  chapterid,
+}: {
+  problemid: string;
+  chapterid: string;
+}) {
   const [language, setLanguage] = useState<string>("python");
   const [codeSize, setCodeSize] = useState<number>(0);
   const [runningCode, setRunningCode] = useState<boolean>(false);
@@ -69,6 +75,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
+    region: chapterid,
   });
 
   const { data: runResponse, refetch: codeRun } = api.code.runProblem.useQuery(
@@ -76,15 +83,16 @@ export default function ProblemView({ problemid }: { problemid: string }) {
       name: problemid,
       code: code,
       lang: language,
+      region: chapterid,
     },
     { enabled: false, retry: false },
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  const { data: s, refetch: dockerCreate } = api.docker.createDockerContainer.useQuery(
-    { name: problemid },
-    { enabled: false, retry: false },
-  );
+  const { data: s, refetch: dockerCreate } =
+    api.docker.createDockerContainer.useQuery(
+      { name: problemid },
+      { enabled: false, retry: false },
+    );
 
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
@@ -131,12 +139,13 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                       setRunningCode(true);
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                       void dockerCreate().then(() => {
-                        void codeRun().then(response => {
-                          //Set stateful data to our data to propagate changes 
+                        void codeRun().then((response) => {
+                          //Set stateful data to our data to propagate changes
                           setRunData(response.data);
 
                           //When setFirstSolve is true we solved the problem (not necessarily the first time)
-                          if (response.data?.reward === true) setFirstSolve(true);
+                          if (response.data?.reward === true)
+                            setFirstSolve(true);
                           setRunningCode(false);
                         });
                       });
@@ -150,7 +159,11 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     theme={dracula}
                     height={`${codeSize - 10}vh`}
-                    extensions={[loadLanguage(language as "java" | "python" | "cpp" | "c")!]} //Typescript shenanigans 
+                    extensions={[
+                      loadLanguage(
+                        language as "java" | "python" | "cpp" | "c",
+                      )!,
+                    ]} //Typescript shenanigans
                     basicSetup={{
                       syntaxHighlighting: true,
                       closeBrackets: true,
@@ -177,10 +190,7 @@ export default function ProblemView({ problemid }: { problemid: string }) {
                   {!runningCode && runData && (
                     <div className="flex gap-4">
                       <div>Total: </div>
-                      <div>
-                        {runData?.numFailed +
-                          runData?.numPassed}
-                      </div>
+                      <div>{runData?.numFailed + runData?.numPassed}</div>
                       <div>Passed: </div>
                       <div>{runData?.numPassed} </div>
                       <div>Failed:</div>
