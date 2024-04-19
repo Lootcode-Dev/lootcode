@@ -7,7 +7,7 @@ import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
 import { $ } from "zx";
 import indFile from "~/util/index.json";
-import regFile from "~/util/region.json";
+import goldFile from "~/util/gold.json";
 import mapFile from "~/util/map.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
@@ -336,6 +336,10 @@ export const codeRouter = createTRPCRouter({
             // Join the array back into a string
             user.problems = currentProblems.join("");
             console.log(user.problems);
+
+            // Update the gold woohoo!!!
+            user.gold += goldFile[input.name as keyof typeof goldFile];
+
             await db.user.update({
               where: { id: ctx.userId },
               data: user,

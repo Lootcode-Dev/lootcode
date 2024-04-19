@@ -347,64 +347,68 @@ export default function MapView({ user, chapterid }: IParams) {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="flex h-[75vh] w-full justify-center">
-                <NodeGraph
-                  nodes={mapFile.chapters}
-                  nodeRadius={30}
-                  nodeColor={setNodeChapterColor}
-                  getNode={selNode}
-                  setNode={setSelNode}
-                  bgImg={"/test_bg.png"}
-                />
-                <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
-                  <div className="flex w-[20vw] flex-col">
-                    {selNode != -1 ? (
-                      <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
-                        {!homedesc ? (
-                          <div className="flex items-center justify-center">
-                            <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
-                          </div>
-                        ) : progress >=
-                          (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
-                          <span className="text-yellow-200">Completed</span>
-                        ) : (
-                          <span className="text-red-500">
-                            {"" +
-                              progress +
-                              " / " +
-                              (mapFile.chapters[selNode]?.nodes.length ?? 0)}
-                          </span>
-                        )}
-                      </div>
-                    ) : (
-                      <div />
-                    )}
+              <div className="flex h-fit w-full shrink flex-row justify-center">
+                <div className="flex h-fit w-full shrink">
+                  <NodeGraph
+                    nodes={mapFile.chapters}
+                    nodeRadius={30}
+                    nodeColor={setNodeChapterColor}
+                    getNode={selNode}
+                    setNode={setSelNode}
+                    bgImg={"/test_bg.png"}
+                  />
+                  <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
+                    <div className="flex w-[20vw] flex-col">
+                      {selNode != -1 ? (
+                        <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                          {!homedesc ? (
+                            <div className="flex items-center justify-center">
+                              <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                            </div>
+                          ) : progress >=
+                            (mapFile.chapters[selNode]?.nodes.length ?? 0) ? (
+                            <span className="text-yellow-200">Completed</span>
+                          ) : (
+                            <span className="text-red-500">
+                              {"" +
+                                progress +
+                                " / " +
+                                (mapFile.chapters[selNode]?.nodes.length ?? 0)}
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <div />
+                      )}
 
-                    {!homedesc ? (
-                      <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
-                        <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
-                      </div>
-                    ) : (
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        className="prose grow overflow-auto scroll-smooth 
+                      {!homedesc ? (
+                        <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
+                          <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                        </div>
+                      ) : (
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          className="prose grow overflow-auto scroll-smooth 
                   rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
-                      >
-                        {selNode != -1 ? homedesc : "# Select a region..."}
-                      </ReactMarkdown>
-                    )}
+                        >
+                          {selNode != -1 ? homedesc : "# Select a region..."}
+                        </ReactMarkdown>
+                      )}
 
-                    {selNode != -1 ? (
-                      <a
-                        href={"/map/" + nameToFileName(indexToChapter(selNode))}
-                      >
-                        <Button className="mt-2 w-full bg-purple-700">
-                          Embark
-                        </Button>
-                      </a>
-                    ) : (
-                      <div />
-                    )}
+                      {selNode != -1 ? (
+                        <a
+                          href={
+                            "/map/" + nameToFileName(indexToChapter(selNode))
+                          }
+                        >
+                          <Button className="mt-2 w-full bg-purple-700">
+                            Embark
+                          </Button>
+                        </a>
+                      ) : (
+                        <div />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { nameToFileName } from "./mapview";
+import { Dialog, DialogContent } from "./ui/dialog";
+import ReactMarkdown from "react-markdown";
 
 interface Entity {
   image: string;
@@ -64,11 +66,17 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   const [originalEnemies, setOriginalEnemies] = useState<Entity[] | null>(null);
   const [loopRunning, setLoopRunning] = useState<boolean>(false);
   const [encounterLabel, setEncounterLabel] = useState<string>("");
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const userStats = getUserStats(user);
 
-  const { data } = api.game.getEncounter.useQuery({
-    encounterid: enc,
+  const { data } = api.code.getProblem.useQuery({
+    name: enc,
+    region: reg,
   });
+
+  const { data: won, mutate: beatGame } = api.game.beatEncounter.useMutation(
+    {},
+  );
 
   useEffect(() => {
     mapFile.chapters.map((val, index) => {
@@ -83,8 +91,8 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       }
     });
 
-    if (data) {
-      const convertedEnemies = (data as Enemy[]).map((encounter) => ({
+    if (data?.enemies) {
+      const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
         image: encounter.image,
         name: encounter.name,
         health: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
@@ -176,7 +184,12 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             if (allEnemiesDead) {
               clearInterval(intervalRef.current ?? 0);
               setLoopRunning(false);
-              console.log("You win!");
+
+              // Handle win
+              beatGame({ encounterid: enc });
+
+              // Dialog to show loot
+              setDialogOpen(true);
             }
 
             return updatedEnemies;
@@ -267,12 +280,15 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
   return (
     <TooltipProvider>
-      <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        {!data ? (
-          <div className="flex h-full items-center justify-center rounded-xl">
-            <Loader2 className="h-32 w-32 animate-spin text-yellow-200" />
-          </div>
-        ) : (
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+          <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
+            {data?.loot}
+          </ReactMarkdown>
+        </DialogContent>
+      </Dialog>
+      <div className="h-[92.5vh] bg-[#282A36] text-white">
+        <div className="flex justify-center space-x-4 pt-2">
           <div className="flex size-full flex-col items-center justify-center">
             <div className="flex grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
               <div className="flex text-center text-5xl font-bold">
@@ -453,7 +469,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </TooltipProvider>
   );
