@@ -92,6 +92,14 @@ export default function MapView({ user, chapterid }: IParams) {
       { enabled: false, retry: false },
     );
 
+  const { data: algdesc, refetch: getAlgDesc } =
+    api.map.getDescription.useQuery(
+      {
+        name: nameToFileName("algorion"),
+      },
+      { enabled: false, retry: false },
+    );
+
   useEffect(() => {
     void getProblem();
   }, [chapter, getProblem, selNode]);
@@ -102,6 +110,7 @@ export default function MapView({ user, chapterid }: IParams) {
 
   useEffect(() => {
     if (chapter == -1) {
+      void getAlgDesc();
       void getHomeChDesc();
       setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
     }
@@ -332,7 +341,7 @@ export default function MapView({ user, chapterid }: IParams) {
                           className=" prose w-auto  max-w-none 
                         p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                         >
-                          {"nothing here yet..."}
+                          {algdesc}
                         </ReactMarkdown>
                       </DialogDescription>
                     </DialogHeader>
