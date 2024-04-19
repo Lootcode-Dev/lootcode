@@ -325,6 +325,12 @@
                     "name": "Wordy",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Ski",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
