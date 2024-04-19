@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import ReactMarkdown from "react-markdown";
 
 interface IParams {
   name: string;
@@ -43,6 +45,8 @@ export default function Inventory({ name, user }: IParams) {
       },
       { enabled: false, retry: false },
     );
+
+  const { data: loreCollectibles } = api.game.getLoreCollection.useQuery();
 
   useEffect(() => {
     if (selItem != -1) {
@@ -92,21 +96,25 @@ export default function Inventory({ name, user }: IParams) {
             )}
           </div>
         </div>
-        <div className="m-2 text-left text-3xl">
-          Collectibles
+        <div className="m-2 text-left">
+          <span className="text-3xl">Collectibles</span>
           <div className="my-4 grid auto-cols-max grid-flow-col gap-4">
-            {itemList.items.map((value, index) =>
-              getUser.items[index] == "1" ? (
-                <div
-                  className="cursor-pointer rounded bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
-                  key={index}
-                >
-                  Collectible
-                </div>
-              ) : (
-                <div key={index} />
-              ),
-            )}
+            {loreCollectibles?.map((value, index) => (
+              <Dialog key={index}>
+                <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 duration-150 hover:bg-[#15162c] text-2xl">
+                  {value.split("\n")[0]?.replace("#", "")}
+                </DialogTrigger>
+                <DialogContent className="bg-[#15162c] p-4 text-white">
+                  <ReactMarkdown
+                    className="prose w-auto  max-w-none 
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                    key={index}
+                  >
+                    {value}
+                  </ReactMarkdown>
+                </DialogContent>
+              </Dialog>
+            ))}
           </div>
         </div>
       </div>
