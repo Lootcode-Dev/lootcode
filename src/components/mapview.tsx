@@ -181,6 +181,7 @@ export default function MapView({ user, chapterid }: IParams) {
                     nodeColor={setNodeColor}
                     getNode={selNode}
                     setNode={setSelNode}
+                    bgImg={"/test_bg.png"}
                   />
                 </div>
                 {/*fixing height for now*/}
@@ -324,6 +325,7 @@ export default function MapView({ user, chapterid }: IParams) {
                   nodeColor={setNodeChapterColor}
                   getNode={selNode}
                   setNode={setSelNode}
+                  bgImg={"/test_bg.png"}
                 />
                 <div className="ml-4 flex w-[20vw]">
                   <div className="flex w-[20vw] flex-col">

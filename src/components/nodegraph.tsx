@@ -17,6 +17,7 @@ interface Graph {
   nodeColor: any;
   getNode: number;
   setNode: any;
+  bgImg: string;
 }
 
 const mapRes = [1280, 720];
@@ -27,6 +28,7 @@ export default function NodeGraph({
   nodeColor,
   getNode,
   setNode,
+  bgImg,
 }: Graph) {
   if (nodes == undefined)
     return (
