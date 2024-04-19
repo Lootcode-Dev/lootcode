@@ -11,6 +11,11 @@ import { fakeBuy, fakeEquip } from "~/app/game/utility";
 import enemies from "~/util/enemies";
 import encounters from "~/util/encounters";
 import { Enemy } from "~/util/enemies";
+import indFile from "~/util/index.json";
+import regFile from "~/util/region.json";
+import mapFile from "~/util/map.json";
+import { readFile } from "fs/promises";
+import { existsSync } from "fs";
 
 export const gameRouter = createTRPCRouter({
   giveItem: protectedProcedure
@@ -130,4 +135,37 @@ export const gameRouter = createTRPCRouter({
       });
       return entities;
     }),
+  getLoreCollection: protectedProcedure.query(async ({ ctx }) => {
+    const user = await db.user.findFirst({
+      where: { id: ctx.userId },
+    });
+
+    if (!user) return;
+
+    const problems = user.problems.split("");
+    const loreCollection = [];
+    for (let i = 0; i < problems.length; i++) {
+      if (problems[i] === "1") {
+        const problem = indFile.problems[i];
+        if (problem) {
+          const region = Object.keys(regFile).find((key: string) =>
+            (regFile[key as keyof typeof regFile] as string[]).includes(
+              problem,
+            ),
+          );
+
+          // ...
+
+          if (existsSync(`./src/problems/${region}/${problem}/lore.md`)) {
+            const loreContent = await readFile(
+              `./src/problems/${region}/${problem}/lore.md`,
+              "utf-8",
+            );
+            loreCollection.push(loreContent);
+          }
+        }
+      }
+    }
+    return loreCollection;
+  }),
 });
