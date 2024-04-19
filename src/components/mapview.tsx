@@ -97,7 +97,7 @@ export default function MapView({ user, chapterid }: IParams) {
       {
         name: nameToFileName("algorion"),
       },
-      { enabled: false, retry: false },
+      { enabled: true, retry: false },
     );
 
   useEffect(() => {
@@ -110,7 +110,6 @@ export default function MapView({ user, chapterid }: IParams) {
 
   useEffect(() => {
     if (chapter == -1) {
-      void getAlgDesc();
       void getHomeChDesc();
       setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
     }
