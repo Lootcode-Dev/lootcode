@@ -314,9 +314,9 @@ export default function MapView({ user, chapterid }: IParams) {
               </div>
             </div>
           ) : (
-            <div className="flex h-[85vh] w-[70vw] flex-col justify-center">
-              <div className="my-4 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
-                Regions
+            <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
+              <div className="my-4 rounded-xl bg-[#15162c] p-4 text-center text-3xl font-bold">
+                Algorion
               </div>
               <div className="flex h-[75vh] w-full justify-center">
                 <NodeGraph
@@ -327,7 +327,7 @@ export default function MapView({ user, chapterid }: IParams) {
                   setNode={setSelNode}
                   bgImg={"/test_bg.png"}
                 />
-                <div className="ml-4 flex w-[20vw]">
+                <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
                   <div className="flex w-[20vw] flex-col">
                     {selNode != -1 ? (
                       <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
