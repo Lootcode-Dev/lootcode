@@ -287,7 +287,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
           </ReactMarkdown>
         </DialogContent>
       </Dialog>
-      <div className="h-[92.5vh] bg-[#282A36] text-white">
+      <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <div className="flex justify-center space-x-4 pt-2">
           <div className="flex size-full flex-col items-center justify-center">
             <div className="flex grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
