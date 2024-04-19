@@ -291,9 +291,16 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         <div className="flex justify-center space-x-4 pt-2">
           <div className="flex size-full flex-col items-center justify-center">
             <div className="flex grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
-              <div className="flex text-center text-5xl font-bold">
-                {encounterLabel}
-              </div>
+              {!data ? (
+                <div className="flex items-center justify-center">
+                  <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
+                </div>
+              ) : (
+                <div className="flex text-center text-5xl font-bold">
+                  {encounterLabel}
+                </div>
+              )}
+
               <div className="grid grid-cols-3 items-center justify-between gap-8">
                 <div>
                   <Link href={`/map/${reg}`}>
@@ -325,149 +332,155 @@ export default function Testgame({ user, name, enc, reg }: Props) {
               {"Level " + getLevel(user)}
             </div>
 
-            <div className="m-4 grid h-[75vh] w-[80vw] grid-cols-3 rounded-xl border-4 border-[#15162c] bg-indigo-950">
-              <div className="flex items-center justify-center">
-                <div className="flex flex-col items-start space-y-12">
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Card
-                        className={`${
-                          player?.dead || !loopRunning
-                            ? ""
-                            : player?.critHit
-                              ? "animate-wiggle-more animate-infinite"
-                              : "animate-wiggle animate-infinite"
-                        } w-[250px] bg-[#15162c] p-4 text-2xl  text-white`}
-                      >
-                        <div
-                          style={{
-                            color: player?.dead
-                              ? "black"
-                              : player?.critHit
-                                ? "red"
-                                : "inherit",
-                          }}
-                        >
-                          <div className="grid grid-cols-2 justify-between p-2">
-                            <div className="flex flex-row items-center justify-center p-2 font-bold">
-                              {player?.name}
-                            </div>
-                            <div className="flex flex-row items-center justify-center p-2">
-                              <HeartIcon></HeartIcon>
-                              {player?.health}
-                            </div>
-                          </div>
-                          <Progress
-                            value={
-                              ((player?.health ?? 0) /
-                                (player?.maxHealth ?? 1)) *
-                              100
-                            }
-                          ></Progress>
-                        </div>
-                      </Card>
-                    </TooltipTrigger>
-                    <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
-                      <div className="flex flex-col justify-center">
-                        <div className="grid grid-cols-3 grid-rows-2">
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <HeartIcon></HeartIcon>
-                            {player?.maxHealth}
-                          </div>
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <SwordIcon></SwordIcon>
-                            {player?.strength}
-                          </div>
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <ShieldIcon></ShieldIcon>
-                            {player?.armor}
-                          </div>
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <CloverIcon></CloverIcon>
-                            {player?.critChance}
-                          </div>
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <Wand2></Wand2>
-                            {player?.magic}
-                          </div>
-                          <div className="flex flex-col items-center justify-center p-2">
-                            <SparkleIcon></SparkleIcon>
-                            {player?.resist}
-                          </div>
-                        </div>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+            {!data ? (
+              <div className="m-4 flex h-[75vh] w-[80vw] items-center justify-center rounded-xl border-4 border-[#15162c] bg-indigo-950">
+                <Loader2 className="h-32 w-32 animate-spin text-yellow-200" />
               </div>
-              <div className="col-span-2 flex flex-col items-center justify-center p-16">
-                <div className="flex grid grid-cols-3 items-center gap-12">
-                  {enemies?.map((enemy, index) => (
-                    <Tooltip key={index}>
+            ) : (
+              <div className="m-4 grid h-[75vh] w-[80vw] grid-cols-3 rounded-xl border-4 border-[#15162c] bg-indigo-950">
+                <div className="flex items-center justify-center">
+                  <div className="flex flex-col items-start space-y-12">
+                    <Tooltip>
                       <TooltipTrigger>
                         <Card
                           className={`${
-                            enemy.dead || !loopRunning
+                            player?.dead || !loopRunning
                               ? ""
-                              : enemy.critHit
+                              : player?.critHit
                                 ? "animate-wiggle-more animate-infinite"
                                 : "animate-wiggle animate-infinite"
-                          } w-[250px] bg-purple-950 p-4 text-white`}
+                          } w-[250px] bg-[#15162c] p-4 text-2xl  text-white`}
                         >
                           <div
                             style={{
-                              color: enemy.dead
+                              color: player?.dead
                                 ? "black"
-                                : enemy.critHit
+                                : player?.critHit
                                   ? "red"
                                   : "inherit",
                             }}
                           >
-                            <div className="grid grid-cols-2 p-2">
-                              <div>{enemy.name}</div>
-                              <div>{enemy.health}</div>
+                            <div className="grid grid-cols-2 justify-between p-2">
+                              <div className="flex flex-row items-center justify-center p-2 font-bold">
+                                {player?.name}
+                              </div>
+                              <div className="flex flex-row items-center justify-center p-2">
+                                <HeartIcon></HeartIcon>
+                                {player?.health}
+                              </div>
                             </div>
                             <Progress
-                              value={(enemy.health / enemy.maxHealth) * 100}
+                              value={
+                                ((player?.health ?? 0) /
+                                  (player?.maxHealth ?? 1)) *
+                                100
+                              }
                             ></Progress>
                           </div>
                         </Card>
                       </TooltipTrigger>
                       <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col justify-center">
                           <div className="grid grid-cols-3 grid-rows-2">
                             <div className="flex flex-col items-center justify-center p-2">
                               <HeartIcon></HeartIcon>
-                              {enemy.maxHealth}
+                              {player?.maxHealth}
                             </div>
                             <div className="flex flex-col items-center justify-center p-2">
                               <SwordIcon></SwordIcon>
-                              {enemy.strength}
+                              {player?.strength}
                             </div>
                             <div className="flex flex-col items-center justify-center p-2">
                               <ShieldIcon></ShieldIcon>
-                              {enemy.armor}
+                              {player?.armor}
                             </div>
                             <div className="flex flex-col items-center justify-center p-2">
                               <CloverIcon></CloverIcon>
-                              {enemy.critChance}
+                              {player?.critChance}
                             </div>
                             <div className="flex flex-col items-center justify-center p-2">
                               <Wand2></Wand2>
-                              {enemy.magic}
+                              {player?.magic}
                             </div>
                             <div className="flex flex-col items-center justify-center p-2">
                               <SparkleIcon></SparkleIcon>
-                              {enemy.resist}
+                              {player?.resist}
                             </div>
                           </div>
                         </div>
                       </TooltipContent>
                     </Tooltip>
-                  ))}
+                  </div>
+                </div>
+                <div className="col-span-2 flex flex-col items-center justify-center p-16">
+                  <div className="flex grid grid-cols-3 items-center gap-12">
+                    {enemies?.map((enemy, index) => (
+                      <Tooltip key={index}>
+                        <TooltipTrigger>
+                          <Card
+                            className={`${
+                              enemy.dead || !loopRunning
+                                ? ""
+                                : enemy.critHit
+                                  ? "animate-wiggle-more animate-infinite"
+                                  : "animate-wiggle animate-infinite"
+                            } w-[250px] bg-purple-950 p-4 text-white`}
+                          >
+                            <div
+                              style={{
+                                color: enemy.dead
+                                  ? "black"
+                                  : enemy.critHit
+                                    ? "red"
+                                    : "inherit",
+                              }}
+                            >
+                              <div className="grid grid-cols-2 p-2">
+                                <div>{enemy.name}</div>
+                                <div>{enemy.health}</div>
+                              </div>
+                              <Progress
+                                value={(enemy.health / enemy.maxHealth) * 100}
+                              ></Progress>
+                            </div>
+                          </Card>
+                        </TooltipTrigger>
+                        <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
+                          <div className="flex flex-col ">
+                            <div className="grid grid-cols-3 grid-rows-2">
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <HeartIcon></HeartIcon>
+                                {enemy.maxHealth}
+                              </div>
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <SwordIcon></SwordIcon>
+                                {enemy.strength}
+                              </div>
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <ShieldIcon></ShieldIcon>
+                                {enemy.armor}
+                              </div>
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <CloverIcon></CloverIcon>
+                                {enemy.critChance}
+                              </div>
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <Wand2></Wand2>
+                                {enemy.magic}
+                              </div>
+                              <div className="flex flex-col items-center justify-center p-2">
+                                <SparkleIcon></SparkleIcon>
+                                {enemy.resist}
+                              </div>
+                            </div>
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
