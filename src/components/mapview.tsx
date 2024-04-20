@@ -495,7 +495,7 @@ export function chapterToIndex(name: string): number {
   return ret;
 }
 
-function isRegionUnlocked(name: string): boolean {
+export function isRegionUnlocked(name: string): boolean {
   //make a fake node so the linter stops being pissy
   let n: Node = { name: "null", pos: [0, 0], next: [] };
   mapFile.chapters.map((value, index) => {
@@ -533,7 +533,6 @@ function isNodeUnlocked(name: string, ch: number): boolean {
   let ret = true;
   n.next.map((value) => {
     if (!checkCompletion(nameToFileName(value), dummyProblems)) {
-      console.log(value + " was not completed");
       ret = false;
       return;
     }

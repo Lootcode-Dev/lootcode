@@ -118,6 +118,12 @@
             ]
         },
         {
+            "name":"The Tower",
+            "pos": [50,10],
+            "next": ["Lexica", "Vectara", "Stackspires", "Queuesgard", "Arbonclave", "Findara", "Compendia", "Nodak", "Bitwise Bastion", "Arithmend", "Dynamar", "The Thicket"],
+            "nodes":[]
+        },
+        {
             "name":"Stackspires",
             "pos": [70,10],
             "next": [],
