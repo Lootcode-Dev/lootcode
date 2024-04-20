@@ -1,6 +1,9 @@
-# Welcome to Lexica
-In the realm of Lexica, language and communication weave the fabric of society, binding its people with the threads of stories and shared knowledge. This land, adorned with ancient glyphs on every surface from the sides of buildings to the bark of trees, celebrates the art of storytelling and the exchange of ideas, fostering a culture that is both outgoing and welcoming. At the heart of this realm sits the Grand Library, a testament to Lexica's dedication to preserving the lore of the world. However, a crisis looms as the very essence of their communication begins to fade, threatening the collapse of their cherished libraries and the loss of their ability to connect with one another. In this time of need, the restoration of words, the solving of puzzles, and the recreation of their central tome of knowledge become acts of salvation, as efforts are made to reweave the fabric of their society and preserve the legacy of Lexica's deep-rooted connection to language.
+# Lexica
+The region of Lexica is one of curiosity and intrinsic wonder. The first characteristic that points out is, well, characters. Perhaps over a hundred unique dialects appear throughout Lexica, whether it be through natural language or runes alongside architecture. This place is a hub for collaboration and community, and both word of mouth and written scripture are highly cherished. It is said that these runes are even magical, which could be argued by virtue of the stability runes placed alongside buildings with architectural practices you'd swear were unsafe.
 
+The people of Lexica line themselves with - you guessed it - runic tattoos from various languages. As for which, you are unsure, but observe the feeling of many diaspora communities here which stem from the varying dialects displayed on their body. People in Lexica are naturally friendly, partially due to their desire to strike up a conversation.
+
+As you traverse more of the city, though, you once again notice a disdain for the very thing that makes Lexica what it is. People are beginning to grow bored, tired, and lost. Without the passion of runes and language, Lexica would be nothing, and you feel a bitter shame thinking about what would happen if these people continued to fall into despair.
 
 
 

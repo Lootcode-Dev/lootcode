@@ -197,7 +197,11 @@ export default function MapView({ user, chapterid }: IParams) {
                   <div className="flex w-[20vw] shrink flex-col">
                     <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem ? (
-                        problem?.solved || checkChapterCompletion(mapFile.chapters[chapter]?.name, user.problems) ? (
+                        problem?.solved ||
+                        checkChapterCompletion(
+                          mapFile.chapters[chapter]?.name,
+                          user.problems,
+                        ) ? (
                           <span className="text-yellow-200">Completed</span>
                         ) : (
                           <span className="text-red-500">Not Completed</span>
@@ -388,10 +392,10 @@ export default function MapView({ user, chapterid }: IParams) {
                       ) : (
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
-                          className="prose grow overflow-auto scroll-smooth 
-                  rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                          className="prose h-full overflow-auto scroll-smooth 
+                          rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-700 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                         >
-                          {selNode != -1 ? homedesc : "# Select a region..."}
+                          {selNode != -1 ? homedesc : algdesc}
                         </ReactMarkdown>
                       )}
 
@@ -452,7 +456,10 @@ function checkCompletion(problem: string, user: string): boolean {
 }
 
 //Returns true only if all problems in a chapter are completed
-function checkChapterCompletion(name: string | undefined, user: string): boolean {
+function checkChapterCompletion(
+  name: string | undefined,
+  user: string,
+): boolean {
   if (name == undefined) return false;
 
   let res = true;
