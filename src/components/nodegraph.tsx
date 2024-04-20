@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { nameToFileName } from "./mapview";
+import { isRegionUnlocked } from "./mapview";
 
 interface Node {
   pos: number[];
@@ -58,83 +59,92 @@ export default function NodeGraph({
         </marker>
       </defs>
 
-      {nodes.map((node: Node, index) => (
+      {nodes.map((node: Node, index) =>
         //bg-indigo-950
         //rip runtime a lil ig but its better than the lines
         //rendering on top of the nodes
         //plus it would be like 20 iterations instead of 10 at most?
-        <g key={index} id={"node1-" + nameToFileName(node.name)}>
-          {node.next.map((depend, index) => (
-            <g key={index}>
-              <line
-                x1={getNodeX(node.pos[0] ?? 0)}
-                y1={getNodeY(node.pos[1] ?? 0)}
-                x2={
-                  getNodeX(
+        nameToFileName(node.name) != "the_tower" ? (
+          <g key={index} id={"node1-" + nameToFileName(node.name)}>
+            {node.next.map((depend, index) => (
+              <g key={index}>
+                <line
+                  x1={getNodeX(node.pos[0] ?? 0)}
+                  y1={getNodeY(node.pos[1] ?? 0)}
+                  x2={
+                    getNodeX(
+                      findNodePos(nodes, nameToFileName(depend))?.[0] ?? 0,
+                    ) -
+                    (getNodeX(
+                      findNodePos(nodes, nameToFileName(depend))?.[0] ?? 0,
+                    ) -
+                      getNodeX(node.pos[0] ?? 0)) /
+                      2
+                  }
+                  y2={
+                    getNodeY(
+                      findNodePos(nodes, nameToFileName(depend))?.[1] ?? 0,
+                    ) -
+                    (getNodeY(
+                      findNodePos(nodes, nameToFileName(depend))?.[1] ?? 0,
+                    ) -
+                      getNodeY(node.pos[1] ?? 0)) /
+                      2
+                  }
+                  stroke="none"
+                  marker-end="url(#arrow)"
+                ></line>
+                <line
+                  x1={getNodeX(node.pos[0] ?? 0)}
+                  y1={getNodeY(node.pos[1] ?? 0)}
+                  x2={getNodeX(
                     findNodePos(nodes, nameToFileName(depend))?.[0] ?? 0,
-                  ) -
-                  (getNodeX(
-                    findNodePos(nodes, nameToFileName(depend))?.[0] ?? 0,
-                  ) -
-                    getNodeX(node.pos[0] ?? 0)) /
-                    2
-                }
-                y2={
-                  getNodeY(
+                  )}
+                  y2={getNodeY(
                     findNodePos(nodes, nameToFileName(depend))?.[1] ?? 0,
-                  ) -
-                  (getNodeY(
-                    findNodePos(nodes, nameToFileName(depend))?.[1] ?? 0,
-                  ) -
-                    getNodeY(node.pos[1] ?? 0)) /
-                    2
-                }
-                stroke="none"
-                marker-end="url(#arrow)"
-              ></line>
-              <line
-                x1={getNodeX(node.pos[0] ?? 0)}
-                y1={getNodeY(node.pos[1] ?? 0)}
-                x2={getNodeX(
-                  findNodePos(nodes, nameToFileName(depend))?.[0] ?? 0,
-                )}
-                y2={getNodeY(
-                  findNodePos(nodes, nameToFileName(depend))?.[1] ?? 0,
-                )}
-                stroke="white"
-              ></line>
-            </g>
-          ))}
-        </g>
-      ))}
+                  )}
+                  stroke="white"
+                ></line>
+              </g>
+            ))}
+          </g>
+        ) : (
+          <g />
+        ),
+      )}
 
-      {nodes.map((node: Node, index) => (
-        <g key={index} id={"node2-" + nameToFileName(node.name)}>
-          <circle
-            onClick={() => {
-              getNode != index ? setNode(index) : setNode(-1);
-              console.log(getNode);
-            }}
-            r={"" + nodeRadius}
-            cx={"" + getNodeX(node.pos[0] ?? 0)}
-            cy={"" + getNodeY(node.pos[1] ?? 0)}
-            stroke={getNode == index ? "#7E22CE" : "white"}
-            strokeWidth={getNode == index ? "4" : "1"}
-            fill={nodeColor(node.name)}
-            className={"cursor-pointer duration-150 hover:stroke-[4px]"}
-          ></circle>
-          <text
-            id={"nodeText" + index}
-            x={"" + getNodeX(node.pos[0] ?? 0)}
-            y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRadius * 2)}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="border fill-white stroke-black stroke-1 text-xl font-bold"
-          >
-            {node.name}
-          </text>
-        </g>
-      ))}
+      {nodes.map((node: Node, index) => {
+        if (nameToFileName(node.name) == "the_tower")
+          if (!isRegionUnlocked(node.name)) return <g />;
+
+        return (
+          <g key={index} id={"node2-" + nameToFileName(node.name)}>
+            <circle
+              onClick={() => {
+                getNode != index ? setNode(index) : setNode(-1);
+                console.log(getNode);
+              }}
+              r={"" + nodeRadius}
+              cx={"" + getNodeX(node.pos[0] ?? 0)}
+              cy={"" + getNodeY(node.pos[1] ?? 0)}
+              stroke={getNode == index ? "#7E22CE" : "white"}
+              strokeWidth={getNode == index ? "4" : "1"}
+              fill={nodeColor(node.name)}
+              className={"cursor-pointer duration-150 hover:stroke-[4px]"}
+            ></circle>
+            <text
+              id={"nodeText" + index}
+              x={"" + getNodeX(node.pos[0] ?? 0)}
+              y={"" + (getNodeY(node.pos[1] ?? 0) + nodeRadius * 2)}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="border fill-white stroke-black stroke-1 text-xl font-bold"
+            >
+              {node.name}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 }

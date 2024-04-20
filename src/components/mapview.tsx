@@ -55,8 +55,7 @@ interface IParams {
   chapterid: string;
 }
 
-let dummyProblems =
-  "00000000000000000000000000000000000000000000000000000000000000000000000000";
+let dummyProblems = "0".repeat(191);
 
 export default function MapView({ user, chapterid }: IParams) {
   const chapter = chapterToIndex(chapterid);
@@ -385,7 +384,7 @@ export default function MapView({ user, chapterid }: IParams) {
                         <div />
                       )}
 
-                      {!homedesc ? (
+                      {!algdesc || !homedesc ? (
                         <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
                           <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
                         </div>
@@ -504,7 +503,7 @@ export function chapterToIndex(name: string): number {
   return ret;
 }
 
-function isRegionUnlocked(name: string): boolean {
+export function isRegionUnlocked(name: string): boolean {
   //make a fake node so the linter stops being pissy
   let n: Node = { name: "null", pos: [0, 0], next: [] };
   mapFile.chapters.map((value, index) => {
@@ -542,7 +541,6 @@ function isNodeUnlocked(name: string, ch: number): boolean {
   let ret = true;
   n.next.map((value) => {
     if (!checkCompletion(nameToFileName(value), dummyProblems)) {
-      console.log(value + " was not completed");
       ret = false;
       return;
     }
