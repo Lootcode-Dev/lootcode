@@ -55,8 +55,7 @@ interface IParams {
   chapterid: string;
 }
 
-let dummyProblems =
-  "00000000000000000000000000000000000000000000000000000000000000000000000000";
+let dummyProblems = "0".repeat(191);
 
 export default function MapView({ user, chapterid }: IParams) {
   const chapter = chapterToIndex(chapterid);
