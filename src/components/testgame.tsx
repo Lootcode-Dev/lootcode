@@ -344,7 +344,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                       <TooltipTrigger>
                         <Card
                           className={`${
-                            player?.dead || !loopRunning
+                            player?.dead ?? !loopRunning
                               ? player?.dead
                                 ? "border-red-700 bg-red-950"
                                 : "border-purple-700 bg-purple-950"

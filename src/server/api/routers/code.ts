@@ -15,7 +15,6 @@ import { api } from "~/trpc/server";
 
 export interface Enemy {
   name: string;
-  image: string;
   health: number;
   critChance: number;
   strength: number;

@@ -175,7 +175,7 @@ export const gameRouter = createTRPCRouter({
         const problem = indFile.problems[i];
         if (problem) {
           const region = Object.keys(regFile).find((key: string) =>
-            (regFile[key as keyof typeof regFile] as string[]).includes(
+            (regFile[key as keyof typeof regFile]).includes(
               problem,
             ),
           );
