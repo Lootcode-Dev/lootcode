@@ -28,7 +28,6 @@ import { Dialog, DialogContent } from "./ui/dialog";
 import ReactMarkdown from "react-markdown";
 
 interface Entity {
-  image: string;
   name: string;
   health: number;
   maxHealth: number;
@@ -43,7 +42,6 @@ interface Entity {
 
 interface Enemy {
   name: string;
-  image: string;
   health: number;
   critChance: number;
   strength: number;
@@ -93,7 +91,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
-        image: encounter.image,
         name: encounter.name,
         health: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
         maxHealth: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
@@ -115,8 +112,8 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     const convertedPlayer = {
       image: "/player.png",
       name: name,
-      health: userStats.health,
-      maxHealth: userStats.health,
+      health: userStats ? Math.floor(userStats.health * (1 + 0.1 * getLevel(user))) : 0,
+      maxHealth: userStats ? Math.floor(userStats.health * (1 + 0.1 * getLevel(user))) : 0,
       critChance: userStats.critChance,
       strength: userStats.strength,
       armor: userStats.armor,
@@ -205,8 +202,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             updatedPlayer.critHit = false;
 
             let totaldmg = 0;
-            for (let i = 0; i < enemies.length; i++) {
-              const currentEnemy = enemies[i];
+            for (const currentEnemy of enemies) {
               if (currentEnemy) {
                 let damage =
                   Math.max(0, currentEnemy.strength - userStats.armor) +
@@ -245,7 +241,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
           return prevPlayer;
         });
-      }, 100) as unknown as number;
+      }, 400) as unknown as number;
     }
   }
 
@@ -344,7 +340,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                       <TooltipTrigger>
                         <Card
                           className={`${
-                            player?.dead || !loopRunning
+                            player?.dead ?? !loopRunning
                               ? ""
                               : player?.critHit
                                 ? "animate-wiggle-more animate-infinite"

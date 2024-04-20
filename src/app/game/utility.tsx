@@ -56,12 +56,12 @@ export type Entity = {
 
 export function getUserStats(user: GUser): Stats {
   const statBlock: Stats = {
-    health: 1000,
+    health: 100,
     attackSpeed: 1,
     critChance: 3,
-    strength: 0,
+    strength: 1,
     armor: 0,
-    magic: 0,
+    magic: 1,
     resist: 0,
   };
 

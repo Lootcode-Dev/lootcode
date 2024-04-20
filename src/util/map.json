@@ -20,7 +20,7 @@
                 },
                 {
                     "pos": [20,30],
-                    "name": "Lexica1",
+                    "name": "Fanatic",
                     "next": ["Leaking Letters", "Stable Words"],
                     "type": "game"
                 },
@@ -33,7 +33,7 @@
                 {
                     "pos": [50,10],
                     "name": "Engagement",
-                    "next": ["Lexica1"],
+                    "next": ["Fanatic"],
                     "type": "problem"
                 },
                 {
@@ -47,6 +47,12 @@
                     "name": "Merry Go Word",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50,70],
+                    "name": "Typos",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

@@ -2,7 +2,6 @@ type Enemies = Record<string, Enemy>;
 
 export interface Enemy {
   name: string;
-  image: string;
   health: number;
   critChance: number;
   strength: number;
@@ -14,7 +13,6 @@ export interface Enemy {
 const enemies: Enemies = {
   Rat: {
     name: "Rat",
-    image: "/rat.png",
     health: 25,
     critChance: 1,
     strength: 2,
@@ -24,7 +22,6 @@ const enemies: Enemies = {
   },
   Goblin: {
     name: "Goblin",
-    image: "/goblin.png",
     health: 25,
     critChance: 1,
     strength: 2,
@@ -32,15 +29,23 @@ const enemies: Enemies = {
     magic: 0,
     resist: 0,
   },
-  Toilet: {
-    name: "Toilet",
-    image: "/goblin.png",
-    health: 69,
-    critChance: 1,
-    strength: 2,
+  Typo: {
+    name: "Typo",
+    health: 15,
+    critChance: 5,
+    strength: 1,
     armor: 1,
-    magic: 0,
+    magic: 1,
     resist: 1,
+  },
+  Cultist: {
+    name: "Cultist",
+    health: 75,
+    critChance: 2,
+    strength: 0,
+    armor: 1,
+    magic: 4,
+    resist: 3,
   },
 };
 
