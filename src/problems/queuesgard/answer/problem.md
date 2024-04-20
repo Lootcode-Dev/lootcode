@@ -1,6 +1,6 @@
 # Answer
 
-There is a classic tool known to most Nodak's, and that is the Node Cipher. Upon further inspection, you notice it looks a lot like a calculator, but for some reason, the display always starts with a 0 and only has 3 buttons representing different operations.
+There is a classic tool known to most Queuesgardians, and that is the Queue Cipher. Upon further inspection, you notice it looks a lot like a calculator, but for some reason, the display always starts with a 0 and only has 3 buttons representing different operations.
 
 ```
 (1) Add a

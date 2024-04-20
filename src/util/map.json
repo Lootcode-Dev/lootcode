@@ -158,7 +158,14 @@
             "name":"Queuesgard",
             "pos": [70,10],
             "next": [],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "Answer",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Arbonclave",
@@ -236,7 +243,7 @@
             "nodes":[
                 {
                     "pos": [10,10],
-                    "name": "Answer",
+                    "name": "Tour",
                     "next": [],
                     "type": "problem"
                 }
@@ -350,14 +357,7 @@
                     "name": "Wordy",
                     "next": [],
                     "type": "problem"
-                },
-                {
-                    "pos": [10,90],
-                    "name": "Tour",
-                    "next": [],
-                    "type": "problem"
                 }
-                
             ]
         },
         {
