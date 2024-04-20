@@ -345,16 +345,18 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                         <Card
                           className={`${
                             player?.dead || !loopRunning
-                              ? ""
+                              ? player?.dead
+                                ? "border-red-700 bg-red-950"
+                                : "border-purple-700 bg-purple-950"
                               : player?.critHit
-                                ? "animate-wiggle-more animate-infinite"
-                                : "animate-wiggle animate-infinite"
-                          } w-[250px] bg-[#15162c] p-4 text-2xl  text-white`}
+                                ? "animate-wiggle-more bg-purple-950 animate-infinite"
+                                : "animate-wiggle border-purple-700 bg-purple-950 animate-infinite"
+                          } w-[250px] border-4 text-2xl text-white shadow-lg`}
                         >
                           <div
                             style={{
                               color: player?.dead
-                                ? "black"
+                                ? "inherit"
                                 : player?.critHit
                                   ? "red"
                                   : "inherit",
@@ -364,18 +366,23 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                               <div className="flex flex-row items-center justify-center p-2 font-bold">
                                 {player?.name}
                               </div>
-                              <div className="flex flex-row items-center justify-center p-2">
+                              <div className="flex flex-row items-center justify-center gap-1 p-2">
                                 <HeartIcon></HeartIcon>
                                 {player?.health}
                               </div>
                             </div>
-                            <Progress
-                              value={
-                                ((player?.health ?? 0) /
-                                  (player?.maxHealth ?? 1)) *
-                                100
-                              }
-                            ></Progress>
+
+                            {!player?.dead ? (
+                              <Progress
+                                value={
+                                  ((player?.health ?? 0) /
+                                    (player?.maxHealth ?? 1)) *
+                                  100
+                                }
+                              ></Progress>
+                            ) : (
+                              <div />
+                            )}
                           </div>
                         </Card>
                       </TooltipTrigger>
@@ -420,28 +427,39 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                           <Card
                             className={`${
                               enemy.dead || !loopRunning
-                                ? ""
+                                ? enemy.dead
+                                  ? "border-red-700 bg-red-950"
+                                  : "border-purple-700 bg-purple-950"
                                 : enemy.critHit
-                                  ? "animate-wiggle-more animate-infinite"
-                                  : "animate-wiggle animate-infinite"
-                            } w-[250px] bg-purple-950 p-4 text-white`}
+                                  ? "animate-wiggle-more bg-purple-950 animate-infinite"
+                                  : "animate-wiggle border-purple-700 bg-purple-950 animate-infinite"
+                            } w-[250px] border-4 text-2xl text-white shadow-lg`}
                           >
                             <div
                               style={{
                                 color: enemy.dead
-                                  ? "black"
+                                  ? "inherit"
                                   : enemy.critHit
                                     ? "red"
                                     : "inherit",
                               }}
                             >
                               <div className="grid grid-cols-2 p-2">
-                                <div>{enemy.name}</div>
-                                <div>{enemy.health}</div>
+                                <div className="flex flex-row items-center justify-center p-2 font-bold">
+                                  {enemy.name}
+                                </div>
+                                <div className="flex flex-row items-center justify-center gap-1 p-2">
+                                  <HeartIcon></HeartIcon>
+                                  {enemy.health}
+                                </div>
                               </div>
-                              <Progress
-                                value={(enemy.health / enemy.maxHealth) * 100}
-                              ></Progress>
+                              {!enemy.dead ? (
+                                <Progress
+                                  value={(enemy.health / enemy.maxHealth) * 100}
+                                ></Progress>
+                              ) : (
+                                <div />
+                              )}
                             </div>
                           </Card>
                         </TooltipTrigger>
