@@ -2,7 +2,7 @@
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
-import { Coins, CoinsIcon, Loader2 } from "lucide-react";
+import { ArrowLeft, Coins, CoinsIcon, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
@@ -32,6 +32,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import Link from "next/link";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -100,6 +101,13 @@ export default function ProblemView({
         {/* Panel 1: Markdown */}
         <ResizablePanel defaultSize={30} className="bg-[#282A36]">
           <div className="max-h-[92.5vh] overflow-auto">
+            <div className="h-[5vh] justify-between bg-zinc-800">
+              <Link href={`/map/${chapterid}`}>
+                <Button className="border bg-purple-950">
+                  <ArrowLeft className="h-4 w-4"></ArrowLeft>
+                </Button>
+              </Link>
+            </div>
             <ReactMarkdownNoSSR
               remarkPlugins={[remarkGfm]}
               className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
@@ -118,7 +126,7 @@ export default function ProblemView({
               className="bg-[#282A36]"
             >
               <div className="flex flex-col">
-                <div className="  mx-2 flex h-[5vh] justify-between bg-zinc-800 p-1">
+                <div className="flex h-[5vh] justify-between bg-zinc-800 p-1">
                   <Select onValueChange={setLanguage}>
                     <SelectTrigger className="w-[180px] bg-purple-950">
                       <SelectValue placeholder="Python" />
