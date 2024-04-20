@@ -381,7 +381,7 @@ export default function MapView({ user, chapterid }: IParams) {
                         <div />
                       )}
 
-                      {!homedesc ? (
+                      {!algdesc || !homedesc ? (
                         <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
                           <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
                         </div>
@@ -391,7 +391,7 @@ export default function MapView({ user, chapterid }: IParams) {
                           className="prose grow overflow-auto scroll-smooth 
                   rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                         >
-                          {selNode != -1 ? homedesc : "# Select a region..."}
+                          {selNode != -1 ? homedesc : algdesc}
                         </ReactMarkdown>
                       )}
 
