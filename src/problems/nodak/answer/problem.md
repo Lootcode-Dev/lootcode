@@ -1,9 +1,6 @@
 # Answer
 
-You bought a calculator at a garage sale for only 25 cents, thinking you got a steal.
-Unfortunately, the calculator has very limited functionality and a rather strange screen. The
-initial display always starts with 0 on it and there are three buttons you can press which perform
-the following operations on the current number on the screen:
+There is a classic tool known to most Nodak's, and that is the Node Cipher. Upon further inspection, you notice it looks a lot like a calculator, but for some reason, the display always starts with a 0 and only has 3 buttons representing different operations.
 
 ```
 (1) Add a

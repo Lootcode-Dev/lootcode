@@ -1,7 +1,8 @@
 # Jacked
 
-Your local gym has b bars and p plates for barbells. In order to prepare a weight for lifting, you
-must choose a single bar, which has two sides. You then load each side with a (possibly empty)
+Our local gym has b bars and p plates for barbells. In order to prepare for the upcoming Dynamar Dumbells and  Deadlifts competition, we need to begin considering all of the different weights we can offer to our competitors in the gym. 
+
+We must choose a single bar, which has two sides. We then load each side with a (possibly empty)
 set of plates. For safety reasons, the plates on each side must balance; they must sum to the
 same weight. The combination of plates on either side might be different, but the total weight
 on either side must be the same. What weights are available for lifting?

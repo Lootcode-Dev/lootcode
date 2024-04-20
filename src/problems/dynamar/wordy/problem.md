@@ -1,7 +1,6 @@
 # Wordy
 
-Given a sequence of letters as well as subsequence from the original list, you are to count how
-many times the particular subsequence occurs.
+We've got a pretty simple problem, but really, we're just tired. Navigating the labyrinth has become more and more taxing, and we need some help with the simpler things man. We seek to find overlaps between things as a way to find complexity. It's a pretty silly task, but we need help finding subsequent overlaps. Given a sequence of letters as well as subsequence from the original word, you are to count how many times the particular subsequence occurs.
 
 ## Input
 

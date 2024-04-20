@@ -323,7 +323,7 @@
             "nodes":[
                 {
                     "pos": [10,10],
-                    "name": "Partitions",
+                    "name": "Sums",
                     "next": [],
                     "type": "problem"
                 },
@@ -347,7 +347,7 @@
                 },
                 {
                     "pos": [10,90],
-                    "name": "Ski",
+                    "name": "Tour",
                     "next": [],
                     "type": "problem"
                 }

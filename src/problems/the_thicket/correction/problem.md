@@ -1,34 +1,21 @@
 # Correction
 
-Typing on phones can be tedious. It is easy to make typing
-mistakes, which is why most phones come with an autocorrect
-feature. Autocorrect not only fixes common typos, but also suggests how to finish the word while you type it. Jenny has recently
-been pondering how she can use this feature to her advantage, so
-that she can send a particular message with the minimum amount of typing.
+Writing inscriptions in the Thicket can be tedious, and it's super easy to make mistakes mid inscription. Thankfully, the trees being alive and all is helpful, and they usually get what we're trying to inscribe in a form of autocorrect. Autocorrect not only fixes common typos, but also suggests how to finish the word while you type it. We are trying to use this feature to our advantage to make writing less effort.
 
 
-The autocorrect feature on Jenny’s phone works like this: the
-phone has an internal dictionary of words sorted by their fre-
-quency in the English language. Whenever a word is being typed,
-autocorrect suggests the most common word (if any) starting with
-all the letters typed so far. By pressing tab, the word being typed
-is completed with the autocorrect suggestion. Autocorrect can
-only be used after the first character of a word has been typed –
-it is not possible to press tab before having typed anything. If no
-dictionary word starts with the letters typed so far, pressing tab
-has no effect.
+The autocorrect feature works like this: the
+tree has an internal dictionary of words sorted by their frequency. Whenever a word is being typed,
+autocorrect suggests the most common word (if any) starting with all the letters typed so far. By uttering the word "fill," the word being wrote is completed with the autocorrect suggestion. Autocorrect can only be used after the first character of a word has been typed –
+it is not possible to incite "fill" before having typed anything. If no dictionary word starts with the letters typed so far, inciting a fill has no effect.
 
 
-Jenny has recently noticed that it is sometimes possible to use autocorrect to her advantage
+We have recently noticed that it is sometimes possible to use autocorrect to our advantage
 even when it is not suggesting the correct word, by deleting the end of the autocorrected
-word. For instance, to type the word “autocorrelation”, Jenny starts typing “aut”, which then
-autocorrects to “autocorrect” (because it is such a common word these days!) when pressing
-tab. By deleting the last two characters (“ct”) and then typing the six letters “lation”, the whole
-word can be typed using only 3 (“aut”) + 1 (tab) + 2 (backspace twice) + 6 (“lation”) = 12
+word. For instance, to write the word “autocorrelation”, we start typing “aut”, which then
+autocorrects to “autocorrect” (because it is such a common word these days!) when filling. By deleting the last two characters (“ct”) and then typing the six letters “lation”, the whole word can be typed using only 3 (“aut”) + 1 (fill) + 2 (delete twice) + 6 (“lation”) = 12
 keystrokes, 3 fewer than typing “autocorrelation” without using autocorrect.
-Given the dictionary on the phone and the words Jenny wants to type, output the minimum
-number of keystrokes required to type each word. The only keys Jenny can use are the letter
-keys, tab and backspace.
+
+Given the common words and the words we wants to write, output the minimum number of operations required to write each word. The only operations we can use are writing a word, fill and deletion.
 
 ## Input
 
