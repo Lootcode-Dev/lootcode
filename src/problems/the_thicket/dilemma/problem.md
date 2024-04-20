@@ -1,24 +1,25 @@
 # Dilemma
 
-You're hanging out on your favourite Discord server, Corgi Lovers of Macon, when you realise that you're very low on the list of people currently online. Frustrated, you change your name from "i_love_pembroke corgis" to "0" in the hopes of getting to the top of the online list. What you forgot was that people are separated into categories by their highest discord role!
-The Corgi Lovers of Macon Discord server has many Roles. Members are assigned these roles, and these roles separate people in the "Online" list into different groups based on highest role held (meaning you can hold any number of roles at any time, but your highest role determines your rank). For example, the server might have roles Admin, Moderator, and Platinum Corgi Fan, respectively. This means that all people online with the Admin role will appear at the top of the list (within the list, sorted lexicographically). Then are the people with the Moderator role, followed by the people with the Platinum Corgi Fan role.
+You're wandering through The Thicket, a dense and mysterious region filled with guilds known for their distinct ranks and roles. These guilds are like the living veins of The Thicket, organizing the denizens into a structured society. While navigating this labyrinthine forest, you realize that your current rank within the guilds is not prominent enough, prompting you to adopt the guise "0" to try and ascend the ranks, as names tend to sort themselves alphabetically.
 
-You have a list of log-on and log-off events and you want to figure out the highest you can be on the Online list after each event, assuming that nobody has a lexicographically smaller username than "0" at any point.
+In The Thicket, guild members are stratified by their highest held rank, which influences their visibility and influence within the community. For instance, guilds might have ranks such as Elder, Guardian, and Seeker. Members with the Elder rank are most visible and influential, appearing at the top of any gathering or assembly, followed by those holding the Guardian and then Seeker ranks (meaning you can hold any number of ranks at any time, but your highest rank determines your influence).
+
+You have a record of various events within The Thicket that affect the visibility and ranking of its members, and your task is to determine the highest position you can achieve in these assemblies after each event, given that no one can surpass the simplicity and priority of the name "0".
 
 ## Input
 The first line of input will contain a single positive integer, __c (c ≤ 30)__, representing the number of input cases to process. The input cases follow.
 
-The first line of each case contains nonnegative integers __n (1 ≤ n ≤ 100,000)__, __q (1 ≤ q ≤ 300,000)__, and __r (r ≤ n)__, the number of roles on the server, the number of queries to process, and the number of roles you currently hold, respectively. The next line has r distinct positive integers: the ith integer is __c_i (c_i ≤ n)__, the rank of the ith role you currently hold. Role 1 is the highest role and role n is the lowest. By default, every user has the (n+1)th role (@everyone) so everyone always technically has a role.
+The first line of each case contains nonnegative integers __n (1 ≤ n ≤ 100,000)__, __q (1 ≤ q ≤ 300,000)__, and __r (r ≤ n)__, the number of ranks in the guild, the number of queries to process, and the number of ranks you currently hold, respectively. The next line has r distinct positive integers: the ith integer is __c_i (c_i ≤ n)__, the rank of the ith rank you currently hold. Role 1 is the highest role and role n is the lowest. By default, every user has the (n+1)th role (@commoner) so everyone always technically has a rank.
 
 Then follow q lines, each fitting one of the following forms:
 
-A X Y --y people with highest role x log on.
+A X Y --y people with highest rank x log on.
 
-B X Y --y people with highest role x log off. It is guaranteed that there will be enough people to log off.
+B X Y --y people with highest rank x leave an assembly. It is guaranteed that there will be enough people to leave.
 
-C X --role x is added to your list of roles (if it wasn't there before).
+C X --rank x is added to your list of ranks (if it wasn't there before).
 
-D X --role x is removed from your list of roles (if it was there before),
+D X --rank x is removed from your list of ranks (if it was there before),
 
 For all queries, 1 ≤ x ≤ n, 1 ≤ y ≤ 100.
 
@@ -46,7 +47,7 @@ A 6 100
 ```
 
 ## Output
-After each query, output your current rank in the Online list, on a line by itself.
+After each query, output your current rank in the guild list, on a line by itself.
 
 ```
 2
