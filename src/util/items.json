@@ -5,7 +5,7 @@
             "desc": "A basic set of leather clothing. Provides very little protection.",
             "image": "/enemies/rat.png",
             "type": "armor",
-            "value": 5,
+            "value": 10,
             "level": 1,
 
             "health": 0,
@@ -20,14 +20,14 @@
             "desc": "A weak wooden sword used for training.",
             "image": "/enemies/rat.png",
             "type": "weapon",
-            "value": 5,
+            "value": 10,
             "level": 1,
 
             "health": 0,
             "armor": 0,
             "resist": 0,
             "critChance": 0,
-            "strength": 2,
+            "strength": 3,
             "magic": 0
         },
         {
@@ -35,7 +35,7 @@
             "desc": "Though rotting and worn, this oak staff still holds some attunement.",
             "image": "/enemies/rat.png",
             "type": "focus",
-            "value": 5,
+            "value": 10,
             "level": 1,
 
             "health": 0,
@@ -43,14 +43,29 @@
             "resist": 0,
             "critChance": 0,
             "strength": 0,
-            "magic": 2
+            "magic": 3
+        },
+        {
+            "name": "Weak Ward",
+            "desc": "",
+            "image": "",
+            "type": "accessory",
+            "value": 10,
+            "level": 1,
+
+            "health": 0,
+            "armor": 0,
+            "resist": 3,
+            "critChance": 0,
+            "strength": 0,
+            "magic": -1
         },
         {
             "name": "Bronze Daggers",
             "desc": "A set of dull bronze daggers.",
             "image": "/enemies/rat.png",
             "type": "weapon",
-            "value": 10,
+            "value": 20,
             "level": 2,
 
             "health": 0,
