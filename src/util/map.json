@@ -370,6 +370,12 @@
                     "name": "Correction",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Dilemma",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         }
