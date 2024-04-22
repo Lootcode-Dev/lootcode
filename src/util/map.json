@@ -239,6 +239,12 @@
                     "name": "Wordup",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,30],
+                    "name": "Sticks",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
@@ -380,6 +386,12 @@
                 {
                     "pos": [10,30],
                     "name": "Dilemma",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Rehearsal",
                     "next": [],
                     "type": "problem"
                 }
