@@ -222,7 +222,9 @@ export default function MapView({ user, chapterid }: IParams) {
                         className="prose grow overflow-auto scroll-smooth 
                       rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-700 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                       >
-                        {problem?.description}
+                        {isNodeUnlocked(getNodeName(chapter, selNode), chapter)
+                          ? problem?.description
+                          : "*This problem is not revealed yet...*"}
                       </ReactMarkdown>
                     ) : selNode != -1 && problem && problem.type === "game" ? (
                       <div className="flex h-full flex-col overflow-auto rounded-xl bg-[#15162c]">
@@ -231,50 +233,62 @@ export default function MapView({ user, chapterid }: IParams) {
                           className="prose grow scroll-smooth  
                       rounded-xl bg-[#15162c] p-4 text-white prose-headings:text-purple-700 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
                         >
-                          {problem?.description}
+                          {isNodeUnlocked(
+                            getNodeName(chapter, selNode),
+                            chapter,
+                          )
+                            ? problem?.description
+                            : "*This encounter is not revealed yet...*"}
                         </ReactMarkdown>
-                        {problem.enemies?.map((enemy, index) => (
-                          <Tooltip key={index}>
-                            <TooltipTrigger>
-                              <div className="m-4 rounded-xl bg-purple-700 p-4 text-white">
-                                <div className="flex items-center justify-center">
-                                  <div>{enemy.name}</div>
-                                  <InfoIcon className="m-2 h-4 w-4"></InfoIcon>
-                                </div>
-                              </div>
-                            </TooltipTrigger>
-                            <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
-                              <div className="flex flex-col ">
-                                <div className="grid grid-cols-3 grid-rows-2">
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <HeartIcon></HeartIcon>
-                                    {enemy.health}
-                                  </div>
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <SwordIcon></SwordIcon>
-                                    {enemy.strength}
-                                  </div>
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <ShieldIcon></ShieldIcon>
-                                    {enemy.armor}
-                                  </div>
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <CloverIcon></CloverIcon>
-                                    {enemy.critChance}
-                                  </div>
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <Wand2></Wand2>
-                                    {enemy.magic}
-                                  </div>
-                                  <div className="flex flex-col items-center justify-center p-2">
-                                    <SparkleIcon></SparkleIcon>
-                                    {enemy.resist}
+                        {!isNodeUnlocked(
+                          getNodeName(chapter, selNode),
+                          chapter,
+                        ) ? (
+                          <div />
+                        ) : (
+                          problem.enemies?.map((enemy, index) => (
+                            <Tooltip key={index}>
+                              <TooltipTrigger>
+                                <div className="m-4 rounded-xl bg-purple-700 p-4 text-white">
+                                  <div className="flex items-center justify-center">
+                                    <div>{enemy.name}</div>
+                                    <InfoIcon className="m-2 h-4 w-4"></InfoIcon>
                                   </div>
                                 </div>
-                              </div>
-                            </TooltipContent>
-                          </Tooltip>
-                        ))}
+                              </TooltipTrigger>
+                              <TooltipContent className="animate-jump-in bg-[#282A36] text-white">
+                                <div className="flex flex-col ">
+                                  <div className="grid grid-cols-3 grid-rows-2">
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <HeartIcon></HeartIcon>
+                                      {enemy.health}
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <SwordIcon></SwordIcon>
+                                      {enemy.strength}
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <ShieldIcon></ShieldIcon>
+                                      {enemy.armor}
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <CloverIcon></CloverIcon>
+                                      {enemy.critChance}
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <Wand2></Wand2>
+                                      {enemy.magic}
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center p-2">
+                                      <SparkleIcon></SparkleIcon>
+                                      {enemy.resist}
+                                    </div>
+                                  </div>
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          ))
+                        )}
                       </div>
                     ) : selNode != -1 && !problem ? (
                       <div className="flex h-full items-center justify-center rounded-xl bg-[#15162c]">
@@ -526,7 +540,7 @@ export function isRegionUnlocked(name: string): boolean {
   return ret;
 }
 
-function isNodeUnlocked(name: string, ch: number): boolean {
+export function isNodeUnlocked(name: string, ch: number): boolean {
   //make a fake node so the linter stops being pissy
   let n: Node = { name: "null", pos: [0, 0], next: [] };
   mapFile.chapters[ch]?.nodes.map((value, index) => {

@@ -118,7 +118,7 @@
                 {
                     "pos": [50, 30],
                     "name": "Coup",
-                    "next": [],
+                    "next": ["Elections"],
                     "type": "game"
                 },
                 {
