@@ -2,7 +2,7 @@
 
 In the never-ending smog of the green and purple. A deep miasma flutters about the forest expanse of the Arborenclave. Roots, filled to the brim with life and fresh, youthful stories have decayed with the sands of time. In their place are items, locations, and artifacts that used to mean something. However, for you, it's just space to be cleaned.
 
-With the dawn of the recent age... This smog, known as the 'wither' has been enroaching on the Arborenclave, rending areas filled with life into rusted black, leaving chaos in its wake.
+With the dawn of the recent age... This smog, known as the 'wither' has been encroaching on the Arborenclave, rending areas filled with life into rusted black, leaving chaos in its wake.
 
 As the people panic in search of new homes, people like you have taken up your mantle in the pursuit of purposing these rusted roots into new homes for the Arbors.
 
