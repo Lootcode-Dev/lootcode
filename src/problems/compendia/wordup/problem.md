@@ -1,12 +1,8 @@
 # Wordup
 
-You love finding random properties in words and recently, you've been fascinated with "Up
-Words", words that already have their letters in sorted order, with no repeated letters. In order to
-aid your search for these words, write a program that can automatically discern if a word is an
-"Up Word" or not.
+In Compendia, we classify anything and everything. Making things neatly organized and accessible is at the root of our culture. And thus, we have many variations of dictionaries. One of which sorts our words not only alphabetically, but also by if a word is an "Up Word." We define an Up Word as a word that contains distinct letters in alphabetical order.
 
-Given a string with all lower case letters, determine whether or not the letters are distinct and in
-alphabetical order.
+We've got a lot of words to sort through to assemble the 215th edition of Wegster's Dictionary, think we could get a hand?
 
 ## Input
 
