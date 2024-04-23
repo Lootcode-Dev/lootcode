@@ -120,6 +120,12 @@
                     "name": "Coup",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [50, 50],
+                    "name": "Eviction",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

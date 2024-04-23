@@ -51,10 +51,19 @@ const enemies: Enemies = {
     name: "Chief Pointar",
     health: 90,
     critChance: 1,
-    strength: 3,
+    strength: 5,
     armor: 3,
     magic: 0,
     resist: -2
+  },
+  Homeowner: {
+    name: "Homeowner",
+    health: 25,
+    critChance: 1,
+    strength: 1,
+    armor: 0,
+    magic: 1,
+    resist: 1
   }
 };
 

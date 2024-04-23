@@ -54,6 +54,8 @@
         "negation",
         "flood",
         "chances",
-        "perimeter"
+        "perimeter",
+        "coup",
+        "eviction"
     ]
 }

@@ -148,8 +148,15 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             // Enemy incoming damage updates
             if (currentEnemy) {
               let damage =
-                Math.max(0, userStats.strength - currentEnemy.armor) +
-                Math.max(0, userStats.magic - currentEnemy.resist);
+                Math.max(
+                  0,
+                  userStats.strength -
+                    userStats.strength * currentEnemy.armor * 0.1,
+                ) +
+                Math.max(
+                  0,
+                  userStats.magic - userStats.magic * currentEnemy.resist * 0.1,
+                );
 
               if (Math.random() * 100 <= userStats.critChance) {
                 damage *= 3;
@@ -209,8 +216,16 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             for (const currentEnemy of enemies) {
               if (currentEnemy) {
                 let damage =
-                  Math.max(0, currentEnemy.strength - userStats.armor) +
-                  Math.max(0, currentEnemy.magic - userStats.resist);
+                  Math.max(
+                    0,
+                    currentEnemy.strength -
+                      currentEnemy.strength * userStats.armor * 0.1,
+                  ) +
+                  Math.max(
+                    0,
+                    currentEnemy.magic -
+                      currentEnemy.magic * userStats.resist * 0.1,
+                  );
 
                 if (Math.random() * 100 <= currentEnemy.critChance) {
                   damage *= 3;
@@ -362,13 +377,13 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                                   : "inherit",
                             }}
                           >
-                            <div className="grid grid-cols-2 justify-between p-2">
-                              <div className="flex flex-row items-center justify-center p-2 font-bold">
+                            <div className="grid grid-cols-3 justify-between p-2">
+                              <div className="col-span-2 flex flex-row items-center justify-center p-2 font-bold">
                                 {player?.name}
                               </div>
                               <div className="flex flex-row items-center justify-center gap-1 p-2">
                                 <HeartIcon></HeartIcon>
-                                {player?.health}
+                                {Math.floor(player?.health ?? 0)}
                               </div>
                             </div>
 
@@ -444,13 +459,13 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                                     : "inherit",
                               }}
                             >
-                              <div className="grid grid-cols-2 p-2">
-                                <div className="flex flex-row items-center justify-center p-2 font-bold">
+                              <div className="grid grid-cols-3 p-2">
+                                <div className="col-span-2 flex flex-row items-center justify-center p-2 font-bold">
                                   {enemy.name}
                                 </div>
                                 <div className="flex flex-row items-center justify-center gap-1 p-2">
                                   <HeartIcon></HeartIcon>
-                                  {enemy.health}
+                                  {Math.floor(enemy.health)}
                                 </div>
                               </div>
                               {!enemy.dead ? (
