@@ -6,7 +6,8 @@ const encounters: Encounters = {
   test: ["Rat", "Goblin"],
   coup: ["Pointar"],
   eviction: ["Homeowner", "Homeowner", "Homeowner"],
-  leaks: ["Leak", "Leak"]
+  leaks: ["Leak", "Leak"],
+  mob_stacking: ["Minion", "Minion", "Minion", "Minion", "Duelist"]
 };
 
 export default encounters;

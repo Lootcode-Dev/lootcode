@@ -175,6 +175,12 @@
                 "name": "Collision",
                 "next": [],
                 "type": "problem"
+            },
+            {
+                "pos": [30,10],
+                "name": "Mob Stacking",
+                "next": [],
+                "type": "game"
             }
         ]
         },

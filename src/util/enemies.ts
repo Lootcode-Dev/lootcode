@@ -73,6 +73,24 @@ const enemies: Enemies = {
     armor: -1,
     magic: 4,
     resist: 5,
+  },
+  Duelist: {
+    name: "Duelist",
+    health: 50,
+    critChance: 4,
+    strength: 1,
+    armor: 2,
+    magic: 1,
+    resist: 2
+  },
+  Minion: {
+    name: "Minion",
+    critChance: 0,
+    health: 10,
+    strength: 1,
+    armor: 1,
+    magic: 0,
+    resist: -1
   }
 };
 

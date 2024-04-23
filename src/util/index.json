@@ -57,6 +57,7 @@
         "perimeter",
         "coup",
         "eviction",
-        "leaks"
+        "leaks",
+        "mob_stacking"
     ]
 }
