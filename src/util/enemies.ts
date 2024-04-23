@@ -118,6 +118,15 @@ const enemies: Enemies = {
     armor: 1,
     magic: 2,
     resist: 1
+  },
+  Oh_rangutang: {
+    name: "Oh-rangutang",
+    critChance: 4,
+    health: 15,
+    strength: 3,
+    armor: 0,
+    magic: 0,
+    resist: -1
   }
 };
 
