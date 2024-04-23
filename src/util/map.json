@@ -251,6 +251,12 @@
                     "name": "Sticks",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Perimeter",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

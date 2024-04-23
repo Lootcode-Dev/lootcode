@@ -53,6 +53,7 @@
         "renewal",
         "negation",
         "flood",
-        "chances"
+        "chances",
+        "perimeter"
     ]
 }

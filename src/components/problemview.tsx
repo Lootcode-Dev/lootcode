@@ -144,19 +144,21 @@ export default function ProblemView({
                   <Button
                     className="border bg-purple-950"
                     onClick={() => {
-                      setRunningCode(true);
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-                      void dockerCreate().then(() => {
-                        void codeRun().then((response) => {
-                          //Set stateful data to our data to propagate changes
-                          setRunData(response.data);
+                      if (!runningCode) {
+                        setRunningCode(true);
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+                        void dockerCreate().then(() => {
+                          void codeRun().then((response) => {
+                            //Set stateful data to our data to propagate changes
+                            setRunData(response.data);
 
-                          //When setFirstSolve is true we solved the problem (not necessarily the first time)
-                          if (response.data?.reward === true)
-                            setFirstSolve(true);
-                          setRunningCode(false);
+                            //When setFirstSolve is true we solved the problem (not necessarily the first time)
+                            if (response.data?.reward === true)
+                              setFirstSolve(true);
+                            setRunningCode(false);
+                          });
                         });
-                      });
+                      }
                     }}
                   >
                     {runningCode ? "Running..." : "Run"}
