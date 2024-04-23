@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { TRPCError } from "@trpc/server";
-import { readdirSync } from "fs";
+import { existsSync, readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
 import { $ } from "zx";
@@ -29,12 +29,26 @@ export const codeRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const contents = {
         description: "",
-        loot: "",
+        lore: "",
+        gold: 0,
         solved: false,
         type: "",
         enemies: [] as Enemy[],
       };
       const region = input.region;
+
+      // Add lore if it exists
+      if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {
+        const loreContent = await readFile(
+          `./src/problems/${region}/${input.name}/lore.md`,
+          "utf-8",
+        );
+        contents.lore = loreContent;
+      }
+
+      if (goldFile[input.name as keyof typeof goldFile] != 0) {
+        contents.gold = goldFile[input.name as keyof typeof goldFile];
+      }
 
       const type = findNodeType(region ?? "", input.name);
       console.log(type);
@@ -46,11 +60,6 @@ export const codeRouter = createTRPCRouter({
 
           contents.description = await readFile(
             `./src/problems/${region}/${input.name}/problem.md`,
-            "utf-8",
-          );
-
-          contents.loot = await readFile(
-            `./src/problems/${region}/${input.name}/loot.md`,
             "utf-8",
           );
 
@@ -74,11 +83,6 @@ export const codeRouter = createTRPCRouter({
 
           contents.description = await readFile(
             `./src/problems/${region}/${input.name}/problem.md`,
-            "utf-8",
-          );
-
-          contents.loot = await readFile(
-            `./src/problems/${region}/${input.name}/loot.md`,
             "utf-8",
           );
 
@@ -217,7 +221,7 @@ export const codeRouter = createTRPCRouter({
 
           //Clean Up
           await $`docker rm ${ctx.userId}${input.name} -f`;
-          await $`rm -rf ${codePathFolder}`; 
+          await $`rm -rf ${codePathFolder}`;
 
           return codeGradeResponse; //Our code didn't compile no need to test the cases
         }
@@ -302,7 +306,10 @@ export const codeRouter = createTRPCRouter({
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
-          if (expected.stdout.replaceAll(/\s+/g, "") == output.stdout.replaceAll(/\s+/g, "")) {
+          if (
+            expected.stdout.replaceAll(/\s+/g, "") ==
+            output.stdout.replaceAll(/\s+/g, "")
+          ) {
             thisCase.output += "\nPRESENTATION ERROR";
           }
           // console.log("Wrong answer\n");

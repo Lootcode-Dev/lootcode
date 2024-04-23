@@ -217,7 +217,9 @@ export default function ProblemView({
                               remarkPlugins={[remarkGfm]}
                               className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
                             >
-                              {problem?.loot}
+                              {`# You earned...\n` +
+                                `${problem?.lore ? `*Collectible: ${problem?.lore.split("\n")[0]?.replace("#", "")}*\n\n` : ""}` +
+                                `${`*Reward: ${problem?.gold} gold*`}`}
                             </ReactMarkdownNoSSR>
                           </DialogContent>
                         </Dialog>
