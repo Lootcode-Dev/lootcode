@@ -215,7 +215,10 @@ export const codeRouter = createTRPCRouter({
           codeGradeResponse.compileError = "Compile Time Error";
           // console.log(error);
 
-          await $`rm -rf ${codePathFolder}`; //Clean Up
+          //Clean Up
+          await $`docker rm ${ctx.userId}${input.name} -f`;
+          await $`rm -rf ${codePathFolder}`; 
+
           return codeGradeResponse; //Our code didn't compile no need to test the cases
         }
       } // END COMPILE PIPELINE
@@ -299,6 +302,9 @@ export const codeRouter = createTRPCRouter({
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
+          if (expected.stdout.replaceAll(/\s+/g, "") == output.stdout.replaceAll(/\s+/g, "")) {
+            thisCase.output += "\nPRESENTATION ERROR";
+          }
           // console.log("Wrong answer\n");
           codeGradeResponse.numFailed++;
         }
