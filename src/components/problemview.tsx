@@ -101,7 +101,7 @@ export default function ProblemView({
         {/* Panel 1: Markdown */}
         <ResizablePanel defaultSize={30} className="bg-[#282A36]">
           <div className="max-h-[92.5vh] overflow-auto">
-            <div className="h-[5vh] justify-between bg-zinc-800">
+            <div className="flex flex-row items-center justify-between h-[5vh] p-2 bg-zinc-800">
               <Link href={`/map/${chapterid}`}>
                 <Button className="border bg-purple-950">
                   <ArrowLeft className="h-4 w-4"></ArrowLeft>
