@@ -64,6 +64,15 @@ const enemies: Enemies = {
     armor: 0,
     magic: 1,
     resist: 1
+  },
+  Leak: {
+    name: "Leak",
+    health: 35,
+    critChance: 1,
+    strength: 0,
+    armor: -1,
+    magic: 4,
+    resist: 5,
   }
 };
 

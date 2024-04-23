@@ -126,6 +126,12 @@
                     "name": "Eviction",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [50, 70],
+                    "name": "Leaks",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

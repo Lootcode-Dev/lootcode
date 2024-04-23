@@ -5,7 +5,8 @@ const encounters: Encounters = {
   typos:["Typo", "Typo"],
   test: ["Rat", "Goblin"],
   coup: ["Pointar"],
-  eviction: ["Homeowner", "Homeowner", "Homeowner"]
+  eviction: ["Homeowner", "Homeowner", "Homeowner"],
+  leaks: ["Leak", "Leak"]
 };
 
 export default encounters;
