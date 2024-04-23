@@ -189,6 +189,12 @@
                     "name": "Traversal II",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "Negation",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

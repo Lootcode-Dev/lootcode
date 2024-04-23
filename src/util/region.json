@@ -29,7 +29,8 @@
     ],
     "arbonclave": [
         "traversal_i",
-        "traversal_ii"
+        "traversal_ii",
+        "negation"
     ],
     "findara": [
         "alphacount",
