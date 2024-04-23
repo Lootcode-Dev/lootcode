@@ -47,6 +47,15 @@ const enemies: Enemies = {
     magic: 4,
     resist: 3,
   },
+  Pointar: {
+    name: "Chief Pointar",
+    health: 90,
+    critChance: 1,
+    strength: 3,
+    armor: 3,
+    magic: 0,
+    resist: -2
+  }
 };
 
 export default enemies;

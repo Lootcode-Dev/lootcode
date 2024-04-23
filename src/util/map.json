@@ -114,6 +114,12 @@
                     "name": "Bigger Digits",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50, 30],
+                    "name": "Coup",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
