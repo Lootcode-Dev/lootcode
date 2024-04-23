@@ -298,7 +298,9 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
           <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
-            {data?.loot}
+            {`# You earned...\n` +
+              `${data?.lore ? `*Collectible: ${data?.lore.split("\n")[0]?.replace("#", "")}*\n\n` : ""}` +
+              `${`*Reward: ${data?.gold} gold*`}`}
           </ReactMarkdown>
         </DialogContent>
       </Dialog>

@@ -98,7 +98,7 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="my-4 grid auto-cols-max grid-flow-col gap-4">
+          <div className="my-4 flex flex-wrap gap-4">
             {loreCollectibles?.map((value, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 duration-150 hover:bg-[#15162c] text-2xl">
