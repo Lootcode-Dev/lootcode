@@ -2,7 +2,7 @@
 
 We're beginning to set up our annual elementary architecture competition, where we task our brightest young minds to creating architectural wonders. Of course, we don't want them doing this at scale, so we give them sticks. We want a fair competition, so we need your help getting the sticks all sorted for us in time.
 
-There are *n* sticks with some lengths. Your task is to modify the sticks so each stick has the same length. You can either lengthen and shorted each stick, with each operation costing *x* - the difference between the new and original length.
+There are *n* sticks with some lengths. Your task is to modify the sticks so each stick has the same length. You can either lengthen or shorten each stick, with each operation costing *x* - the difference between the new and original length.
 
 We need your help to find the minimum total cost of sorting our sticks for the AEA.
 
