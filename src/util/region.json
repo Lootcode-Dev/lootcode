@@ -81,7 +81,7 @@
     ],
     "queuesgard": [
         "answer",
-        "supermarket",
+        "expiration",
         "order"
     ]
 }
