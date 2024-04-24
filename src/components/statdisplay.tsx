@@ -38,7 +38,7 @@ export default function StatDisplay({ name, user }: IParams) {
   const stats = getUserStats(user);
 
   return (
-    <div className="m-4 flex flex-col rounded-xl bg-[#15162c] p-2">
+    <div className="m-4 flex flex-col rounded-xl bg-[#15162c] h-[80vh] p-2">
       <div className="flex items-center justify-center pb-6 text-2xl font-bold">
         {name}
       </div>

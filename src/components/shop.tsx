@@ -69,9 +69,9 @@ export default function Shop({ name, user }: IParams) {
             Shop
             {fetching ? <LoaderIcon /> : <div />}
           </div>
-          <div className="my-4 grid auto-cols-max grid-flow-col gap-4">
+          <div className="my-4 flex flex-wrap gap-4">
             {itemList.items.map((value, index) =>
-              value.level <= getLevel(getUser) ? (
+
                 getUser.items[index] == "1" ? (
                   <div
                     className="cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
@@ -87,7 +87,23 @@ export default function Shop({ name, user }: IParams) {
 
                     <ItemDisplay id={index} />
                   </div>
-                ) : getItem(index)?.value <= getUser.gold ? (
+                ) : value.level > getLevel(getUser) ?
+                <div
+                    className="cursor-pointer rounded border border-red-700 bg-red-950  p-4 duration-150 hover:bg-[#15162c]"
+                    key={index}
+                  >
+                    <div className="grid grid-cols-2 justify-between text-base font-normal">
+                      {"Level "+value.level}
+                      <div className="items-right flex justify-end">
+                        <div>{"" + getItem(index)?.value}</div>
+                        <CoinsIcon />
+                      </div>
+                    </div>
+
+                    <ItemDisplay id={index} />
+                  </div>
+                
+                : getItem(index)?.value <= getUser.gold ? (
                   <div
                     className="cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() => setSelItem(index)}
@@ -119,9 +135,7 @@ export default function Shop({ name, user }: IParams) {
                     <ItemDisplay id={index} />
                   </div>
                 )
-              ) : (
-                <div />
-              ),
+              
             )}
           </div>
         </div>
