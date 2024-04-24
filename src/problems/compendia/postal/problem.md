@@ -1,0 +1,3 @@
+# Postal
+
+As the region's documents have been going haywire, clerks and scholars have had to start working double-time, just barely putting the pieces together for society to function. This has taken a particular toll on the postage system, as panicked letters and correspondences flood the offices, with no one able to put them in their place. Overwhelmed, one of our clerks, *Bubbles*, has gone postal and is threatening the infrastructure of the entire region. Put a stop to their madness before it spreads.

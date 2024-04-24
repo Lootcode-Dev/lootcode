@@ -209,6 +209,24 @@ const enemies: Enemies = {
     armor: 5,
     magic: 0,
     resist: -3
+  },
+  Bubbles: {
+    name: "Bubbles",
+    health: 15,
+    critChance: 1,
+    strength: 1,
+    armor: 0,
+    magic: 0,
+    resist: 0
+  },
+  Angry_Student: {
+    name: "Angry Student",
+    health: 20,
+    critChance: 1,
+    strength: 1,
+    armor: 1,
+    magic: 0,
+    resist: 0
   }
 };
 

@@ -17,7 +17,9 @@ const encounters: Encounters = {
   prophet: ["Tuo", "Tuos_Complement"],
   irrational: ["Root2", "Pi"],
   blight: ["Blighted_Tree"],
-  greed: ["Thief", "Thief", "Thief"]
+  greed: ["Thief", "Thief", "Thief"],
+  postal: ["Bubbles"],
+  protest: ["Angry_Student", "Angry_Student", "Angry_Student"]
 };
 
 export default encounters;
