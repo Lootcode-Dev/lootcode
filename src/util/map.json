@@ -391,6 +391,12 @@
                     "name": "Malfunction",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Prophet",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

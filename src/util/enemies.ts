@@ -154,6 +154,24 @@ const enemies: Enemies = {
     armor: 1,
     magic: 0,
     resist: -1
+  },
+  Tuo: {
+    name: "Prophet Tuo",
+    critChance: 1,
+    health: 25,
+    strength: 1,
+    armor: -2,
+    magic: 3,
+    resist: 3
+  },
+  Tuos_Complement: {
+    name: "Tuo's Complement",
+    critChance: 1,
+    health: 25,
+    strength: 3,
+    armor: 3,
+    magic: 1,
+    resist: -2
   }
 };
 
