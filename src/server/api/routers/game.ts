@@ -170,7 +170,7 @@ export const gameRouter = createTRPCRouter({
 
     const problems = user.problems.split("");
     const loreCollection = [];
-    for (let i = 0; i < problems.length; i++) {
+    for (let i = 0; i < problems.length + 1; i++) {
       if (problems[i] === "1") {
         const problem = indFile.problems[i];
         if (problem) {

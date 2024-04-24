@@ -71,9 +71,8 @@
     ],
     "nodak": [
         "tour",
-        "flood",
-        "chances",
-        "blockage"
+        "adjacency",
+        "chances"
     ],
     "the_thicket": [
         "correction",

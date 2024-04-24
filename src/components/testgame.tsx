@@ -299,7 +299,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
           <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
             {`# You earned...\n` +
-              `${data?.lore ? `*Collectible: ${data?.lore}` : ""}` +
+              `${data?.lore ? `*Collectible: ${data.lore}*\n\n` : ""}` +
               `${`*Reward: ${data?.gold} gold*`}`}
           </ReactMarkdown>
         </DialogContent>
