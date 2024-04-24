@@ -136,6 +136,15 @@ const enemies: Enemies = {
     armor: 0,
     magic: 6,
     resist: 0
+  },
+  Beaver: {
+    name: "Beaver",
+    critChance: 0,
+    health: 25,
+    strength: 2,
+    armor: 5,
+    magic: 0,
+    resist: -3
   }
 };
 

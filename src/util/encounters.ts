@@ -11,7 +11,8 @@ const encounters: Encounters = {
   avalanche:  ["Pebble", "Rocko"],
   hooliga_n_s: ["Hooligan", "Hooligan", "Hooligan"],
   rescue: ["Oh_rangutang","Oh_rangutang","Oh_rangutang"],
-  exterminator: ["Rat", "Rat", "Spider"]
+  exterminator: ["Rat", "Rat", "Spider"],
+  blockage: ["Beaver", "Beaver"]
 };
 
 export default encounters;
