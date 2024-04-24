@@ -308,6 +308,15 @@ const enemies: Enemies = {
     critChance: 3,
     magic: 3,
     resist: 2
+  },
+  WishEnder: {
+    name: "Wish-Ender",
+    health: 75,
+    armor: -3,
+    strength: 0,
+    magic: 5,
+    resist: 5,
+    critChance: 1
   }
 };
 

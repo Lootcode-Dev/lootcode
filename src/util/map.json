@@ -316,6 +316,12 @@
                     "name": "Rescue",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Last Wish",
+                    "next": ["Stone Circle"],
+                    "type": "game"
                 }
             ]
         },
