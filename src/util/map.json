@@ -404,12 +404,6 @@
                     "name": "Gargantuan",
                     "next": [],
                     "type": "problem"
-                },
-                {
-                    "pos": [50,90],
-                    "name": "Fortnite",
-                    "next": [],
-                    "type": "game"
                 }
             ]
         },
