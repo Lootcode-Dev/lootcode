@@ -384,6 +384,12 @@
                     "name": "Blockage",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Severed",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

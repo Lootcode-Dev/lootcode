@@ -79,7 +79,8 @@
         "tour",
         "adjacency",
         "chances",
-        "blockage"
+        "blockage",
+        "severed"
     ],
     "the_thicket": [
         "correction",

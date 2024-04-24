@@ -299,6 +299,15 @@ const enemies: Enemies = {
     critChance: 0,
     magic: 0,
     resist: -4
+  },
+  Edge: {
+    name: "Corrupt Edge",
+    health: 20,
+    armor: -1,
+    strength: 0,
+    critChance: 3,
+    magic: 3,
+    resist: 2
   }
 };
 

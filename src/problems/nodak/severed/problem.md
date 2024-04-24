@@ -1,0 +1,3 @@
+# Severed
+
+Nodes rely on their connections to their surroundings, not just emotionally, but mentally. The minds of many have become severed from their peers, as they struggle to make connections that simply aren't there. These *corrupt edges*, through the Nodes' desperate will, have become manifest in reality, causing terror as they seek to "connect" to other Nodes. We need your help to purge the corruption before more Nodes become severed.
