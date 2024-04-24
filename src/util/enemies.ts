@@ -145,6 +145,15 @@ const enemies: Enemies = {
     armor: 5,
     magic: 0,
     resist: -3
+  },
+  Rogue_Soldier: {
+    name: "Rogue Soldier",
+    critChance: 2,
+    health: 70,
+    strength: 5,
+    armor: 1,
+    magic: 0,
+    resist: -1
   }
 };
 

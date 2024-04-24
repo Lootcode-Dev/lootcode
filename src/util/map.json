@@ -342,6 +342,12 @@
                     "name": "Chances",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Blockage",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -379,6 +385,12 @@
                     "name": "Merger",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Malfunction",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
