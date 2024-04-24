@@ -43,7 +43,7 @@ export const codeRouter = createTRPCRouter({
           `./src/problems/${region}/${input.name}/lore.md`,
           "utf-8",
         );
-        contents.lore = loreContent;
+        contents.lore = loreContent.split("\n")[0]?.replace("#", "") ?? "";
       }
 
       if (goldFile[input.name as keyof typeof goldFile] != 0) {
