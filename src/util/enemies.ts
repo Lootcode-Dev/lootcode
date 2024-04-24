@@ -194,7 +194,7 @@ const enemies: Enemies = {
   },
   Blighted_Tree: {
     name: "Blighted Tree",
-    health: 50, 
+    health: 30, 
     critChance: 3,
     strength: 0,
     armor: 4,
@@ -245,6 +245,15 @@ const enemies: Enemies = {
     armor: 0,
     magic: 5,
     resist: 4
+  },
+  Blight_Fae: {
+    name: "Blight Fae",
+    health: 50, 
+    critChance: 3,
+    strength: 0,
+    armor: -2,
+    magic: 4,
+    resist: 2
   }
 };
 

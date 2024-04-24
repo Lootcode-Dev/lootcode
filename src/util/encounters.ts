@@ -16,12 +16,13 @@ const encounters: Encounters = {
   malfunction: ["Rogue_Soldier"],
   prophet: ["Tuo", "Tuos_Complement"],
   irrational: ["Root2", "Pi"],
-  blight: ["Blighted_Tree"],
+  blight: ["Blighted_Tree", "Blighted_Tree"],
   greed: ["Thief", "Thief", "Thief"],
   postal: ["Bubbles"],
   protest: ["Angry_Student", "Angry_Student", "Angry_Student"],
   overdue: ["Overdue_Queuesgardian", "Overdue_Queuesgardian"],
-  mad_scientist: ["Euler"]
+  mad_scientist: ["Euler"],
+  blight_fae: ["Blight_Fae"]
 };
 
 export default encounters;
