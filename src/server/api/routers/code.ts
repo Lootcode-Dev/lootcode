@@ -161,6 +161,7 @@ export const codeRouter = createTRPCRouter({
       const codePathFolder = `./temp/${ctx.userId}${input.name}/`; //This is the temp user folder where we store code
       const codePath = `./temp/${ctx.userId}${input.name}/${ctx.userId}${input.name}`; //The path is based on the users id and problem name
       const problemPathInput = `./src/problems/${region}/${input.name}/input/`; //The path is based on the problem name
+      const MAXTRANSMIT = 2000; //Bytes of data
 
       const langSearch: Record<string, langType> = {
         python: { ext: "py", run: `python3 ${ctx.userId}${input.name}.py` },
@@ -198,8 +199,11 @@ export const codeRouter = createTRPCRouter({
         const regex = /public\s+class\s+_?\w+/; //Regex to look for main class
         if (input.code.search(regex) == -1) {
           //Simulate a compile time error in the case there is no main class
-          codeGradeResponse.compileError = "Compile Time Error";
-          await $`rm -rf ${codePathFolder}`; //Clean Up
+          codeGradeResponse.compileError = "A public class is required!";
+
+          //Clean Up
+          await $`docker rm ${ctx.userId}${input.name} -f`;
+          await $`rm -rf ${codePathFolder}`;
           return codeGradeResponse;
         }
         input.code = input.code.replace(
@@ -216,8 +220,8 @@ export const codeRouter = createTRPCRouter({
           await $withoutEscaping`${langObject.compile}`; //Compile our code
           // console.log("Compiled Successfully");
         } catch (error: any) {
-          codeGradeResponse.compileError = "Compile Time Error";
-          // console.log(error);
+          codeGradeResponse.compileError = cutData((error.stderr as string).replaceAll(ctx.userId, ""), MAXTRANSMIT);;
+          //console.log(error);
 
           //Clean Up
           await $`docker rm ${ctx.userId}${input.name} -f`;
@@ -262,8 +266,8 @@ export const codeRouter = createTRPCRouter({
             //Runtime error
             // console.log("Runtime error");
             // console.log(error.stderr);
-            thisCase.runtimeError = error.stderr;
-            thisCase.output = "Runtime error";
+            thisCase.runtimeError = cutData(error.stderr as string, MAXTRANSMIT);
+            thisCase.output = cutData(thisCase.runtimeError.replaceAll(ctx.userId, ""), MAXTRANSMIT);
             codeGradeResponse.numFailed++;
             i++;
           }
@@ -271,13 +275,13 @@ export const codeRouter = createTRPCRouter({
           // Get the input
           const inputFile =
             await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
-          thisCase.input = inputFile.stdout;
+          thisCase.input = cutData(inputFile.stdout, MAXTRANSMIT);
 
           //Get the expected output
           const expectedFile = file.replace(".in", ".out");
           const expected =
             await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
-          thisCase.expected = expected.stdout;
+          thisCase.expected = cutData(expected.stdout, MAXTRANSMIT);
 
           codeGradeResponse.cases.push(thisCase);
           continue;
@@ -286,7 +290,7 @@ export const codeRouter = createTRPCRouter({
         // Get the input
         const inputFile =
           await $`cat ./src/problems/${region}/${input.name}/input/${file}`;
-        thisCase.input = inputFile.stdout;
+        thisCase.input = cutData(inputFile.stdout, MAXTRANSMIT);
 
         // Test the output against the expected output
         const expectedFile = file.replace(".in", ".out");
@@ -299,8 +303,9 @@ export const codeRouter = createTRPCRouter({
         const expectedOutput = expected.stdout.replace(/\s+$/, "");
         const userOutput = output.stdout.replace(/\s+$/, "");
 
-        thisCase.expected = expectedOutput;
-        thisCase.output = userOutput;
+        thisCase.expected = cutData(expectedOutput, MAXTRANSMIT);
+        thisCase.output = cutData(userOutput, MAXTRANSMIT);
+
         if (userOutput === expectedOutput) {
           // console.log("Correct answer\n");
           thisCase.result = true;
@@ -391,6 +396,13 @@ export function $withoutEscaping(
   } finally {
     $.quote = origQuote; //Set the functionality of quote back to being able to escape (without changing our return, so our return returned an unescaped sequence fixing our compilation problems)
   }
+}
+
+function cutData(data: string, cutoff: number) {
+  if (data.length > cutoff) 
+    return data.substring(0, cutoff)+"... "+(data.length-cutoff)+" MORE CHARACTERS.";
+  else 
+    return data;
 }
 
 function findNodeType(regionName: string, problemName: string) {

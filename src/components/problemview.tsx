@@ -238,9 +238,14 @@ export default function ProblemView({
                     </div>
                   ) : runData ? (
                     runData?.compileError ? (
-                      <div className="flex h-full items-center justify-center">
+                      <div className="flex flex-col min-h-full items-center justify-center p-2 overflow-scroll">
+                        <div className="font-extrabold">Compile Time Error</div>
                         <div className="font-extrabold text-red-500">
-                          {runData.compileError}
+                          {
+                            runData.compileError.split("\n").map((data, idx) => (
+                                <p key={idx}>{data}</p>
+                            ))
+                          }
                         </div>
                       </div>
                     ) : (
