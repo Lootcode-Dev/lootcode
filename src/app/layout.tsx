@@ -17,7 +17,7 @@ export const metadata = {
   title: "Lootcode",
   description:
     "A fantasy themed code runner for learning Data Structures and Algorithms.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/lootcode-no-floor.png" }],
 };
 
 export default function RootLayout({

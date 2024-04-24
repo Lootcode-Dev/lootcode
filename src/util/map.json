@@ -147,45 +147,45 @@
             "next": [],
             "nodes":[
             {
-                "pos": [10,10],
+                "pos": [50,4],
                 "name": "Construction",
                 "next": [],
                 "type": "problem"
             },   
             {
-                "pos": [10,30],
+                "pos": [50,47],
                 "name": "Construction II",
-                "next": [],
+                "next": ["Mob Stacking"],
                 "type": "problem"
             },
             {
-                "pos": [10,50],
+                "pos": [50,19],
                 "name": "Layered",
-                "next": [],
+                "next": ["Construction"],
                 "type": "problem"
             },
             {
-                "pos": [10,70],
+                "pos": [50,62],
                 "name": "Layered II",
-                "next": [],
+                "next": ["Construction II"],
                 "type": "problem"
             },
             {
-                "pos": [10,90],
+                "pos": [50,91],
                 "name": "Collision",
-                "next": [],
+                "next": ["Avalanche"],
                 "type": "problem"
             },
             {
-                "pos": [30,10],
+                "pos": [50,34],
                 "name": "Mob Stacking",
-                "next": [],
+                "next": ["Layered"],
                 "type": "game"
             },
             {
-                "pos": [30,30],
+                "pos": [50,77],
                 "name": "Avalanche",
-                "next": [],
+                "next": ["Layered II"],
                 "type": "game"
             }
         ]

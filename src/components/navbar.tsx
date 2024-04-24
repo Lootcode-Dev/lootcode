@@ -8,6 +8,7 @@ import {
   SwordIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Navbar() {
   return (
@@ -15,8 +16,17 @@ export default async function Navbar() {
       <div className="flex items-center space-x-4">
         <h1 className="text-xl font-bold">
           <Link href="/">
-            <span className="text-purple-500">Loot</span>
-            <span className=" text-yellow-200">code</span>
+            <div className="flex items-center">
+              <Image
+                src="/lootcode-no-floor.png"
+                width={50}
+                height={50}
+                alt={"lootcode logo"}
+                className="mb-3 h-12 w-12"
+              />
+              <span className="text-purple-500">Loot</span>
+              <span className=" text-yellow-200">code</span>
+            </div>
           </Link>
         </h1>
       </div>
