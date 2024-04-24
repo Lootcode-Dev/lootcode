@@ -1,0 +1,4 @@
+# The Tower
+Traveling all throughout Algorion, helping its people, and feeling their struggles has been taxing. The grand continent is vast, but you've always wondered about that island across the sea. There's no way this... inconspicuous island with a massive corporate looking tower on it is involved with the turmoil in the planet, right? I guess swimming there to test couldn't hurt
+
+Upon arriving, it is definitely clear that the Tower is home to something cruel. The massive spire is heavily fortified, but the first thing you identify guarding it is the *Dichomoton,* rumored to be STOLEN from the Bastions. This *has* to be where all of these artifacts are being kept...

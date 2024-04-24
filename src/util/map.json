@@ -14,44 +14,44 @@
                 },
                 {
                     "pos": [10,50],
-                    "name": "Stable Words",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [20,30],
                     "name": "Fanatic",
-                    "next": ["Leaking Letters", "Stable Words"],
+                    "next": [],
                     "type": "game"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [20,30],
+                    "name": "Stable Words",
+                    "next": ["Leaking Letters", "Fanatic"],
+                    "type": "game"
+                },
+                {
+                    "pos": [90,50],
                     "name": "Refugees",
-                    "next": [],
+                    "next": ["Typos"],
                     "type": "problem"
                 },
                 {
                     "pos": [50,10],
                     "name": "Engagement",
-                    "next": ["Fanatic"],
+                    "next": ["Stable Words"],
                     "type": "problem"
                 },
                 {
-                    "pos": [50,30],
+                    "pos": [50,35],
                     "name": "Decryption",
-                    "next": [],
+                    "next": ["Engagement"],
                     "type": "problem"
                 },
                 {
-                    "pos": [50,50],
+                    "pos": [60,45],
                     "name": "Merry Go Word",
-                    "next": [],
+                    "next": ["Engagement"],
                     "type": "problem"
                 },
                 {
                     "pos": [50,70],
                     "name": "Typos",
-                    "next": [],
+                    "next": ["Merry Go Word", "Decryption"],
                     "type": "game"
                 }
             ]
@@ -62,13 +62,13 @@
             "next": [],
             "nodes" : [
                 {
-                    "pos": [10,10],
+                    "pos": [10,15],
                     "name": "Flooring",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [10,65],
                     "name": "Solo",
                     "next": [],
                     "type": "problem"
@@ -80,55 +80,55 @@
                     "type": "problem"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [40,10],
                     "name": "Combinations",
-                    "next": [],
+                    "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,30],
+                    "pos": [40,30],
                     "name": "Elections",
-                    "next": [],
+                    "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,50],
-                    "name": "Reallocation",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [30,70],
-                    "name": "Growth",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [30, 90],
-                    "name": "Swapper",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [50, 10],
-                    "name": "Bigger Digits",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [50, 30],
-                    "name": "Coup",
-                    "next": ["Elections"],
-                    "type": "game"
-                },
-                {
-                    "pos": [50, 50],
+                    "pos": [40,50],
                     "name": "Eviction",
-                    "next": [],
+                    "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "game"
                 },
                 {
-                    "pos": [50, 70],
+                    "pos": [40,70],
+                    "name": "Growth",
+                    "next": ["Flooring", "Leaks", "Solo", "Zeros"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [40, 90],
+                    "name": "Swapper",
+                    "next": ["Flooring", "Leaks", "Solo", "Zeros"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [70, 70],
+                    "name": "Bigger Digits",
+                    "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [70, 30],
+                    "name": "Coup",
+                    "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
+                    "type": "game"
+                },
+                {
+                    "pos": [70, 50],
+                    "name": "Reallocation",
+                    "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10, 40],
                     "name": "Leaks",
                     "next": [],
                     "type": "game"
