@@ -16,7 +16,8 @@ const encounters: Encounters = {
   malfunction: ["Rogue_Soldier"],
   prophet: ["Tuo", "Tuos_Complement"],
   irrational: ["Root2", "Pi"],
-  blight: ["Blighted_Tree"]
+  blight: ["Blighted_Tree"],
+  greed: ["Thief", "Thief", "Thief"]
 };
 
 export default encounters;

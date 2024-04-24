@@ -471,6 +471,12 @@
                     "name": "Wordy",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Greed",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
