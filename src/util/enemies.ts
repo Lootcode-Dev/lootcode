@@ -227,6 +227,15 @@ const enemies: Enemies = {
     armor: 1,
     magic: 0,
     resist: 0
+  },
+  Overdue_Queuesgardian: {
+    name: "Overdue Queuesgardian",
+    health: 30,
+    critChance: 1,
+    strength: 3,
+    armor: -3,
+    magic: 1,
+    resist: 1
   }
 };
 

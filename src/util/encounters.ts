@@ -19,7 +19,8 @@ const encounters: Encounters = {
   blight: ["Blighted_Tree"],
   greed: ["Thief", "Thief", "Thief"],
   postal: ["Bubbles"],
-  protest: ["Angry_Student", "Angry_Student", "Angry_Student"]
+  protest: ["Angry_Student", "Angry_Student", "Angry_Student"],
+  overdue: ["Overdue_Queuesgardian", "Overdue_Queuesgardian"]
 };
 
 export default encounters;
