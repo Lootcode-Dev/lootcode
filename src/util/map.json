@@ -519,6 +519,12 @@
                     "name": "Greed",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Demolition Man",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
