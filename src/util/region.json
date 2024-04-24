@@ -35,28 +35,33 @@
     "arbonclave": [
         "traversal_i",
         "traversal_ii",
-        "negation"
+        "negation",
+        "hooliga_n_s"
     ],
     "findara": [
         "alphacount",
         "cooking",
         "triangulation",
         "stone_circle",
-        "twinned"
+        "twinned",
+        "rescue"
     ],
     "bitwise_bastion": [
         "awol",
         "ranking",
         "blind_spot",
         "assemble",
-        "merger"
+        "merger",
+        "malfunction",
+        "prophet"
     ],
     "arithmend": [
         "beauty",
         "disgust",
         "trailing_zeroes",
         "elapsed",
-        "gargantuan"
+        "gargantuan",
+        "irrational"
     ],
     "dynamar": [
         "sums",
@@ -67,7 +72,8 @@
     "nodak": [
         "tour",
         "flood",
-        "chances"
+        "chances",
+        "blockage"
     ],
     "the_thicket": [
         "correction",
@@ -82,6 +88,7 @@
     "queuesgard": [
         "answer",
         "expiration",
-        "order"
+        "order",
+        "exterminator"
     ]
 }
