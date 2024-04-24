@@ -18,14 +18,19 @@
         "reallocation",
         "growth",
         "swapper",
-        "bigger_digits"
+        "bigger_digits",
+        "coup",
+        "eviction",
+        "leaks"
     ],
     "stackspires": [
         "construction",
         "construction_ii",
         "layered",
         "layered_ii",
-        "collision"
+        "collision",
+        "mob_stacking",
+        "avalanche"
     ],
     "arbonclave": [
         "traversal_i",

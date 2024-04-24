@@ -91,6 +91,42 @@ const enemies: Enemies = {
     armor: 1,
     magic: 0,
     resist: -1
+  },
+  Rocko: {
+    name: "Rocko",
+    critChance: 0,
+    health: 100,
+    strength: 2,
+    armor: -5,
+    magic: 0,
+    resist: 3
+  },
+  Pebble: {
+    name: "Pebble",
+    critChance: 5,
+    health: 20,
+    strength: 2,
+    armor: -2,
+    magic: 0,
+    resist: 3
+  },
+  Hooligan: {
+    name: "Hooligan",
+    critChance: 1,
+    health: 25,
+    strength: 1,
+    armor: 1,
+    magic: 2,
+    resist: 1
+  },
+  Oh_rangutang: {
+    name: "Oh-rangutang",
+    critChance: 4,
+    health: 15,
+    strength: 3,
+    armor: 0,
+    magic: 0,
+    resist: -1
   }
 };
 

@@ -181,6 +181,12 @@
                 "name": "Mob Stacking",
                 "next": [],
                 "type": "game"
+            },
+            {
+                "pos": [30,30],
+                "name": "Avalanche",
+                "next": [],
+                "type": "game"
             }
         ]
         },
@@ -219,6 +225,12 @@
                     "name": "Negation",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Hooliga N s",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -256,6 +268,12 @@
                     "name": "Twinned",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Rescue",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

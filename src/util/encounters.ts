@@ -7,7 +7,10 @@ const encounters: Encounters = {
   coup: ["Pointar"],
   eviction: ["Homeowner", "Homeowner", "Homeowner"],
   leaks: ["Leak", "Leak"],
-  mob_stacking: ["Minion", "Minion", "Minion", "Minion", "Duelist"]
+  mob_stacking: ["Minion", "Minion", "Minion", "Minion", "Duelist"],
+  avalanche:  ["Pebble", "Rocko"],
+  hooliga_n_s: ["Hooligan", "Hooligan", "Hooligan"],
+  rescue: ["Oh_rangutang","Oh_rangutang","Oh_rangutang"]
 };
 
 export default encounters;
