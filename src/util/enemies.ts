@@ -236,6 +236,15 @@ const enemies: Enemies = {
     armor: -3,
     magic: 1,
     resist: 1
+  },
+  Euler: {
+    name: "Euler",
+    health: 50,
+    critChance: 3,
+    strength: 1,
+    armor: 0,
+    magic: 5,
+    resist: 4
   }
 };
 

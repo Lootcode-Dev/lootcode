@@ -458,6 +458,12 @@
                     "name": "Irrational",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Mad Scientist",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

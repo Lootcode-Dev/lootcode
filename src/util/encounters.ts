@@ -20,7 +20,8 @@ const encounters: Encounters = {
   greed: ["Thief", "Thief", "Thief"],
   postal: ["Bubbles"],
   protest: ["Angry_Student", "Angry_Student", "Angry_Student"],
-  overdue: ["Overdue_Queuesgardian", "Overdue_Queuesgardian"]
+  overdue: ["Overdue_Queuesgardian", "Overdue_Queuesgardian"],
+  mad_scientist: ["Euler"]
 };
 
 export default encounters;
