@@ -1,6 +1,6 @@
 # Expiration
 
-As per the natural law of Queuesgard, there is a queue for the life cycle process of our citizens.. Assuming a set number of houses to live in, and that a person will not be born and enter the queue of life until a house is empty, your task is to help us calculate the total time required for all the citizens to... expire!
+As per the natural law of Queuesgard, there is a queue for the life cycle process of our citizens... Assuming a set number of houses to live in, and that a person will not be born and enter the queue of life until a house is empty, your task is to help us calculate the total time required for all the citizens to... expire!
 
 __The person at the front of the queue proceeds to a home as soon as it becomes free.__
 
