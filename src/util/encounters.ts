@@ -15,7 +15,8 @@ const encounters: Encounters = {
   blockage: ["Beaver", "Beaver"],
   malfunction: ["Rogue_Soldier"],
   prophet: ["Tuo", "Tuos_Complement"],
-  irrational: ["Root2", "Pi"]
+  irrational: ["Root2", "Pi"],
+  blight: ["Blighted_Tree"]
 };
 
 export default encounters;

@@ -496,6 +496,12 @@
                     "name": "Renewal",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Blight",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         }
