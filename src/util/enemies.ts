@@ -254,6 +254,42 @@ const enemies: Enemies = {
     armor: -2,
     magic: 4,
     resist: 2
+  },
+  Mick: {
+    name: "Mick Palmford",
+    health: 50,
+    critChance: 8,
+    strength: 1,
+    armor: -2,
+    magic: 3,
+    resist: 1
+  },
+  Tector: {
+    name: "Tector Sod-dunk",
+    health: 60,
+    critChance: 1,
+    strength: 3,
+    armor: 2,
+    magic: 0,
+    resist: -4
+  },
+  Jimbo: {
+    name: "Jimbo Sod-dunk",
+    health: 20,
+    critChance: 3,
+    strength: 2,
+    armor: 0,
+    magic: 1,
+    resist: -1
+  },
+  Tavern: {
+    name: "Lou's Tavern",
+    health: 100,
+    critChance: 0,
+    armor: 9,
+    strength: 1,
+    magic: 0,
+    resist: -2
   }
 };
 

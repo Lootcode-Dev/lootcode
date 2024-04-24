@@ -22,7 +22,10 @@ const encounters: Encounters = {
   protest: ["Angry_Student", "Angry_Student", "Angry_Student"],
   overdue: ["Overdue_Queuesgardian", "Overdue_Queuesgardian"],
   mad_scientist: ["Euler"],
-  blight_fae: ["Blight_Fae"]
+  blight_fae: ["Blight_Fae"],
+  family_feud_i: ["Tavern"],
+  family_feud_ii: ["Mick"],
+  family_feud_iii: ["Tector", "Jimbo"]
 };
 
 export default encounters;

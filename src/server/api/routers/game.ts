@@ -149,7 +149,9 @@ export const gameRouter = createTRPCRouter({
       }
 
       // Add the gold to the user's account and solve the problem
-      user.gold += goldFile[input.encounterid as keyof typeof goldFile];
+      if(goldFile[input.encounterid as keyof typeof goldFile])
+        user.gold += goldFile[input.encounterid as keyof typeof goldFile];
+      
       problems[indFile.problems.indexOf(input.encounterid)] = "1";
       user.problems = problems.join("");
 

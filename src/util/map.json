@@ -255,6 +255,24 @@
                     "name": "Hooliga N s",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Family Feud I",
+                    "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Family Feud II",
+                    "next": ["Family Feud I"],
+                    "type": "game"
+                },
+                {
+                    "pos": [50,30],
+                    "name": "Family Feud III",
+                    "next": ["Family Feud I"],
+                    "type": "game"
                 }
             ]
         },
