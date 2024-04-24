@@ -136,6 +136,42 @@ const enemies: Enemies = {
     armor: 0,
     magic: 6,
     resist: 0
+  },
+  Beaver: {
+    name: "Beaver",
+    critChance: 0,
+    health: 25,
+    strength: 2,
+    armor: 5,
+    magic: 0,
+    resist: -3
+  },
+  Rogue_Soldier: {
+    name: "Rogue Soldier",
+    critChance: 2,
+    health: 70,
+    strength: 5,
+    armor: 1,
+    magic: 0,
+    resist: -1
+  },
+  Tuo: {
+    name: "Prophet Tuo",
+    critChance: 1,
+    health: 25,
+    strength: 1,
+    armor: -2,
+    magic: 3,
+    resist: 3
+  },
+  Tuos_Complement: {
+    name: "Tuo's Complement",
+    critChance: 1,
+    health: 25,
+    strength: 3,
+    armor: 3,
+    magic: 1,
+    resist: -2
   }
 };
 
