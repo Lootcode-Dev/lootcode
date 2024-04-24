@@ -266,7 +266,14 @@ export const codeRouter = createTRPCRouter({
             //Runtime error
             // console.log("Runtime error");
             // console.log(error.stderr);
+
             thisCase.runtimeError = cutData(error.stderr as string, MAXTRANSMIT);
+            if (thisCase.runtimeError.includes("WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied")) {
+              thisCase.runtimeError = thisCase.runtimeError.replace("WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied", "");
+              // Remove empty lines containing only ""
+              thisCase.runtimeError = thisCase.runtimeError.replace(/^\s*[\r\n]/gm, "");
+
+            }
             thisCase.output = cutData(thisCase.runtimeError.replaceAll(ctx.userId, ""), MAXTRANSMIT);
             codeGradeResponse.numFailed++;
             i++;
