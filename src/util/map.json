@@ -212,6 +212,12 @@
                     "name": "Order",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Exterminator",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },

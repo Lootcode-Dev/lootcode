@@ -10,7 +10,8 @@ const encounters: Encounters = {
   mob_stacking: ["Minion", "Minion", "Minion", "Minion", "Duelist"],
   avalanche:  ["Pebble", "Rocko"],
   hooliga_n_s: ["Hooligan", "Hooligan", "Hooligan"],
-  rescue: ["Oh_rangutang","Oh_rangutang","Oh_rangutang"]
+  rescue: ["Oh_rangutang","Oh_rangutang","Oh_rangutang"],
+  exterminator: ["Rat", "Rat", "Spider"]
 };
 
 export default encounters;

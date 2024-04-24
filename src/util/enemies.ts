@@ -127,6 +127,15 @@ const enemies: Enemies = {
     armor: 0,
     magic: 0,
     resist: -1
+  },
+  Spider: {
+    name: "Spider",
+    critChance: 1,
+    health: 5,
+    strength: 0,
+    armor: 0,
+    magic: 6,
+    resist: 0
   }
 };
 
