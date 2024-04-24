@@ -38,6 +38,7 @@
     "chances": 0,
     "perimeter": 0,
     "supermarket": 0,
+    "order": 0,
     "elapsed" : 0,
     "gargantuan" : 0,
     "fanatic" : 999
