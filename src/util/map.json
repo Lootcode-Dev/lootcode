@@ -218,6 +218,12 @@
                     "name": "Exterminator",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Overdue",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -248,6 +254,24 @@
                     "pos": [10,70],
                     "name": "Hooliga N s",
                     "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Family Feud I",
+                    "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Family Feud II",
+                    "next": ["Family Feud I"],
+                    "type": "game"
+                },
+                {
+                    "pos": [50,30],
+                    "name": "Family Feud III",
+                    "next": ["Family Feud I"],
                     "type": "game"
                 }
             ]
@@ -317,6 +341,18 @@
                     "name": "Perimeter",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Postal",
+                    "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Protest",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -440,6 +476,12 @@
                     "name": "Irrational",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Mad Scientist",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -507,6 +549,12 @@
                     "pos": [10,70],
                     "name": "Blight",
                     "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Blight Fae",
+                    "next": ["Blight"],
                     "type": "game"
                 }
             ]
