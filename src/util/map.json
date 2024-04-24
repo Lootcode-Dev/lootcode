@@ -471,6 +471,12 @@
                     "name": "Wordy",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Greed",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
@@ -496,6 +502,12 @@
                     "name": "Renewal",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "Blight",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         }
