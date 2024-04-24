@@ -14,7 +14,8 @@ const encounters: Encounters = {
   exterminator: ["Rat", "Rat", "Spider"],
   blockage: ["Beaver", "Beaver"],
   malfunction: ["Rogue_Soldier"],
-  prophet: ["Tuo", "Tuos_Complement"]
+  prophet: ["Tuo", "Tuos_Complement"],
+  irrational: ["Root2", "Pi"]
 };
 
 export default encounters;

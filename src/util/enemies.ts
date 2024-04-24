@@ -172,6 +172,25 @@ const enemies: Enemies = {
     armor: 3,
     magic: 1,
     resist: -2
+  },
+  Root2: {
+    name: "Root of 2",
+    critChance: 1,
+    health: 30,
+    strength: 1.41,
+    armor: 2,
+    magic: 2,
+    resist: 1
+
+  },
+  Pi: {
+    name: "Pi",
+    health: 25,
+    critChance: 1,
+    strength: 1,
+    armor: -2,
+    magic: 3.14,
+    resist: 2
   }
 };
 

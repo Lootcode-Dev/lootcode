@@ -434,6 +434,12 @@
                     "name": "Gargantuan",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Irrational",
+                    "next": [],
+                    "type": "game"
                 }
             ]
         },
