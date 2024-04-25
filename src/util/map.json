@@ -163,6 +163,12 @@
                     "name": "The Tome of Equilibrium",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "The Index Orb",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
