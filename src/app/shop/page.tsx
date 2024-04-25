@@ -11,19 +11,19 @@ import Shop from "~/components/shop";
 export default async function Page() {
   const user = await currentUser();
 
-  if (!user?.id) redirect(`/auth-callback?origin=map`);
+  if (!user?.id) redirect(`/auth-callback?origin=shop`);
 
   const dbUser = await db.user.findFirst({
     where: { id: user.id },
   });
 
   if (!dbUser) {
-    redirect(`/auth-callback?origin=map`);
+    redirect(`/auth-callback?origin=shop`);
   }
 
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <Shop name={user.firstName} user={dbUser}></Shop>
+      <Shop name={user.firstName ?? ''} user={dbUser}></Shop>
     </main>
   );
 }

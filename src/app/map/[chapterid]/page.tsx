@@ -13,17 +13,17 @@ interface PageProps {
   };
 }
 
-export default async function Page({params}:PageProps) {
+export default async function Page({ params }: PageProps) {
   const user = await currentUser();
 
-  if (!user?.id) redirect(`/auth-callback?origin=map`);
+  if (!user?.id) redirect(`/auth-callback?origin=map/${params.chapterid}`);
 
   const dbUser = await db.user.findFirst({
     where: { id: user.id },
   });
 
   if (!dbUser) {
-    redirect(`/auth-callback?origin=map`);
+    redirect(`/auth-callback?origin=map/${params.chapterid}`);
   }
 
   return <MapView user={dbUser} chapterid={params.chapterid}></MapView>;

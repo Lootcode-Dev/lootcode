@@ -50,7 +50,7 @@ export default function Shop({ name, user }: IParams) {
   useEffect(() => {
     if (selItem != -1) {
       setFetching(true);
-      buyCallback().then((response) => {
+      void buyCallback().then((response) => {
         if (response != undefined) {
           setUser(response.data ?? getUser);
           setSelItem(-1);
@@ -71,71 +71,68 @@ export default function Shop({ name, user }: IParams) {
           </div>
           <div className="my-4 flex flex-wrap gap-4">
             {itemList.items.map((value, index) =>
-
-                getUser.items[index] == "1" ? (
-                  <div
-                    className="cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
-                    key={index}
-                  >
-                    <div className="grid grid-cols-2 justify-between text-base font-normal">
-                      Owned
-                      <div className="items-right flex justify-end">
-                        <div>{"" + getItem(index)?.value}</div>
-                        <CoinsIcon />
-                      </div>
-                    </div>
-
-                    <ItemDisplay id={index} />
-                  </div>
-                ) : value.level > getLevel(getUser) ?
+              getUser.items[index] == "1" ? (
                 <div
-                    className="cursor-pointer rounded border border-red-700 bg-red-950  p-4 duration-150 hover:bg-[#15162c]"
-                    key={index}
-                  >
-                    <div className="grid grid-cols-2 justify-between text-base font-normal">
-                      {"Level "+value.level}
-                      <div className="items-right flex justify-end">
-                        <div>{"" + getItem(index)?.value}</div>
-                        <CoinsIcon />
-                      </div>
+                  className="cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
+                  key={index}
+                >
+                  <div className="grid grid-cols-2 justify-between text-base font-normal">
+                    Owned
+                    <div className="items-right flex justify-end">
+                      <div>{"" + getItem(index)?.value}</div>
+                      <CoinsIcon />
                     </div>
-
-                    <ItemDisplay id={index} />
                   </div>
-                
-                : getItem(index)?.value <= getUser.gold ? (
-                  <div
-                    className="cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
-                    onClick={() => setSelItem(index)}
-                    key={index}
-                  >
-                    <div className="grid grid-cols-2 justify-between text-base font-normal">
-                      Purchase
-                      <div className="items-right flex justify-end">
-                        <div>{"" + getItem(index)?.value}</div>
-                        <CoinsIcon />
-                      </div>
+
+                  <ItemDisplay id={index} />
+                </div>
+              ) : value.level > getLevel(getUser) ? (
+                <div
+                  className="cursor-pointer rounded border border-red-700 bg-red-950  p-4 duration-150 hover:bg-[#15162c]"
+                  key={index}
+                >
+                  <div className="grid grid-cols-2 justify-between text-base font-normal">
+                    {"Level " + value.level}
+                    <div className="items-right flex justify-end">
+                      <div>{"" + getItem(index)?.value}</div>
+                      <CoinsIcon />
                     </div>
-
-                    <ItemDisplay id={index} />
                   </div>
-                ) : (
-                  <div
-                    className="cursor-pointer rounded border border-red-700 bg-red-950 p-4 duration-150 hover:bg-[#15162c]"
-                    key={index}
-                  >
-                    <div className="grid grid-cols-2 justify-between text-base font-normal">
-                      Not Enough Gold
-                      <div className="items-right flex justify-end">
-                        <div>{"" + getItem(index)?.value}</div>
-                        <CoinsIcon />
-                      </div>
+
+                  <ItemDisplay id={index} />
+                </div>
+              ) : getItem(index)?.value ?? 0 <= getUser.gold ? (
+                <div
+                  className="cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
+                  onClick={() => setSelItem(index)}
+                  key={index}
+                >
+                  <div className="grid grid-cols-2 justify-between text-base font-normal">
+                    Purchase
+                    <div className="items-right flex justify-end">
+                      <div>{"" + getItem(index)?.value}</div>
+                      <CoinsIcon />
                     </div>
-
-                    <ItemDisplay id={index} />
                   </div>
-                )
-              
+
+                  <ItemDisplay id={index} />
+                </div>
+              ) : (
+                <div
+                  className="cursor-pointer rounded border border-red-700 bg-red-950 p-4 duration-150 hover:bg-[#15162c]"
+                  key={index}
+                >
+                  <div className="grid grid-cols-2 justify-between text-base font-normal">
+                    Not Enough Gold
+                    <div className="items-right flex justify-end">
+                      <div>{"" + getItem(index)?.value}</div>
+                      <CoinsIcon />
+                    </div>
+                  </div>
+
+                  <ItemDisplay id={index} />
+                </div>
+              ),
             )}
           </div>
         </div>

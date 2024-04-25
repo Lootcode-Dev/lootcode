@@ -2,6 +2,10 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Testgame from "~/components/testgame";
 import { db } from "~/server/db";
+import regFile from "~/util/region.json";
+import mapFile from "~/util/map.json";
+import indFile from "~/util/index.json";
+import ReqsDenied from "~/components/reqsdenied";
 
 interface PageProps {
   params: {
@@ -13,24 +17,64 @@ interface PageProps {
 export default async function GamePage({ params }: PageProps) {
   const user = await currentUser();
 
-  if (!user?.id) redirect(`/auth-callback?origin=map`);
+  if (!user?.id)
+    redirect(
+      `/auth-callback?origin=game/${params.chapterid}/${params.encounterid}`,
+    );
 
   const dbUser = await db.user.findFirst({
     where: { id: user.id },
   });
 
   if (!dbUser) {
-    redirect(`/auth-callback?origin=map`);
+    redirect(
+      `/auth-callback?origin=game/${params.chapterid}/${params.encounterid}`,
+    );
   }
 
-  return (
-    <div>
-      <Testgame
-        user={dbUser}
-        name={user.firstName ?? ""}
-        enc={params.encounterid}
-        reg={params.chapterid}
-      />
-    </div>
-  );
+  // Check if the necessary requisite problems were completed first
+  // Grab the pre-requisites from the map file
+  let reqsMet = true;
+  const problems = dbUser.problems.split("");
+  const regName = params.chapterid
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const region = mapFile.chapters.find((chapter) => chapter.name == regName);
+  if (region) {
+    const encName = params.encounterid
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+    console.log(encName);
+    const encounter = region.nodes.find((node) => node.name === encName);
+    const prereqs = encounter?.next.map((str) =>
+      str.toLowerCase().replace(/\s/g, "_"),
+    );
+    if (prereqs) {
+      for (const prereq of prereqs) {
+        // Find the index of prereq in the index file
+        const prereqIndex = indFile.problems.findIndex(
+          (problem) => problem.toLowerCase() === prereq,
+        );
+        if (problems[prereqIndex] === "0") {
+          reqsMet = false;
+          break;
+        }
+      }
+    }
+  }
+
+  if (reqsMet) {
+    return (
+      <div>
+        <Testgame
+          user={dbUser}
+          name={user.firstName ?? ""}
+          enc={params.encounterid}
+          reg={params.chapterid}
+        />
+      </div>
+    );
+  } else {
+    return <ReqsDenied />;
+  }
 }

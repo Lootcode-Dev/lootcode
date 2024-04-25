@@ -13,7 +13,7 @@ const Callback = () => {
   api.auth.authCallback.useQuery(undefined, {
     onSuccess: ({ success }) => {
       if (success) {
-        router.push(origin ? `/${origin}` : `/map`);
+        router.push(origin ? `/${origin}` : `/map/home`);
       }
     },
     onError: (err) => {
@@ -37,4 +37,3 @@ const Callback = () => {
 };
 
 export default Callback;
-1;
