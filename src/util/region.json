@@ -47,7 +47,8 @@
         "triangulation",
         "stone_circle",
         "twinned",
-        "rescue"
+        "rescue",
+        "last_wish"
     ],
     "bitwise_bastion": [
         "awol",
@@ -72,13 +73,15 @@
         "weaving",
         "jacked",
         "wordy",
-        "greed"
+        "greed",
+        "demolition_man"
     ],
     "nodak": [
         "tour",
         "adjacency",
         "chances",
-        "blockage"
+        "blockage",
+        "severed"
     ],
     "the_thicket": [
         "correction",

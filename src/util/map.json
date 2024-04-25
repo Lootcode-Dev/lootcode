@@ -316,6 +316,12 @@
                     "name": "Rescue",
                     "next": [],
                     "type": "game"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "Last Wish",
+                    "next": ["Stone Circle"],
+                    "type": "game"
                 }
             ]
         },
@@ -382,6 +388,12 @@
                 {
                     "pos": [10,70],
                     "name": "Blockage",
+                    "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "Severed",
                     "next": [],
                     "type": "game"
                 }
@@ -517,6 +529,12 @@
                 {
                     "pos": [10,90],
                     "name": "Greed",
+                    "next": [],
+                    "type": "game"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "Demolition Man",
                     "next": [],
                     "type": "game"
                 }

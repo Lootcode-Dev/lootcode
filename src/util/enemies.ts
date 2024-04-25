@@ -206,9 +206,9 @@ const enemies: Enemies = {
     health: 20,
     critChance: 7,
     strength: 2, 
-    armor: 5,
+    armor: -3,
     magic: 0,
-    resist: -3
+    resist: 5
   },
   Bubbles: {
     name: "Bubbles",
@@ -290,6 +290,33 @@ const enemies: Enemies = {
     strength: 1,
     magic: 0,
     resist: -2
+  },
+  Demolitionist: {
+    name: "Demolitionist",
+    health: 90,
+    armor: 5,
+    strength: 5,
+    critChance: 0,
+    magic: 0,
+    resist: -4
+  },
+  Edge: {
+    name: "Corrupt Edge",
+    health: 20,
+    armor: -1,
+    strength: 0,
+    critChance: 3,
+    magic: 3,
+    resist: 2
+  },
+  WishEnder: {
+    name: "Wish-Ender",
+    health: 75,
+    armor: -3,
+    strength: 0,
+    magic: 5,
+    resist: 5,
+    critChance: 1
   }
 };
 

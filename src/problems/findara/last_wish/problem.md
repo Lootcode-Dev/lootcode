@@ -1,0 +1,3 @@
+# Last Wish
+
+The Stone Circle can grant more than just *one* wish. Many explorers of Findara have used the circle before to enhance their powers and peer further into the Boundary. However, one malicious Findar, the aptly-named *Wish-Ender*, seeks to claim the power for themselves, attempting to wish for all Findars to lose their ability to search so that she may be the only one to rule the land. Because of your experience with the Circles, the Findars have asked you to stop her before this wish becomes the Circles' last.
