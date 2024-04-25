@@ -106,6 +106,7 @@
     ],
     "the_tower": [
         "the_edgex",
-        "the_alphabind"
+        "the_alphabind",
+        "the_cache"
     ]
 }

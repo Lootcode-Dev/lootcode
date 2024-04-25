@@ -151,6 +151,12 @@
                     "name": "The Alphabind",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,50],
+                    "name": "The Cache",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
