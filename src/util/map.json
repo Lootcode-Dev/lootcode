@@ -315,7 +315,7 @@
                 {
                     "pos": [50,90],
                     "name": "Twinned",
-                    "next": ["Cooking", "Rescue"],
+                    "next": ["Cooking", "Rescue", "Stone Circle"],
                     "type": "problem"
                 },
                 {
@@ -327,7 +327,7 @@
                 {
                     "pos": [65,30],
                     "name": "Last Wish",
-                    "next": ["Triangulation", "Stone Circle"],
+                    "next": ["Triangulation"],
                     "type": "game"
                 }
             ]
