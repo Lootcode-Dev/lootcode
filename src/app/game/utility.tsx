@@ -17,8 +17,6 @@ export interface GUser {
 
 export interface Item {
   name: string;
-  desc: string;
-  image: string;
   type: string;
   value: number;
   level: number;
@@ -56,9 +54,9 @@ export type Entity = {
 
 export function getUserStats(user: GUser): Stats {
   const statBlock: Stats = {
-    health: 100,
+    health: Math.floor(100 * (1 + 0.1 * getLevel(user))),
     attackSpeed: 1,
-    critChance: 3,
+    critChance: 1,
     strength: 1,
     armor: 0,
     magic: 1,
@@ -198,5 +196,5 @@ export function getProblemsCompleted(user: GUser): number {
 export function getLevel(user: GUser): number {
   const sum = getProblemsCompleted(user);
 
-  return Math.floor(sum / 10) + 1;
+  return Math.min(Math.floor(sum / 9) + 1, 10);
 }

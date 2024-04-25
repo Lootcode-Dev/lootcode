@@ -95,9 +95,9 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         health: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
         maxHealth: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
         critChance: encounter.critChance,
-        strength: encounter.strength,
+        strength: Math.round(encounter.strength * (1 + 0.25 * getLevel(user))),
         armor: encounter.armor,
-        magic: encounter.magic,
+        magic: Math.round(encounter.magic * (1 + 0.25 * getLevel(user))),
         resist: encounter.resist,
         dead: false,
         critHit: false,
@@ -112,12 +112,8 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     const convertedPlayer = {
       image: "/player.png",
       name: name,
-      health: userStats
-        ? Math.floor(userStats.health * (1 + 0.1 * getLevel(user)))
-        : 0,
-      maxHealth: userStats
-        ? Math.floor(userStats.health * (1 + 0.1 * getLevel(user)))
-        : 0,
+      health: userStats.health,
+      maxHealth: userStats.health,
       critChance: userStats.critChance,
       strength: userStats.strength,
       armor: userStats.armor,
@@ -151,11 +147,20 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                 Math.max(
                   0,
                   userStats.strength -
-                    userStats.strength * currentEnemy.armor * 0.1,
+                    (userStats.strength >= 0
+                      ? userStats.strength * currentEnemy.armor * 0.1
+                      : 0),
+                  //if strength is negative, let it count against your total damage
+                  //there should not be a scenario where your attacks heal the enemy
+                  //if we make the items correctly
                 ) +
                 Math.max(
                   0,
-                  userStats.magic - userStats.magic * currentEnemy.resist * 0.1,
+                  userStats.magic -
+                    (userStats.magic >= 0
+                      ? userStats.magic * currentEnemy.resist * 0.1
+                      : 0),
+                  //same with magical damage
                 );
 
               if (Math.random() * 100 <= userStats.critChance) {

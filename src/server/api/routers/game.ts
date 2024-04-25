@@ -7,7 +7,7 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
 import itemList from "~/util/items.json";
-import { fakeBuy, fakeEquip } from "~/app/game/utility";
+import { fakeBuy, fakeEquip, getLevel } from "~/app/game/utility";
 import enemies from "~/util/enemies";
 import encounters from "~/util/encounters";
 import { Enemy } from "~/util/enemies";
@@ -147,13 +147,13 @@ export const gameRouter = createTRPCRouter({
       if (problems[indFile.problems.indexOf(input.encounterid)] == "1") {
         return user;
       }
-
-      // Add the gold to the user's account and solve the problem
-      if(goldFile[input.encounterid as keyof typeof goldFile])
-        user.gold += goldFile[input.encounterid as keyof typeof goldFile];
       
       problems[indFile.problems.indexOf(input.encounterid)] = "1";
       user.problems = problems.join("");
+
+      // Add the gold to the user's account and solve the problem
+      if(goldFile[input.encounterid as keyof typeof goldFile])
+        user.gold += Math.floor(goldFile[input.encounterid as keyof typeof goldFile] * (1+((getLevel(user) - 1) * .25)));
 
       // Update the user's data
       await db.user.update({

@@ -12,6 +12,7 @@ import mapFile from "~/util/map.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 import { api } from "~/trpc/server";
+import { getLevel } from "~/app/game/utility";
 
 export interface Enemy {
   name: string;
@@ -382,8 +383,9 @@ export const codeRouter = createTRPCRouter({
             user.problems = currentProblems.join("");
             console.log(user.problems);
 
-            // Update the gold woohoo!!!
-            user.gold += goldFile[input.name as keyof typeof goldFile];
+            // Add the gold to the user's account and solve the problem
+            if(goldFile[input.name as keyof typeof goldFile])
+              user.gold += Math.floor(goldFile[input.name as keyof typeof goldFile] * (1+((getLevel(user) - 1) * .25)));
 
             await db.user.update({
               where: { id: ctx.userId },
