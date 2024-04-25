@@ -81,5 +81,6 @@
     "severed" : 0,
     "last_wish" : 0,
     "the_edgex" : 0,
-    "the_alphabind" : 0
+    "the_alphabind" : 0,
+    "the_cache": 0
 }
