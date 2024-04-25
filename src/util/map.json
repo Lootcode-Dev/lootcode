@@ -157,6 +157,12 @@
                     "name": "The Cache",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "The Tome of Equilibrium",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
