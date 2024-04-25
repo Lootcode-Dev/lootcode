@@ -3,14 +3,11 @@ import {
   ArrowRight,
   BrainIcon,
   Instagram,
-  InstagramIcon,
-  LinkIcon,
   SwordIcon,
   TerminalIcon,
   Youtube,
-  YoutubeIcon,
 } from "lucide-react";
-import { SignInButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,12 +39,12 @@ export default async function Home() {
               </p>
               <div className="flex space-x-4">
                 <Button className="mt-4 bg-purple-700 text-white">
-                  <SignInButton>
+                  <SignUpButton>
                     <div className="flex items-center">
                       Get Started
                       <ArrowRight className="h-5 w-5" />
                     </div>
-                  </SignInButton>
+                  </SignUpButton>
                 </Button>
               </div>
             </div>
