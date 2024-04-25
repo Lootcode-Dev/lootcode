@@ -31,6 +31,14 @@ export default function NodeGraph({
   setNode,
   bgImg,
 }: Graph) {
+  const handleMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
+    const svgElement = event.currentTarget;
+    const svgRect = svgElement.getBoundingClientRect();
+    const mouseX = ((event.clientX - svgRect.left) / svgRect.width) * 100;
+    const mouseY = ((event.clientY - svgRect.top) / svgRect.height) * 100;
+    console.log("Mouse position:", mouseX, mouseY);
+  };
+
   if (nodes == undefined)
     return (
       <div className="rounded-xl border border-[#15162c] bg-indigo-950 p-4">
@@ -42,6 +50,7 @@ export default function NodeGraph({
     <svg
       viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
       className="aspect-video rounded-xl border-4 border-[#15162c] bg-[url('/test_bg.png')] bg-cover bg-center p-4"
+      onMouseMove={handleMouseMove}
     >
       <defs>
         <marker
@@ -92,7 +101,7 @@ export default function NodeGraph({
                       2
                   }
                   stroke="none"
-                  marker-end="url(#arrow)"
+                  markerEnd="url(#arrow)"
                 ></line>
                 <line
                   x1={getNodeX(node.pos[0] ?? 0)}
@@ -109,13 +118,13 @@ export default function NodeGraph({
             ))}
           </g>
         ) : (
-          <g />
+          <g key={index} />
         ),
       )}
 
       {nodes.map((node: Node, index) => {
         if (nameToFileName(node.name) == "the_tower")
-          if (!isRegionUnlocked(node.name)) return <g />;
+          if (!isRegionUnlocked(node.name)) return <g key={index} />;
 
         return (
           <g key={index} id={"node2-" + nameToFileName(node.name)}>

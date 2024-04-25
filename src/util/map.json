@@ -196,33 +196,33 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [90,50],
                     "name": "Answer",
-                    "next": [],
+                    "next": ["Exterminator"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [10,50],
                     "name": "Expiration",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [50,50],
                     "name": "Order",
-                    "next": [],
+                    "next": ["Overdue"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [70,50],
                     "name": "Exterminator",
-                    "next": [],
+                    "next": ["Order"],
                     "type": "game"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [30,50],
                     "name": "Overdue",
-                    "next": [],
+                    "next": ["Expiration"],
                     "type": "game"
                 }
             ]
@@ -233,43 +233,43 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [50,10],
                     "name": "Traversal I",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [35,30],
                     "name": "Traversal II",
-                    "next": [],
+                    "next": ["Traversal I"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [20,60],
                     "name": "Negation",
-                    "next": [],
+                    "next": ["Traversal II"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [65,30],
                     "name": "Hooliga N s",
-                    "next": [],
+                    "next": ["Traversal I"],
                     "type": "game"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [40,60],
                     "name": "Family Feud I",
-                    "next": [],
+                    "next": ["Traversal II"],
                     "type": "game"
                 },
                 {
-                    "pos": [30,30],
+                    "pos": [35,90],
                     "name": "Family Feud II",
                     "next": ["Family Feud I"],
                     "type": "game"
                 },
                 {
-                    "pos": [50,30],
+                    "pos": [50,90],
                     "name": "Family Feud III",
                     "next": ["Family Feud I"],
                     "type": "game"
@@ -282,45 +282,45 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [35,30],
                     "name": "Alphacount",
-                    "next": [],
+                    "next": ["Triangulation"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [65,60],
                     "name": "Cooking",
-                    "next": [],
+                    "next": ["Stone Circle", "Last Wish"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [50,5],
                     "name": "Triangulation",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [50,45],
                     "name": "Stone Circle",
-                    "next": [],
+                    "next": ["Alphacount", "Last Wish", "Triangulation"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [50,90],
                     "name": "Twinned",
-                    "next": [],
+                    "next": ["Cooking", "Rescue"],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [35,60],
                     "name": "Rescue",
-                    "next": [],
+                    "next": ["Alphacount", "Stone Circle"],
                     "type": "game"
                 },
                 {
-                    "pos": [30,30],
+                    "pos": [65,30],
                     "name": "Last Wish",
-                    "next": ["Stone Circle"],
+                    "next": ["Triangulation", "Stone Circle"],
                     "type": "game"
                 }
             ]
@@ -368,33 +368,33 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [45, 53],
                     "name": "Tour",
-                    "next": [],
+                    "next": ["Severed", "Blockage"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [68, 40],
                     "name": "Adjacency",
-                    "next": [],
+                    "next": ["Blockage"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [37, 72],
                     "name": "Chances",
-                    "next": [],
+                    "next": ["Adjacency"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [65, 25],
                     "name": "Blockage",
-                    "next": [],
+                    "next": ["Chances", "Severed"],
                     "type": "game"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [35, 50],
                     "name": "Severed",
-                    "next": [],
+                    "next": ["Adjacency"],
                     "type": "game"
                 }
             ]
@@ -405,45 +405,45 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [55,40],
+                    "name": "Prophet",
+                    "next": ["Blind Spot"],
+                    "type": "game"
+                },
+                {
+                    "pos": [30,70],
+                    "name": "Ranking",
+                    "next": ["Malfunction"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [70,10],
+                    "name": "Blind Spot",
+                    "next": ["Ranking"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [70,70],
+                    "name": "Assemble",
+                    "next": ["Prophet", "Merger"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [85,40],
+                    "name": "Merger",
+                    "next": ["Blind Spot"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,10],
                     "name": "AWOL",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
-                    "name": "Ranking",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [10,50],
-                    "name": "Blind Spot",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [10,70],
-                    "name": "Assemble",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [10,90],
-                    "name": "Merger",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [30,10],
+                    "pos": [30,40],
                     "name": "Malfunction",
-                    "next": [],
-                    "type": "game"
-                },
-                {
-                    "pos": [30,30],
-                    "name": "Prophet",
-                    "next": [],
+                    "next": ["AWOL"],
                     "type": "game"
                 }
             ]
@@ -454,45 +454,45 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [30, 30],
+                    "name": "Elapsed",
+                    "next": ["Beauty"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [70, 60],
+                    "name": "Disgust",
+                    "next": ["Trailing Zeroes", "Mad Scientist"],
+                    "type": "problem"
+                },
+                {
+                    "pos": [50, 10],
                     "name": "Beauty",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
-                    "name": "Disgust",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [10,50],
+                    "pos": [50, 45],
                     "name": "Trailing Zeroes",
-                    "next": [],
+                    "next": ["Beauty", "Elapsed", "Mad Scientist"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
-                    "name": "Elapsed",
-                    "next": [],
-                    "type": "problem"
-                },
-                {
-                    "pos": [10,90],
+                    "pos": [50, 80],
                     "name": "Gargantuan",
-                    "next": [],
+                    "next": ["Irrational", "Disgust"],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [30, 60],
                     "name": "Irrational",
-                    "next": [],
+                    "next": ["Elapsed", "Trailing Zeroes"],
                     "type": "game"
                 },
                 {
-                    "pos": [30,30],
+                    "pos": [70, 30],
                     "name": "Mad Scientist",
-                    "next": [],
+                    "next": ["Beauty"],
                     "type": "game"
                 }
             ]
@@ -503,39 +503,39 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [85,75],
                     "name": "Sums",
-                    "next": [],
+                    "next": ["Demolition Man"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [50,15],
                     "name": "Weaving",
-                    "next": [],
+                    "next": ["Wordy"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [15,15],
                     "name": "Jacked",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [50,75],
                     "name": "Wordy",
-                    "next": [],
+                    "next": ["Greed"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [15,75],
                     "name": "Greed",
-                    "next": [],
+                    "next": ["Jacked"],
                     "type": "game"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [85,15],
                     "name": "Demolition Man",
-                    "next": [],
+                    "next": ["Weaving"],
                     "type": "game"
                 }
             ]
@@ -546,31 +546,31 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [50,15],
                     "name": "Correction",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [29,25],
                     "name": "Dilemma",
-                    "next": [],
+                    "next": ["Correction"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [15,56],
                     "name": "Renewal",
-                    "next": [],
+                    "next": ["Dilemma"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [53,47],
                     "name": "Blight",
-                    "next": [],
+                    "next": ["Correction"],
                     "type": "game"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [80,60],
                     "name": "Blight Fae",
                     "next": ["Blight"],
                     "type": "game"

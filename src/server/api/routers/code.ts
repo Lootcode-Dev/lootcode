@@ -51,7 +51,6 @@ export const codeRouter = createTRPCRouter({
       }
 
       const type = findNodeType(region ?? "", input.name);
-      console.log(type);
 
       // Detect if the node is of type problem
       if (type === "problem") {
@@ -220,7 +219,10 @@ export const codeRouter = createTRPCRouter({
           await $withoutEscaping`${langObject.compile}`; //Compile our code
           // console.log("Compiled Successfully");
         } catch (error: any) {
-          codeGradeResponse.compileError = cutData((error.stderr as string).replaceAll(ctx.userId, ""), MAXTRANSMIT);;
+          codeGradeResponse.compileError = cutData(
+            (error.stderr as string).replaceAll(ctx.userId, ""),
+            MAXTRANSMIT,
+          );
           //console.log(error);
 
           //Clean Up
@@ -267,14 +269,29 @@ export const codeRouter = createTRPCRouter({
             // console.log("Runtime error");
             // console.log(error.stderr);
 
-            thisCase.runtimeError = cutData(error.stderr as string, MAXTRANSMIT);
-            if (thisCase.runtimeError.includes("WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied")) {
-              thisCase.runtimeError = thisCase.runtimeError.replace("WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied", "");
+            thisCase.runtimeError = cutData(
+              error.stderr as string,
+              MAXTRANSMIT,
+            );
+            if (
+              thisCase.runtimeError.includes(
+                "WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied",
+              )
+            ) {
+              thisCase.runtimeError = thisCase.runtimeError.replace(
+                "WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied",
+                "",
+              );
               // Remove empty lines containing only ""
-              thisCase.runtimeError = thisCase.runtimeError.replace(/^\s*[\r\n]/gm, "");
-
+              thisCase.runtimeError = thisCase.runtimeError.replace(
+                /^\s*[\r\n]/gm,
+                "",
+              );
             }
-            thisCase.output = cutData(thisCase.runtimeError.replaceAll(ctx.userId, ""), MAXTRANSMIT);
+            thisCase.output = cutData(
+              thisCase.runtimeError.replaceAll(ctx.userId, ""),
+              MAXTRANSMIT,
+            );
             codeGradeResponse.numFailed++;
             i++;
           }
@@ -406,10 +423,14 @@ export function $withoutEscaping(
 }
 
 function cutData(data: string, cutoff: number) {
-  if (data.length > cutoff) 
-    return data.substring(0, cutoff)+"... "+(data.length-cutoff)+" MORE CHARACTERS.";
-  else 
-    return data;
+  if (data.length > cutoff)
+    return (
+      data.substring(0, cutoff) +
+      "... " +
+      (data.length - cutoff) +
+      " MORE CHARACTERS."
+    );
+  else return data;
 }
 
 function findNodeType(regionName: string, problemName: string) {
