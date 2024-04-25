@@ -101,7 +101,7 @@ export default function ProblemView({
         {/* Panel 1: Markdown */}
         <ResizablePanel defaultSize={30} className="bg-[#282A36]">
           <div className="max-h-[92.5vh] overflow-auto">
-            <div className="flex flex-row items-center justify-between h-[5vh] p-2 bg-zinc-800">
+            <div className="flex h-[5vh] flex-row items-center justify-between bg-zinc-800 p-2">
               <Link href={`/map/${chapterid}`}>
                 <Button className="border bg-purple-950">
                   <ArrowLeft className="h-4 w-4"></ArrowLeft>
@@ -219,9 +219,9 @@ export default function ProblemView({
                               remarkPlugins={[remarkGfm]}
                               className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
                             >
-                              {`# You earned...\n` +
-                                `${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}` +
-                                `${`*Reward: ${problem?.gold} gold*`}`}
+                              {chapterid === "the_tower"
+                                ? problem?.lore
+                                : `# You earned...\n${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}${`*Reward: ${problem?.gold} gold*`}`}
                             </ReactMarkdownNoSSR>
                           </DialogContent>
                         </Dialog>
@@ -238,14 +238,12 @@ export default function ProblemView({
                     </div>
                   ) : runData ? (
                     runData?.compileError ? (
-                      <div className="flex flex-col min-h-full items-center justify-center p-2 overflow-scroll">
+                      <div className="flex min-h-full flex-col items-center justify-center overflow-scroll p-2">
                         <div className="font-extrabold">Compile Time Error</div>
                         <div className="font-extrabold text-red-500">
-                          {
-                            runData.compileError.split("\n").map((data, idx) => (
-                                <p key={idx}>{data}</p>
-                            ))
-                          }
+                          {runData.compileError.split("\n").map((data, idx) => (
+                            <p key={idx}>{data}</p>
+                          ))}
                         </div>
                       </div>
                     ) : (
