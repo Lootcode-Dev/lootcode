@@ -377,13 +377,13 @@
                 {
                     "pos": [45, 53],
                     "name": "Tour",
-                    "next": ["Severed", "Blockage"],
+                    "next": ["Severed"],
                     "type": "problem"
                 },
                 {
                     "pos": [68, 40],
                     "name": "Adjacency",
-                    "next": ["Blockage"],
+                    "next": [],
                     "type": "problem"
                 },
                 {
@@ -395,7 +395,7 @@
                 {
                     "pos": [65, 25],
                     "name": "Blockage",
-                    "next": ["Chances", "Severed"],
+                    "next": ["Chances", "Severed", "Adjacency", "Tour"],
                     "type": "game"
                 },
                 {
