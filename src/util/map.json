@@ -139,7 +139,14 @@
             "name":"The Tower",
             "pos": [50,70],
             "next": ["Lexica", "Vectara", "Stackspires", "Queuesgard", "Arbonclave", "Findara", "Compendia", "Nodak", "Bitwise Bastion", "Arithmend", "Dynamar", "The Thicket"],
-            "nodes":[]
+            "nodes":[
+                {
+                    "pos": [10,10],
+                    "name": "The Edgex",
+                    "next": [],
+                    "type": "problem"
+                }
+            ]
         },
         {
             "name":"Stackspires",

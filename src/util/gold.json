@@ -41,5 +41,6 @@
     "order": 0,
     "elapsed" : 0,
     "gargantuan" : 0,
-    "fanatic" : 999
+    "fanatic" : 999,
+    "the_edgex": 0
 }
