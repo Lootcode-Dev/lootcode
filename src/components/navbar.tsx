@@ -26,19 +26,28 @@ export default function Navbar() {
       <nav className="z-30 flex h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110">
         <div className="nt-bold flex-1 text-2xl font-bold">
           <h1 className="text-xl font-bold">
-            <Link href="/">
-              <div className="flex items-center">
-                <Image
-                  src="/lootcode-no-floor.png"
-                  width={50}
-                  height={50}
-                  alt={"lootcode logo"}
-                  className="mb-3 h-12 w-12"
-                />
-                <span className="text-purple-500">Loot</span>
-                <span className=" text-yellow-200">code</span>
-              </div>
-            </Link>
+            <div className="flex items-center">
+              <Image
+                src="/lootcode-no-floor.png"
+                width={50}
+                height={50}
+                alt={"lootcode logo"}
+                className="mb-3 h-12 w-12 cursor-pointer"
+                onClick={() => router.push("/")}
+              />
+              <span
+                className="cursor-pointer text-purple-500"
+                onClick={() => router.push("/")}
+              >
+                Loot
+              </span>
+              <span
+                className=" cursor-pointer text-yellow-200"
+                onClick={() => router.push("/")}
+              >
+                code
+              </span>
+            </div>
           </h1>
         </div>
         <div className="items-center">
