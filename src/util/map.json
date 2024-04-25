@@ -80,49 +80,49 @@
                     "type": "problem"
                 },
                 {
-                    "pos": [40,10],
+                    "pos": [50,10],
                     "name": "Combinations",
                     "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [40,30],
+                    "pos": [50,30],
                     "name": "Elections",
                     "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [40,50],
+                    "pos": [50,50],
                     "name": "Eviction",
                     "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "game"
                 },
                 {
-                    "pos": [40,70],
+                    "pos": [50,70],
                     "name": "Growth",
                     "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [40, 90],
+                    "pos": [50, 90],
                     "name": "Swapper",
                     "next": ["Flooring", "Leaks", "Solo", "Zeros"],
                     "type": "problem"
                 },
                 {
-                    "pos": [70, 70],
+                    "pos": [90, 75],
                     "name": "Bigger Digits",
                     "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
                     "type": "problem"
                 },
                 {
-                    "pos": [70, 30],
+                    "pos": [90, 25],
                     "name": "Coup",
                     "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
                     "type": "game"
                 },
                 {
-                    "pos": [70, 50],
+                    "pos": [90, 50],
                     "name": "Reallocation",
                     "next": ["Combinations", "Elections", "Eviction", "Growth", "Swapper"],
                     "type": "problem"
@@ -344,33 +344,33 @@
             "next": [],
             "nodes":[
                 {
-                    "pos": [10,10],
+                    "pos": [20,10],
                     "name": "Wordup",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [50,25],
                     "name": "Sticks",
-                    "next": [],
+                    "next": ["Postal"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [80,10],
                     "name": "Perimeter",
-                    "next": [],
+                    "next": ["Protest"],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [30,90],
                     "name": "Postal",
-                    "next": [],
+                    "next": ["Wordup"],
                     "type": "game"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [70,90],
                     "name": "Protest",
-                    "next": [],
+                    "next": ["Sticks"],
                     "type": "game"
                 }
             ]
