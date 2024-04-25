@@ -18,7 +18,7 @@ export const dockerRouter = createTRPCRouter({
       const problemPathInput = `./src/problems/${region}/${input.name}/input/`; //The path is based on the problem name
 
       //Spwan a docker process for security reasons
-      await $`docker run --name ${ctx.userId}${input.name} --rm -i -d -v ${codePathFolder}:/app/ -v ${problemPathInput}:/app/inputs/:ro code-runner`;
+      await $`docker run --network none --name ${ctx.userId}${input.name} --rm -i -d -v ${codePathFolder}:/app/ -v ${problemPathInput}:/app/inputs/:ro code-runner`;
 
       return { success: true };
     }),
