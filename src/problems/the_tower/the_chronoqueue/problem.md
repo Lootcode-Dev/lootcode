@@ -25,7 +25,7 @@ Input will consist of a non-negative integer.
 
 ## Output
 
-If input is zero, output "now". Otherwise, output the duration is expressed as a combination of years, days, hours, minutes, and seconds.
+If input is zero, output "now". Otherwise, output the duration expressed as a combination of years, days, hours, minutes, and seconds.
 
 ```
 1 minute and 2 seconds
