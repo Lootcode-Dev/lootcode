@@ -57,10 +57,12 @@ export const codeRouter = createTRPCRouter({
         if (input.name !== "") {
           contents.type = "problem";
 
-          contents.description = await readFile(
-            `./src/problems/${region}/${input.name}/problem.md`,
-            "utf-8",
-          );
+          const problemPath = `./src/problems/${region}/${input.name}/problem.md`;
+          if (existsSync(problemPath)) {
+            contents.description = await readFile(problemPath, "utf-8");
+          } else {
+            contents.description = "DNE";
+          }
 
           const currentProblems = indFile.problems;
           const index = currentProblems.findIndex(
@@ -80,10 +82,12 @@ export const codeRouter = createTRPCRouter({
         if (input.name !== "") {
           contents.type = "game";
 
-          contents.description = await readFile(
-            `./src/problems/${region}/${input.name}/problem.md`,
-            "utf-8",
-          );
+          const problemPath = `./src/problems/${region}/${input.name}/problem.md`;
+          if (existsSync(problemPath)) {
+            contents.description = await readFile(problemPath, "utf-8");
+          } else {
+            contents.description = "DNE";
+          }
 
           const enemies = await api.game.getEncounter.query({
             encounterid: input.name,

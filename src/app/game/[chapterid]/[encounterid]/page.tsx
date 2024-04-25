@@ -6,6 +6,7 @@ import regFile from "~/util/region.json";
 import mapFile from "~/util/map.json";
 import indFile from "~/util/index.json";
 import ReqsDenied from "~/components/reqsdenied";
+import { api } from "~/trpc/server";
 
 interface PageProps {
   params: {
@@ -15,6 +16,20 @@ interface PageProps {
 }
 
 export default async function GamePage({ params }: PageProps) {
+  // Make sure this is an encounter, not a problem, and that it exists
+  const problem = await api.code.getProblem.query({
+    name: params.encounterid,
+    region: params.chapterid,
+  });
+
+  if (problem.type == "problem") {
+    redirect(`/map/${params.chapterid}/${params.encounterid}`);
+  }
+
+  if (problem.description == "DNE") {
+    redirect(`/map/${params.chapterid}`);
+  }
+
   const user = await currentUser();
 
   if (!user?.id)

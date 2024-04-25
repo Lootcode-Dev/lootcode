@@ -6,6 +6,7 @@ import { db } from "~/server/db";
 import mapFile from "~/util/map.json";
 import indFile from "~/util/index.json";
 import ReqsDenied from "~/components/reqsdenied";
+import { api } from "~/trpc/server";
 
 // Dynamically import `ProblemView` with no SSR
 const ProblemViewWithNoSSR = dynamic(() => import("~/components/problemview"), {
@@ -20,6 +21,21 @@ interface PageProps {
 }
 
 export default async function Problem({ params }: PageProps) {
+  
+  // Make sure this is a problem, not an encounter, and that it exists
+  const problem = await api.code.getProblem.query({
+    name: params.problemid,
+    region: params.chapterid,
+  });
+
+  if (problem.type == "game") {
+    redirect(`/game/${params.chapterid}/${params.problemid}`);
+  }
+
+  if (problem.description == "DNE") {
+    redirect(`/map/${params.chapterid}`);
+  }
+
   const user = await currentUser();
 
   if (!user?.id) redirect(`/auth-callback?origin=map/${params.problemid}`);
