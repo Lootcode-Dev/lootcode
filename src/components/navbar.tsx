@@ -57,7 +57,7 @@ export default function Navbar() {
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="bg-purple-700 text-white"
+                  className="animate-fade-down bg-purple-700 text-white ease-in animate-duration-300"
                 >
                   <div>Map</div>
                 </TooltipContent>
@@ -75,7 +75,7 @@ export default function Navbar() {
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="bg-purple-700 text-white"
+                  className="animate-fade-down bg-purple-700 text-white ease-in animate-duration-300"
                 >
                   <div>Inventory</div>
                 </TooltipContent>
@@ -93,7 +93,7 @@ export default function Navbar() {
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="bg-purple-700 text-white"
+                  className="animate-fade-down bg-purple-700 text-white ease-in animate-duration-300"
                 >
                   <div>Shop</div>
                 </TooltipContent>
@@ -111,7 +111,7 @@ export default function Navbar() {
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="bg-purple-700 text-white"
+                  className="animate-fade-down bg-purple-700 text-white ease-in animate-duration-300"
                 >
                   <div>Leaderboard</div>
                 </TooltipContent>
