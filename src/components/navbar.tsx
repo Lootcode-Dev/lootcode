@@ -1,3 +1,4 @@
+"use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import {
@@ -5,69 +6,131 @@ import {
   BackpackIcon,
   CoinsIcon,
   MapIcon,
-  SwordIcon,
+  TrophyIcon,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import { useRouter } from "next/navigation";
 
-export default async function Navbar() {
+export default function Navbar() {
+  const router = useRouter();
+
   return (
-    <nav className="flex h-[7.5vh] w-full items-center justify-between bg-indigo-950 px-56 py-4 shadow-md">
-      <div className="flex items-center space-x-4">
-        <h1 className="text-xl font-bold">
-          <Link href="/">
-            <div className="flex items-center">
-              <Image
-                src="/lootcode-no-floor.png"
-                width={50}
-                height={50}
-                alt={"lootcode logo"}
-                className="mb-3 h-12 w-12"
-              />
-              <span className="text-purple-500">Loot</span>
-              <span className=" text-yellow-200">code</span>
-            </div>
-          </Link>
-        </h1>
-      </div>
-      <div>
-        <SignedIn>
-          <div className="flex items-center gap-8">
-            <Link href="/map/home">
-              <Button className="bg-purple-700 text-white">
-                <div className="flex items-center gap-2">
-                  Map <MapIcon className="h-5 w-5" />
-                </div>
-              </Button>
-            </Link>
-            <Link href="/inventory">
-              <Button className="bg-purple-700 text-white">
-                <div className="flex items-center gap-2">
-                  Inventory <BackpackIcon className="h-5 w-5" />
-                </div>
-              </Button>
-            </Link>
-            <Link href="/shop">
-              <Button className="bg-purple-700 text-white">
-                <div className="flex items-center gap-2">
-                  Shop <CoinsIcon className="h-5 w-5" />
-                </div>
-              </Button>
-            </Link>
-            <UserButton afterSignOutUrl="/sign-in" showName={true} />
-          </div>
-        </SignedIn>
-        <SignedOut>
-          <Button className="bg-purple-700 text-white">
-            <SignInButton>
+    <TooltipProvider>
+      <nav className="z-30 flex h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110">
+        <div className="nt-bold flex-1 text-2xl font-bold">
+          <h1 className="text-xl font-bold">
+            <Link href="/">
               <div className="flex items-center">
-                Sign in
-                <ArrowRight className="h-5 w-5" />
+                <Image
+                  src="/lootcode-no-floor.png"
+                  width={50}
+                  height={50}
+                  alt={"lootcode logo"}
+                  className="mb-3 h-12 w-12"
+                />
+                <span className="text-purple-500">Loot</span>
+                <span className=" text-yellow-200">code</span>
               </div>
-            </SignInButton>
-          </Button>
-        </SignedOut>
-      </div>
-    </nav>
+            </Link>
+          </h1>
+        </div>
+        <div className="items-center">
+          <SignedIn>
+            <div className="flex items-center gap-8">
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="rounded-md  bg-purple-700 p-3 text-white hover:bg-primary"
+                    onClick={() => router.push("/map/home")}
+                  >
+                    <div className="flex items-center gap-2">
+                      <MapIcon className="h-5 w-5" />
+                    </div>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="bg-purple-700 text-white"
+                >
+                  <div>Map</div>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="rounded-md  bg-purple-700 p-3 text-white hover:bg-primary"
+                    onClick={() => router.push("/inventory")}
+                  >
+                    <div className="flex items-center gap-2">
+                      <BackpackIcon className="h-5 w-5" />
+                    </div>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="bg-purple-700 text-white"
+                >
+                  <div>Inventory</div>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="rounded-md  bg-purple-700 p-3 text-white hover:bg-primary"
+                    onClick={() => router.push("/shop")}
+                  >
+                    <div className="flex items-center gap-2">
+                      <CoinsIcon className="h-5 w-5" />
+                    </div>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="bg-purple-700 text-white"
+                >
+                  <div>Shop</div>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div
+                    className="rounded-md  bg-purple-700 p-3 text-white hover:bg-primary"
+                    onClick={() => router.push("/leaderboard")}
+                  >
+                    <div className="flex items-center gap-2">
+                      <TrophyIcon className="h-5 w-5" />
+                    </div>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="bg-purple-700 text-white"
+                >
+                  <div>Leaderboard</div>
+                </TooltipContent>
+              </Tooltip>
+              <UserButton afterSignOutUrl="/sign-in" showName={true} />
+            </div>
+          </SignedIn>
+          <SignedOut>
+            <Button className="rounded-md bg-purple-700 p-4 text-white">
+              <SignInButton>
+                <div className="flex items-center">
+                  Sign in
+                  <ArrowRight className="h-5 w-5" />
+                </div>
+              </SignInButton>
+            </Button>
+          </SignedOut>
+        </div>
+      </nav>
+    </TooltipProvider>
   );
 }
