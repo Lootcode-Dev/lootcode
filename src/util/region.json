@@ -103,5 +103,8 @@
         "order",
         "exterminator",
         "overdue"
+    ],
+    "the_tower": [
+        "the_edgex"
     ]
 }

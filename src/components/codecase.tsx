@@ -59,15 +59,15 @@ export default function CodeCase({ c }: { c: caseRes }) {
       {open && (
         <div className="flex max-w-full flex-col gap-2 break-words">
           <div>Input: </div>
-          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2">
+          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2 font-mono">
             {c.input}
           </div>
           <div>Expected: </div>
-          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2">
+          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2 font-mono">
             {c.expected}
           </div>
           <div>Output: </div>
-          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2">
+          <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2 font-mono">
             {c.output}
           </div>
         </div>
