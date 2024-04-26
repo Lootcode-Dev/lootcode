@@ -187,6 +187,12 @@
                     "name": "The Pebble",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,70],
+                    "name": "The Dichomoton",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

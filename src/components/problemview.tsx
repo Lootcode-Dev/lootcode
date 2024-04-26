@@ -86,6 +86,7 @@ export default function ProblemView({
   const [code, setCode] = useState<string>("");
   const [firstSolve, setFirstSolve] = useState<boolean>(false);
   const [problemLabel, setProblemLabel] = useState<string>("");
+  const panelRef = useRef(null);
 
   useEffect(() => {
     mapFile.chapters.map((val, index) => {
@@ -126,7 +127,7 @@ export default function ProblemView({
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
       <div className="m-2 flex grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 text-2xl font-bold">
         <div className="flex flex-row items-center gap-2">
-          <a href="/map/home">
+          <a href={`/map/${chapterid}`}>
             <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
           </a>
           <div>{problemLabel}</div>
@@ -169,7 +170,7 @@ export default function ProblemView({
           </Button>
         </div>
       </div>
-      <ResizablePanelGroup direction="horizontal" className="">
+      <ResizablePanelGroup direction="horizontal" ref={panelRef} className="">
         {/* Panel 1: Markdown */}
         <ResizablePanel
           defaultSize={30}
@@ -193,28 +194,25 @@ export default function ProblemView({
               onResize={setCodeSize}
               className="rounded-lg border-4 border-[#15162c] bg-[#282A36]"
             >
-              <div className="max-h-100px grow overflow-auto">
-                <CodeMirrorNoSSR
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  theme={dracula}
-                  height={`${codeSize - 10}vh`}
-                  extensions={[
-                    loadLanguage(language as "java" | "python" | "cpp" | "c")!,
-                  ]} //Typescript shenanigans
-                  basicSetup={{
-                    syntaxHighlighting: true,
-                    closeBrackets: true,
-                    highlightActiveLine: true,
-                    lineNumbers: true,
-                    highlightActiveLineGutter: true,
-                    autocompletion: false,
-                  }}
-                  onChange={(value) => {
-                    setCode(value);
-                  }}
-                  className=""
-                />
-              </div>
+              <CodeMirrorNoSSR
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                theme={dracula}
+                height={`${80 * codeSize/100}vh`}
+                extensions={[
+                  loadLanguage(language as "java" | "python" | "cpp" | "c")!,
+                ]} //Typescript shenanigans
+                basicSetup={{
+                  syntaxHighlighting: true,
+                  closeBrackets: true,
+                  highlightActiveLine: true,
+                  lineNumbers: true,
+                  highlightActiveLineGutter: true,
+                  autocompletion: false,
+                }}
+                onChange={(value) => {
+                  setCode(value);
+                }}
+              />
             </ResizablePanel>
             <ResizableHandle className="border-4 border-transparent bg-transparent" />
             {/* Panel 3 */}
