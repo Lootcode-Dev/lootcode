@@ -2,7 +2,17 @@
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
-import { ArrowLeft, Coins, CoinsIcon, Loader2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Coins,
+  CoinsIcon,
+  Cross,
+  Hash,
+  Loader2,
+  Tally5,
+  X,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
@@ -23,6 +33,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { api } from "~/trpc/react";
+import mapFile from "~/util/map.json";
 import {
   Dialog,
   DialogContent,
@@ -33,6 +44,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import Link from "next/link";
+import { nameToFileName } from "./mapview";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -73,6 +85,21 @@ export default function ProblemView({
   const [runData, setRunData] = useState<codeGradeResult>();
   const [code, setCode] = useState<string>("");
   const [firstSolve, setFirstSolve] = useState<boolean>(false);
+  const [problemLabel, setProblemLabel] = useState<string>("");
+
+  useEffect(() => {
+    mapFile.chapters.map((val, index) => {
+      if (nameToFileName(val.name) == chapterid) {
+        mapFile.chapters[index]?.nodes.map((value) => {
+          if (nameToFileName(value.name) == problemid) {
+            setProblemLabel(value.name);
+            return;
+          }
+        });
+        return;
+      }
+    });
+  }, []);
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
@@ -96,18 +123,59 @@ export default function ProblemView({
     );
 
   return (
-    <main className="z-10 flex h-[92.5vh] flex-col items-center  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <ResizablePanelGroup direction="horizontal" className="border">
+    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
+      <div className="m-2 flex grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 text-2xl font-bold">
+        <div className="flex flex-row items-center gap-2">
+          <a href="/map/home">
+            <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
+          </a>
+          <div>{problemLabel}</div>
+        </div>
+        <div className="mr-1 flex flex-row justify-end gap-2">
+          <Select onValueChange={setLanguage}>
+            <SelectTrigger className="h-8 w-[180px] bg-purple-700">
+              <SelectValue placeholder="Python" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Languages</SelectLabel>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="java">Java</SelectItem>
+                <SelectItem value="cpp">C++</SelectItem>
+                <SelectItem value="c">C</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Button
+            className="h-8 bg-purple-700"
+            onClick={() => {
+              if (!runningCode) {
+                setRunningCode(true);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+                void dockerCreate().then(() => {
+                  void codeRun().then((response) => {
+                    //Set stateful data to our data to propagate changes
+                    setRunData(response.data);
+
+                    //When setFirstSolve is true we solved the problem (not necessarily the first time)
+                    if (response.data?.reward === true) setFirstSolve(true);
+                    setRunningCode(false);
+                  });
+                });
+              }
+            }}
+          >
+            {runningCode ? "Running..." : "Run"}
+          </Button>
+        </div>
+      </div>
+      <ResizablePanelGroup direction="horizontal" className="">
         {/* Panel 1: Markdown */}
-        <ResizablePanel defaultSize={30} className="bg-[#282A36]">
-          <div className="max-h-[92.5vh] overflow-auto">
-            <div className="flex flex-row items-center justify-between h-[5vh] p-2 bg-zinc-800">
-              <Link href={`/map/${chapterid}`}>
-                <Button className="border bg-purple-950">
-                  <ArrowLeft className="h-4 w-4"></ArrowLeft>
-                </Button>
-              </Link>
-            </div>
+        <ResizablePanel
+          defaultSize={30}
+          className="rounded-lg border-4 border-[#15162c] bg-transparent"
+        >
+          <div className="h-full overflow-auto bg-[#282A36]">
             <ReactMarkdownNoSSR
               remarkPlugins={[remarkGfm]}
               className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
@@ -116,121 +184,97 @@ export default function ProblemView({
             </ReactMarkdownNoSSR>
           </div>
         </ResizablePanel>
-        <ResizableHandle />
+        <ResizableHandle className="border-4 border-transparent bg-transparent" />
         <ResizablePanel defaultSize={70}>
           <ResizablePanelGroup direction="vertical">
             {/* Panel 2: Editor */}
             <ResizablePanel
               defaultSize={40}
               onResize={setCodeSize}
-              className="bg-[#282A36]"
+              className="rounded-lg border-4 border-[#15162c] bg-[#282A36]"
             >
-              <div className="flex flex-col">
-                <div className="flex h-[5vh] justify-between bg-zinc-800 p-1">
-                  <Select onValueChange={setLanguage}>
-                    <SelectTrigger className="w-[180px] bg-purple-950">
-                      <SelectValue placeholder="Python" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Languages</SelectLabel>
-                        <SelectItem value="python">Python</SelectItem>
-                        <SelectItem value="java">Java</SelectItem>
-                        <SelectItem value="cpp">C++</SelectItem>
-                        <SelectItem value="c">C</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Button
-                    className="border bg-purple-950"
-                    onClick={() => {
-                      if (!runningCode) {
-                        setRunningCode(true);
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-                        void dockerCreate().then(() => {
-                          void codeRun().then((response) => {
-                            //Set stateful data to our data to propagate changes
-                            setRunData(response.data);
-
-                            //When setFirstSolve is true we solved the problem (not necessarily the first time)
-                            if (response.data?.reward === true)
-                              setFirstSolve(true);
-                            setRunningCode(false);
-                          });
-                        });
-                      }
-                    }}
-                  >
-                    {runningCode ? "Running..." : "Run"}
-                  </Button>
-                </div>
-                <div className="max-h-100px grow overflow-auto">
-                  <CodeMirrorNoSSR
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    theme={dracula}
-                    height={`${codeSize - 10}vh`}
-                    extensions={[
-                      loadLanguage(
-                        language as "java" | "python" | "cpp" | "c",
-                      )!,
-                    ]} //Typescript shenanigans
-                    basicSetup={{
-                      syntaxHighlighting: true,
-                      closeBrackets: true,
-                      highlightActiveLine: true,
-                      lineNumbers: true,
-                      highlightActiveLineGutter: true,
-                      autocompletion: false,
-                    }}
-                    onChange={(value) => {
-                      setCode(value);
-                    }}
-                  />
-                </div>
+              <div className="max-h-100px grow overflow-auto">
+                <CodeMirrorNoSSR
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  theme={dracula}
+                  height={`${codeSize - 10}vh`}
+                  extensions={[
+                    loadLanguage(language as "java" | "python" | "cpp" | "c")!,
+                  ]} //Typescript shenanigans
+                  basicSetup={{
+                    syntaxHighlighting: true,
+                    closeBrackets: true,
+                    highlightActiveLine: true,
+                    lineNumbers: true,
+                    highlightActiveLineGutter: true,
+                    autocompletion: false,
+                  }}
+                  onChange={(value) => {
+                    setCode(value);
+                  }}
+                  className=""
+                />
               </div>
             </ResizablePanel>
-            <ResizableHandle />
+            <ResizableHandle className="border-4 border-transparent bg-transparent" />
             {/* Panel 3 */}
             <ResizablePanel
               defaultSize={20}
-              className=" overflow-auto  bg-[#282A36]"
+              className="overflow-auto rounded-lg border-4 border-[#15162c] bg-[#282A36]"
             >
               <div className={`flex h-full flex-col items-center`}>
-                <div className="flex h-[5vh] w-full items-center bg-zinc-800 p-1 px-4">
-                  {!runningCode && runData && (
-                    <div className="flex gap-4">
-                      <div>Total: </div>
-                      <div>{runData?.numFailed + runData?.numPassed}</div>
-                      <div>Passed: </div>
-                      <div>{runData?.numPassed} </div>
-                      <div>Failed:</div>
-                      <div> {runData?.numFailed} </div>
-                    </div>
-                  )}
-                  <div className="flex w-full items-center justify-end">
-                    {runData?.solved === true ? (
-                      <>
-                        <Dialog open={firstSolve} onOpenChange={setFirstSolve}>
-                          <DialogTrigger asChild>
-                            <CoinsIcon className="mx-2 h-6 w-6 text-yellow-200" />
-                          </DialogTrigger>
-                          <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
-                            <ReactMarkdownNoSSR
-                              remarkPlugins={[remarkGfm]}
-                              className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                <div className="flex h-[5vh] w-full items-center bg-zinc-800 p-2">
+                  <div className="grid w-full grid-cols-2 items-center justify-between">
+                    <div className="items-center text-xl font-bold">Cases</div>
+
+                    <div className="flex flex-row justify-end gap-2">
+                      <div className="flex w-full items-center justify-end">
+                        {runData?.solved === true ? (
+                          <>
+                            <Dialog
+                              open={firstSolve}
+                              onOpenChange={setFirstSolve}
                             >
-                              {`# You earned...\n` +
-                                `${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}` +
-                                `${`*Reward: ${problem?.gold} gold*`}`}
-                            </ReactMarkdownNoSSR>
-                          </DialogContent>
-                        </Dialog>
-                      </>
-                    ) : null}
+                              <DialogTrigger asChild className="cursor-pointer">
+                                <CoinsIcon className="mx-2 h-6 w-6 text-yellow-200" />
+                              </DialogTrigger>
+                              <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
+                                <ReactMarkdownNoSSR
+                                  remarkPlugins={[remarkGfm]}
+                                  className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                                >
+                                  {`# You earned...\n` +
+                                    `${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}` +
+                                    `${`*Reward: ${problem?.gold} gold*`}`}
+                                </ReactMarkdownNoSSR>
+                              </DialogContent>
+                            </Dialog>
+                          </>
+                        ) : (
+                          <div />
+                        )}
+                      </div>
+                      {!runningCode && runData && (
+                        <div className="flex flex-row justify-end gap-2">
+                          <div className="flex flex-row rounded border-2 border-gray-700 bg-gray-950 p-1">
+                            <Hash />
+                            {runData?.numFailed + runData?.numPassed}
+                          </div>
+                          <div className="flex flex-row rounded border-2 border-green-700 bg-green-950 p-1">
+                            <Check />
+                            {runData?.numPassed}
+                          </div>
+                          <div className="flex flex-row rounded border-2 border-red-700 bg-red-950 p-1">
+                            <X />
+                            {runData?.numFailed}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div
-                  className={`mt-4 h-full max-h-full w-full flex-col space-y-4 overflow-auto  px-2`}
+                  className={`m-2 h-full max-h-full w-full flex-col space-y-4 overflow-auto  px-2`}
                 >
                   {runningCode ? (
                     <div className="flex h-full items-center justify-center font-extrabold text-yellow-200">
@@ -238,14 +282,12 @@ export default function ProblemView({
                     </div>
                   ) : runData ? (
                     runData?.compileError ? (
-                      <div className="flex flex-col min-h-full items-center justify-center p-2 overflow-scroll">
+                      <div className="flex min-h-full flex-col items-center justify-center overflow-scroll p-2">
                         <div className="font-extrabold">Compile Time Error</div>
                         <div className="font-extrabold text-red-500">
-                          {
-                            runData.compileError.split("\n").map((data, idx) => (
-                                <p key={idx}>{data}</p>
-                            ))
-                          }
+                          {runData.compileError.split("\n").map((data, idx) => (
+                            <p key={idx}>{data}</p>
+                          ))}
                         </div>
                       </div>
                     ) : (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { Check, X } from "lucide-react";
 
 interface caseRes {
   num: number;
@@ -21,18 +22,15 @@ export default function CodeCase({ c }: { c: caseRes }) {
   }, []);
 
   return (
-    <div className="w-full flex-1 flex-col justify-between gap-4 rounded-xl border bg-zinc-800 p-2">
+    <div className="w-full flex-1 flex-col justify-between gap-4 rounded-lg bg-[#15162c] p-2">
       <div className="flex h-auto items-center justify-between">
-        <div className="flex gap-2 font-semibold">
-          <div>Case: {c.num}</div>
-          <div>
-            Result:{" "}
-            {c.result ? (
-              <span className="text-green-500">Pass</span>
-            ) : (
-              <span className="text-red-500">Fail</span>
-            )}
-          </div>
+        <div className="flex flex-row gap-2 text-center text-2xl">
+          {c.result ? (
+            <Check className="size-8 text-green-700" />
+          ) : (
+            <X className="size-8 text-red-700" />
+          )}
+          <div>{"Case " + c.num}</div>
         </div>
         <Button
           onClick={(_event) => setOpen(!open)}
@@ -57,7 +55,7 @@ export default function CodeCase({ c }: { c: caseRes }) {
         </Button>
       </div>
       {open && (
-        <div className="flex max-w-full flex-col gap-2 break-words">
+        <div className="mt-2 flex max-w-full flex-col gap-2 break-words rounded-lg bg-[#15162c] p-2">
           <div>Input: </div>
           <div className="whitespace-pre-wrap rounded-md bg-[#1f2937] p-2 font-mono">
             {c.input}
