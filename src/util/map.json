@@ -181,6 +181,12 @@
                     "name": "The Lens of Clarity",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,50],
+                    "name": "The Pebble",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
