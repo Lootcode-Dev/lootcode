@@ -138,7 +138,7 @@ export default async function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                  25,000+ Words of Lore
+                  25,000+ Words of Story
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Across lore collectibles, region descriptions, problem
