@@ -157,6 +157,36 @@
                     "name": "The Cache",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [10,70],
+                    "name": "The Tome of Equilibrium",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [10,90],
+                    "name": "The Index Orb",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,10],
+                    "name": "The Chronoqueue",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "The Lens of Clarity",
+                    "next": [],
+                    "type": "problem"
+                },
+                {
+                    "pos": [30,50],
+                    "name": "The Pebble",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

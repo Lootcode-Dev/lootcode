@@ -44,7 +44,11 @@ export const codeRouter = createTRPCRouter({
           `./src/problems/${region}/${input.name}/lore.md`,
           "utf-8",
         );
-        contents.lore = loreContent.split("\n")[0]?.replace("#", "") ?? "";
+        if (input.region != "the_tower") {
+          contents.lore = loreContent.split("\n")[0]?.replace("#", "") ?? "";
+        } else {
+          contents.lore = loreContent;
+        }
       }
 
       if (goldFile[input.name as keyof typeof goldFile] != 0) {
@@ -278,21 +282,7 @@ export const codeRouter = createTRPCRouter({
               error.stderr as string,
               MAXTRANSMIT,
             );
-            if (
-              thisCase.runtimeError.includes(
-                "WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied",
-              )
-            ) {
-              thisCase.runtimeError = thisCase.runtimeError.replace(
-                "WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied",
-                "",
-              );
-              // Remove empty lines containing only ""
-              thisCase.runtimeError = thisCase.runtimeError.replace(
-                /^\s*[\r\n]/gm,
-                "",
-              );
-            }
+
             thisCase.output = cutData(
               thisCase.runtimeError.replaceAll(ctx.userId, ""),
               MAXTRANSMIT,
@@ -384,8 +374,11 @@ export const codeRouter = createTRPCRouter({
             console.log(user.problems);
 
             // Add the gold to the user's account and solve the problem
-            if(goldFile[input.name as keyof typeof goldFile])
-              user.gold += Math.floor(goldFile[input.name as keyof typeof goldFile] * (1+((getLevel(user) - 1) * .25)));
+            if (goldFile[input.name as keyof typeof goldFile])
+              user.gold += Math.floor(
+                goldFile[input.name as keyof typeof goldFile] *
+                  (1 + (getLevel(user) - 1) * 0.25),
+              );
 
             await db.user.update({
               where: { id: ctx.userId },
