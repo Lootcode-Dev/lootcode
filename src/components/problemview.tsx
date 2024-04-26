@@ -5,13 +5,10 @@ import { dracula } from "@uiw/codemirror-theme-dracula";
 import {
   ArrowLeft,
   Check,
-  Coins,
   CoinsIcon,
-  Cross,
   Hash,
   Loader2,
-  Tally5,
-  X,
+  X
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
@@ -34,17 +31,12 @@ import {
 } from "~/components/ui/select";
 import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
+import { nameToFileName } from "./mapview";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "./ui/dialog";
-import Link from "next/link";
-import { nameToFileName } from "./mapview";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,

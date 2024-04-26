@@ -1,4 +1,4 @@
-import { Button } from "~/components/ui/button";
+import { SignUpButton } from "@clerk/nextjs";
 import {
   ArrowRight,
   BrainIcon,
@@ -7,9 +7,9 @@ import {
   TerminalIcon,
   Youtube,
 } from "lucide-react";
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 export default async function Home() {
   return (

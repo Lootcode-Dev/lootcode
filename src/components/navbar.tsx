@@ -1,6 +1,5 @@
 "use client";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { Button } from "./ui/button";
 import {
   ArrowRight,
   BackpackIcon,
@@ -8,15 +7,15 @@ import {
   MapIcon,
   TrophyIcon,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter();
