@@ -175,6 +175,12 @@
                     "name": "The Chronoqueue",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,30],
+                    "name": "The Lens of Clarity",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
