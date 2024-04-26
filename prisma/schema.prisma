@@ -15,6 +15,7 @@ datasource db {
 model User {
     id        String @id @unique
     email     String @unique
+    name      String
     problems  String
     items     String
     gold      Int
@@ -25,4 +26,6 @@ model User {
     skill1    Int
     skill2    Int
     skill3    Int
+    score     Int
+    time      DateTime
 }

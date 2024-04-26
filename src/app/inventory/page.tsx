@@ -9,7 +9,7 @@ import Inventory from "~/components/inventory";
 
 export default async function Page() {
   const user = await currentUser();
-
+  
   if (!user?.id) redirect(`/auth-callback?origin=inventory`);
 
   const dbUser = await db.user.findFirst({
