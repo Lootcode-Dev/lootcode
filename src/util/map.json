@@ -193,6 +193,12 @@
                     "name": "The Dichomoton",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [30,90],
+                    "name": "The Arborithm",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
