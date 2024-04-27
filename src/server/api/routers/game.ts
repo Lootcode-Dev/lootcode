@@ -155,6 +155,9 @@ export const gameRouter = createTRPCRouter({
       if(goldFile[input.encounterid as keyof typeof goldFile])
         user.gold += Math.floor(goldFile[input.encounterid as keyof typeof goldFile] * (1+((getLevel(user) - 1) * .25)));
 
+      // Update their score
+      user.score += 1;
+
       // Update the user's data
       await db.user.update({
         where: { id: ctx.userId },
