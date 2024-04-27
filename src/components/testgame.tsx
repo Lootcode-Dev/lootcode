@@ -253,7 +253,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
             if (updatedPlayer.health <= 0) {
               clearInterval(intervalRef.current ?? 0);
               setLoopRunning(false);
-              console.log("You lose!");
             }
 
             return {

@@ -38,35 +38,6 @@ export const codeRouter = createTRPCRouter({
       };
       const region = input.region;
 
-      // Sort the Map File
-
-      // First sort mapFile.chapters by their position, sorting by x coordinates, and then by y coordinates
-      mapFile.chapters.sort((a, b) => {
-        if (a.pos[0] === b.pos[0]) {
-          return (a.pos[1] ?? 0) - (b.pos[1] ?? 0);
-        }
-        return (a.pos[0] ?? 0) - (b.pos[0] ?? 0);
-      });
-      // Now, for each chatper, sort the nodes by their position, sorting by x coordinates, and then by y coordinates
-      for (const chapter of mapFile.chapters) {
-        chapter.nodes.sort((a, b) => {
-          if (a.pos[0] === b.pos[0]) {
-            return (a.pos[1] ?? 0) - (b.pos[1] ?? 0);
-          }
-          return (a.pos[0] ?? 0) - (b.pos[0] ?? 0);
-        });
-      }
-
-      // Using the sorted mapfile, take every node name, and add it to an array in order of appearance in mapfile
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const nodeNames: string[] = [];
-      for (const chapter of mapFile.chapters) {
-        for (const node of chapter.nodes) {
-          nodeNames.push(node.name.toLowerCase().replace(/ /g, "_"));
-        }
-      }
-      console.log(nodeNames);
-
       // Add lore if it exists
       if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {
         const loreContent = await readFile(
@@ -220,7 +191,6 @@ export const codeRouter = createTRPCRouter({
       };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
       if (langObject == "Error") {
-        console.log("Invalid language");
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "Invalid language",
@@ -229,7 +199,6 @@ export const codeRouter = createTRPCRouter({
 
       // Get all of our input files
       const filenames = readdirSync(`${problemPathInput}`);
-      // console.log(filenames);
 
       //Make sure the java class name is appropriate for our file system
       if (langObject.ext == "java") {
@@ -255,13 +224,11 @@ export const codeRouter = createTRPCRouter({
       if (langObject.compile) {
         try {
           await $withoutEscaping`${langObject.compile}`; //Compile our code
-          // console.log("Compiled Successfully");
         } catch (error: any) {
           codeGradeResponse.compileError = cutData(
             (error.stderr as string).replaceAll(ctx.userId, ""),
             MAXTRANSMIT,
           );
-          //console.log(error);
 
           //Clean Up
           await $`docker rm ${ctx.userId}${input.name} -f`;
@@ -297,15 +264,12 @@ export const codeRouter = createTRPCRouter({
           if (error.exitCode === 124) {
             //Time Limit Exceeded
             //TLE exist code is 124
-            // console.log("Time limit exceeded");
             thisCase.runtimeError = "Time limit exceeded";
             thisCase.output = "Time limit exceeded";
             codeGradeResponse.numFailed++;
             i++;
           } else {
             //Runtime error
-            // console.log("Runtime error");
-            // console.log(error.stderr);
 
             thisCase.runtimeError = cutData(
               error.stderr as string,
@@ -346,8 +310,6 @@ export const codeRouter = createTRPCRouter({
         const expected =
           await $`cat ./src/problems/${region}/${input.name}/output/${expectedFile}`;
 
-        // console.log("Output: " + output.stdout);
-        // console.log("Expected: " + expected.stdout);
         const expectedOutput = expected.stdout.replace(/\s+$/, "");
         const userOutput = output.stdout.replace(/\s+$/, "");
 
@@ -355,7 +317,6 @@ export const codeRouter = createTRPCRouter({
         thisCase.output = cutData(userOutput, MAXTRANSMIT);
 
         if (userOutput === expectedOutput) {
-          // console.log("Correct answer\n");
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
@@ -365,7 +326,6 @@ export const codeRouter = createTRPCRouter({
           ) {
             thisCase.output += "\nPRESENTATION ERROR";
           }
-          // console.log("Wrong answer\n");
           codeGradeResponse.numFailed++;
         }
         codeGradeResponse.cases.push(thisCase);
@@ -387,7 +347,6 @@ export const codeRouter = createTRPCRouter({
 
       // Check if the user has fully passed the problem for the first time, if so, reward them
       if (codeGradeResponse.numFailed === 0) {
-        console.log(checkCompletion());
         if (checkCompletion() !== -1) {
           const index = checkCompletion();
           const user = await db.user.findFirst({
@@ -398,12 +357,10 @@ export const codeRouter = createTRPCRouter({
             user.time = new Date();
 
             const currentProblems = user.problems.split("");
-            console.log(currentProblems);
             currentProblems[index] = "1";
 
             // Join the array back into a string
             user.problems = currentProblems.join("");
-            console.log(user.problems);
 
             // Add the gold to the user's account and solve the problem
             if (goldFile[input.name as keyof typeof goldFile])
@@ -419,7 +376,6 @@ export const codeRouter = createTRPCRouter({
             codeGradeResponse.reward = true;
           } else {
             codeGradeResponse.reward = true;
-            console.log("User has already completed this problem");
           }
         }
       }
@@ -430,12 +386,10 @@ export const codeRouter = createTRPCRouter({
           where: { id: ctx.userId },
         });
         if (user?.problems[index] === "1") {
-          console.log("User has already completed this problem");
           codeGradeResponse.solved = true;
         }
       }
 
-      console.log(codeGradeResponse);
       return codeGradeResponse;
     }),
 });

@@ -59,7 +59,6 @@ export default async function Problem({ params }: PageProps) {
     const encName = params.problemid
       .replace(/_/g, " ")
       .replace(/\b\w/g, (c) => c.toUpperCase());
-    console.log(encName);
     const encounter = region.nodes.find((node) => node.name === encName);
     const prereqs = encounter?.next.map((str) =>
       str.toLowerCase().replace(/\s/g, "_"),

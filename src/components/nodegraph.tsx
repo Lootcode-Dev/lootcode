@@ -35,7 +35,6 @@ export default function NodeGraph({
     const svgRect = svgElement.getBoundingClientRect();
     const mouseX = ((event.clientX - svgRect.left) / svgRect.width) * 100;
     const mouseY = ((event.clientY - svgRect.top) / svgRect.height) * 100;
-    console.log("Mouse position:", mouseX, mouseY);
   };
 
   if (nodes == undefined)
@@ -130,7 +129,6 @@ export default function NodeGraph({
             <circle
               onClick={() => {
                 getNode != index ? setNode(index) : setNode(-1);
-                console.log(getNode);
               }}
               r={"" + nodeRadius}
               cx={"" + getNodeX(node.pos[0] ?? 0)}
@@ -171,7 +169,6 @@ function findNodePos(list: Node[], name: string): number[] | undefined {
   pos = [-1, -1]; // Default value for typescript
   list.map((node: Node) => {
     if (nameToFileName(node.name) === nameToFileName(name)) {
-      // console.log("inside: " + node.pos);
       pos = node.pos;
       return;
     }
