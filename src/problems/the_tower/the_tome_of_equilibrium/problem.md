@@ -10,7 +10,7 @@ Hurry up and get this done... Getting the Tome back is important, but I bet the 
 
 ## Input
 
-The first line of input will contain an Integer n (1 ≤ n ≤ 10^5), representing the number of intervals.
+The first line of input will contain an Integer *n (1 ≤ n ≤ 10^5)*, representing the number of intervals.
 The next n lines will contain two space integers representing the first and second value in the interval, these values will not exceed 10^9 (some professors think 31 year long exams are necessary).
 
 ```
