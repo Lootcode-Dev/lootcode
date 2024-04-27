@@ -3,7 +3,7 @@
     [
         {
             "name": "Lexica",
-            "pos": [79,72],
+            "pos": [79,75],
             "next": [],
             "nodes": [
                 {
@@ -58,7 +58,7 @@
         },
         {
             "name":"Vectara",
-            "pos": [30,10],
+            "pos": [12,26],
             "next": [],
             "nodes" : [
                 {
@@ -137,7 +137,7 @@
         },
         {
             "name":"The Tower",
-            "pos": [45,15],
+            "pos": [46,19],
             "next": ["Lexica", "Vectara", "Stackspires", "Queuesgard", "Arbonclave", "Findara", "Compendia", "Nodak", "Bitwise Bastion", "Arithmend", "Dynamar", "The Thicket"],
             "nodes":[
                 {
@@ -216,7 +216,7 @@
         },
         {
             "name":"Stackspires",
-            "pos": [50,10],
+            "pos": [65, 50],
             "next": [],
             "nodes":[
             {
@@ -265,7 +265,7 @@
         },
         {
             "name":"Queuesgard",
-            "pos": [70,10],
+            "pos": [36,92],
             "next": [],
             "nodes":[
                 {
@@ -302,7 +302,7 @@
         },
         {
             "name":"Arbonclave",
-            "pos": [90, 10],
+            "pos": [85, 35],
             "next": [],
             "nodes":[
                 {
@@ -351,7 +351,7 @@
         },
         {
             "name":"Findara",
-            "pos": [10, 40],
+            "pos": [50, 68],
             "next": [],
             "nodes":[
                 {
@@ -400,7 +400,7 @@
         },
         {
             "name":"Compendia",
-            "pos": [30, 40],
+            "pos": [61, 92],
             "next": [],
             "nodes":[
                 {
@@ -437,7 +437,7 @@
         },
         {
             "name":"Nodak",
-            "pos": [50, 40],
+            "pos": [13, 87],
             "next": [],
             "nodes":[
                 {
@@ -474,7 +474,7 @@
         },
         {
             "name":"Bitwise Bastion",
-            "pos": [70, 40],
+            "pos": [7, 60],
             "next": [],
             "nodes":[
                 {
@@ -523,7 +523,7 @@
         },
         {
             "name":"Arithmend",
-            "pos": [90, 40],
+            "pos": [29, 64],
             "next": [],
             "nodes":[
                 {
@@ -572,7 +572,7 @@
         },
         {
             "name":"Dynamar",
-            "pos": [10, 70],
+            "pos": [18, 47],
             "next": [],
             "nodes":[
                 {
@@ -615,7 +615,7 @@
         },
         {
             "name":"The Thicket",
-            "pos": [30, 70],
+            "pos": [91, 94],
             "next": [],
             "nodes":[
                 {
