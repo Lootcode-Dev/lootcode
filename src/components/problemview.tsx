@@ -83,6 +83,7 @@ export default function ProblemView({
         return;
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { data: problem } = api.code.getProblem.useQuery({
@@ -90,7 +91,7 @@ export default function ProblemView({
     region: chapterid,
   });
 
-  const { data: runResponse, refetch: codeRun } = api.code.runProblem.useQuery(
+  const { refetch: codeRun } = api.code.runProblem.useQuery(
     {
       name: problemid,
       code: code,
@@ -100,11 +101,10 @@ export default function ProblemView({
     { enabled: false, retry: false },
   );
 
-  const { data: s, refetch: dockerCreate } =
-    api.docker.createDockerContainer.useQuery(
-      { name: problemid },
-      { enabled: false, retry: false },
-    );
+  const { refetch: dockerCreate } = api.docker.createDockerContainer.useQuery(
+    { name: problemid },
+    { enabled: false, retry: false },
+  );
 
   // Check if the user is a mobile user
   if (isMobile) {
@@ -113,7 +113,7 @@ export default function ProblemView({
 
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
-      <div className="m-2 flex grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 text-2xl font-bold">
+      <div className="m-2 grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 text-2xl font-bold">
         <div className="flex flex-row items-center gap-2">
           <a href={`/map/${chapterid}`}>
             <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>

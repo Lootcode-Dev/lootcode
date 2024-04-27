@@ -2,13 +2,13 @@
 
 import { CoinsIcon, LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { GUser, Stats, getItem, getUserStats } from "~/app/game/utility";
+import { isMobile } from "react-device-detect";
+import { getItem, type GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
-import StatDisplay from "./statdisplay";
-import { isMobile } from "react-device-detect";
 import Mobile from "./mobile";
+import StatDisplay from "./statdisplay";
 
 interface IParams {
   name: string;
@@ -16,12 +16,11 @@ interface IParams {
 }
 
 export default function Shop({ name, user }: IParams) {
-  const [stats, setStats] = useState<Stats>(getUserStats(user));
   const [getUser, setUser] = useState<GUser>(user);
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
 
-  const { data: newUser, refetch: buyCallback } = api.game.buyItem.useQuery(
+  const { refetch: buyCallback } = api.game.buyItem.useQuery(
     {
       item: selItem,
     },
@@ -39,7 +38,7 @@ export default function Shop({ name, user }: IParams) {
         }
       });
     }
-  }, [selItem]);
+  }, [buyCallback, getUser, selItem]);
 
   // Check if the user is a mobile user
   if (isMobile) {

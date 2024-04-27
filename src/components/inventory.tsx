@@ -3,7 +3,7 @@
 import { LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { GUser, isEquipped } from "~/app/game/utility";
+import { type GUser, isEquipped } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
@@ -22,7 +22,7 @@ export default function Inventory({ name, user }: IParams) {
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
 
-  const { data: newUser, refetch: equipCallback } =
+  const { refetch: equipCallback } =
     api.game.equipItemID.useQuery(
       {
         item: selItem,

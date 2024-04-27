@@ -9,7 +9,7 @@ import { Button } from "~/components/ui/button";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { GUser } from "~/app/game/utility";
+import { type GUser } from "~/app/game/utility";
 import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
@@ -89,7 +89,7 @@ export default function MapView({ user, chapterid }: IParams) {
       { enabled: false, retry: false },
     );
 
-  const { data: algdesc, refetch: getAlgDesc } =
+  const { data: algdesc } =
     api.map.getDescription.useQuery(
       {
         name: nameToFileName("algorion"),
@@ -110,7 +110,7 @@ export default function MapView({ user, chapterid }: IParams) {
       void getHomeChDesc();
       setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
     }
-  }, [selNode, getHomeChDesc]);
+  }, [selNode, getHomeChDesc, chapter, user.problems]);
 
   function setNodeColor(name: string): string {
     let ntype = "";
@@ -525,7 +525,7 @@ export function chapterToIndex(name: string): number {
 export function isRegionUnlocked(name: string): boolean {
   //make a fake node so the linter stops being pissy
   let n: Node = { name: "null", pos: [0, 0], next: [] };
-  mapFile.chapters.map((value, index) => {
+  mapFile.chapters.map((value) => {
     if (nameToFileName(value.name) == nameToFileName(name)) {
       n = value;
       return;
@@ -548,7 +548,7 @@ export function isRegionUnlocked(name: string): boolean {
 export function isNodeUnlocked(name: string, ch: number): boolean {
   //make a fake node so the linter stops being pissy
   let n: Node = { name: "null", pos: [0, 0], next: [] };
-  mapFile.chapters[ch]?.nodes.map((value, index) => {
+  mapFile.chapters[ch]?.nodes.map((value) => {
     if (nameToFileName(value.name) == nameToFileName(name)) {
       n = value;
       return;

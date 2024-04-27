@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { GUser, getLevel, getUserStats } from "~/app/game/utility";
+import { type GUser, getLevel, getUserStats } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
 import { nameToFileName } from "./mapview";
@@ -72,7 +72,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     region: reg,
   });
 
-  const { data: won, mutate: beatGame } = api.game.beatEncounter.useMutation(
+  const { mutate: beatGame } = api.game.beatEncounter.useMutation(
     {},
   );
 
@@ -106,7 +106,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       setEnemies(convertedEnemies);
       setOriginalEnemies(convertedEnemies);
     }
-  }, [data, user]);
+  }, [data, enc, reg, user]);
 
   useEffect(() => {
     const convertedPlayer = {
@@ -315,7 +315,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <div className="flex justify-center space-x-4 pt-2">
           <div className="flex size-full flex-col items-center justify-center">
-            <div className="flex grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
+            <div className="grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
               {!data ? (
                 <div className="flex items-center justify-center">
                   <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
@@ -445,7 +445,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                   </div>
                 </div>
                 <div className="col-span-2 flex flex-col items-center justify-center p-16">
-                  <div className="flex grid grid-cols-3 items-center gap-12">
+                  <div className="grid grid-cols-3 items-center gap-12">
                     {enemies?.map((enemy, index) => (
                       <Tooltip key={index}>
                         <TooltipTrigger>

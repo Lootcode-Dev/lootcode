@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GUser } from "~/app/game/utility";
+import { type GUser } from "~/app/game/utility";
 import LeaderboardCard from "~/components/leaderboardcard";
 import { Button } from "~/components/ui/button";
 
@@ -30,7 +30,7 @@ export default function Leaderboard({
   const [getPage, setPage] = useState(0);
   const [getLoader, setLoader] = useState(false);
 
-  const { data, refetch, isLoading, isError } =
+  const { refetch } =
     api.leaderboard.grabUsers.useQuery(
       { page: getPage, perPage: perPage },
       {
@@ -54,7 +54,7 @@ export default function Leaderboard({
       setUsers(res.data ?? []);
       setLoader(false);
     });
-  }, [getPage]);
+  }, [getPage, refetch]);
 
   // Check if the user is a mobile user
   if (isMobile) {

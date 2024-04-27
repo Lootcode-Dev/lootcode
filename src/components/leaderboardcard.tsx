@@ -1,4 +1,4 @@
-import { GUser } from "~/app/game/utility";
+import { type GUser } from "~/app/game/utility";
 
 interface LParams {
   user: GUser;
