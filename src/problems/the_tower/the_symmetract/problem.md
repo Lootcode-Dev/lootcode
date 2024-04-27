@@ -2,7 +2,7 @@
 
 The Symmetract, a magical tabloid device, is the source of logic and reason within Arithmend. Said to be responsible for the creation of the beautifully structured architecture of the region, this device is crucial to the Numerans of Arithmend. Now, locked in the tower, the Symmetract has been sent into a stasis of sorts, and must be reactivated. Across the rectangular face of the Symmetract, a user is able to input different runes, commands, or spells. The reactivation sequence is quite simple, but requires extreme precision and accuracy.
 
-During the reactivation sequence, the Symmetract will display two circular regions. In order to reactivate the Symmetract, the user must touch a point within or on the boundary of each circle simultaneously, with the two points being pressed needing to be as close as possible. The Symmetract will then be reactivated, and the user will be able to access the information stored within.
+During the reactivation sequence, the Symmetract will display two circular regions. In order to reactivate the Symmetract, the user must touch a point within or on the boundary of each circle simultaneously, with the two points needing to be as close as possible. The Symmetract will then be reactivated, and the user will be able to access the information stored within.
 
 The laws of arithmetic itself have begun to unravel in Arithmend. Take back the Symmetract, and get the Numerans back on track!
 

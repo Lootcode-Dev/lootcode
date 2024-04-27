@@ -205,6 +205,12 @@
                     "name": "The Symmetract",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50,30],
+                    "name": "The Root",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },
