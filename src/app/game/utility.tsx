@@ -3,6 +3,7 @@ import itemList from "~/util/items.json";
 export interface GUser {
   id: string;
   email: string;
+  name: string;
   problems: string;
   items: string;
   gold: number;
@@ -13,6 +14,8 @@ export interface GUser {
   skill1: number;
   skill2: number;
   skill3: number;
+  score: number;
+  time: Date;
 }
 
 export interface Item {

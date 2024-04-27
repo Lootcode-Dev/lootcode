@@ -365,6 +365,9 @@ export const codeRouter = createTRPCRouter({
             where: { id: ctx.userId },
           });
           if (user?.problems[index] === "0") {
+            user.score += 1;
+            user.time = new Date();
+            
             const currentProblems = user.problems.split("");
             console.log(currentProblems);
             currentProblems[index] = "1";

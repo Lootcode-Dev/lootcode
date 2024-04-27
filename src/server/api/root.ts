@@ -1,6 +1,7 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { authRouter } from "./routers/auth";
 import { codeRouter } from "./routers/code";
+import { leaderRouter } from "./routers/leaderboard";
 import { mapRouter } from "./routers/map";
 import { dockerRouter } from "./routers/docker";
 import { gameRouter } from "./routers/game";
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   auth: authRouter,
   code: codeRouter,
   docker: dockerRouter,
+  leaderboard: leaderRouter,
   map: mapRouter,
   game: gameRouter,
 });
