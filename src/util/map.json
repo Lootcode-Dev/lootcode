@@ -22,7 +22,7 @@
                     "pos": [20,30],
                     "name": "Stable Words",
                     "next": ["Leaking Letters", "Fanatic"],
-                    "type": "game"
+                    "type": "problem"
                 },
                 {
                     "pos": [90,50],
