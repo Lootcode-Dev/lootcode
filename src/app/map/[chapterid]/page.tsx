@@ -61,7 +61,7 @@ export default async function Page({ params }: PageProps) {
   return <MapView user={dbUser} chapterid={params.chapterid}></MapView>;
 }
 
-export function nameToFileName(name: string): string {
+function nameToFileName(name: string): string {
   return name.split(" ").join("_").toLowerCase();
 }
 

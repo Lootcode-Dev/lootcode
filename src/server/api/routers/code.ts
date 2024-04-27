@@ -47,7 +47,18 @@ export const codeRouter = createTRPCRouter({
         }
         return (a.pos[0] ?? 0) - (b.pos[0] ?? 0);
       });
-      console.log(mapFile.chapters);
+      // Now, for each chatper, sort the nodes by their position, sorting by x coordinates, and then by y coordinates
+      for (const chapter of mapFile.chapters) {
+        chapter.nodes.sort((a, b) => {
+          if (a.pos[0] === b.pos[0]) {
+            return (a.pos[1] ?? 0) - (b.pos[1] ?? 0);
+          }
+          return (a.pos[0] ?? 0) - (b.pos[0] ?? 0);
+        });
+      }
+
+      // Write the fully sorted mapFile into a temp.json with proper newline
+      await writeFile("./src/util/temp.json", JSON.stringify(mapFile, null, 2));
 
       // Add lore if it exists
       if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {

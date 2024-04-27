@@ -136,78 +136,91 @@
             ]
         },
         {
-            "name":"The Tower",
-            "pos": [46,19],
-            "next": ["Lexica", "Vectara", "Stackspires", "Queuesgard", "Arbonclave", "Findara", "Compendia", "Nodak", "Bitwise Bastion", "Arithmend", "Dynamar", "The Thicket"],
-            "nodes":[
+            "name": "The Tower",
+            "pos": [50, 50],
+            "next": [
+                "Lexica",
+                "Vectara",
+                "Stackspires",
+                "Queuesgard",
+                "Arbonclave",
+                "Findara",
+                "Compendia",
+                "Nodak",
+                "Bitwise Bastion",
+                "Arithmend",
+                "Dynamar",
+                "The Thicket"
+            ],
+            "nodes": [
                 {
-                    "pos": [10,10],
+                    "pos": [50, 75],
                     "name": "The Edgex",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,30],
+                    "pos": [62, 71],
                     "name": "The Alphabind",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,50],
+                    "pos": [71, 62],
                     "name": "The Cache",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,70],
+                    "pos": [75, 50],
                     "name": "The Tome of Equilibrium",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [10,90],
+                    "pos": [71, 38],
                     "name": "The Index Orb",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,10],
+                    "pos": [62, 29],
                     "name": "The Chronoqueue",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,30],
+                    "pos": [50, 25],
                     "name": "The Lens of Clarity",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,50],
+                    "pos": [38, 29],
                     "name": "The Pebble",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,70],
+                    "pos": [29, 38],
                     "name": "The Dichomoton",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [30,90],
+                    "pos": [25, 50],
                     "name": "The Arborithm",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [50,10],
+                    "pos": [29, 62],
                     "name": "The Symmetract",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [50,30],
+                    "pos": [38, 71],
                     "name": "The Root",
                     "next": [],
                     "type": "problem"

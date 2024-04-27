@@ -184,7 +184,7 @@ export default function MapView({ user, chapterid }: IParams) {
                 <div className="flex h-fit w-full shrink">
                   <NodeGraph
                     nodes={mapFile.chapters[chapter]?.nodes}
-                    nodeRadius={25}
+                    nodeRadius={20}
                     nodeColor={setNodeColor}
                     getNode={selNode}
                     setNode={setSelNode}
