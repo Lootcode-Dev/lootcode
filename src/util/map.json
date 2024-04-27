@@ -199,6 +199,12 @@
                     "name": "The Arborithm",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50,10],
+                    "name": "The Symmetract",
+                    "next": [],
+                    "type": "problem"
                 }
             ]
         },

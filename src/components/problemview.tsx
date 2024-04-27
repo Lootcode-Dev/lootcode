@@ -2,14 +2,7 @@
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { dracula } from "@uiw/codemirror-theme-dracula";
-import {
-  ArrowLeft,
-  Check,
-  CoinsIcon,
-  Hash,
-  Loader2,
-  X
-} from "lucide-react";
+import { ArrowLeft, Check, CoinsIcon, Hash, Loader2, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
@@ -32,11 +25,7 @@ import {
 import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
 import { nameToFileName } from "./mapview";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -189,7 +178,7 @@ export default function ProblemView({
               <CodeMirrorNoSSR
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 theme={dracula}
-                height={`${80 * codeSize/100}vh`}
+                height={`${(80 * codeSize) / 100}vh`}
                 extensions={[
                   loadLanguage(language as "java" | "python" | "cpp" | "c")!,
                 ]} //Typescript shenanigans
