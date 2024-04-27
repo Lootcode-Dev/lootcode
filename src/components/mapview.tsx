@@ -39,6 +39,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { isMobile } from "react-device-detect";
+import Mobile from "./mobile";
 
 interface Node {
   pos: number[];
@@ -139,6 +141,11 @@ export default function MapView({ user, chapterid }: IParams) {
         </div>
       </main>
     );
+
+  // Check if the user is a mobile user
+  if (isMobile) {
+    return <Mobile />;
+  }
 
   return (
     <TooltipProvider>

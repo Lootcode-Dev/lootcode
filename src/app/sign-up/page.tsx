@@ -2,6 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function SignInPage() {
+
   return (
     <div className=" flex h-[92.5vh] w-full flex-col  bg-gradient-to-b from-[#2e026d] to-[#15162c]">
       <div className="flex items-center justify-center p-8 text-white lg:p-12 ">

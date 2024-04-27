@@ -1,19 +1,16 @@
 "use client";
 
-import {
-  LoaderIcon
-} from "lucide-react";
+import { LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import {
-  GUser,
-  isEquipped
-} from "~/app/game/utility";
+import { GUser, isEquipped } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import Mobile from "./mobile";
+import { isMobile } from "react-device-detect";
 
 interface IParams {
   name: string;
@@ -47,6 +44,11 @@ export default function Inventory({ name, user }: IParams) {
       });
     }
   }, [equipCallback, getUser, selItem]);
+
+  // Check if the user is a mobile user
+  if (isMobile) {
+    return <Mobile />;
+  }
 
   return (
     <div className="flex flex-row">

@@ -14,11 +14,11 @@ import { Button } from "~/components/ui/button";
 export default async function Home() {
   return (
     <>
-      <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] px-4 text-white md:px-0">
         <div className="mt-[-7.5vh] flex h-screen w-full items-center justify-center p-4">
-          <div className="flex w-full max-w-7xl items-center justify-between space-x-12">
+          <div className="grid w-full max-w-7xl grid-cols-1 items-center justify-between  md:grid-cols-2">
             <div className="space-y-2">
-              <div className="flex content-center items-center">
+              <div className="grid grid-cols-1 content-center items-center md:flex ">
                 <Image
                   src={"/logos/lootcode-no-floor.png"}
                   width={512}
@@ -37,7 +37,7 @@ export default async function Home() {
                 Explore the world, fight enemies, and uncover the mystery of the
                 world of Algorion.
               </p>
-              <div className="flex space-x-4">
+              <div className="hidden space-x-4 md:flex">
                 <Button className="mt-4 bg-purple-700 text-white">
                   <SignUpButton>
                     <div className="flex items-center">
@@ -48,16 +48,14 @@ export default async function Home() {
                 </Button>
               </div>
             </div>
-            <div className="flex items-center justify-center">
-              <div className="h-auto w-[40vw]">
-                <Image
-                  src={"/maps/map.png"}
-                  height={1920}
-                  width={1080}
-                  alt={"A colorful fantasy background"}
-                  className="h-auto w-[40vw]"
-                />
-              </div>
+            <div className="mt-8 flex w-full items-center justify-center px-4">
+              <Image
+                src={"/maps/map.png"}
+                height={720}
+                width={1280}
+                alt={"A colorful fantasy background"}
+                className="mt-6 h-full w-auto rounded-3xl border-2 p-2 transition-transform hover:scale-105 md:mt-0"
+              />
             </div>
           </div>
         </div>
@@ -72,7 +70,7 @@ export default async function Home() {
                 into a simple, yet engaging gameplay loop.
               </p>
             </div>
-            <div className="mx-auto grid max-w-sm items-start gap-24 lg:max-w-none lg:grid-cols-3 lg:grid-rows-1">
+            <div className="mx-auto grid max-w-sm items-start gap-10 md:gap-24 lg:max-w-none lg:grid-cols-3 lg:grid-rows-1">
               <div className="flex flex-col items-center space-y-2 rounded-lg border border-purple-500 bg-[#15162c] p-4 drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
                 <div className="rounded-full bg-purple-500 p-3 ">
                   <TerminalIcon className="h-6 w-6" />
@@ -110,7 +108,7 @@ export default async function Home() {
           </div>
         </section>
         <section className="w-full md:py-24 lg:py-72">
-          <div className="mb-24 space-y-4 text-center">
+          <div className="mb-8 mt-12 space-y-4 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
               Expansive Gameplay
             </h2>
@@ -121,10 +119,10 @@ export default async function Home() {
               is!
             </p>
           </div>
-          <div className="container grid grid-cols-2 gap-12 px-4 md:px-6">
+          <div className="container grid grid-cols-1 gap-12 px-4 md:grid-cols-2 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl  font-bold tracking-tighter md:text-4xl/tight">
                   12 Unique Regions
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -137,7 +135,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl  font-bold tracking-tighter md:text-4xl/tight">
                   25,000+ Words of Story
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -150,7 +148,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl font-bold tracking-tighter md:text-4xl/tight">
                   75+ Problems
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -162,7 +160,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl font-bold tracking-tighter md:text-4xl/tight">
                   35+ Encounters
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -174,7 +172,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl  font-bold tracking-tighter md:text-4xl/tight">
                   35+ Collectibles
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -186,7 +184,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                <h2 className="text-xl  font-bold tracking-tighter md:text-4xl/tight">
                   25+ Items
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -201,7 +199,7 @@ export default async function Home() {
         <section className="w-full pb-56">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              <h2 className="pt-12 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 Gallery
               </h2>
               <p className="mx-auto max-w-[700px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">

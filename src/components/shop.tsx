@@ -1,20 +1,14 @@
 "use client";
 
-import {
-  CoinsIcon,
-  LoaderIcon
-} from "lucide-react";
+import { CoinsIcon, LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-  GUser,
-  Stats,
-  getItem,
-  getUserStats
-} from "~/app/game/utility";
+import { GUser, Stats, getItem, getUserStats } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
+import { isMobile } from "react-device-detect";
+import Mobile from "./mobile";
 
 interface IParams {
   name: string;
@@ -46,6 +40,11 @@ export default function Shop({ name, user }: IParams) {
       });
     }
   }, [selItem]);
+
+  // Check if the user is a mobile user
+  if (isMobile) {
+    return <Mobile />;
+  }
 
   return (
     <div className="flex flex-row">

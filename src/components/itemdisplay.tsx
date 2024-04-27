@@ -7,6 +7,8 @@ import {
   Wand2
 } from "lucide-react";
 import { getItem } from "~/app/game/utility";
+import Mobile from "./mobile";
+import { isMobile } from "react-device-detect";
 
 interface IParams {
   id: number;
@@ -14,6 +16,11 @@ interface IParams {
 
 export default function ItemDisplay({ id }: IParams) {
   const item = getItem(id);
+
+  // Check if the user is a mobile user
+  if (isMobile) {
+    return <Mobile />;
+  }
 
   return (
     <div className="items-left mx-2 flex flex-col text-2xl">
@@ -81,7 +88,7 @@ export default function ItemDisplay({ id }: IParams) {
         )}
       </div>
       <div className="text-center text-sm">
-        {item?.type[0]?.toUpperCase() + item?.type.substring(1) ?? ''}
+        {item?.type[0]?.toUpperCase() + item!.type.substring(1) ?? ''}
       </div>
     </div>
   );

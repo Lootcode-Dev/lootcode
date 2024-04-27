@@ -22,8 +22,8 @@ export default function Navbar() {
 
   return (
     <TooltipProvider>
-      <nav className="z-30 flex h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110">
-        <div className="nt-bold flex-1 text-2xl font-bold">
+      <nav className="z-30 hidden h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110 md:flex">
+        <div className="nt-bold flex-1 text-2xl font-bold ">
           <h1 className="text-xl font-bold">
             <div className="flex items-center">
               <Image

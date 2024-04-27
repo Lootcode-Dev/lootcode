@@ -15,10 +15,8 @@ export default function LeaderboardCard({ user, place }: LParams) {
         {findExt(place)}
       </b>
       <b className="w-[20%] overflow-clip">{user.name}</b>
-      <p  className="w-[20%] overflow-clip">Solves: {user.score}</p>
-      <p  className="w-[30%] overflow-clip">
-        {formatTime(user.time)}
-      </p>
+      <p className="w-[20%] overflow-clip">Solves: {user.score}</p>
+      <p className="w-[30%] overflow-clip">{formatTime(user.time)}</p>
     </span>
   );
 }
@@ -27,18 +25,19 @@ function formatTime(d: Date) {
   let res = "";
 
   // The date formatted
-  if (d.getMonth() < 10) res+="0";
-  res += (d.getMonth()+1)+"/";
+  if (d.getMonth() < 10) res += "0";
+  res += d.getMonth() + 1 + "/";
 
-  if (d.getDate() < 10) res+="0";
-  res += d.getDate()+"/";
+  if (d.getDate() < 10) res += "0";
+  res += d.getDate() + "/";
 
   res += d.getFullYear();
-  
 
   res += " ";
   //24 Hour Time converted into 12 Hour
-  res += (d.getHours()%12 == 0 ? d.getHours()%12+12 : d.getHours()%12)+":";
+  res +=
+    (d.getHours() % 12 == 0 ? (d.getHours() % 12) + 12 : d.getHours() % 12) +
+    ":";
 
   if (d.getMinutes() < 10) res += "0";
   res += d.getMinutes();

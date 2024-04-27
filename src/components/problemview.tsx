@@ -26,6 +26,8 @@ import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
 import { nameToFileName } from "./mapview";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import Mobile from "./mobile";
+import { isMobile } from "react-device-detect";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
   ssr: false,
@@ -103,6 +105,11 @@ export default function ProblemView({
       { name: problemid },
       { enabled: false, retry: false },
     );
+
+  // Check if the user is a mobile user
+  if (isMobile) {
+    return <Mobile />;
+  }
 
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
