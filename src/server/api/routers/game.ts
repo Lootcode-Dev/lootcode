@@ -157,6 +157,7 @@ export const gameRouter = createTRPCRouter({
 
       // Update their score
       user.score += 1;
+      user.time = new Date();
 
       // Update the user's data
       await db.user.update({
