@@ -38,6 +38,17 @@ export const codeRouter = createTRPCRouter({
       };
       const region = input.region;
 
+      // Sort the Map File
+
+      // First sort mapFile.chapters by their position, sorting by x coordinates, and then by y coordinates
+      mapFile.chapters.sort((a, b) => {
+        if (a.pos[0] === b.pos[0]) {
+          return (a.pos[1] ?? 0) - (b.pos[1] ?? 0);
+        }
+        return (a.pos[0] ?? 0) - (b.pos[0] ?? 0);
+      });
+      console.log(mapFile.chapters);
+
       // Add lore if it exists
       if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {
         const loreContent = await readFile(
@@ -367,7 +378,7 @@ export const codeRouter = createTRPCRouter({
           if (user?.problems[index] === "0") {
             user.score += 1;
             user.time = new Date();
-            
+
             const currentProblems = user.problems.split("");
             console.log(currentProblems);
             currentProblems[index] = "1";

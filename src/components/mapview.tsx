@@ -188,7 +188,7 @@ export default function MapView({ user, chapterid }: IParams) {
                     nodeColor={setNodeColor}
                     getNode={selNode}
                     setNode={setSelNode}
-                    bgImg={"/test_bg.png"}
+                    bgImg={"map"}
                   />
                 </div>
                 {/*fixing height for now*/}
@@ -368,11 +368,11 @@ export default function MapView({ user, chapterid }: IParams) {
                 <div className="flex h-fit w-full shrink">
                   <NodeGraph
                     nodes={mapFile.chapters}
-                    nodeRadius={30}
+                    nodeRadius={15}
                     nodeColor={setNodeChapterColor}
                     getNode={selNode}
                     setNode={setSelNode}
-                    bgImg={"/test_bg.png"}
+                    bgImg={"home"}
                   />
                 </div>
                 <div>

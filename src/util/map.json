@@ -3,7 +3,7 @@
     [
         {
             "name": "Lexica",
-            "pos": [10,10],
+            "pos": [79,72],
             "next": [],
             "nodes": [
                 {
@@ -137,7 +137,7 @@
         },
         {
             "name":"The Tower",
-            "pos": [50,70],
+            "pos": [45,15],
             "next": ["Lexica", "Vectara", "Stackspires", "Queuesgard", "Arbonclave", "Findara", "Compendia", "Nodak", "Bitwise Bastion", "Arithmend", "Dynamar", "The Thicket"],
             "nodes":[
                 {
