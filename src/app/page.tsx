@@ -20,7 +20,7 @@ export default async function Home() {
             <div className="space-y-2">
               <div className="flex content-center items-center">
                 <Image
-                  src={"/lootcode-no-floor.png"}
+                  src={"/logos/lootcode-no-floor.png"}
                   width={512}
                   height={512}
                   alt={"lootcode logo"}
@@ -51,7 +51,7 @@ export default async function Home() {
             <div className="flex items-center justify-center">
               <div className="h-auto w-[40vw]">
                 <Image
-                  src={"/homepage2.png"}
+                  src={"/maps/map.png"}
                   height={1920}
                   width={1080}
                   alt={"A colorful fantasy background"}
@@ -214,7 +214,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -225,7 +225,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -236,7 +236,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -247,7 +247,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -258,7 +258,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -269,7 +269,7 @@ export default async function Home() {
                 alt="Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
                 height="225"
-                src="/test_bg.png"
+                src="/maps/board.png"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",

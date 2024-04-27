@@ -8,7 +8,7 @@ The region of the Arborithm's domain is represented by a white grid of n × m sq
 
 Here is an example of the sample input
 
-![](http://localhost:3000/Arborithm.png)
+![](http://localhost:3000/problems/Arborithm.png)
 
 If you are able to determine the number of regions that are unaffected by the plague, you can identify with certainty points in which you will be safe. After doing so, you can navigate this malignant domain and retrieve the Arborithm to take back to the Thicket for safe keeping.
 

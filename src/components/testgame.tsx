@@ -108,7 +108,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
   useEffect(() => {
     const convertedPlayer = {
-      image: "/player.png",
       name: name,
       health: userStats.health,
       maxHealth: userStats.health,

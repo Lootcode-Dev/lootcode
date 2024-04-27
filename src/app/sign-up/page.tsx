@@ -8,7 +8,7 @@ export default function SignInPage() {
         <div className="w-full max-w-xl space-y-4 rounded-xl border bg-[#15162c] drop-shadow-xl">
           <div className="flex w-full justify-center px-12 pt-4">
             <Image
-              src="/lootcode-no-floor.png"
+              src="/logos/lootcode-no-floor.png"
               width={512}
               height={512}
               alt="lootcode logo"

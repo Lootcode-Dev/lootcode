@@ -27,7 +27,7 @@ export default function Navbar() {
           <h1 className="text-xl font-bold">
             <div className="flex items-center">
               <Image
-                src="/lootcode-no-floor.png"
+                src="/logos/lootcode-no-floor.png"
                 width={50}
                 height={50}
                 alt={"lootcode logo"}
