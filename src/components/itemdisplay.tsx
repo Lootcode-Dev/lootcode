@@ -4,7 +4,7 @@ import {
   ShieldIcon,
   SparkleIcon,
   SwordIcon,
-  Wand2,
+  Wand2
 } from "lucide-react";
 import { getItem } from "~/app/game/utility";
 
@@ -81,7 +81,7 @@ export default function ItemDisplay({ id }: IParams) {
         )}
       </div>
       <div className="text-center text-sm">
-        {item?.type[0]?.toUpperCase() ?? "" + item?.type.substring(1) ?? ""}
+        {item?.type[0]?.toUpperCase() + item?.type.substring(1) ?? ''}
       </div>
     </div>
   );

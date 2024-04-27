@@ -57,8 +57,15 @@ export const codeRouter = createTRPCRouter({
         });
       }
 
-      // Write the fully sorted mapFile into a temp.json with proper newline
-      await writeFile("./src/util/temp.json", JSON.stringify(mapFile, null, 2));
+      // Using the sorted mapfile, take every node name, and add it to an array in order of appearance in mapfile
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const nodeNames: string[] = [];
+      for (const chapter of mapFile.chapters) {
+        for (const node of chapter.nodes) {
+          nodeNames.push(node.name.toLowerCase().replace(/ /g, "_"));
+        }
+      }
+      console.log(nodeNames);
 
       // Add lore if it exists
       if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {
