@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { $ } from "zx";
-import regFile from "~/util/region.json";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import regFile from "~/util/region.json";
 
 export const dockerRouter = createTRPCRouter({
   createDockerContainer: protectedProcedure

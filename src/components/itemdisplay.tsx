@@ -1,12 +1,6 @@
 import {
-  BrainIcon,
-  ChevronsUp,
   CloverIcon,
-  CoinsIcon,
-  FlaskRound,
-  Heart,
   HeartIcon,
-  PlusIcon,
   ShieldIcon,
   SparkleIcon,
   SwordIcon,
@@ -87,7 +81,7 @@ export default function ItemDisplay({ id }: IParams) {
         )}
       </div>
       <div className="text-center text-sm">
-        {item?.type[0]?.toUpperCase() + item?.type.substring(1)}
+        {item?.type[0]?.toUpperCase() ?? "" + item?.type.substring(1) ?? ""}
       </div>
     </div>
   );

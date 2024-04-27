@@ -6,13 +6,13 @@ import { existsSync, readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
 import { $ } from "zx";
-import indFile from "~/util/index.json";
-import goldFile from "~/util/gold.json";
-import mapFile from "~/util/map.json";
+import { getLevel } from "~/app/game/utility";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 import { api } from "~/trpc/server";
-import { getLevel } from "~/app/game/utility";
+import goldFile from "~/util/gold.json";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 export interface Enemy {
   name: string;

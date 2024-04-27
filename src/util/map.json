@@ -154,19 +154,19 @@
             ],
             "nodes": [
                 {
-                    "pos": [50, 75],
+                    "pos": [50, 90],
                     "name": "The Edgex",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [62, 71],
+                    "pos": [62, 81],
                     "name": "The Alphabind",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [71, 62],
+                    "pos": [71, 67],
                     "name": "The Cache",
                     "next": [],
                     "type": "problem"
@@ -178,31 +178,31 @@
                     "type": "problem"
                 },
                 {
-                    "pos": [71, 38],
+                    "pos": [71, 33],
                     "name": "The Index Orb",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [62, 29],
+                    "pos": [62, 19],
                     "name": "The Chronoqueue",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [50, 25],
+                    "pos": [50, 10],
                     "name": "The Lens of Clarity",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [38, 29],
+                    "pos": [38, 19],
                     "name": "The Pebble",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [29, 38],
+                    "pos": [29, 33],
                     "name": "The Dichomoton",
                     "next": [],
                     "type": "problem"
@@ -214,16 +214,22 @@
                     "type": "problem"
                 },
                 {
-                    "pos": [29, 62],
+                    "pos": [29, 67],
                     "name": "The Symmetract",
                     "next": [],
                     "type": "problem"
                 },
                 {
-                    "pos": [38, 71],
+                    "pos": [38, 81],
                     "name": "The Root",
                     "next": [],
                     "type": "problem"
+                },
+                {
+                    "pos": [50, 50],
+                    "name": "???",
+                    "next": ["The Lens of Clarity", "The Chronoqueue", "The Index Orb", "The Tome of Equilibrium", "The Cache", "The Alphabind", "The Edgex", "The Root", "The Symmetract", "The Arborithm", "The Dichomoton", "The Pebble"],
+                    "type": "game"
                 }
             ]
         },

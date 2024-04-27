@@ -9,21 +9,12 @@ import { Button } from "~/components/ui/button";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import NodeGraph from "~/components/nodegraph";
 import { GUser } from "~/app/game/utility";
+import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
-import { redirect } from "next/navigation";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-} from "~/components/ui/dialog";
-import Inventory from "./inventory";
 import {
   ArrowLeft,
   CloverIcon,
@@ -36,13 +27,18 @@ import {
   Wand2,
 } from "lucide-react";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { Card } from "./ui/card";
-import { Progress } from "./ui/progress";
 
 interface Node {
   pos: number[];

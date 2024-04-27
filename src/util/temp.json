@@ -573,7 +573,7 @@
         {
           "pos": [
             29,
-            38
+            33
           ],
           "name": "The Dichomoton",
           "next": [],
@@ -582,7 +582,7 @@
         {
           "pos": [
             29,
-            62
+            67
           ],
           "name": "The Symmetract",
           "next": [],
@@ -591,7 +591,7 @@
         {
           "pos": [
             38,
-            29
+            19
           ],
           "name": "The Pebble",
           "next": [],
@@ -600,7 +600,7 @@
         {
           "pos": [
             38,
-            71
+            81
           ],
           "name": "The Root",
           "next": [],
@@ -609,7 +609,7 @@
         {
           "pos": [
             50,
-            25
+            10
           ],
           "name": "The Lens of Clarity",
           "next": [],
@@ -618,7 +618,29 @@
         {
           "pos": [
             50,
-            75
+            50
+          ],
+          "name": "???",
+          "next": [
+            "The Lens of Clarity",
+            "The Chronoqueue",
+            "The Index Orb",
+            "The Tome of Equilibrium",
+            "The Cache",
+            "The Alphabind",
+            "The Edgex",
+            "The Root",
+            "The Symmetract",
+            "The Arborithm",
+            "The Dichomoton",
+            "The Pebble"
+          ],
+          "type": "game"
+        },
+        {
+          "pos": [
+            50,
+            90
           ],
           "name": "The Edgex",
           "next": [],
@@ -627,7 +649,7 @@
         {
           "pos": [
             62,
-            29
+            19
           ],
           "name": "The Chronoqueue",
           "next": [],
@@ -636,7 +658,7 @@
         {
           "pos": [
             62,
-            71
+            81
           ],
           "name": "The Alphabind",
           "next": [],
@@ -645,7 +667,7 @@
         {
           "pos": [
             71,
-            38
+            33
           ],
           "name": "The Index Orb",
           "next": [],
@@ -654,7 +676,7 @@
         {
           "pos": [
             71,
-            62
+            67
           ],
           "name": "The Cache",
           "next": [],

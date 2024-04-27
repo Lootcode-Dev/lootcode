@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { db } from "~/server/db";
+import { type GUser } from "~/app/game/utility";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
-import { GUser } from "~/app/game/utility";
+import { db } from "~/server/db";
 
 export const leaderRouter = createTRPCRouter({
   grabUsers: protectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input }) => {
         const topUsers = await db.user.findMany({
             orderBy: [
                 {score: 'desc'}, //Sort by score

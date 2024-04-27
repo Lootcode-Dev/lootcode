@@ -6,17 +6,15 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
-import itemList from "~/util/items.json";
-import { fakeBuy, fakeEquip, getLevel } from "~/app/game/utility";
-import enemies from "~/util/enemies";
-import encounters from "~/util/encounters";
-import { Enemy } from "~/util/enemies";
-import indFile from "~/util/index.json";
-import regFile from "~/util/region.json";
-import mapFile from "~/util/map.json";
-import goldFile from "~/util/gold.json";
-import { readFile } from "fs/promises";
 import { existsSync } from "fs";
+import { readFile } from "fs/promises";
+import { fakeBuy, fakeEquip, getLevel } from "~/app/game/utility";
+import encounters from "~/util/encounters";
+import enemies, { Enemy } from "~/util/enemies";
+import goldFile from "~/util/gold.json";
+import indFile from "~/util/index.json";
+import itemList from "~/util/items.json";
+import regFile from "~/util/region.json";
 
 export const gameRouter = createTRPCRouter({
   giveItem: protectedProcedure

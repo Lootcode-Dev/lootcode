@@ -1,7 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
-import { SwordIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function SignInPage() {
   return (

@@ -1,31 +1,18 @@
 "use client";
 
 import {
+  CoinsIcon,
+  LoaderIcon
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import {
   GUser,
   Stats,
-  fakeBuy,
-  fakeEquip,
   getItem,
-  getItemName,
-  getLevel,
-  getUserStats,
-  isEquipped,
+  getUserStats
 } from "~/app/game/utility";
-import itemList from "~/util/items.json";
-import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
-import {
-  BrainIcon,
-  CoinsIcon,
-  FlaskRound,
-  LoaderIcon,
-  PlusIcon,
-  ShieldIcon,
-  SparkleIcon,
-  SwordIcon,
-  Wand2,
-} from "lucide-react";
+import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 

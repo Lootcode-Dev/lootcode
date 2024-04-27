@@ -1,5 +1,5 @@
 import { Pause, Play, TimerReset } from "lucide-react";
-import React, { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Stopwatch = () => {
   const [timer, setTimer] = useState(0);

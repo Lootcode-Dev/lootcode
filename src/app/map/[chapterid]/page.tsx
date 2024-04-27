@@ -3,12 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { currentUser } from "@clerk/nextjs";
-import MapView from "~/components/mapview";
 import { redirect } from "next/navigation";
-import { db } from "~/server/db";
-import mapFile from "~/util/map.json";
-import indFile from "~/util/index.json";
+import MapView from "~/components/mapview";
 import ReqsDenied from "~/components/reqsdenied";
+import { db } from "~/server/db";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 interface PageProps {
   params: {

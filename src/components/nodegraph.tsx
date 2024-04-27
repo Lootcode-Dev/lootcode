@@ -3,8 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { nameToFileName } from "./mapview";
-import { isRegionUnlocked } from "./mapview";
+import { isRegionUnlocked, nameToFileName } from "./mapview";
 
 interface Node {
   pos: number[];

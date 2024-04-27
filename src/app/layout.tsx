@@ -5,8 +5,8 @@ import { dark } from "@clerk/themes";
 
 import { Inter } from "next/font/google";
 
-import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "~/components/navbar";
+import { TRPCReactProvider } from "~/trpc/react";
 
 const inter = Inter({
   subsets: ["latin"],

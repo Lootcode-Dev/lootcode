@@ -1,9 +1,9 @@
 "use client";
 
-import { GUser } from "~/app/game/utility";
-import { Button } from "~/components/ui/button";
 import { useEffect, useState } from "react";
+import { GUser } from "~/app/game/utility";
 import LeaderboardCard from "~/components/leaderboardcard";
+import { Button } from "~/components/ui/button";
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { api } from "~/trpc/react";

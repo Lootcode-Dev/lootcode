@@ -1,32 +1,19 @@
 "use client";
 
 import {
-  GUser,
-  Stats,
-  fakeEquip,
-  getItemName,
-  getUserStats,
-  isEquipped,
-} from "~/app/game/utility";
-import itemList from "~/util/items.json";
-import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
-import { api } from "~/trpc/react";
-import {
-  BrainIcon,
-  CoinsIcon,
-  FlaskRound,
-  LoaderIcon,
-  PlusIcon,
-  ShieldIcon,
-  SparkleIcon,
-  SwordIcon,
-  Wand2,
+  LoaderIcon
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import {
+  GUser,
+  isEquipped
+} from "~/app/game/utility";
+import { api } from "~/trpc/react";
+import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import ReactMarkdown from "react-markdown";
 
 interface IParams {
   name: string;

@@ -1,6 +1,6 @@
+import { Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Check, X } from "lucide-react";
 
 interface caseRes {
   num: number;

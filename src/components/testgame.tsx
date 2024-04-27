@@ -1,31 +1,29 @@
 "use client";
+import {
+  CloverIcon,
+  HeartIcon,
+  Loader2,
+  ShieldIcon,
+  SparkleIcon,
+  SwordIcon,
+  Wand2
+} from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { api } from "~/trpc/react";
-import { Button } from "./ui/button";
+import ReactMarkdown from "react-markdown";
 import { GUser, getLevel, getUserStats } from "~/app/game/utility";
-import { Card } from "./ui/card";
-import { Progress } from "./ui/progress";
+import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
+import { nameToFileName } from "./mapview";
+import { Card } from "./ui/card";
+import { Dialog, DialogContent } from "./ui/dialog";
+import { Progress } from "./ui/progress";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import {
-  Clover,
-  CloverIcon,
-  HeartIcon,
-  ShieldIcon,
-  SparkleIcon,
-  SwordIcon,
-  Loader2,
-  Wand2,
-} from "lucide-react";
-import Link from "next/link";
-import { nameToFileName } from "./mapview";
-import { Dialog, DialogContent } from "./ui/dialog";
-import ReactMarkdown from "react-markdown";
 
 interface Entity {
   name: string;

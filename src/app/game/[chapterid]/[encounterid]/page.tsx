@@ -1,12 +1,11 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import ReqsDenied from "~/components/reqsdenied";
 import Testgame from "~/components/testgame";
 import { db } from "~/server/db";
-import regFile from "~/util/region.json";
-import mapFile from "~/util/map.json";
-import indFile from "~/util/index.json";
-import ReqsDenied from "~/components/reqsdenied";
 import { api } from "~/trpc/server";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 interface PageProps {
   params: {

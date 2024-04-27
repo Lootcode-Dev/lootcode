@@ -1,12 +1,11 @@
 import { currentUser } from "@clerk/nextjs";
-import { StringLike } from "bun";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { db } from "~/server/db";
-import mapFile from "~/util/map.json";
-import indFile from "~/util/index.json";
 import ReqsDenied from "~/components/reqsdenied";
+import { db } from "~/server/db";
 import { api } from "~/trpc/server";
+import indFile from "~/util/index.json";
+import mapFile from "~/util/map.json";
 
 // Dynamically import `ProblemView` with no SSR
 const ProblemViewWithNoSSR = dynamic(() => import("~/components/problemview"), {

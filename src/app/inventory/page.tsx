@@ -4,8 +4,8 @@
 
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { db } from "~/server/db";
 import Inventory from "~/components/inventory";
+import { db } from "~/server/db";
 
 export default async function Page() {
   const user = await currentUser();

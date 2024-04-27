@@ -1,6 +1,6 @@
+import { readFile } from "fs/promises";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
-import { readFile } from "fs/promises";
 
 export const mapRouter = createTRPCRouter({
   getDescription: protectedProcedure

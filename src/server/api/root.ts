@@ -1,10 +1,10 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { authRouter } from "./routers/auth";
 import { codeRouter } from "./routers/code";
-import { leaderRouter } from "./routers/leaderboard";
-import { mapRouter } from "./routers/map";
 import { dockerRouter } from "./routers/docker";
 import { gameRouter } from "./routers/game";
+import { leaderRouter } from "./routers/leaderboard";
+import { mapRouter } from "./routers/map";
 
 /**
  * This is the primary router for your server.
