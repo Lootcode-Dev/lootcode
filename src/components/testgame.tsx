@@ -72,9 +72,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     region: reg,
   });
 
-  const { mutate: beatGame } = api.game.beatEncounter.useMutation(
-    {},
-  );
+  const { mutate: beatGame } = api.game.beatEncounter.useMutation({});
 
   useEffect(() => {
     mapFile.chapters.map((val, index) => {
