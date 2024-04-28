@@ -23,8 +23,8 @@ export default function ItemDisplay({ id }: IParams) {
   }
 
   return (
-    <div className="items-left mx-2 flex flex-col text-2xl">
-      <div className="text-center text-2xl">{item?.name}</div>
+    <div className="items-left mx-2 flex flex-col text-xl">
+      <div className="text-center text-xl">{item?.name}</div>
       <div className="flex flex-row justify-center">
         {item?.armor != 0 ? (
           <div className="mr-1 flex items-center text-base">

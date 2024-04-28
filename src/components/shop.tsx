@@ -22,6 +22,15 @@ export default function Shop({ name, user }: IParams) {
   const [selItem, setSelItem] = useState(-1);
 
   const items = [...itemList.items].sort((a, b) => {
+    const groupA = Math.floor(a.value / 50);
+    const groupB = Math.floor(b.value / 50);
+
+    if (groupA < groupB) {
+      return -1;
+    }
+    if (groupA > groupB) {
+      return 1;
+    }
     if (a.type < b.type) {
       return -1;
     }
@@ -37,10 +46,27 @@ export default function Shop({ name, user }: IParams) {
     return 0;
   });
 
-  const itemIndexes:number[] = [];
-  items.map((val, index)=>{
-    itemIndexes[index] = itemList.items.findIndex((item) => item.name == val.name);
-  })
+  // Log the sum of the values of the items
+  console.log(items.reduce((acc, item) => acc + (item as Item).value, 0));
+
+  // Log the sum of the values of the items at each level
+  console.log(
+    items.reduce(
+      (acc, item) => {
+        const group = Math.floor((item as Item).value / 50);
+        acc[group] = (acc[group] ?? 0) + (item as Item).value;
+        return acc;
+      },
+      {} as Record<string, number>,
+    ),
+  );
+
+  const itemIndexes: number[] = [];
+  items.map((val, index) => {
+    itemIndexes[index] = itemList.items.findIndex(
+      (item) => item.name == val.name,
+    );
+  });
 
   const { refetch: buyCallback } = api.game.buyItem.useQuery(
     {
@@ -91,18 +117,14 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay
-                    id={itemIndexes[index] ?? 0}
-                  />
+                  <ItemDisplay id={itemIndexes[index] ?? 0} />
                 </div>
-              ) : (getItem(itemIndexes[index] ?? 0)?.value ?? 0) <= getUser.gold ? (
+              ) : (getItem(itemIndexes[index] ?? 0)?.value ?? 0) <=
+                getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                   onClick={() =>
-                    !fetching &&
-                    setSelItem(
-                      itemIndexes[index] ?? 0
-                    )
+                    !fetching && setSelItem(itemIndexes[index] ?? 0)
                   }
                   key={index}
                 >
@@ -114,9 +136,7 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay
-                    id={itemIndexes[index] ?? 0}
-                  />
+                  <ItemDisplay id={itemIndexes[index] ?? 0} />
                 </div>
               ) : (
                 <div
@@ -131,9 +151,7 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay
-                    id={itemIndexes[index] ?? 0}
-                  />
+                  <ItemDisplay id={itemIndexes[index] ?? 0} />
                 </div>
               ),
             )}

@@ -37,10 +37,12 @@ export default function Inventory({ name, user }: IParams) {
     return 0;
   });
 
-  const itemIndexes:number[] = [];
-  items.map((val, index)=>{
-    itemIndexes[index] = itemList.items.findIndex((item) => item.name == val.name);
-  })
+  const itemIndexes: number[] = [];
+  items.map((val, index) => {
+    itemIndexes[index] = itemList.items.findIndex(
+      (item) => item.name == val.name,
+    );
+  });
 
   const { refetch: equipCallback } = api.game.equipItemID.useQuery(
     {
@@ -78,43 +80,28 @@ export default function Inventory({ name, user }: IParams) {
             Items
             {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
           </div>
-          <div className="my-4 flex flex-wrap">
+          <div className="my-4 flex max-h-[28vh] flex-wrap overflow-auto">
             {items.map((value, index) =>
-              getUser.items[
-                itemIndexes[index] ?? 0
-              ] == "1" ? (
-                isEquipped(
-                  getUser,
-                  itemIndexes[index] ?? 0,
-                ) ? (
+              getUser.items[itemIndexes[index] ?? 0] == "1" ? (
+                isEquipped(getUser, itemIndexes[index] ?? 0) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>
-                      !fetching &&
-                      setSelItem(
-                        itemIndexes[index] ?? 0,
-                      )
+                      !fetching && setSelItem(itemIndexes[index] ?? 0)
                     }
                     key={index}
                   >
-                    <ItemDisplay
-                      id={itemIndexes[index] ?? 0}
-                    />
+                    <ItemDisplay id={itemIndexes[index] ?? 0} />
                   </div>
                 ) : (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>
-                      !fetching &&
-                      setSelItem(
-                        itemIndexes[index] ?? 0,
-                      )
+                      !fetching && setSelItem(itemIndexes[index] ?? 0)
                     }
                     key={index}
                   >
-                    <ItemDisplay
-                      id={itemIndexes[index] ?? 0}
-                    />
+                    <ItemDisplay id={itemIndexes[index] ?? 0} />
                   </div>
                 )
               ) : (
@@ -125,7 +112,7 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="my-4 flex flex-wrap">
+          <div className="m-4 flex max-h-[28vh] flex-wrap overflow-auto">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
