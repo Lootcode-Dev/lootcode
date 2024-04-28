@@ -50,7 +50,7 @@ export default async function Home() {
             </div>
             <div className="mt-8 flex w-full items-center justify-center px-4">
               <Image
-                src={"/maps/map.png"}
+                src={"/maps/map1.png"}
                 height={720}
                 width={1280}
                 alt={"A colorful fantasy background"}

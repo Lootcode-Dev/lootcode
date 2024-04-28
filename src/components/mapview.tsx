@@ -59,6 +59,7 @@ export default function MapView({ user, chapterid }: IParams) {
   const chapter = chapterToIndex(chapterid);
   const [selNode, setSelNode] = useState(-1);
   const [progress, setProgress] = useState(-1);
+  const [mapChoice, setMapChoice] = useState(4);
 
   //I know this is goofy but I don't want to query the user
   //here and in the getColor functions, and I think having to pass
@@ -89,13 +90,12 @@ export default function MapView({ user, chapterid }: IParams) {
       { enabled: false, retry: false },
     );
 
-  const { data: algdesc } =
-    api.map.getDescription.useQuery(
-      {
-        name: nameToFileName("algorion"),
-      },
-      { enabled: true, retry: false },
-    );
+  const { data: algdesc } = api.map.getDescription.useQuery(
+    {
+      name: nameToFileName("algorion"),
+    },
+    { enabled: true, retry: false },
+  );
 
   useEffect(() => {
     void getProblem();
@@ -111,6 +111,23 @@ export default function MapView({ user, chapterid }: IParams) {
       setProgress(completionsInChapter(indexToChapter(selNode), user.problems));
     }
   }, [selNode, getHomeChDesc, chapter, user.problems]);
+
+  useEffect(() => {
+    // Determine which map to use
+    let map = 1;
+
+    // Check for the Tower pre Requisites.
+    if (isRegionUnlocked("the_tower")) {
+      map = 2;
+    }
+
+    // Check if the user has completed the Tower
+    if (checkChapterCompletion("the_tower", user.problems)) {
+      map = 3;
+    }
+
+    setMapChoice(map);
+  }, [user.problems]);
 
   function setNodeColor(name: string): string {
     let ntype = "";
@@ -191,7 +208,7 @@ export default function MapView({ user, chapterid }: IParams) {
                     nodeColor={setNodeColor}
                     getNode={selNode}
                     setNode={setSelNode}
-                    bgImg={"map"}
+                    bgImg={4}
                   />
                 </div>
                 {/*fixing height for now*/}
@@ -375,7 +392,7 @@ export default function MapView({ user, chapterid }: IParams) {
                     nodeColor={setNodeChapterColor}
                     getNode={selNode}
                     setNode={setSelNode}
-                    bgImg={"home"}
+                    bgImg={mapChoice}
                   />
                 </div>
                 <div>
