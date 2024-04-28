@@ -125,7 +125,7 @@ export default function MapView({ user, chapterid }: IParams) {
     // Check if the user has completed the Tower
     if (checkChapterCompletion("the_tower", user.problems)) {
       map = 3;
-      setEnd(true);
+      setEnd(chapter == -1);
     }
 
     setMapChoice(map);

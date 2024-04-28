@@ -38,6 +38,12 @@ export const codeRouter = createTRPCRouter({
       };
       const region = input.region;
 
+      const user = await db.user.findFirst({
+        where: { id: ctx.userId },
+      });
+
+      if (!user) return;
+
       // Add lore if it exists
       if (existsSync(`./src/problems/${region}/${input.name}/lore.md`)) {
         const loreContent = await readFile(
@@ -52,7 +58,7 @@ export const codeRouter = createTRPCRouter({
       }
 
       if (goldFile[input.name as keyof typeof goldFile] != 0) {
-        contents.gold = goldFile[input.name as keyof typeof goldFile];
+        contents.gold = goldFile[input.name as keyof typeof goldFile] * getLevel(user);
       }
 
       const type = findNodeType(region ?? "", input.name);
@@ -74,9 +80,7 @@ export const codeRouter = createTRPCRouter({
             (problem) => problem === input.name,
           );
           if (index !== -1) {
-            const user = await db.user.findFirst({
-              where: { id: ctx.userId },
-            });
+           
             if (user?.problems[index] === "1") {
               contents.solved = true;
             }
@@ -104,9 +108,7 @@ export const codeRouter = createTRPCRouter({
             (problem) => problem === input.name,
           );
           if (index !== -1) {
-            const user = await db.user.findFirst({
-              where: { id: ctx.userId },
-            });
+
             if (user?.problems[index] === "1") {
               contents.solved = true;
             }
