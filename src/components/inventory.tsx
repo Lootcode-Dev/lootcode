@@ -113,7 +113,7 @@ export default function Inventory({ name, user }: IParams) {
               </div>
             </div>
           </div>
-          <div className="my-4 flex max-h-[28vh] flex-wrap overflow-auto">
+          <div className="my-4 flex max-h-[40vh] flex-wrap overflow-auto">
             {items.map((value, index) =>
               getUser.items[itemList.items.findIndex((item) => item.name == value.name)] == "1" ? (
                 !sortStat(value, filter) ? <div/> :
@@ -146,7 +146,7 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="my-4 flex max-h-[28vh] flex-wrap overflow-auto">
+          <div className="my-4 flex max-h-[20vh] flex-wrap overflow-auto">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
