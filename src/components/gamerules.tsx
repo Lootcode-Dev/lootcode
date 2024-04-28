@@ -14,16 +14,16 @@ export default function GameRules() {
           <InfoIcon className="h-6 w-6 text-yellow-200" />
         </TooltipTrigger>
         <TooltipContent className="h-auto max-w-lg border-purple-500 bg-[#15162c] p-4 drop-shadow-md transition-all ease-in hover:border-yellow-200">
-          <div className="text-white text-center">
+          <div className="text-white text-center prose prose-headings:text-purple-500 font-normal">
             <h1 className="text-2xl font-bold">Game Breakdown</h1>
             <p className="text-sm">
               There are 6 main stats in the game, and each of them works as
               follows:
             </p>
-            <ul className="mt-4 text-sm">
+            <ul className="mt-4 text-sm text-left">
               <li>Health: the amount of damage you can take</li>
               <li>
-                Critical Strike: The percentage chance of critting an enemy,
+                Critical Strike: The chance of critting an enemy out of 10,
                 which deals 3x damage
               </li>
               <li>Strength: The amount of physical damage you do</li>
