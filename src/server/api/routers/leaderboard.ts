@@ -8,6 +8,11 @@ export const leaderRouter = createTRPCRouter({
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
         const topUsers = await db.user.findMany({
+            where: {
+                email: {
+                    notIn: ['leogofman23@gmail.com', 'dylanvidal1204@gmail.com', 'lukeculleninc@gmail.com']
+                }
+            },
             orderBy: [
                 {score: 'desc'}, //Sort by score
                 {time: 'asc'} //In ties sort by earliest solve

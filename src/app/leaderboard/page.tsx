@@ -13,6 +13,11 @@ export default async function Page() {
       where: { id: user.id },
     });
     const allUsers = await db.user.findMany({
+        where: {
+            email: {
+                notIn: ['leogofman23@gmail.com', 'dylanvidal1204@gmail.com', 'lukeculleninc@gmail.com']
+            }
+        },
         orderBy: [
             {score: 'desc'}, //Sort by score
             {time: 'asc'} //In ties sort by earliest solve
