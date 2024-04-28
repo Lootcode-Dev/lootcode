@@ -60,6 +60,7 @@ export default function MapView({ user, chapterid }: IParams) {
   const [selNode, setSelNode] = useState(-1);
   const [progress, setProgress] = useState(-1);
   const [mapChoice, setMapChoice] = useState(4);
+  const [end, setEnd] = useState(false);
 
   //I know this is goofy but I don't want to query the user
   //here and in the getColor functions, and I think having to pass
@@ -124,6 +125,7 @@ export default function MapView({ user, chapterid }: IParams) {
     // Check if the user has completed the Tower
     if (checkChapterCompletion("the_tower", user.problems)) {
       map = 3;
+      setEnd(true);
     }
 
     setMapChoice(map);
@@ -170,6 +172,16 @@ export default function MapView({ user, chapterid }: IParams) {
         {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
       </div> */}
+        <Dialog open={end} onOpenChange={setEnd}>
+          <DialogContent className="max-h-[500px] overflow-auto bg-zinc-800 sm:max-w-[625px]">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
+            >
+              {`# Thank you for embarking on this journey with us!\n\nCongratulations on beating Lootcode.\n\nFeel free to retry and upsolve any former encounters or problems, or join our Discord server to discuss your journey with other adventurers!\n\nAnd in case it wasn't obvious - this was all a dream you made in your head while prepping for your next coding interview. Regardless of how real they are, the people of Algorion thank you too.`}
+            </ReactMarkdown>
+          </DialogContent>
+        </Dialog>
         <div className="mt-[-2.5vh] flex size-full items-center justify-center">
           {chapter != -1 ? (
             <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
