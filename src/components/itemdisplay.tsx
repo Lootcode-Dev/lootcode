@@ -4,7 +4,7 @@ import {
   ShieldIcon,
   SparkleIcon,
   SwordIcon,
-  Wand2
+  Wand2,
 } from "lucide-react";
 import { getItem } from "~/app/game/utility";
 import Mobile from "./mobile";
@@ -16,6 +16,7 @@ interface IParams {
 
 export default function ItemDisplay({ id }: IParams) {
   const item = getItem(id);
+  console.log("In item at ID:", id, item);
 
   // Check if the user is a mobile user
   if (isMobile) {
@@ -88,7 +89,7 @@ export default function ItemDisplay({ id }: IParams) {
         )}
       </div>
       <div className="text-center text-sm">
-        {item?.type[0]?.toUpperCase() + item!.type.substring(1) ?? ''}
+        {item?.type[0]?.toUpperCase() + item!.type.substring(1) ?? ""}
       </div>
     </div>
   );

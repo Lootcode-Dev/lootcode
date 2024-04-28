@@ -20,6 +20,22 @@ export default function Shop({ name, user }: IParams) {
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
 
+  const items = itemList.items.sort((a, b) => {
+    if (a.type < b.type) {
+      return -1;
+    }
+    if (a.type > b.type) {
+      return 1;
+    }
+    if (a.level < b.level) {
+      return -1;
+    }
+    if (a.level > b.level) {
+      return 1;
+    }
+    return 0;
+  });
+
   const { refetch: buyCallback } = api.game.buyItem.useQuery(
     {
       item: selItem,
@@ -55,7 +71,7 @@ export default function Shop({ name, user }: IParams) {
             {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
           </div>
           <div className="my-4 flex flex-wrap">
-            {itemList.items.map((value, index) =>
+            {items.map((value, index) =>
               getUser.items[index] == "1" ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
@@ -69,7 +85,11 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay id={index} />
+                  <ItemDisplay
+                    id={itemList.items.findIndex(
+                      (item) => item.name == value.name,
+                    )}
+                  />
                 </div>
               ) : getItem(index)?.value ?? 0 <= getUser.gold ? (
                 <div
@@ -85,7 +105,11 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay id={index} />
+                  <ItemDisplay
+                    id={itemList.items.findIndex(
+                      (item) => item.name == value.name,
+                    )}
+                  />
                 </div>
               ) : (
                 <div
@@ -100,7 +124,11 @@ export default function Shop({ name, user }: IParams) {
                     </div>
                   </div>
 
-                  <ItemDisplay id={index} />
+                  <ItemDisplay
+                    id={itemList.items.findIndex(
+                      (item) => item.name == value.name,
+                    )}
+                  />
                 </div>
               ),
             )}

@@ -1,9 +1,9 @@
 "use client";
 
 import { LoaderIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { type GUser, isEquipped } from "~/app/game/utility";
+import { type GUser, isEquipped, getItem } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
@@ -21,14 +21,36 @@ export default function Inventory({ name, user }: IParams) {
   const [getUser, setUser] = useState<GUser>(user);
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
+  const items = itemList.items.sort((a, b) => {
+    if (a.type < b.type) {
+      return -1;
+    }
+    if (a.type > b.type) {
+      return 1;
+    }
+    if (a.level < b.level) {
+      return -1;
+    }
+    if (a.level > b.level) {
+      return 1;
+    }
+    return 0;
+  });
 
-  const { refetch: equipCallback } =
-    api.game.equipItemID.useQuery(
-      {
-        item: selItem,
-      },
-      { enabled: false, retry: false },
+  for (const item of items) {
+    console.log(itemList.items.findIndex((test) => test.name === item.name));
+    console.log("In for loop:", item);
+    console.log(
+      getItem(itemList.items.findIndex((test) => test.name === item.name)),
     );
+  }
+
+  const { refetch: equipCallback } = api.game.equipItemID.useQuery(
+    {
+      item: selItem,
+    },
+    { enabled: false, retry: false },
+  );
 
   const { data: loreCollectibles } = api.game.getLoreCollection.useQuery();
 
@@ -51,7 +73,7 @@ export default function Inventory({ name, user }: IParams) {
   }
 
   return (
-    <div className="flex flex-row mt-2">
+    <div className="mt-2 flex flex-row">
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
@@ -60,7 +82,7 @@ export default function Inventory({ name, user }: IParams) {
             {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
           </div>
           <div className="my-4 flex flex-wrap">
-            {itemList.items.map((value, index) =>
+            {items.map((value, index) =>
               getUser.items[index] == "1" ? (
                 isEquipped(getUser, index) ? (
                   <div
@@ -68,7 +90,11 @@ export default function Inventory({ name, user }: IParams) {
                     onClick={() => !fetching && setSelItem(index)}
                     key={index}
                   >
-                    <ItemDisplay id={index} />
+                    <ItemDisplay
+                      id={itemList.items.findIndex(
+                        (item) => item.name == value.name,
+                      )}
+                    />
                   </div>
                 ) : (
                   <div
@@ -76,7 +102,11 @@ export default function Inventory({ name, user }: IParams) {
                     onClick={() => !fetching && setSelItem(index)}
                     key={index}
                   >
-                    <ItemDisplay id={index} />
+                    <ItemDisplay
+                      id={itemList.items.findIndex(
+                        (item) => item.name == value.name,
+                      )}
+                    />
                   </div>
                 )
               ) : (
@@ -88,7 +118,7 @@ export default function Inventory({ name, user }: IParams) {
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
           <div className="my-4 flex flex-wrap gap-4">
-            {loreCollectibles?.map((value, index) => (
+            {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
