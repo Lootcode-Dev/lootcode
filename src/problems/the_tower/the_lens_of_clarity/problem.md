@@ -12,19 +12,19 @@ The resolution refers to the dimensions of squares of a single color. See below 
 
 With resolution = 1:
 
-![](http://localhost:3000/problems/claritylens1.png)
+![](https://www.lootcode.dev/problems/claritylens1.png)
 
 __Number of black squares = 33__
 
 And now with resolution = 2:
 
-![](http://localhost:3000/problems/claritylens2.png)
+![](https://www.lootcode.dev/problems/claritylens2.png)
 
 __Number of black squares = 32__
 
 And one more example, resolution = 5:
 
-![](http://localhost:3000/problems/claritylens3.png)
+![](https://www.lootcode.dev/problems/claritylens3.png)
 
 __Number of black squares = 31__
 

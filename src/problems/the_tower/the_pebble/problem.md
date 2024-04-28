@@ -24,7 +24,7 @@ As an example, the following input would be visually represented as such.
 3 4
 ```
 
-![](http://localhost:3000/problems/pebble.png)
+![](https://www.lootcode.dev/problems/pebble.png)
 
 Notice valid paths can be traversed across any number of adjacent edges in the case of path 4. A valid path is simply a connection between an opening parenthesis and a closed parenthesis of the same type.
 
