@@ -26,10 +26,8 @@ export const authRouter = createTRPCRouter({
           id: user.id,
           email: user.emailAddresses[0].emailAddress,
           name: user.firstName ?? "",
-          problems:
-            '0'.repeat(191),
-          items:
-            '0'.repeat(100),
+          problems: "0".repeat(191),
+          items: "0".repeat(100),
           gold: 0,
           armor: -1,
           accessory: -1,
@@ -39,7 +37,7 @@ export const authRouter = createTRPCRouter({
           skill2: -1,
           skill3: -1,
           score: 0,
-          time: new Date()
+          time: new Date(),
         },
       });
     }

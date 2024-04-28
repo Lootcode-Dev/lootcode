@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export function constructMetadata({
   title = "Lootcode",
   description = "Lootcode is a platform for developers to learn data stuctures and algorithms in a fun, fantasy-themed way.",
-  image = "/logos/lootcode-final.png",
+  image = "/logos/lootcode-no-floor.png",
   noIndex = false,
 }: {
   title?: string;

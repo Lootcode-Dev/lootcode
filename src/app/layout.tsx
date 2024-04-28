@@ -7,7 +7,6 @@ import { Inter } from "next/font/google";
 
 import Navbar from "~/components/navbar";
 import { TRPCReactProvider } from "~/trpc/react";
-import { constructMetadata } from "~/lib/utils";
 import { type Viewport } from "next";
 
 const inter = Inter({
@@ -15,10 +14,15 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-export const metadata = constructMetadata();
+export const metadata = {
+  title: "Lootcode",
+  description:
+    "A fantasy themed code runner for learning Data Structures and Algorithms.",
+  icons: [{ rel: "icon", url: "/logos/lootcode-no-floor.png" }],
+};
 
 export const viewport: Viewport = {
-    themeColor: "purple",
+  themeColor: "purple",
 };
 
 export default function RootLayout({

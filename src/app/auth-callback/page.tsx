@@ -22,7 +22,7 @@ const Callback = () => {
       }
     },
     retry: true,
-    retryDelay: 500,
+    retryDelay: 1000,
   });
 
   return (
