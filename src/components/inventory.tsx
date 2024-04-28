@@ -75,8 +75,13 @@ export default function Inventory({ name, user }: IParams) {
           </div>
           <div className="my-4 flex flex-wrap">
             {items.map((value, index) =>
-              getUser.items[index] == "1" ? (
-                isEquipped(getUser, index) ? (
+              getUser.items[
+                itemList.items.findIndex((item) => item.name == value.name)
+              ] == "1" ? (
+                isEquipped(
+                  getUser,
+                  itemList.items.findIndex((item) => item.name == value.name),
+                ) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>

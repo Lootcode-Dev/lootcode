@@ -72,7 +72,9 @@ export default function Shop({ name, user }: IParams) {
           </div>
           <div className="my-4 flex flex-wrap">
             {items.map((value, index) =>
-              getUser.items[index] == "1" ? (
+              getUser.items[
+                itemList.items.findIndex((item) => item.name == value.name)
+              ] == "1" ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                   key={index}
@@ -94,7 +96,14 @@ export default function Shop({ name, user }: IParams) {
               ) : getItem(index)?.value ?? 0 <= getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
-                  onClick={() => !fetching && setSelItem(index)}
+                  onClick={() =>
+                    !fetching &&
+                    setSelItem(
+                      itemList.items.findIndex(
+                        (item) => item.name == value.name,
+                      ),
+                    )
+                  }
                   key={index}
                 >
                   <div className="grid grid-cols-2 justify-between text-base font-normal">
