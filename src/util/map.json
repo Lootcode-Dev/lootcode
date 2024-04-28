@@ -706,30 +706,30 @@
               35,
               30
             ],
-            "name": "Alphacount",
+            "name": "Rescue",
             "next": [
-              "Triangulation"
+              "Alphacount"
             ],
-            "type": "problem"
+            "type": "game"
           },
           {
             "pos": [
               35,
               60
             ],
-            "name": "Rescue",
+            "name": "Triangulation",
             "next": [
-              "Alphacount",
-              "Stone Circle"
+              "Rescue",
+              "Last Wish"
             ],
-            "type": "game"
+            "type": "problem"
           },
           {
             "pos": [
               50,
               5
             ],
-            "name": "Triangulation",
+            "name": "Alphacount",
             "next": [],
             "type": "problem"
           },
@@ -738,13 +738,13 @@
               50,
               45
             ],
-            "name": "Stone Circle",
+            "name": "Last Wish",
             "next": [
               "Alphacount",
-              "Last Wish",
-              "Triangulation"
+              "Rescue",
+              "Stone Circle"
             ],
-            "type": "problem"
+            "type": "game"
           },
           {
             "pos": [
@@ -754,8 +754,8 @@
             "name": "Twinned",
             "next": [
               "Cooking",
-              "Rescue",
-              "Stone Circle"
+              "Triangulation",
+              "Last Wish"
             ],
             "type": "problem"
           },
@@ -764,11 +764,11 @@
               65,
               30
             ],
-            "name": "Last Wish",
+            "name": "Stone Circle",
             "next": [
-              "Triangulation"
+              "Alphacount"
             ],
-            "type": "game"
+            "type": "problem"
           },
           {
             "pos": [

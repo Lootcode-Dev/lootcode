@@ -67,7 +67,6 @@ export const gameRouter = createTRPCRouter({
 
       if (!user) return;
 
-      console.log("Equipping item", input.item);
       fakeEquip(user, input.item);
 
       await db.user.update({

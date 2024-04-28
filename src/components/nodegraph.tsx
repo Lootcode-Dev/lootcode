@@ -17,7 +17,7 @@ interface Graph {
   nodeColor: any;
   getNode: number;
   setNode: any;
-  bgImg: string;
+  bgImg: number;
 }
 
 const mapRes = [1280, 720];
@@ -47,7 +47,15 @@ export default function NodeGraph({
   return (
     <svg
       viewBox={"0 0 " + mapRes[0] + " " + mapRes[1]}
-      className={`aspect-video rounded-xl border-4 border-[#15162c] ${bgImg === "home" ? "bg-[url('/maps/map.png')]" : "bg-[url('/maps/board.png')]"} bg-cover bg-center p-4`}
+      className={`aspect-video rounded-xl border-4 border-[#15162c] ${
+        bgImg == 1
+          ? "bg-[url('/maps/map1.png')]"
+          : bgImg == 2
+            ? "bg-[url('/maps/map2.png')]"
+            : bgImg == 3
+              ? "bg-[url('/maps/map3.png')]"
+              : "bg-[url('/maps/board.png')]"
+      } bg-cover bg-center p-4`}
       onMouseMove={handleMouseMove}
     >
       <defs>
