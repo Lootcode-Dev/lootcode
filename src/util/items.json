@@ -246,7 +246,58 @@
             "critChance": 0,
             "strength": 0,
             "magic": 0
-        }
+        },
+        {
+            "name": "Sword of the Sun",
+            "type": "weapon",
+            "value": 100,
+            "level": 3,
 
+            "health": -50,
+            "armor": 0,
+            "resist": 0,
+            "critChance": 0,
+            "strength": 6,
+            "magic": -1.5
+        },
+        {
+            "name": "Staff of the Moon",
+            "type": "focus",
+            "value": 100,
+            "level": 3,
+
+            "health": -50,
+            "armor": 0,
+            "resist": 0,
+            "critChance": 0,
+            "strength": -1.5,
+            "magic": 6
+        },
+        {
+            "name": "Sword of the Moon",
+            "type": "weapon",
+            "value": 100,
+            "level": 3,
+
+            "health": -50,
+            "armor": 0,
+            "resist": 0,
+            "critChance": 0,
+            "strength": 6,
+            "magic": -1.5
+        },
+        {
+            "name": "Staff of the Sun",
+            "type": "focus",
+            "value": 100,
+            "level": 3,
+
+            "health": -50,
+            "armor": 0,
+            "resist": 0,
+            "critChance": 0,
+            "strength": -1.5,
+            "magic": 6
+        }
     ]
 }

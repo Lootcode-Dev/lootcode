@@ -209,70 +209,70 @@ export default async function Home() {
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <Image
-                alt="Screenshot"
-                className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                alt="Inventory Screenshot"
+                className=" rounded-xl object-cover transition-transform hover:scale-105"
+                height="720"
+                src="/gallery/inventory.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
               <Image
-                alt="Screenshot"
+                alt="Home Page Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                height="720"
+                src="/gallery/home.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
               <Image
-                alt="Screenshot"
+                alt="Problem Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                height="720"
+                src="/gallery/problem.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
               <Image
-                alt="Screenshot"
+                alt="Leaderboard Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                height="720"
+                src="/gallery/leaderboard.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
               <Image
-                alt="Screenshot"
+                alt="Region Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                height="720"
+                src="/gallery/region.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
               <Image
-                alt="Screenshot"
+                alt="Game Screenshot"
                 className="rounded-xl object-cover transition-transform hover:scale-105"
-                height="225"
-                src="/maps/board.png"
+                height="720"
+                src="/gallery/game.png"
                 style={{
-                  aspectRatio: "400/225",
+                  aspectRatio: "16/9",
                   objectFit: "cover",
                 }}
-                width="400"
+                width="1280"
               />
             </div>
           </div>
