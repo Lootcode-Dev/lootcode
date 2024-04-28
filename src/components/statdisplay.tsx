@@ -94,9 +94,6 @@ export default function StatDisplay({ name, user }: IParams) {
         {user.accessory != -1 ? <ItemDisplay id={user.accessory} /> : <div />}
         {user.weapon != -1 ? <ItemDisplay id={user.weapon} /> : <div />}
         {user.focus != -1 ? <ItemDisplay id={user.focus} /> : <div />}
-        {user.skill1 != -1 ? <ItemDisplay id={user.skill1} /> : <div />}
-        {user.skill2 != -1 ? <ItemDisplay id={user.skill2} /> : <div />}
-        {user.skill3 != -1 ? <ItemDisplay id={user.skill3} /> : <div />}
       </div>
     </div>
   );

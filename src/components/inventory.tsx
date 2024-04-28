@@ -21,7 +21,7 @@ export default function Inventory({ name, user }: IParams) {
   const [getUser, setUser] = useState<GUser>(user);
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
-  const items = itemList.items.sort((a, b) => {
+  const items = [...itemList.items].sort((a, b) => {
     if (a.type < b.type) {
       return -1;
     }
@@ -36,14 +36,6 @@ export default function Inventory({ name, user }: IParams) {
     }
     return 0;
   });
-
-  for (const item of items) {
-    console.log(itemList.items.findIndex((test) => test.name === item.name));
-    console.log("In for loop:", item);
-    console.log(
-      getItem(itemList.items.findIndex((test) => test.name === item.name)),
-    );
-  }
 
   const { refetch: equipCallback } = api.game.equipItemID.useQuery(
     {
@@ -87,7 +79,14 @@ export default function Inventory({ name, user }: IParams) {
                 isEquipped(getUser, index) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
-                    onClick={() => !fetching && setSelItem(index)}
+                    onClick={() =>
+                      !fetching &&
+                      setSelItem(
+                        itemList.items.findIndex(
+                          (item) => item.name == value.name,
+                        ),
+                      )
+                    }
                     key={index}
                   >
                     <ItemDisplay
@@ -99,7 +98,14 @@ export default function Inventory({ name, user }: IParams) {
                 ) : (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
-                    onClick={() => !fetching && setSelItem(index)}
+                    onClick={() =>
+                      !fetching &&
+                      setSelItem(
+                        itemList.items.findIndex(
+                          (item) => item.name == value.name,
+                        ),
+                      )
+                    }
                     key={index}
                   >
                     <ItemDisplay

@@ -16,7 +16,6 @@ interface IParams {
 
 export default function ItemDisplay({ id }: IParams) {
   const item = getItem(id);
-  console.log("In item at ID:", id, item);
 
   // Check if the user is a mobile user
   if (isMobile) {

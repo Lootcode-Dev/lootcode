@@ -67,6 +67,7 @@ export const gameRouter = createTRPCRouter({
 
       if (!user) return;
 
+      console.log("Equipping item", input.item);
       fakeEquip(user, input.item);
 
       await db.user.update({
@@ -145,13 +146,16 @@ export const gameRouter = createTRPCRouter({
       if (problems[indFile.problems.indexOf(input.encounterid)] == "1") {
         return user;
       }
-      
+
       problems[indFile.problems.indexOf(input.encounterid)] = "1";
       user.problems = problems.join("");
 
       // Add the gold to the user's account and solve the problem
-      if(goldFile[input.encounterid as keyof typeof goldFile])
-        user.gold += Math.floor(goldFile[input.encounterid as keyof typeof goldFile] * (1+((getLevel(user) - 1) * .25)));
+      if (goldFile[input.encounterid as keyof typeof goldFile])
+        user.gold += Math.floor(
+          goldFile[input.encounterid as keyof typeof goldFile] *
+            (1 + (getLevel(user) - 1) * 0.25),
+        );
 
       // Update their score
       user.score += 1;
@@ -179,9 +183,7 @@ export const gameRouter = createTRPCRouter({
         const problem = indFile.problems[i];
         if (problem) {
           const region = Object.keys(regFile).find((key: string) =>
-            (regFile[key as keyof typeof regFile]).includes(
-              problem,
-            ),
+            regFile[key as keyof typeof regFile].includes(problem),
           );
 
           if (existsSync(`./src/problems/${region}/${problem}/lore.md`)) {

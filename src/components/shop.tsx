@@ -20,7 +20,7 @@ export default function Shop({ name, user }: IParams) {
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
 
-  const items = itemList.items.sort((a, b) => {
+  const items = [...itemList.items].sort((a, b) => {
     if (a.type < b.type) {
       return -1;
     }
