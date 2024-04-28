@@ -13,7 +13,7 @@ export interface Enemy {
 const enemies: Enemies = {
   Rat: {
     name: "Rat",
-    health: 25,
+    health: 15,
     critChance: 1,
     strength: 2,
     armor: 0,
@@ -40,7 +40,7 @@ const enemies: Enemies = {
   },
   Cultist: {
     name: "Cultist",
-    health: 75,
+    health: 60,
     critChance: 2,
     strength: 0,
     armor: 1,
@@ -54,11 +54,11 @@ const enemies: Enemies = {
     strength: 5,
     armor: 3,
     magic: 0,
-    resist: -2
+    resist: -3
   },
   Homeowner: {
     name: "Homeowner",
-    health: 25,
+    health: 20,
     critChance: 1,
     strength: 1,
     armor: 0,
@@ -67,7 +67,7 @@ const enemies: Enemies = {
   },
   Leak: {
     name: "Leak",
-    health: 35,
+    health: 25,
     critChance: 1,
     strength: 0,
     armor: -1,
@@ -76,7 +76,7 @@ const enemies: Enemies = {
   },
   Duelist: {
     name: "Duelist",
-    health: 50,
+    health: 40,
     critChance: 4,
     strength: 1,
     armor: 2,
@@ -95,7 +95,7 @@ const enemies: Enemies = {
   Rocko: {
     name: "Rocko",
     critChance: 0,
-    health: 100,
+    health: 80,
     strength: 2,
     armor: -5,
     magic: 0,
@@ -113,7 +113,7 @@ const enemies: Enemies = {
   Hooligan: {
     name: "Hooligan",
     critChance: 1,
-    health: 25,
+    health: 20,
     strength: 1,
     armor: 1,
     magic: 2,
@@ -266,7 +266,7 @@ const enemies: Enemies = {
   },
   Tector: {
     name: "Tector Sod-dunk",
-    health: 60,
+    health: 50,
     critChance: 1,
     strength: 3,
     armor: 2,
@@ -293,7 +293,7 @@ const enemies: Enemies = {
   },
   Demolitionist: {
     name: "Demolitionist",
-    health: 90,
+    health: 80,
     armor: 5,
     strength: 5,
     critChance: 0,

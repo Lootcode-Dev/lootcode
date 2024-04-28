@@ -61,7 +61,7 @@
             "health": 0,
             "armor": -1,
             "resist": 0,
-            "critChance": 1,
+            "critChance": 0,
             "strength": 4,
             "magic": 0
         },
@@ -145,7 +145,7 @@
         },
         {
             "name": "Forest Staff",
-            "type": "weapon",
+            "type": "focus",
             "value": 40,
             "level": 4,
 
@@ -184,7 +184,7 @@
         },
         {
             "name": "Plate Armor",
-            "type": "accessory",
+            "type": "armor",
             "value": 50,
             "level": 5,
 
@@ -227,9 +227,9 @@
             "value": 100,
             "level": 3,
 
-            "health": -50,
+            "health": -35,
             "armor": -1.5,
-            "resist": 6,
+            "resist": 6.5,
             "critChance": 0,
             "strength": 0,
             "magic": 0
@@ -240,64 +240,13 @@
             "value": 100,
             "level": 3,
 
-            "health": -50,
-            "armor": 6,
+            "health": -35,
+            "armor": 6.5,
             "resist": -1.5,
             "critChance": 0,
             "strength": 0,
             "magic": 0
-        },
-        {
-            "name": "Sword of the Sun",
-            "type": "weapon",
-            "value": 100,
-            "level": 3,
-
-            "health": -50,
-            "armor": 0,
-            "resist": 0,
-            "critChance": 0,
-            "strength": 6,
-            "magic": -1.5
-        },
-        {
-            "name": "Staff of the Moon",
-            "type": "focus",
-            "value": 100,
-            "level": 3,
-
-            "health": -50,
-            "armor": 0,
-            "resist": 0,
-            "critChance": 0,
-            "strength": -1.5,
-            "magic": 6
-        },
-        {
-            "name": "Sword of the Moon",
-            "type": "weapon",
-            "value": 100,
-            "level": 3,
-
-            "health": -50,
-            "armor": 0,
-            "resist": 0,
-            "critChance": 0,
-            "strength": 6,
-            "magic": -1.5
-        },
-        {
-            "name": "Staff of the Sun",
-            "type": "focus",
-            "value": 100,
-            "level": 3,
-
-            "health": -50,
-            "armor": 0,
-            "resist": 0,
-            "critChance": 0,
-            "strength": -1.5,
-            "magic": 6
         }
+
     ]
 }

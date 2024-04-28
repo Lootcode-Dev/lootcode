@@ -9,6 +9,7 @@ import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import Mobile from "./mobile";
 import StatDisplay from "./statdisplay";
+import { Item } from "~/app/game/utility";
 
 interface IParams {
   name: string;
@@ -35,6 +36,11 @@ export default function Shop({ name, user }: IParams) {
     }
     return 0;
   });
+
+  const itemIndexes:number[] = [];
+  items.map((val, index)=>{
+    itemIndexes[index] = itemList.items.findIndex((item) => item.name == val.name);
+  })
 
   const { refetch: buyCallback } = api.game.buyItem.useQuery(
     {
@@ -72,9 +78,7 @@ export default function Shop({ name, user }: IParams) {
           </div>
           <div className="my-4 flex flex-wrap">
             {items.map((value, index) =>
-              getUser.items[
-                itemList.items.findIndex((item) => item.name == value.name)
-              ] == "1" ? (
+              getUser.items[itemIndexes[index] ?? 0] == "1" ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                   key={index}
@@ -82,26 +86,22 @@ export default function Shop({ name, user }: IParams) {
                   <div className="grid grid-cols-2 justify-between text-base font-normal">
                     Owned
                     <div className="items-right flex justify-end">
-                      <div>{"" + getItem(index)?.value}</div>
+                      <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
                       <CoinsIcon />
                     </div>
                   </div>
 
                   <ItemDisplay
-                    id={itemList.items.findIndex(
-                      (item) => item.name == value.name,
-                    )}
+                    id={itemIndexes[index] ?? 0}
                   />
                 </div>
-              ) : getItem(index)?.value ?? 0 <= getUser.gold ? (
+              ) : getItem(itemIndexes[index] ?? 0)?.value ?? 0 <= getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                   onClick={() =>
                     !fetching &&
                     setSelItem(
-                      itemList.items.findIndex(
-                        (item) => item.name == value.name,
-                      ),
+                      itemIndexes[index] ?? 0
                     )
                   }
                   key={index}
@@ -109,15 +109,13 @@ export default function Shop({ name, user }: IParams) {
                   <div className="grid grid-cols-2 justify-between text-base font-normal">
                     Purchase
                     <div className="items-right flex justify-end">
-                      <div>{"" + getItem(index)?.value}</div>
+                      <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
                       <CoinsIcon />
                     </div>
                   </div>
 
                   <ItemDisplay
-                    id={itemList.items.findIndex(
-                      (item) => item.name == value.name,
-                    )}
+                    id={itemIndexes[index] ?? 0}
                   />
                 </div>
               ) : (
@@ -128,15 +126,13 @@ export default function Shop({ name, user }: IParams) {
                   <div className="grid grid-cols-2 justify-between text-base font-normal">
                     Not Enough Gold
                     <div className="items-right flex justify-end">
-                      <div>{"" + getItem(index)?.value}</div>
+                      <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
                       <CoinsIcon />
                     </div>
                   </div>
 
                   <ItemDisplay
-                    id={itemList.items.findIndex(
-                      (item) => item.name == value.name,
-                    )}
+                    id={itemIndexes[index] ?? 0}
                   />
                 </div>
               ),

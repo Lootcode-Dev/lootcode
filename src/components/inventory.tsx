@@ -37,6 +37,11 @@ export default function Inventory({ name, user }: IParams) {
     return 0;
   });
 
+  const itemIndexes:number[] = [];
+  items.map((val, index)=>{
+    itemIndexes[index] = itemList.items.findIndex((item) => item.name == val.name);
+  })
+
   const { refetch: equipCallback } = api.game.equipItemID.useQuery(
     {
       item: selItem,
@@ -76,28 +81,24 @@ export default function Inventory({ name, user }: IParams) {
           <div className="my-4 flex flex-wrap">
             {items.map((value, index) =>
               getUser.items[
-                itemList.items.findIndex((item) => item.name == value.name)
+                itemIndexes[index] ?? 0
               ] == "1" ? (
                 isEquipped(
                   getUser,
-                  itemList.items.findIndex((item) => item.name == value.name),
+                  itemIndexes[index] ?? 0,
                 ) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>
                       !fetching &&
                       setSelItem(
-                        itemList.items.findIndex(
-                          (item) => item.name == value.name,
-                        ),
+                        itemIndexes[index] ?? 0,
                       )
                     }
                     key={index}
                   >
                     <ItemDisplay
-                      id={itemList.items.findIndex(
-                        (item) => item.name == value.name,
-                      )}
+                      id={itemIndexes[index] ?? 0}
                     />
                   </div>
                 ) : (
@@ -106,17 +107,13 @@ export default function Inventory({ name, user }: IParams) {
                     onClick={() =>
                       !fetching &&
                       setSelItem(
-                        itemList.items.findIndex(
-                          (item) => item.name == value.name,
-                        ),
+                        itemIndexes[index] ?? 0,
                       )
                     }
                     key={index}
                   >
                     <ItemDisplay
-                      id={itemList.items.findIndex(
-                        (item) => item.name == value.name,
-                      )}
+                      id={itemIndexes[index] ?? 0}
                     />
                   </div>
                 )
