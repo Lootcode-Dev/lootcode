@@ -65,7 +65,7 @@ export default function Inventory({ name, user }: IParams) {
                 isEquipped(getUser, index) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
-                    onClick={() => setSelItem(index)}
+                    onClick={() => !fetching && setSelItem(index)}
                     key={index}
                   >
                     <ItemDisplay id={index} />
@@ -73,7 +73,7 @@ export default function Inventory({ name, user }: IParams) {
                 ) : (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
-                    onClick={() => setSelItem(index)}
+                    onClick={() => !fetching && setSelItem(index)}
                     key={index}
                   >
                     <ItemDisplay id={index} />
