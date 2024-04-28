@@ -55,7 +55,7 @@
         {
             "name": "Bronze Daggers",
             "type": "weapon",
-            "value": 25,
+            "value": 35,
             "level": 2,
 
             "health": 0,
@@ -77,6 +77,19 @@
             "critChance": 0,
             "strength": 0,
             "magic": 3
+        },
+        {
+            "name": "Torn Tome",
+            "type": "focus",
+            "value": 25,
+            "level": 2,
+
+            "health": 0,
+            "armor": 0,
+            "resist": 1,
+            "critChance": 0,
+            "strength": 0,
+            "magic": 2
         },
         {
             "name": "Light Armor",
@@ -118,6 +131,19 @@
             "magic": 0
         },
         {
+            "name": "Bow",
+            "type": "weapon",
+            "value": 25,
+            "level": 2,
+
+            "health": 0,
+            "armor": 1,
+            "resist": 0,
+            "critChance": 0,
+            "strength": 2,
+            "magic": 0
+        },
+        {
             "name": "4-Leaf Clover",
             "type": "accessory",
             "value": 30,
@@ -133,7 +159,7 @@
         {
             "name": "Longsword",
             "type": "weapon",
-            "value": 40,
+            "value": 50,
             "level": 4,
 
             "health": 0,
@@ -146,15 +172,41 @@
         {
             "name": "Forest Staff",
             "type": "focus",
-            "value": 40,
+            "value": 50,
             "level": 4,
 
             "health": 0,
             "armor": 0,
             "resist": 0,
-            "critChance": 1,
+            "critChance": 0,
             "strength": 0,
             "magic": 4
+        },
+        {
+            "name": "Ancient Tome",
+            "type": "focus",
+            "value": 50,
+            "level": 4,
+
+            "health": 0,
+            "armor": 0,
+            "resist": 1.5,
+            "critChance": 0,
+            "strength": 0,
+            "magic": 3
+        },
+        {
+            "name": "Longbow",
+            "type": "weapon",
+            "value": 50,
+            "level": 2,
+
+            "health": 0,
+            "armor": 1.5,
+            "resist": 0,
+            "critChance": 0,
+            "strength": 3,
+            "magic": 0
         },
         {
             "name": "Vitality Charm",

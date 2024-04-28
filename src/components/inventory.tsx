@@ -28,10 +28,10 @@ export default function Inventory({ name, user }: IParams) {
     if (a.type > b.type) {
       return 1;
     }
-    if (a.level < b.level) {
+    if (a.value < b.value) {
       return -1;
     }
-    if (a.level > b.level) {
+    if (a.value > b.value) {
       return 1;
     }
     return 0;

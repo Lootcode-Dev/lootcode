@@ -91,17 +91,17 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
-        name: encounter.name,
-        health: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user) - 1))),
+        name: encounter.name, 
+        health: Math.floor(encounter.health * (1 + 0.135 * (getLevel(user) - 1))),
         maxHealth: Math.floor(
-          encounter.health * (1 + 0.1 * (getLevel(user) - 1)),
+          encounter.health * (1 + 0.135 * (getLevel(user) - 1)),
         ),
         critChance: encounter.critChance,
         strength: Math.round(
-          encounter.strength * (1 + 0.125 * (getLevel(user) - 1)),
+          encounter.strength * (1 + 0.175 * (getLevel(user) - 1)),
         ),
         armor: encounter.armor,
-        magic: Math.round(encounter.magic * (1 + 0.125 * (getLevel(user) - 1))),
+        magic: Math.round(encounter.magic * (1 + 0.175 * (getLevel(user) - 1))),
         resist: encounter.resist,
         dead: false,
         critHit: false,

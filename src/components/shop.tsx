@@ -28,10 +28,10 @@ export default function Shop({ name, user }: IParams) {
     if (a.type > b.type) {
       return 1;
     }
-    if (a.level < b.level) {
+    if (a.value < b.value) {
       return -1;
     }
-    if (a.level > b.level) {
+    if (a.value > b.value) {
       return 1;
     }
     return 0;
@@ -95,7 +95,7 @@ export default function Shop({ name, user }: IParams) {
                     id={itemIndexes[index] ?? 0}
                   />
                 </div>
-              ) : getItem(itemIndexes[index] ?? 0)?.value ?? 0 <= getUser.gold ? (
+              ) : (getItem(itemIndexes[index] ?? 0)?.value ?? 0) <= getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                   onClick={() =>
