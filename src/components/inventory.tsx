@@ -51,7 +51,7 @@ export default function Inventory({ name, user }: IParams) {
   }
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-2">
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
