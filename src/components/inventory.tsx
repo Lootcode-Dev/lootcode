@@ -1,6 +1,6 @@
 "use client";
 
-import { LoaderIcon } from "lucide-react";
+import { Clover, Filter, Heart, LoaderIcon, Shield, Sparkle, Sword, Wand, Wand2 } from "lucide-react";
 import { Key, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { type GUser, isEquipped, getItem } from "~/app/game/utility";
@@ -11,16 +11,27 @@ import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Mobile from "./mobile";
 import { isMobile } from "react-device-detect";
+import { Item } from "~/app/game/utility";
 
 interface IParams {
   name: string;
   user: GUser;
 }
 
+enum IKEY {
+  HEALTH = 0,
+  CRIT,
+  STRENGTH,
+  MAGIC,
+  ARMOR,
+  RESIST
+}
+
 export default function Inventory({ name, user }: IParams) {
   const [getUser, setUser] = useState<GUser>(user);
   const [fetching, setFetching] = useState(false);
   const [selItem, setSelItem] = useState(-1);
+  const [filter, setFilter] = useState(-1)
   const items = [...itemList.items].sort((a, b) => {
     if (a.type < b.type) {
       return -1;
@@ -35,13 +46,6 @@ export default function Inventory({ name, user }: IParams) {
       return 1;
     }
     return 0;
-  });
-
-  const itemIndexes: number[] = [];
-  items.map((val, index) => {
-    itemIndexes[index] = itemList.items.findIndex(
-      (item) => item.name == val.name,
-    );
   });
 
   const { refetch: equipCallback } = api.game.equipItemID.useQuery(
@@ -76,32 +80,62 @@ export default function Inventory({ name, user }: IParams) {
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
-          <div className="flex items-center gap-2">
-            Items
-            {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
+          <div className="grid grid-cols-2 justify-between">
+            <div className="flex items-center gap-2">
+              Items
+              {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
+            </div>
+            <div className="flex items-center gap-2 justify-end">
+              <Filter className="mr-2"/>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.HEALTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.HEALTH) setFilter(-1); else setFilter(IKEY.HEALTH);}}>
+                <Heart/>
+              </div>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.CRIT ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.CRIT) setFilter(-1); else setFilter(IKEY.CRIT);}}>
+                <Clover/>
+              </div>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.STRENGTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.STRENGTH) setFilter(-1); else setFilter(IKEY.STRENGTH);}}>
+                <Sword/>
+              </div>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.ARMOR ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.ARMOR) setFilter(-1); else setFilter(IKEY.ARMOR);}}>
+                <Shield/>
+              </div>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.MAGIC ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.MAGIC) setFilter(-1); else setFilter(IKEY.MAGIC);}}>
+                <Wand2/>
+              </div>
+              <div className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.RESIST ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={()=>{if(filter == IKEY.RESIST) setFilter(-1); else setFilter(IKEY.RESIST);}}>
+                <Sparkle/>
+              </div>
+            </div>
           </div>
-          <div className="my-4 flex max-h-[28vh] flex-wrap overflow-auto">
+          <div className="my-4 flex max-h-[40vh] flex-wrap overflow-auto">
             {items.map((value, index) =>
-              getUser.items[itemIndexes[index] ?? 0] == "1" ? (
-                isEquipped(getUser, itemIndexes[index] ?? 0) ? (
+              getUser.items[itemList.items.findIndex((item) => item.name == value.name)] == "1" ? (
+                !sortStat(value, filter) ? <div/> :
+                isEquipped(getUser, itemList.items.findIndex((item) => item.name == value.name)) ? (
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-950 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>
-                      !fetching && setSelItem(itemIndexes[index] ?? 0)
+                      !fetching && setSelItem(itemList.items.findIndex((item) => item.name == value.name))
                     }
                     key={index}
                   >
-                    <ItemDisplay id={itemIndexes[index] ?? 0} />
+                    <ItemDisplay id={itemList.items.findIndex((item) => item.name == value.name)} />
                   </div>
-                ) : (
+                ) : ( !sortStat(value, filter) ? <div/> :
                   <div
                     className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                     onClick={() =>
-                      !fetching && setSelItem(itemIndexes[index] ?? 0)
+                      !fetching && setSelItem(itemList.items.findIndex((item) => item.name == value.name))
                     }
                     key={index}
                   >
-                    <ItemDisplay id={itemIndexes[index] ?? 0} />
+                    <ItemDisplay id={itemList.items.findIndex((item) => item.name == value.name)}/>
                   </div>
                 )
               ) : (
@@ -112,10 +146,10 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="m-4 flex max-h-[28vh] flex-wrap gap-4 overflow-auto">
+          <div className="my-4 flex max-h-[20vh] flex-wrap overflow-auto">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
-                <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 text-xl duration-150 hover:bg-[#15162c]">
+                <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
                 <DialogContent className="bg-[#15162c] p-4 text-white">
@@ -134,4 +168,21 @@ export default function Inventory({ name, user }: IParams) {
       </div>
     </div>
   );
+}
+
+function sortStat(it:Item, stat:number):boolean {
+  if(stat == -1) return true;
+
+  let comp = -1;
+  switch(stat)
+  {
+    case IKEY.HEALTH: comp = it.health; break;
+    case IKEY.CRIT: comp = it.critChance; break; 
+    case IKEY.STRENGTH: comp = it.strength; break; 
+    case IKEY.MAGIC: comp = it.magic; break; 
+    case IKEY.ARMOR: comp = it.armor; break; 
+    case IKEY.RESIST: comp = it.resist; break; 
+  }
+
+  return comp > 0;
 }

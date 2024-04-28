@@ -55,7 +55,7 @@ export default function NodeGraph({
             : bgImg == 3
               ? "bg-[url('/maps/map3.png')]"
               : "bg-[url('/maps/board.png')]"
-      } bg-cover bg-center p-4`}
+      } bg-cover bg-center p-[1vw]`}
       onMouseMove={handleMouseMove}
     >
       <defs>

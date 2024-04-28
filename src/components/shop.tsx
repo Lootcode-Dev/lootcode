@@ -3,7 +3,7 @@
 import { CoinsIcon, LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { getItem, type GUser } from "~/app/game/utility";
+import { getItem, getLevel, type GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
@@ -119,7 +119,21 @@ export default function Shop({ name, user }: IParams) {
 
                   <ItemDisplay id={itemIndexes[index] ?? 0} />
                 </div>
-              ) : (getItem(itemIndexes[index] ?? 0)?.value ?? 0) <=
+              ) : (value.level > getLevel(user)) ? (
+              <div
+              className="m-2 cursor-pointer rounded border border-red-700 bg-red-950 p-4 duration-150 hover:bg-[#15162c]"
+              key={index}
+            >
+              <div className="grid grid-cols-2 justify-between text-base font-normal">
+                {`Level ${value.level}`}
+                <div className="items-right flex justify-end">
+                  <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
+                  <CoinsIcon />
+                </div>
+              </div>
+
+              <ItemDisplay id={itemIndexes[index] ?? 0} />
+            </div>) : value.value <=
                 getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"

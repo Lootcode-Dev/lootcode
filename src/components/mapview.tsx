@@ -289,7 +289,7 @@ export default function MapView({ user, chapterid }: IParams) {
                                     </div>
                                     <div className="flex flex-col items-center justify-center p-2">
                                       <ShieldIcon></ShieldIcon>
-                                      {enemy.armor}
+                                      {enemy.armor * 4}
                                     </div>
                                     <div className="flex flex-col items-center justify-center p-2">
                                       <CloverIcon></CloverIcon>
@@ -301,7 +301,7 @@ export default function MapView({ user, chapterid }: IParams) {
                                     </div>
                                     <div className="flex flex-col items-center justify-center p-2">
                                       <SparkleIcon></SparkleIcon>
-                                      {enemy.resist}
+                                      {enemy.resist * 4}
                                     </div>
                                   </div>
                                 </div>

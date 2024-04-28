@@ -1,9 +1,9 @@
 {
     "chapters": [
       {
-        "name": "Bitwise Bastion",
+        "name": "Bitwise Bastions",
         "pos": [
-          6,
+          8,
           60
         ],
         "next": [],
@@ -555,7 +555,7 @@
           "Findara",
           "Compendia",
           "Nodak",
-          "Bitwise Bastion",
+          "Bitwise Bastions",
           "Arithmend",
           "Dynamar",
           "The Thicket"
@@ -620,7 +620,7 @@
               50,
               50
             ],
-            "name": "???",
+            "name": "CEO",
             "next": [
               "The Lens of Clarity",
               "The Chronoqueue",

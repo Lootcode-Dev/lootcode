@@ -366,7 +366,7 @@ export const codeRouter = createTRPCRouter({
             if (goldFile[input.name as keyof typeof goldFile])
               user.gold += Math.floor(
                 goldFile[input.name as keyof typeof goldFile] *
-                  (1 + (getLevel(user) - 1) * 0.25),
+                getLevel(user),
               );
 
             await db.user.update({

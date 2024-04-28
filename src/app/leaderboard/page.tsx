@@ -20,7 +20,8 @@ export default async function Page() {
         },
         orderBy: [
             {score: 'desc'}, //Sort by score
-            {time: 'asc'} //In ties sort by earliest solve
+            {time: 'asc'}, //In ties sort by earliest solve
+            {email: 'desc'}
         ]
     });
 

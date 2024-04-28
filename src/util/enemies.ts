@@ -14,7 +14,7 @@ const enemies: Enemies = {
   Rat: {
     name: "Rat",
     health: 15,
-    critChance: 1,
+    critChance: 5,
     strength: 2,
     armor: 0,
     magic: 0,
@@ -23,7 +23,7 @@ const enemies: Enemies = {
   Goblin: {
     name: "Goblin",
     health: 25,
-    critChance: 1,
+    critChance: 15,
     strength: 2,
     armor: 0,
     magic: 0,
@@ -32,7 +32,7 @@ const enemies: Enemies = {
   Typo: {
     name: "Typo",
     health: 15,
-    critChance: 5,
+    critChance: 30,
     strength: 1,
     armor: 1,
     magic: 1,
@@ -41,7 +41,7 @@ const enemies: Enemies = {
   Cultist: {
     name: "Cultist",
     health: 60,
-    critChance: 2,
+    critChance: 15,
     strength: 0,
     armor: 1,
     magic: 4,
@@ -50,7 +50,7 @@ const enemies: Enemies = {
   Pointar: {
     name: "Chief Pointar",
     health: 90,
-    critChance: 1,
+    critChance: 5,
     strength: 5,
     armor: 3,
     magic: 0,
@@ -59,7 +59,7 @@ const enemies: Enemies = {
   Homeowner: {
     name: "Homeowner",
     health: 20,
-    critChance: 1,
+    critChance: 5,
     strength: 1,
     armor: 0,
     magic: 1,
@@ -68,7 +68,7 @@ const enemies: Enemies = {
   Leak: {
     name: "Leak",
     health: 25,
-    critChance: 1,
+    critChance: 8,
     strength: 0,
     armor: -1,
     magic: 4,
@@ -77,7 +77,7 @@ const enemies: Enemies = {
   Duelist: {
     name: "Duelist",
     health: 40,
-    critChance: 4,
+    critChance: 30,
     strength: 1,
     armor: 2,
     magic: 1,
@@ -103,7 +103,7 @@ const enemies: Enemies = {
   },
   Pebble: {
     name: "Pebble",
-    critChance: 5,
+    critChance: 30,
     health: 20,
     strength: 2,
     armor: -2,
@@ -112,7 +112,7 @@ const enemies: Enemies = {
   },
   Hooligan: {
     name: "Hooligan",
-    critChance: 1,
+    critChance: 5,
     health: 20,
     strength: 1,
     armor: 1,
@@ -121,7 +121,7 @@ const enemies: Enemies = {
   },
   Oh_rangutang: {
     name: "Oh-rangutang",
-    critChance: 4,
+    critChance: 30,
     health: 15,
     strength: 3,
     armor: 0,
@@ -130,7 +130,7 @@ const enemies: Enemies = {
   },
   Spider: {
     name: "Spider",
-    critChance: 1,
+    critChance: 8,
     health: 5,
     strength: 0,
     armor: 0,
@@ -148,7 +148,7 @@ const enemies: Enemies = {
   },
   Rogue_Soldier: {
     name: "Rogue Soldier",
-    critChance: 2,
+    critChance: 10,
     health: 70,
     strength: 5,
     armor: 1,
@@ -157,7 +157,7 @@ const enemies: Enemies = {
   },
   Tuo: {
     name: "Prophet Tuo",
-    critChance: 1,
+    critChance: 5,
     health: 25,
     strength: 1,
     armor: -2,
@@ -166,7 +166,7 @@ const enemies: Enemies = {
   },
   Tuos_Complement: {
     name: "Tuo's Complement",
-    critChance: 1,
+    critChance: 5,
     health: 25,
     strength: 3,
     armor: 3,
@@ -175,7 +175,7 @@ const enemies: Enemies = {
   },
   Root2: {
     name: "Root of 2",
-    critChance: 1,
+    critChance: 8,
     health: 30,
     strength: 1.41,
     armor: 2,
@@ -186,7 +186,7 @@ const enemies: Enemies = {
   Pi: {
     name: "Pi",
     health: 25,
-    critChance: 1,
+    critChance: 8,
     strength: 1,
     armor: -2,
     magic: 3.14,
@@ -195,7 +195,7 @@ const enemies: Enemies = {
   Blighted_Tree: {
     name: "Blighted Tree",
     health: 30, 
-    critChance: 3,
+    critChance: 15,
     strength: 0,
     armor: 4,
     magic: 4,
@@ -204,7 +204,7 @@ const enemies: Enemies = {
   Thief: {
     name: "Thief",
     health: 20,
-    critChance: 7,
+    critChance: 30,
     strength: 2, 
     armor: -3,
     magic: 0,
@@ -213,7 +213,7 @@ const enemies: Enemies = {
   Bubbles: {
     name: "Bubbles",
     health: 15,
-    critChance: 1,
+    critChance: 10,
     strength: 1,
     armor: 0,
     magic: 0,
@@ -222,7 +222,7 @@ const enemies: Enemies = {
   Angry_Student: {
     name: "Angry Student",
     health: 20,
-    critChance: 1,
+    critChance: 10,
     strength: 1,
     armor: 1,
     magic: 0,
@@ -231,7 +231,7 @@ const enemies: Enemies = {
   Overdue_Queuesgardian: {
     name: "Overdue Queuesgardian",
     health: 30,
-    critChance: 1,
+    critChance: 10,
     strength: 3,
     armor: -3,
     magic: 1,
@@ -240,7 +240,7 @@ const enemies: Enemies = {
   Euler: {
     name: "Euler",
     health: 50,
-    critChance: 3,
+    critChance: 30,
     strength: 1,
     armor: 0,
     magic: 5,
@@ -249,7 +249,7 @@ const enemies: Enemies = {
   Blight_Fae: {
     name: "Blight Fae",
     health: 50, 
-    critChance: 3,
+    critChance: 30,
     strength: 0,
     armor: -2,
     magic: 4,
@@ -258,7 +258,7 @@ const enemies: Enemies = {
   Mick: {
     name: "Mick Palmford",
     health: 50,
-    critChance: 8,
+    critChance: 50,
     strength: 1,
     armor: -2,
     magic: 3,
@@ -267,7 +267,7 @@ const enemies: Enemies = {
   Tector: {
     name: "Tector Sod-dunk",
     health: 50,
-    critChance: 1,
+    critChance: 10,
     strength: 3,
     armor: 2,
     magic: 0,
@@ -276,7 +276,7 @@ const enemies: Enemies = {
   Jimbo: {
     name: "Jimbo Sod-dunk",
     health: 20,
-    critChance: 3,
+    critChance: 30,
     strength: 2,
     armor: 0,
     magic: 1,
@@ -305,7 +305,7 @@ const enemies: Enemies = {
     health: 20,
     armor: -1,
     strength: 0,
-    critChance: 3,
+    critChance: 30,
     magic: 3,
     resist: 2
   },
@@ -316,7 +316,16 @@ const enemies: Enemies = {
     strength: 0,
     magic: 5,
     resist: 5,
-    critChance: 1
+    critChance: 10
+  },
+  Interviewer: {
+    name: "The Interviewer",
+    critChance: 30,
+    health: 300,
+    armor: 5,
+    strength: 1,
+    resist: 5,
+    magic: 1
   }
 };
 

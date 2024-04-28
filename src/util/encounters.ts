@@ -28,7 +28,8 @@ const encounters: Encounters = {
   family_feud_iii: ["Tector", "Jimbo"],
   demolition_man: ["Demolitionist"],
   severed: ["Edge", "Edge", "Edge"],
-  last_wish: ["WishEnder"]
+  last_wish: ["WishEnder"],
+  ceo: ["Interviewer"]
 };
 
 export default encounters;
