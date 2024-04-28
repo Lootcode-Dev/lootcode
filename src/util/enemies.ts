@@ -318,8 +318,8 @@ const enemies: Enemies = {
     resist: 5,
     critChance: 10
   },
-  Interviewer: {
-    name: "The Interviewer",
+  TechnicaIngoramus: {
+    name: "Technica Ingoramus",
     critChance: 30,
     health: 300,
     armor: 5,

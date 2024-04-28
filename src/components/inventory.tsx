@@ -219,7 +219,7 @@ export default function Inventory({ name, user }: IParams) {
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
-                <DialogContent className="bg-[#15162c] p-4 text-white">
+                <DialogContent className="bg-[#15162c] p-4 text-white max-w-[600px] max-h-[425px] overflow-auto">
                   <ReactMarkdown
                     className="prose w-auto  max-w-none 
                         p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400  prose-strong:text-opacity-30 prose-em:text-yellow-200"
