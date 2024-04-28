@@ -92,17 +92,17 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
         name: encounter.name, 
-        health: Math.floor(encounter.health * (1 + 0.135 * (getLevel(user) - 1))),
+        health: Math.floor(encounter.health * (1 + 0.25 * (getLevel(user) - 1))),
         maxHealth: Math.floor(
-          encounter.health * (1 + 0.135 * (getLevel(user) - 1)),
+          encounter.health * (1 + 0.25 * (getLevel(user) - 1)),
         ),
         critChance: encounter.critChance,
         strength: Math.round(
-          encounter.strength * (1 + 0.175 * (getLevel(user) - 1)),
+          encounter.strength * (1 + 0.25 * (getLevel(user) - 1)),
         ),
-        armor: encounter.armor,
-        magic: Math.round(encounter.magic * (1 + 0.175 * (getLevel(user) - 1))),
-        resist: encounter.resist,
+        armor: encounter.armor * 4,
+        magic: Math.round(encounter.magic * (1 + 0.25 * (getLevel(user) - 1))),
+        resist: encounter.resist * 4,
         dead: false,
         critHit: false,
       }));
@@ -153,7 +153,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                   0,
                   userStats.strength -
                     (userStats.strength >= 0
-                      ? userStats.strength * currentEnemy.armor * 0.1
+                      ? userStats.strength * currentEnemy.armor * 0.025
                       : 0),
                   //if strength is negative, let it count against your total damage
                   //there should not be a scenario where your attacks heal the enemy
@@ -163,7 +163,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                   0,
                   userStats.magic -
                     (userStats.magic >= 0
-                      ? userStats.magic * currentEnemy.resist * 0.1
+                      ? userStats.magic * currentEnemy.resist * 0.025
                       : 0),
                   //same with magical damage
                 );
@@ -229,12 +229,12 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                   Math.max(
                     0,
                     currentEnemy.strength -
-                      currentEnemy.strength * userStats.armor * 0.1,
+                      currentEnemy.strength * userStats.armor * 0.025,
                   ) +
                   Math.max(
                     0,
                     currentEnemy.magic -
-                      currentEnemy.magic * userStats.resist * 0.1,
+                      currentEnemy.magic * userStats.resist * 0.025,
                   );
 
                 if (Math.random() * 100 <= currentEnemy.critChance) {
@@ -502,7 +502,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                               </div>
                               <div className="flex flex-col items-center justify-center p-2">
                                 <ShieldIcon></ShieldIcon>
-                                {enemy.armor}
+                                {enemy.armor * 4}
                               </div>
                               <div className="flex flex-col items-center justify-center p-2">
                                 <CloverIcon></CloverIcon>
@@ -514,7 +514,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                               </div>
                               <div className="flex flex-col items-center justify-center p-2">
                                 <SparkleIcon></SparkleIcon>
-                                {enemy.resist}
+                                {enemy.resist * 4}
                               </div>
                             </div>
                           </div>
