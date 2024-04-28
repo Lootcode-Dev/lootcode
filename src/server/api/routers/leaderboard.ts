@@ -15,7 +15,8 @@ export const leaderRouter = createTRPCRouter({
             },
             orderBy: [
                 {score: 'desc'}, //Sort by score
-                {time: 'asc'} //In ties sort by earliest solve
+                {time: 'asc'}, //In ties sort by earliest solve
+                {email: 'desc'}
             ],
             skip: input.page*input.perPage,
             take: input.perPage
