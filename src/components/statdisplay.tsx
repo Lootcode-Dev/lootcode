@@ -15,6 +15,7 @@ import {
   getUserStats
 } from "~/app/game/utility";
 import ItemDisplay from "./itemdisplay";
+import GameRules from "./gamerules";
 
 interface IParams {
   name: string;
@@ -27,7 +28,8 @@ export default function StatDisplay({ name, user }: IParams) {
   return (
     <div className="m-4 flex flex-col rounded-xl bg-[#15162c] h-[80vh] p-2">
       <div className="flex items-center justify-center pb-6 text-2xl font-bold">
-        {name}
+        <div className="mr-2">{name}</div> 
+        <GameRules />
       </div>
       <div className="grid grid-cols-2 justify-items-center">
         <div className="flex items-center text-2xl">

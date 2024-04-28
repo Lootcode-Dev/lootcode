@@ -27,6 +27,7 @@ import {
 } from "./ui/tooltip";
 import Mobile from "./mobile";
 import { isMobile } from "react-device-detect";
+import GameRules from "./gamerules";
 
 interface Entity {
   name: string;
@@ -91,12 +92,16 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
         name: encounter.name,
-        health: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user)-1))),
-        maxHealth: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user)-1))),
+        health: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user) - 1))),
+        maxHealth: Math.floor(
+          encounter.health * (1 + 0.1 * (getLevel(user) - 1)),
+        ),
         critChance: encounter.critChance,
-        strength: Math.round(encounter.strength * (1 + 0.125 * (getLevel(user)-1))),
+        strength: Math.round(
+          encounter.strength * (1 + 0.125 * (getLevel(user) - 1)),
+        ),
         armor: encounter.armor,
-        magic: Math.round(encounter.magic * (1 + 0.125 * (getLevel(user)-1))),
+        magic: Math.round(encounter.magic * (1 + 0.125 * (getLevel(user) - 1))),
         resist: encounter.resist,
         dead: false,
         critHit: false,
@@ -137,7 +142,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
       intervalRef.current = setInterval(() => {
         // Update Enemy health for each player attack
         setEnemies((prevEnemies) => {
-
           if (prevEnemies) {
             const updatedEnemies = [...prevEnemies];
             const currentEnemy = updatedEnemies[currentEnemyIndex];
@@ -215,7 +219,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         // Update Player health for each enemy attack that is still alive
         setPlayer((prevPlayer) => {
           if (prevPlayer) {
-
             const updatedPlayer = { ...prevPlayer };
             updatedPlayer.critHit = false;
 
@@ -332,25 +335,25 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 items-center justify-between gap-8">
-
-                  <div
-                    onClick={()=>{
-                      reset();
-                      gameLoop();}}
-                    className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
-                  >
-                    Start
-                  </div>
-
-
-                  <div
-                    onClick={reset}
-                    className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
-                  >
-                    Reset
-                  </div>
-
+              <div className="grid grid-cols-3 items-center justify-between gap-8">
+                <div
+                  onClick={() => {
+                    reset();
+                    gameLoop();
+                  }}
+                  className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
+                >
+                  Start
+                </div>
+                <div className="flex h-full items-center justify-center">
+                  <GameRules />
+                </div>
+                <div
+                  onClick={reset}
+                  className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
+                >
+                  Reset
+                </div>
               </div>
               {"Level " + getLevel(user)}
             </div>
