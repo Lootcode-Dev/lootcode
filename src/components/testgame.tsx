@@ -1,5 +1,6 @@
 "use client";
 import {
+  ArrowLeft,
   CloverIcon,
   HeartIcon,
   Loader2,
@@ -90,12 +91,12 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
         name: encounter.name,
-        health: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
-        maxHealth: Math.floor(encounter.health * (1 + 0.1 * getLevel(user))),
+        health: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user)-1))),
+        maxHealth: Math.floor(encounter.health * (1 + 0.1 * (getLevel(user)-1))),
         critChance: encounter.critChance,
-        strength: Math.round(encounter.strength * (1 + 0.25 * getLevel(user))),
+        strength: Math.round(encounter.strength * (1 + 0.125 * (getLevel(user)-1))),
         armor: encounter.armor,
-        magic: Math.round(encounter.magic * (1 + 0.25 * getLevel(user))),
+        magic: Math.round(encounter.magic * (1 + 0.125 * (getLevel(user)-1))),
         resist: encounter.resist,
         dead: false,
         critHit: false,
@@ -128,12 +129,15 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   const intervalRef = useRef<number | null>(null);
 
   function gameLoop() {
+    // Check if player is dead
+
     if (enemies && !loopRunning) {
       let currentEnemyIndex = 0;
       setLoopRunning(true);
       intervalRef.current = setInterval(() => {
         // Update Enemy health for each player attack
         setEnemies((prevEnemies) => {
+
           if (prevEnemies) {
             const updatedEnemies = [...prevEnemies];
             const currentEnemy = updatedEnemies[currentEnemyIndex];
@@ -211,6 +215,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         // Update Player health for each enemy attack that is still alive
         setPlayer((prevPlayer) => {
           if (prevPlayer) {
+
             const updatedPlayer = { ...prevPlayer };
             updatedPlayer.critHit = false;
 
@@ -311,46 +316,41 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         </DialogContent>
       </Dialog>
       <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="flex justify-center space-x-4 pt-2">
+        <div className="flex justify-center space-x-4 pt-8">
           <div className="flex size-full flex-col items-center justify-center">
-            <div className="grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-4 px-8 text-end text-5xl font-bold">
+            <div className="grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-2 pr-4 text-end text-3xl font-bold">
               {!data ? (
                 <div className="flex items-center justify-center">
                   <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
                 </div>
               ) : (
-                <div className="flex text-center text-5xl font-bold">
-                  {encounterLabel}
+                <div className="flex flex-row items-center gap-2">
+                  <a href={`/map/${reg}`}>
+                    <ArrowLeft className="m-1 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
+                  </a>
+                  <div>{encounterLabel}</div>
                 </div>
               )}
 
-              <div className="grid grid-cols-3 items-center justify-between gap-8">
-                <div>
-                  <Link href={`/map/${reg}`}>
-                    <div
-                      onClick={reset}
-                      className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
-                    >
-                      Back
-                    </div>
-                  </Link>
-                </div>
-                <div>
+              <div className="grid grid-cols-2 items-center justify-between gap-8">
+
                   <div
-                    onClick={gameLoop}
+                    onClick={()=>{
+                      reset();
+                      gameLoop();}}
                     className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
                   >
                     Start
                   </div>
-                </div>
-                <div>
+
+
                   <div
                     onClick={reset}
                     className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
                   >
                     Reset
                   </div>
-                </div>
+
               </div>
               {"Level " + getLevel(user)}
             </div>

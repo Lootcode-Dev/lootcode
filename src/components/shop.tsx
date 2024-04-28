@@ -46,7 +46,7 @@ export default function Shop({ name, user }: IParams) {
   }
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-2">
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
@@ -71,7 +71,7 @@ export default function Shop({ name, user }: IParams) {
 
                   <ItemDisplay id={index} />
                 </div>
-              ) : getItem(index)?.value ?? 0 <= getUser.gold ? (
+              ) : getItem(index)?.value <= getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                   onClick={() => setSelItem(index)}
