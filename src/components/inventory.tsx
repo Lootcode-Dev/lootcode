@@ -115,7 +115,7 @@ export default function Inventory({ name, user }: IParams) {
           <div className="m-4 flex max-h-[28vh] flex-wrap gap-4 overflow-auto">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
-                <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
+                <DialogTrigger className="cursor-pointer rounded bg-purple-700 p-4 text-xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
                 <DialogContent className="bg-[#15162c] p-4 text-white">
