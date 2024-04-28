@@ -124,6 +124,28 @@ export default function NodeGraph({
         if (nameToFileName(node.name) == "the_tower")
           if (!isRegionUnlocked(node.name)) return <g key={index} />;
 
+        // Position for the node text label
+        const textX = getNodeX(node.pos[0] ?? 0);
+        const textY = getNodeY(node.pos[1] ?? 0) + nodeRadius * 2;
+
+        // Approximate background size
+        const padding = 8; // Adjust padding as needed
+        let rectWidth = node.name.length * 14; // Adjust multiplier as needed based on your font size
+        if (node.name.length < 9) {
+          rectWidth = node.name.length * 16;
+        }
+        if (
+          node.name == "Vectara" ||
+          node.name == "Lexica" ||
+          node.name == "Findara"
+        ) {
+          rectWidth = node.name.length * 13;
+        }
+        if (node.name.length > 10) {
+          rectWidth = node.name.length * 12;
+        }
+        const rectHeight = 20; // Adjust height as needed
+
         return (
           <g key={index} id={"node2-" + nameToFileName(node.name)}>
             <circle
@@ -138,6 +160,17 @@ export default function NodeGraph({
               fill={nodeColor(node.name)}
               className={"cursor-pointer duration-150 hover:stroke-[4px]"}
             ></circle>
+            <rect
+              x={textX - rectWidth / 2 - padding / 2}
+              y={textY - rectHeight / 2 - padding / 2}
+              width={rectWidth + padding}
+              height={rectHeight + padding}
+              fill="#15162C" // The color for the background rectangle
+              rx="5" // Adjust for rounded corners if desired
+              stroke="#a855f7"
+              strokeWidth={getNode == index ? "3" : "2"}
+              opacity={0.9}
+            />
             <text
               id={"nodeText" + index}
               x={"" + getNodeX(node.pos[0] ?? 0)}

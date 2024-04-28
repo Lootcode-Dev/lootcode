@@ -3,7 +3,7 @@
       {
         "name": "Bitwise Bastion",
         "pos": [
-          7,
+          6,
           60
         ],
         "next": [],
@@ -1117,7 +1117,7 @@
         "name": "The Thicket",
         "pos": [
           91,
-          94
+          93
         ],
         "next": [],
         "nodes": [
