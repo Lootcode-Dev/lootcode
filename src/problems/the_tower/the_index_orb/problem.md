@@ -1,5 +1,7 @@
 # The Index Orb
 
+"TO HELL WITH CUTTING THE BLUE WIRE, TRY DISARMING THE ORB OF VECTARA'S IMMINENT IMPLOSION!"
+
 Floating before you is the relic known as the Index Orb, solely responsible for the self-expanding properties of Vectara. It's absence has caused turmoil throughout the realm, and now, you have the opportunity to restore it to its rightful place.
 
 The Orb, being aware of the fact that it has been stolen and taken to this tower, has begun to collapse onto itself. If it is allowed to do so for too long, it will implode, and take this entire island with it. The implosion process is simple, and if you are able to determine the outcome of the implosion, you will be able to prevent it from happening.

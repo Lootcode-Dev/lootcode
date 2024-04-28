@@ -1,14 +1,15 @@
 # The Cache
 
+"UNLIKE YOU, THE DYMADS HAD TO BE CLEVER TO DECIPHER THE CACHE... GOOD LUCK FINDING YOUR WAY OUT OF THE TOWER!"
+
 A beautifully woven tapestry, hundreds of square feet large, and miles and miles of yarn, the Cache is more than just an art project to the Dymads. Representing complexity through yarn, this weaving holds the key to all past, present, and future decisions. While many patterns are present on the cache, one of the most prominent are triangles. These triangles represent a decision, with each layer being branches of the decisions that come before it. By looking and analyzing the triangles on the Cache, it is said that you can solve just about any problem in Algorion.
 
 By "sliding down" the top of a triangle through the path of the maximum sum, you are able to determine the best decision to make at each turn. You've wandered this maze floor of the tower for hours, and now, you find the Cache before you. You are dazed, tired, and unsure if you will be able to make it out yourself. Maybe if you can reference the cache's triangles yourself... maybe, just maybe, you can make it out alive.
 
-
 ```
    /3/
-  \7\ 4 
- 2 \4\ 6 
+  \7\ 4
+ 2 \4\ 6
 8 5 \9\ 3
 ```
 

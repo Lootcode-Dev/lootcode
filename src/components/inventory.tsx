@@ -121,7 +121,7 @@ export default function Inventory({ name, user }: IParams) {
                 <DialogContent className="bg-[#15162c] p-4 text-white">
                   <ReactMarkdown
                     className="prose w-auto  max-w-none 
-                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-bold prose-strong:text-yellow-200 prose-em:text-yellow-200"
+                        p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400  prose-strong:text-opacity-30 prose-em:text-yellow-200"
                     key={index}
                   >
                     {value}

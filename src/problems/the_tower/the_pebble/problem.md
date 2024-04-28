@@ -1,5 +1,7 @@
 # The Pebble
 
+"EVEN WITH AN UNDERWHELMING NAME LIKE THE PEBBLE, IT WILL STILL AMOUNT TO MORE THAN YOU EVER WILL!"
+
 Don't let the name underwhelm you, the Pebble is arguably one of the most powerful relics in all of Algorion. The magic of the Stackspires dictates that items, by placing things atop one another, become stronger the more things that are on top of it. That is what makes the Stackspires so sturdy, or at least, until the Pebble was stolen. It is said that the trade-off of this magical property, is that removing the first in out first has catastrophic effects.
 
 The removal of the Pebble is exactly what has caused the landslides in the Stackspires, since this property was fundamentally violated. And thus, there is now rubble scattered all throughout the Stackspires. The only way to put the Pebble back where it belongs is to be able to identify the rubble that needs to go on top of it. It would be immature to take the Pebble back to the Stackspires without knowing how to put it back once you get there.

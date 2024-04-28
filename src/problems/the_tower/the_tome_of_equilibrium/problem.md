@@ -1,5 +1,7 @@
 # The Tome of Equilibrium
 
+"YOU THINK YOU KNOW IT ALL, DON'T YOU? GOOD LUCK GETTING THIS ONE BACK!"
+
 At the core of Compendia, and more particularly, the Grand Compendian University, the Tome of Equilibrium is responsible for automatically sorting various aspects of the region with magic. Whether that be sorting the library, students into respective classes, creating schedules, or assigning IDs, the Tome of Equilibrium is essential for campus operations.
 
 However, the Tome of Equilibrium has its limits. It requires a scholar, typically the dean or an expert bookkeeper, to continue powering it. Once it goes without power, the tasks delegated to the Tome build up, and must be done manually in order to kick start it once again. Every page represents a task, and... let's just say there are a LOT of pages left. This Tome is impossibly heavy from all of the pages, and you cannot pick it up! Maybe this is what happens when the Tome goes missing over finals week... A potential collapse at the university could be a cultural collapse in Compendia as we know it.

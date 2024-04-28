@@ -1,5 +1,7 @@
 # The Arborithm
 
+"HOW IRONIC, THE ARBORITHM IS SPEWING A PLAGUE AND ITS STILL LESS FAULTY THAN THAT MIND OF YOURS!"
+
 In the heart of the Thicket, the verdant forest hums with a resonant life energy - that was until it lost its heart. The Arborithm rests at the root of the Thicket, dictating the winding paths, sentient trees, and life energy itself. You have seen that there is even an entire religion formed around it, so you should probably get that back.
 
 The issue is, the Arborithm has reproduced a sub-ecosystem on the floor of the tower it resides on, attempting to create the home it has now lost. However, with lack of priests to keep the Arborithm in check, this process has become cancerous. The ecosystem created by the Arborithm has now plagued itself, making it increasingly hard to retrieve it. If you are to touch any of the withering plague, you too may rot. You don't think your flesh falling from your bone in seconds would be very enjoyable, so you aim to avoid the withering.

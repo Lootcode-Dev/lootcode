@@ -1,5 +1,7 @@
 # The Alphabind
 
+"IM SURPRISED YOU EVEN KNOW HOW TO READ, LET ALONE BE ABLE TO READ THE DIVINE WORD OF THE UNIVERSE... GOOD LUCK DECODING THE ALPHABIND!"
+
 The Alphabind holds all recorded language throughout all of Algorion across all of time. But more impressively, the Alphabind can translate the world itself, interpolating the meaning of existence, the universe, and the cosmos. This level of insight and understanding has allowed Lexica to create their lexicographical magic, thus making the Alphabind critical to the arcane power of Lexica.
 
 You've found the Alphabind amidst the chaos of the tower, but you've quickly found yourself surrounded by armed traps and obstacles. Without divine intervention, you likely won't make it out alive. Lucky for you, with some clever deciphering, you *can* hear the divine. Or rather, you can read the divine energy of miracles through the pages of the Alphabind.

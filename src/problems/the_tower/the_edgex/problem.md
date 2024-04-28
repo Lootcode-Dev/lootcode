@@ -1,5 +1,7 @@
 # The Edgex
 
+"I'M SURPRISED YOU COULD EVEN FIND YOUR WAY UP THE STAIRS, GOOD LUCK FINDING YOUR WAY TO THE EDGEX!"
+
 The Edgex alone powers the interwoven complexity of Nodak. That was until it was stolen, and brought here. The Edgex is a powerful relic that the Nodes have suffered without for too long.
 
 In order to steal the Edgex back, you need to beat it at its own game. The Edgex is responsible for navigating graph-like relationships, like that of a grid, web, or maze. Now, the Edgex has been stored within the Tower on a constantly moving platform being powered by the Edgex against its will, instructed to make it impossible to reach. In order to retrieve it, you need to outsmart it. It won't be easy, as the Edgex has positioned itself in such a way that requires a very specific path to be taken in order to reach it.

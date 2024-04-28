@@ -1,5 +1,7 @@
 # The Lens of Clarity
 
+"GLANCE INTO THE LENS ALL YOU WANT, YOU WILL NEVER FIND THE SATISFACTION YOU ARE LOOKING FOR!"
+
 The Lens of Clarity is the core of Findara, and solely responsible for the Search Boundary. Peering into the Lens of Clarity allows Findars to find anything, anytime, anywhere. That was until it was stolen from them.
 
 The Lens of Clarity has lost its ability to see into Findara, and now, peering into it reveals a puzzle that you must solve in order to re-calibrate it to Findara before taking it back from this god forsaken island. Should you grab it and run, you risk destroying it. And thus, risk dooming Findara for all eternity.

@@ -1,5 +1,7 @@
 # The Chronoqueue
 
+"FOR EVERY GRAIN OF SAND IN THE CHRONOQUEUE IS A MISTAKE YOU HAVE MADE!"
+
 Responsible for the order of birth, life, and death, the Chronoqueue is immensely powerful, and extremely important to the balance of Queuesgard. It has sat still in this tower for possibly even months now, and has ran the queue of time unchecked. Removing it from its chamber could have unintended consequences. Perhaps the buildup of life energy could cause the birth of a million Queuesguardians, causing unprecedented overpopulation. Or even worse, it could have the inverse effect, wiping the planet of the entire Queuesgard population.
 
 As you stand before this massive Hourglass, you notice it is backed up and full of sand. After recalling a conversation during your time in Queuesgard, you remember that one grain of sand represents exactly one second of time. This information, paired with your newfound approximation skills from your time in Arithmend, can help you determine how much excess time there is in the Chronoqueue.

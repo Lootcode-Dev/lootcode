@@ -228,15 +228,25 @@ export default function ProblemView({
                               <DialogTrigger asChild className="cursor-pointer">
                                 <CoinsIcon className="mx-2 h-6 w-6 text-yellow-200" />
                               </DialogTrigger>
-                              <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
-                                <ReactMarkdownNoSSR
-                                  remarkPlugins={[remarkGfm]}
-                                  className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
-                                >
-                                  {`# You earned...\n` +
-                                    `${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}` +
-                                    `${`*Reward: ${problem?.gold} gold*`}`}
-                                </ReactMarkdownNoSSR>
+                              <DialogContent className="max-h-[500px] overflow-auto bg-zinc-800 sm:max-w-[625px]">
+                                {chapterid === "the_tower" ? (
+                                  <ReactMarkdownNoSSR
+                                    remarkPlugins={[remarkGfm]}
+                                    className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
+                                  >
+                                    {`${problem?.lore}\n\n` +
+                                      `${`*Reward: ${problem?.gold} gold*`}`}
+                                  </ReactMarkdownNoSSR>
+                                ) : (
+                                  <ReactMarkdownNoSSR
+                                    remarkPlugins={[remarkGfm]}
+                                    className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200"
+                                  >
+                                    {`# You earned...\n` +
+                                      `${problem?.lore ? `*Collectible: ${problem.lore}*\n\n` : ""}` +
+                                      `${`*Reward: ${problem?.gold} gold*`}`}
+                                  </ReactMarkdownNoSSR>
+                                )}
                               </DialogContent>
                             </Dialog>
                           </>

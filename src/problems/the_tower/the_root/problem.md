@@ -1,5 +1,7 @@
 # The Root
 
+"WHEN WILL YOU LEARN? NO MATTER HOW FAST OR STRONG, YOU CANNOT OUTSMART MY FOREST!"
+
 The Ursol Tree stands tall in the center of the Arbonclave, and is said to be the birthplace of all Treefolk of the region. That was until the Ursol Tree was robbed of its power. The Arbonclave now faces critical withering threatening the homes of the Treefolk, and without the Root of the Ursol Tree, the withering will soon spread to the people.
 
 Kept on a floor of the tower, the Ursol Root is now surrounded by magical trees that are blocking the way to the Root, and have sworn to protect it by any means necessary - even violence. Unaware of what the situation is, or that keeping the Root here will do more harm than good, these trees are dedicated. In order to retrieve the Root, you must burn down the trees in your way and retrieve it. Don't worry, the magical trees do not feel pain, and you _think_ the Root is fireproof.

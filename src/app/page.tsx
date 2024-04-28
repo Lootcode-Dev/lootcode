@@ -53,7 +53,7 @@ export default async function Home() {
                 src={"/maps/map1.png"}
                 height={720}
                 width={1280}
-                alt={"A colorful fantasy background"}
+                alt={"Map of Algorion"}
                 className="mt-6 h-full w-auto rounded-3xl border-2 p-2 transition-transform hover:scale-105 md:mt-0"
               />
             </div>
@@ -282,13 +282,32 @@ export default async function Home() {
         <p className="text-xs ">© 2024 Lootcode. All rights reserved.</p>
         <nav className="flex gap-4 sm:ml-auto sm:gap-6"></nav>
         <div className="flex gap-4 sm:ml-auto sm:gap-6">
-          <Link className="text-white hover:text-gray-900 " href="#">
+          <Link
+            className="text-white transition-all ease-in hover:-translate-y-1"
+            href="https://www.instagram.com/lootcode.dev/"
+          >
             <Instagram className="h-5 w-5" />
             <span className="sr-only">Instagram</span>
           </Link>
-          <Link className="text-white hover:text-gray-900 " href="#">
+          <Link
+            className="text-white transition-all ease-in hover:-translate-y-1"
+            href="#"
+          >
             <Youtube className="h-5 w-5" />
             <span className="sr-only">YouTube</span>
+          </Link>
+          <Link
+            className="text-white transition-all ease-in hover:-translate-y-1  "
+            href="https://discord.gg/7G7kJzc4pd"
+          >
+            <Image
+              src="/discord.svg"
+              alt="Discord"
+              width={24}
+              height={24}
+              className="h-5 w-5 "
+            />
+            <span className="sr-only">Discord</span>
           </Link>
         </div>
       </footer>
