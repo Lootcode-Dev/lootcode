@@ -102,7 +102,9 @@ export default function Leaderboard({
           <div className="flex grow flex-col justify-end">
             <hr className="border-purple-500"></hr>
             <b className="mx-4 px-4 pt-4">Your placement:</b>
-            <LeaderboardCard user={user} place={place}></LeaderboardCard>
+            {
+              <LeaderboardCard user={user} place={place}></LeaderboardCard>
+            }
           </div>
         </div>
         <div className="flex flex-row items-end gap-2">

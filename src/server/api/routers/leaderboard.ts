@@ -11,6 +11,9 @@ export const leaderRouter = createTRPCRouter({
             where: {
                 email: {
                     notIn: ['leogofman23@gmail.com', 'dylanvidal1204@gmail.com', 'lukeculleninc@gmail.com']
+                },
+                score: {
+                    gt: 0
                 }
             },
             orderBy: [

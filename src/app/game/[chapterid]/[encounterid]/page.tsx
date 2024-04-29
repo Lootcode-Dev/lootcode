@@ -21,11 +21,11 @@ export default async function GamePage({ params }: PageProps) {
     region: params.chapterid,
   });
 
-  if (problem.type == "problem") {
+  if (problem?.type == "problem") {
     redirect(`/map/${params.chapterid}/${params.encounterid}`);
   }
 
-  if (problem.description == "DNE") {
+  if (problem?.description == "DNE") {
     redirect(`/map/${params.chapterid}`);
   }
 

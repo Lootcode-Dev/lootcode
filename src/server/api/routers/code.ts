@@ -318,16 +318,10 @@ export const codeRouter = createTRPCRouter({
         thisCase.expected = cutData(expectedOutput, MAXTRANSMIT);
         thisCase.output = cutData(userOutput, MAXTRANSMIT);
 
-        if (userOutput === expectedOutput) {
+        if (expected.stdout.replaceAll(/\s+/g, "") === output.stdout.replaceAll(/\s+/g, "")) {
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
-          if (
-            expected.stdout.replaceAll(/\s+/g, "") ==
-            output.stdout.replaceAll(/\s+/g, "")
-          ) {
-            thisCase.output += "\nPRESENTATION ERROR";
-          }
           codeGradeResponse.numFailed++;
         }
         codeGradeResponse.cases.push(thisCase);
