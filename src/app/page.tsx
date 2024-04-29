@@ -161,7 +161,7 @@ export default async function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
                 <h2 className="text-xl font-bold tracking-tighter md:text-4xl/tight">
-                  35+ Encounters
+                  30+ Encounters
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Engage in addictive combat encounters with foes who dare
@@ -185,7 +185,7 @@ export default async function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-purple-500 bg-[#15162c] p-4 text-center drop-shadow-md transition-all ease-in hover:-translate-y-2 hover:border-yellow-200">
               <div className="space-y-2">
                 <h2 className="text-xl  font-bold tracking-tighter md:text-4xl/tight">
-                  25+ Items
+                  50+ Items
                 </h2>
                 <p className="max-w-[600px]  md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Having access to unique items, each with a unique playstyle
