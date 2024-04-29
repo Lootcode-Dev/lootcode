@@ -27,11 +27,11 @@ export default async function Problem({ params }: PageProps) {
     region: params.chapterid,
   });
 
-  if (problem.type == "game") {
+  if (problem?.type == "game") {
     redirect(`/game/${params.chapterid}/${params.problemid}`);
   }
 
-  if (problem.description == "DNE") {
+  if (problem?.description == "DNE") {
     redirect(`/map/${params.chapterid}`);
   }
 
