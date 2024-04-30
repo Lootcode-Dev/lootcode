@@ -14,7 +14,7 @@ The legendary Alphabind, guarded in the Grand Hall of Lexica, is an incredibly p
 
 # Output
 
-Print the following statistics of the words on their own line in the respective order, always rounded up:
+Print the following statistics of the words on their own line in the respective order, ignoring punctuation, always rounded up:
 
 - average length
 - median length

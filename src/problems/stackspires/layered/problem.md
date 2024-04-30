@@ -4,7 +4,7 @@ I'm sure you've laid eyes on the beautiful Stackspires by now. The intricately d
 
 We've been tasked with the job of ensuring that the Stackspires remain as beautiful as they are, and to ensure the variety of its composition remains. Thus, we want to come up with an ideal blueprint for a spire, where each layer is different. Our engineers, however, have grown sloppy, and seemed to have written blueprints at a whim. We need your help to overhaul the blueprints and ensure that each layer is different from the one below it.
 
-However, it is a bit more complicated than just removing layers. Take the configuration of "ABBACA" for example. Once we remove the b-layer, we are left with "AACA", which is still not a valid configuration. We need to make sure that we keep removing layers until we have it just right. Nothing less for the glory of the Stackspires!
+However, it is a bit more complicated than just removing layers. A layer is *two* adjacent floors, which are represented as letters. In the case of "ABBBA", the outcome is "B", since we remove *two* A's and *two" B's. Take the configuration of "ABBACA" for example. Once we remove the b-layer, we are left with "AACA", which is still not a valid configuration. We need to make sure that we keep removing layers of until we have it just right. Nothing less for the glory of the Stackspires!
 
 ## Input
 
@@ -16,7 +16,7 @@ ABBACA
 
 ## Output
 
-Print the number of removal operations needed to make the blueprint valid. Then, print the blueprint after the removal operations.
+Print the number of removal operations (1 removal is the deletion of a single layer, or two letters) needed to make the blueprint valid. Then, print the blueprint after the removal operations.
 
 ```
 2

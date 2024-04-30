@@ -14,7 +14,7 @@ For each of these representations, we need you to implement a way to tell us the
 
 ## Input
 
-Input will consist of a single integer, _n (1 ≤ n ≤ 100,000)_, which represents the number of houses in the Arbonclave. The next line will contain _n_ distinct, space-separated integers, which represent the addresses of the houses in the Arbonclave.
+Input will consist of a single integer, _n (1 ≤ n ≤ 100,000)_, which represents the number of houses in the Arbonclave. The next line will contain _n_ distinct, space-separated integers, which represent the addresses of the houses in the Arbonclave. These addresses are ordered by insertion, with the first number being the first inserted into the BST configuration (root).
 
 ```
 5
