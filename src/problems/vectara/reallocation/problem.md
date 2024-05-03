@@ -6,7 +6,7 @@ The issue is, we really want to grab the addresses of the residiencies with the 
 
 ## Input
 
-Input will consist of _n (1 ≤ n ≤ 10^6)_, representing the number of households to read in, and _m (1 ≤ n ≤ 100)_, representing the size of the segment to reallocate. The next line will consist of _n_ numbers, separated by spaces, representing the number of people in each household.
+Input will consist of _n (1 ≤ n ≤ 10^6)_, representing the number of households to read in, and _m (1 ≤ m ≤ 100)_, representing the size of the segment to reallocate. The next line will consist of _n_ numbers, separated by spaces, representing the number of people in each household.
 
 ```
 10 3
