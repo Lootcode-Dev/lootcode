@@ -1,11 +1,15 @@
 # Lootcode
 
 Instagram: [lootcode.dev](https://www.instagram.com/lootcode.dev/)
+
 YouTube: [@Lootcode-dev](https://www.youtube.com/@Lootcode-Dev)
+
 Discord: [Lootcode Community](https://discord.com/invite/7G7kJzc4pd)
 
 Welcome to the grand world of Algorion!
+
 ![](https://www.lootcode.dev/logos/lootcode-final.png)
+
 ![](https://www.lootcode.dev/maps/map1.png)
 
 # Inspiration
