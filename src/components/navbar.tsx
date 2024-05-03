@@ -129,12 +129,12 @@ export default function Navbar() {
           </SignedIn>
           <SignedOut>
             <Button className="rounded-md bg-purple-700 p-4 text-white">
-              <SignInButton>
+              <Link href="/sign-in">
                 <div className="flex items-center">
                   Sign in
                   <ArrowRight className="h-5 w-5" />
                 </div>
-              </SignInButton>
+              </Link>
             </Button>
           </SignedOut>
         </div>
