@@ -10,7 +10,7 @@ The input consists of:
 
 one line with two integers n (2 ≤ n ≤ 1000) and m (1 ≤ m ≤ 5000), where n is the number of (1-indexed) connecting chambers in the maze and m is the number of passageways.
 
-m lines, each with three integers s, t, c (1 ≤ s, t ≤ n, 1 ≤ c ≤ 100) representing a slope from point s to point t with condition measure c.
+m lines follow, each with three integers s, t, c (1 ≤ s, t ≤ n, 1 ≤ c ≤ 100) representing a slope from point s to point t with condition measure c.
 
 Chambers without incoming passageways are entry points with enticing mysteries, and chambers without outgoing passageways are exits leading out of the maze. The helicopter can drop the adventurers off at any chamber, so they can start and end their exploration at any point they desire. All passageways flow in one direction, ensuring that once they leave a chamber, they cannot return to it through any passageway.
 

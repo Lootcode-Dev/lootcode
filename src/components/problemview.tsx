@@ -232,7 +232,7 @@ export default function ProblemView({
                                 {chapterid === "the_tower" ? (
                                   <ReactMarkdownNoSSR
                                     remarkPlugins={[remarkGfm]}
-                                    className="prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
+                                    className="max-w-[600px] max-h-[425px] overflow-auto prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
                                   >
                                     {`${problem?.lore}\n\n` +
                                       `${`*Reward: ${problem?.gold} gold*`}`}

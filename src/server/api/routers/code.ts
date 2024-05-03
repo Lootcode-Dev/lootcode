@@ -241,6 +241,8 @@ export const codeRouter = createTRPCRouter({
       } // END COMPILE PIPELINE
 
       // Iterate through the input files
+      console.log(input.name);
+      const timeout = input.name === "the_pebble" ? 5 : 1;
       let i = 1;
       for (const file of filenames) {
         // Declare our case object
@@ -258,7 +260,7 @@ export const codeRouter = createTRPCRouter({
         try {
           await writeFile(
             `${codePath}.sh`,
-            `timeout 1s ${langObject.run} < inputs/${file}`,
+            `timeout ${timeout}s ${langObject.run} < inputs/${file}`,
           );
           await $`docker exec -i ${ctx.userId}${input.name} /bin/bash < ${codePath}.sh > ${codePath}.txt`;
         } catch (error: any) {

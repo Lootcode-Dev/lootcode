@@ -9,6 +9,7 @@ Either way, its not my job to speculate. Its my job to process the votes! I'd li
 Input will consist of _n (1 ≤ n ≤ 10^6)_, representing the number of candidate IDs to read in. The next line will consist of _n_ numbers, separated by spaces, representing a vote for a candidate with the ID of that given number.
 
 ```
+14
 1 1 2 3 1 2 1 1 2 1 1 3 3 3
 ```
 

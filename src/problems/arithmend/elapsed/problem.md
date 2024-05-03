@@ -10,9 +10,9 @@ The input will contain a single integer, _n (1 ≤ n ≤ 10,000)_, which represe
 
 ```
 3
-12:00:00
-12:30:00
-13:00:00
+12:00
+12:30
+13:00
 ```
 
 ## Output

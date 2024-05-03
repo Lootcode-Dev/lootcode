@@ -2,7 +2,7 @@
 
 In the world of arithmetic, we must find beauty in the digits. For without beauty, we are left with nothing but chaos. Perhaps it is our love for beauty that drives us to find the most beautiful numbers.
 
-A beautiful number is a positive integer, whose contiunous sum of its digits squared is equal to 1, or results in an infinite loop. For example, the number 19 is a beautiful number.
+A beautiful number is a positive integer, whose contiunous sum of its digits squared is equal to 1, it's not beautiful if it results in an infinite loop. For example, the number 19 is a beautiful number.
 
 - 1^2 + 9^2 = 82
 - 8^2 + 2^2 = 68

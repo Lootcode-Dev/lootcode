@@ -11,7 +11,7 @@ Given two regions, start and end, find the path with the maximum probability of 
 The first line of input will contain 4 space separated integers, __n (2 ≤ n ≤ 10^4)__ representing the number of nodes, __c (0 ≤ c ≤ 2*10^4)__ representing the amount of connections (edges),
  __s, e (0 ≤ s, e ≤ n)__ representing your start and ending point.
 
-The next __c__ lines will contain 2 space separated integers followed by a floating point number __u__, __v__, __w__ __(0 ≤ u, v < n)__ __(0 ≤ w ≤ 1)__, representing a connection from u to v with a w probability of success.
+The next __c__ lines will contain 2 space separated integers followed by a floating point number __u__, __v__, __w__ __(0 ≤ u, v < n)__ __(0 ≤ w ≤ 1)__, representing a bidirectional connection from u to v with a w probability of success.
 
 ```
 3 3 0 2
