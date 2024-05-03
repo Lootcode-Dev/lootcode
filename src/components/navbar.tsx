@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import Link from "next/link";
 
 export default function Navbar() {
   const router = useRouter();
