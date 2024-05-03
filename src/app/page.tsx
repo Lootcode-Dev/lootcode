@@ -39,12 +39,12 @@ export default async function Home() {
               </p>
               <div className="hidden space-x-4 md:flex">
                 <Button className="mt-4 bg-purple-700 text-white">
-                  <SignUpButton>
+                  <Link href="/sign-up">
                     <div className="flex items-center">
                       Get Started
                       <ArrowRight className="h-5 w-5" />
                     </div>
-                  </SignUpButton>
+                  </Link>
                 </Button>
               </div>
             </div>

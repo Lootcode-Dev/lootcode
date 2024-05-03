@@ -1,6 +1,6 @@
 # Weaving
 
-Weaving is a big part of our culture in Dynamar. While we are incredibly complex people, we still find ways to enjoy such complexity in our artistic expressions. Our grandma's here are like, crochet deities. However, I want to beat my grandma, and could use some help with weaving, but first, I need to know if it is even possible.
+Weaving is a big part of our culture in Dynamar. While we are incredibly complex people, we still find ways to enjoy such complexity in our artistic expressions. Our grandmas here are like, crochet deities. However, I want to beat my grandma, and could use some help with weaving, but first, I need to know if it is even possible.
 
 Given strings representing segments of yarn, s1, s2, and s3, find whether s3 is formed by a weaving of s1 and s2.
 

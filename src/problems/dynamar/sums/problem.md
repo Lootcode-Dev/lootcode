@@ -1,6 +1,6 @@
 # Sums
 
-The challenge committee has thrown us another competition. Sure, there are challenged like this one in Dynamar every year to keep us sharp, but this one seems to leave me... perplex. There are a series of rooms in the Labyrinth of Sums. The Labyrinth contains a series of rooms, each marked by a number *n*. The task for each of us is to reduce that number to a partition of numbers that add up to *n*. The correct partitions will lead us to valid clues down the line, so we really need a hand.
+The challenge committee has thrown us another competition. Sure, there are challenged like this one in Dynamar every year to keep us sharp, but this one seems to leave me... perplexed. There are a series of rooms in the Labyrinth of Sums. The Labyrinth contains a series of rooms, each marked by a number *n*. The task for each of us is to reduce that number to a partition of numbers that add up to *n*. The correct partitions will lead us to valid clues down the line, so we really need a hand.
 
 A partition of an integer n is a set of positive integers which sum to n, typically written in descending
 order. For example:
