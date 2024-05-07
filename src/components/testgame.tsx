@@ -91,8 +91,10 @@ export default function Testgame({ user, name, enc, reg }: Props) {
 
     if (data?.enemies) {
       const convertedEnemies = (data.enemies as Enemy[]).map((encounter) => ({
-        name: encounter.name, 
-        health: Math.floor(encounter.health * (1 + 0.25 * (getLevel(user) - 1))),
+        name: encounter.name,
+        health: Math.floor(
+          encounter.health * (1 + 0.25 * (getLevel(user) - 1)),
+        ),
         maxHealth: Math.floor(
           encounter.health * (1 + 0.25 * (getLevel(user) - 1)),
         ),
@@ -310,12 +312,18 @@ export default function Testgame({ user, name, enc, reg }: Props) {
   return (
     <TooltipProvider>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="bg-zinc-800 sm:max-w-[425px]">
-          <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
-            {`# You earned...\n` +
-              `${data?.lore ? `*Collectible: ${data.lore}*\n\n` : ""}` +
-              `${`*Reward: ${data?.gold} gold*`}`}
-          </ReactMarkdown>
+        <DialogContent className="bg-zinc-800">
+          {reg === "the_tower" ? (
+            <ReactMarkdown className="prose max-h-[425px] max-w-[600px] overflow-auto p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200">
+              {`${data?.lore}\n\n` + `${`*Reward: ${data?.gold} gold*`}`}
+            </ReactMarkdown>
+          ) : (
+            <ReactMarkdown className="prose p-4 text-white prose-headings:text-purple-500 prose-em:text-yellow-200">
+              {`# You earned...\n` +
+                `${data?.lore ? `*Collectible: ${data.lore}*\n\n` : ""}` +
+                `${`*Reward: ${data?.gold} gold*`}`}
+            </ReactMarkdown>
+          )}
         </DialogContent>
       </Dialog>
       <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
