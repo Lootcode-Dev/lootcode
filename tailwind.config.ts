@@ -19,6 +19,7 @@ const config = {
     },
     fontFamily: {
       'sans': ["Ubuntu"],
+      mono: ["Liberation Mono", "Courier New"],
     },
     extend: {
       colors: {

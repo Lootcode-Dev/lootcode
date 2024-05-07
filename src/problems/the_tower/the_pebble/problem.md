@@ -33,7 +33,7 @@ Notice valid paths can be traversed across any number of adjacent edges in the c
 Compute the number of balanced paths over the entire tree, which is crucial in determining the configuration to restore the Stackspires.
 ## Input
 
-The first line of input contains a single integer n (2 ≤ n ≤ 10^3).
+The first line of input contains a single integer n (2 ≤ n ≤ 5*10^3).
 
 The next line contains a string of n characters, where each character is one of ()[]{}.
 

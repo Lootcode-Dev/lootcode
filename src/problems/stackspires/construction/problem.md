@@ -8,7 +8,7 @@ For example, a valid building with pairings A : B, C : D, and E : F, would be AC
 
 ## Input
 
-The first line of input will be an integer, _n (1 ≤ n ≤ 10)_, representing the number of beginning/end pairs to read in. The next _n_, lines will be two characters, separated by spaces, with the beginning character being first and the ending character being second. Then, on the line after that, will be a building configuration with length _m (1 ≤ m ≤ 10)_
+The first line of input will be an integer, _n (1 ≤ n ≤ 10)_, representing the number of beginning/end pairs to read in. The next _n_, lines will be two characters, separated by spaces, with the beginning character being first and the ending character being second. Then, on the line after that, will be a building configuration with length _m (1 ≤ m ≤ 20)_
 
 ```
 3

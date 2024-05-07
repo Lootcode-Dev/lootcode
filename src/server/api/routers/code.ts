@@ -219,6 +219,17 @@ export const codeRouter = createTRPCRouter({
           `public class ${ctx.userId}${input.name}`,
         ); //Replace the name of the main class with what we want it to be
       }
+
+      //Add special exceptions for certain problems
+      let timeout = input.name === "the_pebble" ? 5 : 1;
+      switch(input.name) {
+        case 'the_pebble': timeout = 5;
+        break;
+        case 'merger': input.code = input.code.replaceAll(/[+\-*/]/g, "");
+        break;
+        case 'gargantuan': input.code = input.code.replaceAll(/set_int_max_str_digits|BigInteger/g, "");
+        break;
+      }
       // Write the code to a temp file with the correct extension
       await writeFile(`${codePath}.${langObject.ext}`, input.code);
 
@@ -241,8 +252,6 @@ export const codeRouter = createTRPCRouter({
       } // END COMPILE PIPELINE
 
       // Iterate through the input files
-      console.log(input.name);
-      const timeout = input.name === "the_pebble" ? 5 : 1;
       let i = 1;
       for (const file of filenames) {
         // Declare our case object

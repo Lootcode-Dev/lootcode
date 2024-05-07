@@ -16,7 +16,7 @@ The first line of input will consist of an Integer __n (1 ≤ n ≤ 10^4)__ repr
 
 ## Output
 
-Output the triangle with the maximum perimeter you can make, if it is impossible to make any triangle output 0.
+Output the valid triangle with the maximum perimeter you can make, if it is impossible to make any valid triangle output 0.
 
 ```
 5

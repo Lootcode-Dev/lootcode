@@ -18,6 +18,12 @@ export interface GUser {
   time: Date;
 }
 
+export interface LUser {
+  name: string;
+  score: number;
+  time: Date;
+}
+
 export interface Item {
   name: string;
   type: string;

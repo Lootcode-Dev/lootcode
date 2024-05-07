@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type GUser } from "~/app/game/utility";
+import { LUser } from "~/app/game/utility";
 import LeaderboardCard from "~/components/leaderboardcard";
 import { Button } from "~/components/ui/button";
 
@@ -11,11 +11,11 @@ import { isMobile } from "react-device-detect";
 import Mobile from "./mobile";
 
 interface LParams {
-  user: GUser;
+  user: LUser;
   place: number;
   totalUsers: number;
-  topUsers: GUser[];
-  topThree: GUser[];
+  topUsers: LUser[];
+  topThree: LUser[];
 }
 
 export default function Leaderboard({
@@ -26,7 +26,7 @@ export default function Leaderboard({
   topThree,
 }: LParams) {
   const perPage = topUsers.length;
-  const [getUsers, setUsers] = useState<GUser[]>(topUsers);
+  const [getUsers, setUsers] = useState<LUser[]>(topUsers);
   const [getPage, setPage] = useState(0);
   const [getLoader, setLoader] = useState(false);
 

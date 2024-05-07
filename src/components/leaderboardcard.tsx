@@ -1,7 +1,7 @@
-import { type GUser } from "~/app/game/utility";
+import { LUser } from "~/app/game/utility";
 
 interface LParams {
-  user: GUser;
+  user: LUser;
   place: number;
 }
 
@@ -32,8 +32,8 @@ function formatTime(d: Date) {
   res += d.getDate() + "/";
 
   res += d.getFullYear();
-
   res += " ";
+  
   //24 Hour Time converted into 12 Hour
   res +=
     (d.getHours() % 12 == 0 ? (d.getHours() % 12) + 12 : d.getHours() % 12) +

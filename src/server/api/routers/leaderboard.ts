@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { type GUser } from "~/app/game/utility";
+import { LUser } from "~/app/game/utility";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 
@@ -24,6 +24,7 @@ export const leaderRouter = createTRPCRouter({
             skip: input.page*input.perPage,
             take: input.perPage
         });
-        return topUsers as GUser[];
+        const lTopUsers = topUsers.map(obj => ({name: obj.name, score: obj.score, time: obj.time}));
+        return lTopUsers as LUser[];
     }),
 });

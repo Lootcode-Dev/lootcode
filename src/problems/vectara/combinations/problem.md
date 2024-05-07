@@ -15,7 +15,7 @@ Input will consist of an integer _n (1 ≤ n ≤ 9)_, representing the number of
 
 ## Output
 
-Print each possible configuration on its own line, sorted lexicographically
+Print each possible configuration on its own line, sorted lexicographically by its string representation 
 
 ```
 1 2 3

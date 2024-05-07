@@ -12,6 +12,12 @@ export default async function Page() {
     const dbUser = await db.user.findFirst({
       where: { id: user.id },
     });
+    
+    if (!dbUser) redirect('/auth-callback?origin=leaderboard');
+
+    //Only use required info
+    const mainUser = {name: dbUser.name, score: dbUser.score, time: dbUser.time};
+
     const allUsers = await db.user.findMany({
         where: {
             email: {
@@ -28,16 +34,17 @@ export default async function Page() {
         ]
     });
 
-    const totalUsers = allUsers.length; //Total Users
-    const dbUserPlace = allUsers.findIndex(u => u.id === dbUser?.id)+1; //Placement of current user
-    const topTen = allUsers.slice(0, 10); //Top ten
-    const topThree = allUsers.slice(0, 3); // Top three
+    //Only use required info
+    const lUsers = allUsers.map(obj => ({name: obj.name, score: obj.score, time: obj.time}));
 
-    if (!dbUser) redirect('/auth-callback?origin=leaderboard');
+    const totalUsers = lUsers.length; //Total Users
+    const dbUserPlace = allUsers.findIndex(u => u.id === dbUser?.id)+1; //Placement of current user
+    const topTen = lUsers.slice(0, 10); //Top ten
+    const topThree = lUsers.slice(0, 3); // Top three
   
     return (
       <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <Leaderboard user={dbUser} place={dbUserPlace} totalUsers={totalUsers} topUsers={topTen} topThree={topThree}></Leaderboard>
+        <Leaderboard user={mainUser} place={dbUserPlace} totalUsers={totalUsers} topUsers={topTen} topThree={topThree}></Leaderboard>
       </main>
     );
   }
