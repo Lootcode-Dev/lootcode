@@ -293,7 +293,7 @@ export default async function Home() {
           </Link>
           <Link
             className="text-white transition-all ease-in hover:-translate-y-1"
-            href="#"
+            href="https://www.youtube.com/@Lootcode-Dev"
           >
             <Youtube className="h-5 w-5" />
             <span className="sr-only">YouTube</span>
