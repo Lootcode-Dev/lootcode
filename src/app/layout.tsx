@@ -33,6 +33,11 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="bg-[#282A36]">
+      <Script
+                async
+                src="https://dormdevs-analytics.vercel.app/script.js"
+                data-website-id="c309e430-da82-4161-b0d0-08714de60cda"
+            />
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
           <link rel="preconnect" href="https://fonts.gstatic.com"/>
