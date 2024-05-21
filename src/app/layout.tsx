@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import Navbar from "~/components/navbar";
 import { TRPCReactProvider } from "~/trpc/react";
 import { type Viewport } from "next";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,7 +37,7 @@ export default function RootLayout({
       <Script
                 async
                 src="https://dormdevs-analytics.vercel.app/script.js"
-                data-website-id="c309e430-da82-4161-b0d0-08714de60cda"
+                data-website-id="d99d0840-a8c0-4343-9f5f-c5195ded000c"
             />
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
