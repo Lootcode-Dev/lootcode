@@ -20,12 +20,21 @@ export const authRouter = createTRPCRouter({
       },
     });
 
+    let username = user.firstName?.toString() ?? "Lootcoder";
+    for (const c of username) {
+      const charCode = c.charCodeAt(0);
+      if (charCode < 32 || charCode > 126) {
+        username = "Lootcoder";
+        break;
+      }
+    }
+
     if (!dbUser) {
       await db.user.create({
         data: {
           id: user.id,
           email: user.emailAddresses[0].emailAddress,
-          name: user.firstName ?? "Lootcoder",
+          name: username,
           problems: "0".repeat(191),
           items: "1111" + "0".repeat(96),
           gold: 0,
