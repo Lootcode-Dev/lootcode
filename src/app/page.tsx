@@ -1,4 +1,4 @@
-import { SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import {
   ArrowRight,
   BrainIcon,
@@ -37,15 +37,17 @@ export default async function Home() {
                 Explore the world, fight enemies, and uncover the mystery of the
                 world of Algorion.
               </p>
-              <div className="hidden space-x-4 md:flex">
-                <Button className="mt-4 bg-purple-700 text-white">
+              <div className="hidden space-x-4 md:flex md:flex-row">
+                <SignedOut>
                   <Link href="/sign-up">
-                    <div className="flex items-center">
-                      Get Started
-                      <ArrowRight className="h-5 w-5" />
-                    </div>
+                    <Button className="mt-4 bg-purple-700 text-white">
+                        <div className="flex items-center">
+                          Get Started
+                          <ArrowRight className="h-5 w-5" />
+                        </div>
+                    </Button>
                   </Link>
-                </Button>
+                </SignedOut>
               </div>
             </div>
             <div className="mt-8 flex w-full items-center justify-center px-4">

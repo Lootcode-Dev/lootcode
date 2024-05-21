@@ -23,8 +23,8 @@ export default function Navbar() {
 
   return (
     <TooltipProvider>
-      <nav className="z-30 hidden h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110 md:flex">
-        <div className="nt-bold flex-1 text-2xl font-bold ">
+      <nav className="z-30 h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110 md:flex">
+        <div className="nt-bold flex-1 text-2xl font-bold hidden md:block">
           <h1 className="text-xl font-bold">
             <div className="flex items-center">
               <Image
@@ -50,7 +50,7 @@ export default function Navbar() {
             </div>
           </h1>
         </div>
-        <div className="items-center">
+        <div className="items-center hidden md:block">
           <SignedIn>
             <div className="flex items-center gap-8">
               <Tooltip>
@@ -125,18 +125,18 @@ export default function Navbar() {
                   <div>Leaderboard</div>
                 </TooltipContent>
               </Tooltip>
-              <UserButton afterSignOutUrl="/sign-in" showName={true} />
+              <UserButton afterSignOutUrl="/sign-in" showName={true} userProfileMode="navigation" userProfileUrl="/manage" />
             </div>
           </SignedIn>
           <SignedOut>
-            <Button className="rounded-md bg-purple-700 p-4 text-white">
-              <Link href="/sign-in">
-                <div className="flex items-center">
-                  Sign in
-                  <ArrowRight className="h-5 w-5" />
-                </div>
-              </Link>
-            </Button>
+            <Link href="/sign-in">
+              <Button className="rounded-md bg-purple-700 p-4 text-white">
+                  <div className="flex items-center">
+                    Sign in
+                    <ArrowRight className="h-5 w-5" />
+                  </div>
+              </Button>
+            </Link>
           </SignedOut>
         </div>
       </nav>
