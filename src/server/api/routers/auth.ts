@@ -16,10 +16,11 @@ export const authRouter = createTRPCRouter({
 
     const dbUser = await db.user.findFirst({
       where: {
-        id: user.id,
+        email: user.emailAddresses[0].emailAddress,
       },
     });
 
+    // Check if the username is valid
     let username = user.firstName?.toString() ?? "Lootcoder";
     for (const c of username) {
       const charCode = c.charCodeAt(0);
@@ -29,6 +30,7 @@ export const authRouter = createTRPCRouter({
       }
     }
 
+    // New user, lets instantiate
     if (!dbUser) {
       await db.user.create({
         data: {
@@ -47,6 +49,18 @@ export const authRouter = createTRPCRouter({
           skill3: -1,
           score: 0,
           time: new Date(),
+        },
+      });
+    }
+
+    // Migration from dev to prod, only update the user id
+    if (dbUser?.email === user.emailAddresses[0].emailAddress) {
+      await db.user.update({
+        where: {
+          email: user.emailAddresses[0].emailAddress,
+        },
+        data: {
+          id: user.id,
         },
       });
     }
