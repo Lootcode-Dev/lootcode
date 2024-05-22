@@ -54,7 +54,10 @@ export const authRouter = createTRPCRouter({
     }
 
     // Migration from dev to prod, only update the user id
-    if (dbUser?.email === user.emailAddresses[0].emailAddress) {
+    if (
+      dbUser?.email === user.emailAddresses[0].emailAddress &&
+      dbUser?.id !== user.id
+    ) {
       await db.user.update({
         where: {
           email: user.emailAddresses[0].emailAddress,
