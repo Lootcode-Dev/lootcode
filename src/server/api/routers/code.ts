@@ -39,7 +39,7 @@ export const codeRouter = createTRPCRouter({
       const region = input.region;
 
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       if (!user) return;
@@ -357,7 +357,7 @@ export const codeRouter = createTRPCRouter({
         if (checkCompletion() !== -1) {
           const index = checkCompletion();
           const user = await db.user.findFirst({
-            where: { id: ctx.userId },
+            where: { email: ctx.user.emailAddresses[0]?.emailAddress },
           });
           if (user?.problems[index] === "0") {
             user.score += 1;
@@ -390,7 +390,7 @@ export const codeRouter = createTRPCRouter({
       if (checkCompletion() !== -1) {
         const index = checkCompletion();
         const user = await db.user.findFirst({
-          where: { id: ctx.userId },
+          where: { id: ctx.user.emailAddresses[0]?.emailAddress },
         });
         if (user?.problems[index] === "1") {
           codeGradeResponse.solved = true;

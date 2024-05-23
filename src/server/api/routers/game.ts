@@ -21,7 +21,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ item: z.string() }))
     .query(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       const oldItems = user?.items.split("");
@@ -43,7 +43,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       const oldItems = user?.items.split("");
@@ -62,7 +62,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       if (!user) return;
@@ -80,7 +80,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ amount: z.number() }))
     .query(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       if (!user) return;
@@ -98,7 +98,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ item: z.number() }))
     .query(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       if (!user) return;
@@ -133,7 +133,7 @@ export const gameRouter = createTRPCRouter({
     .input(z.object({ encounterid: z.string() }))
     .mutation(async ({ input, ctx }) => {
       const user = await db.user.findFirst({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
       });
 
       if (!user) return;
@@ -170,7 +170,7 @@ export const gameRouter = createTRPCRouter({
     }),
   getLoreCollection: protectedProcedure.query(async ({ ctx }) => {
     const user = await db.user.findFirst({
-      where: { id: ctx.userId },
+      where: { email: ctx.user.emailAddresses[0]?.emailAddress },
     });
 
     if (!user) return;
