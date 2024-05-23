@@ -37,7 +37,7 @@ export default async function GamePage({ params }: PageProps) {
     );
 
   const dbUser = await db.user.findFirst({
-    where: { id: user.id },
+    where: { email: user.emailAddresses[0]?.emailAddress },
   });
 
   if (!dbUser) {

@@ -37,7 +37,7 @@ export default async function Page({ params }: PageProps) {
   if (!user?.id) redirect(`/auth-callback?origin=map/${params.chapterid}`);
 
   const dbUser = await db.user.findFirst({
-    where: { id: user.id },
+    where: { email: user.emailAddresses[0]?.emailAddress },
   });
 
   if (!dbUser) {

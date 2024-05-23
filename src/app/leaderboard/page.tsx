@@ -10,7 +10,7 @@ export default async function Page() {
     if (!user?.id) redirect(`/auth-callback?origin=leaderboard`);
 
     const dbUser = await db.user.findFirst({
-      where: { id: user.id },
+      where: { email: user.emailAddresses[0]?.emailAddress },
     });
     
     if (!dbUser) redirect('/auth-callback?origin=leaderboard');
