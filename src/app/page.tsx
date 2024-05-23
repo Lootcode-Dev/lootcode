@@ -47,8 +47,8 @@ export default async function Home() {
                         </div>
                     </Button>
                   </Link>
-                  <div className="mt-4 font-bold">As of 05/22/2024 if you previously had an account you will have to sign up again. If you sign up with the same method all your progress should still be saved. If you experience any issues feel free to join our <a href="https://discord.com/invite/7G7kJzc4pd" target="_blank" className="text-blue-500 hover:text-white">Discord</a>.</div>
                 </SignedOut>
+                <div className="mt-4 font-bold">If you experience any issues feel free to reach out to us in our <a href="https://discord.com/invite/7G7kJzc4pd" target="_blank" className="text-blue-500 hover:text-white">Discord</a>.</div>
               </div>
             </div>
             <div className="mt-8 flex w-full items-center justify-center px-4">
