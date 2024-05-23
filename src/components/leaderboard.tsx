@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LUser } from "~/app/game/utility";
+import { type LUser } from "~/app/game/utility";
 import LeaderboardCard from "~/components/leaderboardcard";
 import { Button } from "~/components/ui/button";
 
@@ -30,13 +30,12 @@ export default function Leaderboard({
   const [getPage, setPage] = useState(0);
   const [getLoader, setLoader] = useState(false);
 
-  const { refetch } =
-    api.leaderboard.grabUsers.useQuery(
-      { page: getPage, perPage: perPage },
-      {
-        enabled: false, // Prevents the query from automatically running on mount
-      },
-    );
+  const { refetch } = api.leaderboard.grabUsers.useQuery(
+    { page: getPage, perPage: perPage },
+    {
+      enabled: false, // Prevents the query from automatically running on mount
+    },
+  );
 
   const nextPage = () => {
     setUsers([]);
@@ -102,9 +101,7 @@ export default function Leaderboard({
           <div className="flex grow flex-col justify-end">
             <hr className="border-purple-500"></hr>
             <b className="mx-4 px-4 pt-4">Your placement:</b>
-            {
-              <LeaderboardCard user={user} place={place}></LeaderboardCard>
-            }
+            {<LeaderboardCard user={user} place={place}></LeaderboardCard>}
           </div>
         </div>
         <div className="flex flex-row items-end gap-2">
