@@ -377,7 +377,7 @@ export const codeRouter = createTRPCRouter({
               );
 
             await db.user.update({
-              where: { id: ctx.userId },
+              where: { email: ctx.user.emailAddresses[0]?.emailAddress },
               data: user,
             });
             codeGradeResponse.reward = true;
@@ -390,7 +390,7 @@ export const codeRouter = createTRPCRouter({
       if (checkCompletion() !== -1) {
         const index = checkCompletion();
         const user = await db.user.findFirst({
-          where: { id: ctx.user.emailAddresses[0]?.emailAddress },
+          where: { email: ctx.user.emailAddresses[0]?.emailAddress },
         });
         if (user?.problems[index] === "1") {
           codeGradeResponse.solved = true;
