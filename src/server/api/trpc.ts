@@ -85,7 +85,7 @@ const middleware = t.middleware;
 const isAuth = middleware(async (opts) => {
   const user = await currentUser();
 
-  if (!user?.id || !user?.firstName) {
+  if (!user?.id) {
     throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
   }
 
