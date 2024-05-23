@@ -1,5 +1,5 @@
 "use client";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
   ArrowRight,
   BackpackIcon,
@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <TooltipProvider>
       <nav className="z-30 h-[7.5vh] w-full items-center bg-indigo-950 px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110 md:flex">
-        <div className="nt-bold flex-1 text-2xl font-bold hidden md:block">
+        <div className="nt-bold hidden flex-1 text-2xl font-bold md:block">
           <h1 className="text-xl font-bold">
             <div className="flex items-center">
               <Image
@@ -50,7 +50,7 @@ export default function Navbar() {
             </div>
           </h1>
         </div>
-        <div className="items-center hidden md:block">
+        <div className="hidden items-center md:block">
           <SignedIn>
             <div className="flex items-center gap-8">
               <Tooltip>
@@ -125,16 +125,21 @@ export default function Navbar() {
                   <div>Leaderboard</div>
                 </TooltipContent>
               </Tooltip>
-              <UserButton afterSignOutUrl="/sign-in" showName={true} userProfileMode="navigation" userProfileUrl="/manage" />
+              <UserButton
+                afterSignOutUrl="/sign-in"
+                showName={true}
+                userProfileMode="navigation"
+                userProfileUrl="/manage"
+              />
             </div>
           </SignedIn>
           <SignedOut>
             <Link href="/sign-in">
               <Button className="rounded-md bg-purple-700 p-4 text-white">
-                  <div className="flex items-center">
-                    Sign in
-                    <ArrowRight className="h-5 w-5" />
-                  </div>
+                <div className="flex items-center">
+                  Sign in
+                  <ArrowRight className="h-5 w-5" />
+                </div>
               </Button>
             </Link>
           </SignedOut>

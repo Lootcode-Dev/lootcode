@@ -9,12 +9,11 @@ import {
   Shield,
   Sparkle,
   Sword,
-  Wand,
   Wand2,
 } from "lucide-react";
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { type GUser, isEquipped, getItem } from "~/app/game/utility";
+import { type GUser, isEquipped } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
@@ -22,7 +21,7 @@ import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Mobile from "./mobile";
 import { isMobile } from "react-device-detect";
-import { Item } from "~/app/game/utility";
+import { type Item } from "~/app/game/utility";
 
 interface IParams {
   name: string;
@@ -219,7 +218,7 @@ export default function Inventory({ name, user }: IParams) {
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
-                <DialogContent className="bg-[#15162c] p-4 text-white max-w-[600px] max-h-[425px] overflow-auto">
+                <DialogContent className="max-h-[425px] max-w-[600px] overflow-auto bg-[#15162c] p-4 text-white">
                   <ReactMarkdown
                     className="prose w-auto  max-w-none 
                         p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400  prose-strong:text-opacity-30 prose-em:text-yellow-200"
