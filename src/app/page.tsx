@@ -37,7 +37,7 @@ export default async function Home() {
                 Explore the world, fight enemies, and uncover the mystery of the
                 world of Algorion.
               </p>
-              <div className="hidden space-x-4 md:flex md:flex-row">
+              <div className="hidden md:flex md:flex-col">
                 <SignedOut>
                   <Link href="/sign-up">
                     <Button className="mt-4 bg-purple-700 text-white">
@@ -47,6 +47,7 @@ export default async function Home() {
                         </div>
                     </Button>
                   </Link>
+                  <div className="mt-4 font-bold">As of 05/22/2024 if you previously had an account you will have to sign up again. If you sign up with the same method all your progress should still be saved. If you experience any issues feel free to join our <a href="https://discord.com/invite/7G7kJzc4pd" target="_blank" className="text-blue-500 hover:text-white">Discord</a>.</div>
                 </SignedOut>
               </div>
             </div>
