@@ -78,14 +78,12 @@ export default async function GamePage({ params }: PageProps) {
 
   if (reqsMet) {
     return (
-      <div>
-        <Testgame
-          user={dbUser}
-          name={user.firstName ?? ""}
-          enc={params.encounterid}
-          reg={params.chapterid}
-        />
-      </div>
+      <Testgame
+        user={dbUser}
+        name={user.firstName ?? ""}
+        enc={params.encounterid}
+        reg={params.chapterid}
+      />
     );
   } else {
     return <ReqsDenied />;

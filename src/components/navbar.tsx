@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <TooltipProvider>
-      <nav className="z-30 flex h-[7.5vh] w-full items-center bg-indigo-950 px-4 md:px-14 shadow-md backdrop-blur-3xl backdrop-brightness-110">
+      <nav className="z-30 flex h-[7.5vh] w-full items-center bg-indigo-950 px-4 shadow-md backdrop-blur-3xl backdrop-brightness-110 md:px-14">
         <div className="nt-bold flex-1 text-2xl font-bold">
           <h1 className="text-sm font-bold md:text-xl">
             <div className="flex items-center">
@@ -56,7 +56,7 @@ export default function Navbar() {
               <Tooltip>
                 <TooltipTrigger>
                   <div
-                    className="rounded-md  bg-purple-700 p-1 text-white hover:bg-primary md:p-3"
+                    className="rounded-md  bg-purple-700 p-2 text-white hover:bg-primary md:p-3"
                     onClick={() => router.push("/map/home")}
                   >
                     <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export default function Navbar() {
               <Tooltip>
                 <TooltipTrigger>
                   <div
-                    className="rounded-md  bg-purple-700 p-1 text-white hover:bg-primary md:p-3"
+                    className="rounded-md  bg-purple-700 p-2 text-white hover:bg-primary md:p-3"
                     onClick={() => router.push("/inventory")}
                   >
                     <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function Navbar() {
               <Tooltip>
                 <TooltipTrigger>
                   <div
-                    className="rounded-md  bg-purple-700 p-1 text-white hover:bg-primary md:p-3"
+                    className="rounded-md  bg-purple-700 p-2 text-white hover:bg-primary md:p-3"
                     onClick={() => router.push("/shop")}
                   >
                     <div className="flex items-center gap-2">
@@ -110,7 +110,7 @@ export default function Navbar() {
               <Tooltip>
                 <TooltipTrigger>
                   <div
-                    className="rounded-md  bg-purple-700 p-1 text-white hover:bg-primary md:p-3"
+                    className="rounded-md  bg-purple-700 p-2 text-white hover:bg-primary md:p-3"
                     onClick={() => router.push("/leaderboard")}
                   >
                     <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export default function Navbar() {
           </SignedIn>
           <SignedOut>
             <Link href="/sign-in">
-              <Button className="rounded-md bg-purple-700 p-2 md:p-4 text-white">
+              <Button className="rounded-md bg-purple-700 p-2 text-white md:p-4">
                 <div className="flex items-center">
                   Sign in
                   <ArrowRight className="h-5 w-5" />

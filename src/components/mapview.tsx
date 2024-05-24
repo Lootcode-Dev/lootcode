@@ -163,7 +163,7 @@ export default function MapView({ user, chapterid }: IParams) {
 
   return (
     <TooltipProvider>
-      <main className="z-10 flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white md:h-[92.5vh]">
+      <main className="z-10 min-h-screen w-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white md:flex md:h-[92.5vh] md:w-full">
         {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
       </div> */}
@@ -179,14 +179,14 @@ export default function MapView({ user, chapterid }: IParams) {
         </Dialog>
         <div className="flex md:mt-[-2.5vh] md:size-full md:items-center md:justify-center">
           {chapter != -1 ? (
-            <div className="flex w-[85vw] flex-col justify-center md:h-[85vh]">
+            <div className="flex w-[100vw] flex-col justify-center md:h-[85vh] md:w-[85vw]">
               <div className="my-4 flex justify-between rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold md:grid md:grid-cols-3">
                 <a href="/map/home">
                   <ArrowLeft className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
                 </a>
                 <Dialog>
                   <DialogTrigger>
-                    <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
+                    <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-2 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
                       {mapFile.chapters[chapter]?.name}
                     </div>
                   </DialogTrigger>
@@ -219,7 +219,7 @@ export default function MapView({ user, chapterid }: IParams) {
                   />
                 </div>
                 {/*fixing height for now*/}
-                <div className="mt-6 flex grow md:ml-4 md:mt-0 md:h-[71.5vh] md:w-[20vw]">
+                <div className="mt-4 flex grow md:ml-4 md:mt-0 md:h-[71.5vh] md:w-[20vw]">
                   <div className="flex w-full shrink flex-col md:w-[20vw]">
                     <div className="mb-2 w-full rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem ? (
@@ -366,7 +366,7 @@ export default function MapView({ user, chapterid }: IParams) {
               </div>
             </div>
           ) : (
-            <div className="flex w-[85vw] flex-col justify-center md:h-[85vh]">
+            <div className="flex w-[100vw] flex-col justify-center md:h-[85vh] md:w-[85vw]">
               <div className="my-4 grid rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold md:grid-cols-3">
                 <div />
                 <Dialog>
@@ -403,8 +403,8 @@ export default function MapView({ user, chapterid }: IParams) {
                   />
                 </div>
                 <div>
-                  <div className="md:ml-4 flex grow md:h-[71.5vh] md:w-[20vw]">
-                    <div className="flex w-[85vw] flex-col md:w-[20vw] mt-4 md:mt-0">
+                  <div className="flex grow md:ml-4 md:h-[71.5vh] md:w-[20vw]">
+                    <div className="mt-4 flex w-[100vw] flex-col md:mt-0 md:w-[20vw]">
                       {selNode != -1 ? (
                         <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                           {!homedesc ? (

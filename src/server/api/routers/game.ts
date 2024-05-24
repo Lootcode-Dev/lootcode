@@ -35,7 +35,7 @@ export const gameRouter = createTRPCRouter({
 
       if (user)
         await db.user.update({
-          where: { id: ctx.userId },
+          where: { email: ctx.user.emailAddresses[0]?.emailAddress },
           data: user,
         });
     }),
@@ -53,7 +53,7 @@ export const gameRouter = createTRPCRouter({
 
         if (user)
           await db.user.update({
-            where: { id: ctx.userId },
+            where: { email: ctx.user.emailAddresses[0]?.emailAddress },
             data: user,
           });
       }
@@ -70,7 +70,7 @@ export const gameRouter = createTRPCRouter({
       fakeEquip(user, input.item);
 
       await db.user.update({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
         data: user,
       });
 
@@ -88,7 +88,7 @@ export const gameRouter = createTRPCRouter({
       user.gold += input.amount;
 
       await db.user.update({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
         data: user,
       });
 
@@ -106,7 +106,7 @@ export const gameRouter = createTRPCRouter({
       fakeBuy(user, input.item);
 
       await db.user.update({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
         data: user,
       });
 
@@ -152,8 +152,7 @@ export const gameRouter = createTRPCRouter({
       // Add the gold to the user's account and solve the problem
       if (goldFile[input.encounterid as keyof typeof goldFile])
         user.gold += Math.floor(
-          goldFile[input.encounterid as keyof typeof goldFile] *
-          getLevel(user),
+          goldFile[input.encounterid as keyof typeof goldFile] * getLevel(user),
         );
 
       // Update their score
@@ -162,7 +161,7 @@ export const gameRouter = createTRPCRouter({
 
       // Update the user's data
       await db.user.update({
-        where: { id: ctx.userId },
+        where: { email: ctx.user.emailAddresses[0]?.emailAddress },
         data: user,
       });
 
