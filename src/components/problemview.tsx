@@ -92,13 +92,19 @@ export default function ProblemView({
   }, []);
 
   const langName = new Map(); //Map to convert lang identifier to proper name
-  langName.set("python", "Python"); langName.set("java", "Java"); langName.set("cpp", "C++"); langName.set("c", "C");
+  langName.set("python", "Python");
+  langName.set("java", "Java");
+  langName.set("cpp", "C++");
+  langName.set("c", "C");
+  langName.set("rust", "Rust");
+  langName.set("go", "Go");
+  langName.set("csharp", "C#");
 
   //Function to save what lang we're using to localStorage
-  const langSaver = (lang: string) => { 
+  const langSaver = (lang: string) => {
     setLanguage(lang);
     localStorage.setItem(`lang${problemid}`, lang);
-  }
+  };
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
@@ -142,8 +148,11 @@ export default function ProblemView({
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="python">Python</SelectItem>
                 <SelectItem value="java">Java</SelectItem>
+                <SelectItem value="csharp">C#</SelectItem>
                 <SelectItem value="cpp">C++</SelectItem>
                 <SelectItem value="c">C</SelectItem>
+                <SelectItem value="rust">Rust</SelectItem>
+                <SelectItem value="go">Go</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -199,7 +208,9 @@ export default function ProblemView({
                 value={code}
                 height={`${(80 * codeSize) / 100}vh`}
                 extensions={[
-                  loadLanguage(language as "java" | "python" | "cpp" | "c")!,
+                  loadLanguage(
+                    language as "java" | "python" | "csharp" | "cpp" | "c" | "rust" | "go",
+                  )!,
                 ]} //Typescript shenanigans
                 basicSetup={{
                   syntaxHighlighting: true,

@@ -199,6 +199,20 @@ export const codeRouter = createTRPCRouter({
           compile: `g++ ${codePath}.cpp -o ${codePath}.out -lm`,
           run: `./${ctx.userId}${input.name}.out`,
         },
+        csharp: {
+          ext: "cs",
+          compile: `mcs ${codePath}.cs`,
+          run: `mono ${ctx.userId}${input.name}.exe`,
+        },
+        rust: {
+          ext: "rs",
+          compile: `rustc ${codePath}.rs`,
+          run: `./${ctx.userId}${input.name}`,
+        },
+        go: {
+          ext: "go",
+          run: `go run ${codePath}.go`,
+        },
       };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
       if (langObject == "Error") {
@@ -207,6 +221,8 @@ export const codeRouter = createTRPCRouter({
           message: "Invalid language",
         });
       }
+
+      console.log(langObject);
 
       // Get all of our input files
       const filenames = readdirSync(`${problemPathInput}`);
