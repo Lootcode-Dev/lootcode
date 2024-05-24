@@ -20,7 +20,7 @@ import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import Mobile from "./mobile";
+import Mobile from "./safari";
 import { Item } from "~/app/game/utility";
 
 interface IParams {
@@ -83,7 +83,7 @@ export default function Inventory({ name, user }: IParams) {
   return (
     <div className="mt-2 flex flex-col md:flex-row">
       <StatDisplay name={name} user={getUser} />
-      <div className="m-4 md:h-[80vh] md:w-[70vw] rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+      <div className="m-4 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white md:h-[80vh] md:w-[70vw]">
         <div className="m-2 text-left text-3xl">
           <div className="flex items-center justify-end gap-2">
             <Filter className="mr-2" />
@@ -264,13 +264,13 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="my-4 flex md:max-h-[20vh] max-h-[40vh] flex-wrap overflow-auto">
+          <div className="my-4 flex max-h-[40vh] flex-wrap overflow-auto md:max-h-[20vh]">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
-                <DialogContent className="md:max-h-[425px] md:max-w-[600px] max-h-[50vh] max-w-[90vw] overflow-auto bg-[#15162c] p-4 text-white rounded-xl">
+                <DialogContent className="max-h-[50vh] max-w-[90vw] overflow-auto rounded-xl bg-[#15162c] p-4 text-white md:max-h-[425px] md:max-w-[600px]">
                   <ReactMarkdown
                     className="prose w-auto  max-w-none 
                         p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400  prose-strong:text-opacity-30 prose-em:text-yellow-200"

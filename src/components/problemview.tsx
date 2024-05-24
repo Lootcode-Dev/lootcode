@@ -26,7 +26,7 @@ import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
 import { nameToFileName } from "./mapview";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import Mobile from "./mobile";
+import Mobile from "./safari";
 import Stopwatch from "./stopwatch";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
@@ -106,18 +106,16 @@ export default function ProblemView({
     { enabled: false, retry: false },
   );
 
-
-
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
-      <div className="m-2 grid w-full md:grid-cols-3 grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 md:text-2xl font-bold">
+      <div className="m-2 grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 font-bold md:grid-cols-3 md:text-2xl">
         <div className="flex flex-row items-center gap-2">
           <a href={`/map/${chapterid}`}>
             <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
           </a>
           <div>{problemLabel}</div>
         </div>
-        <div className="text-lg hidden md:block">
+        <div className="hidden text-lg md:block">
           <Stopwatch />
         </div>
         <div className="mr-1 flex flex-row justify-end gap-2">
@@ -228,7 +226,7 @@ export default function ProblemView({
                                 {chapterid === "the_tower" ? (
                                   <ReactMarkdownNoSSR
                                     remarkPlugins={[remarkGfm]}
-                                    className="max-w-[600px] max-h-[425px] overflow-auto prose p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
+                                    className="prose max-h-[425px] max-w-[600px] overflow-auto p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400 prose-strong:text-opacity-30 prose-em:text-yellow-200"
                                   >
                                     {`${problem?.lore}\n\n` +
                                       `${`*Reward: ${problem?.gold} gold*`}`}

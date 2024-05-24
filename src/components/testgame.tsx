@@ -25,7 +25,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import Mobile from "./mobile";
+import Mobile from "./safari";
 import GameRules from "./gamerules";
 
 interface Entity {

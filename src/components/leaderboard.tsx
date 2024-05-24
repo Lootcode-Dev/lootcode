@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { api } from "~/trpc/react";
-import Mobile from "./mobile";
+import Mobile from "./safari";
 
 interface LParams {
   user: LUser;
@@ -56,7 +56,7 @@ export default function Leaderboard({
 
   return (
     <div className="flex h-full w-full md:items-center md:justify-between md:p-10">
-      <div className="flex h-[150vh] flex-col p-4 md:h-full md:w-[100%] md:flex-row md:items-end md:justify-around md:p-0">
+      <div className="flex h-[150vh] my-2 flex-col md:h-full md:w-[100%] md:flex-row md:items-end md:justify-around md:p-0">
         <div
           style={{ borderStyle: "groove" }}
           className="flex w-full flex-col overflow-auto rounded-2xl border-4 border-purple-700 bg-[#15162c] p-2 font-mono md:h-[80vh] md:w-[40vw]"

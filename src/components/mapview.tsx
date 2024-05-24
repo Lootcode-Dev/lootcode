@@ -14,6 +14,7 @@ import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
+import { isSafari } from "react-device-detect";
 
 import {
   ArrowLeft,
@@ -40,7 +41,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { isMobile } from "react-device-detect";
-import Mobile from "./mobile";
+import Safari from "./safari";
 
 interface Node {
   pos: number[];
@@ -160,6 +161,8 @@ export default function MapView({ user, chapterid }: IParams) {
         </div>
       </main>
     );
+
+  if (isSafari) return <Safari></Safari>;
 
   return (
     <TooltipProvider>
