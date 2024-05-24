@@ -14,6 +14,7 @@ import NodeGraph from "~/components/nodegraph";
 import { api } from "~/trpc/react";
 import indFile from "~/util/index.json";
 import mapFile from "~/util/map.json";
+import { isSafari } from "react-device-detect";
 
 import {
   ArrowLeft,
@@ -40,7 +41,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { isMobile } from "react-device-detect";
-import Mobile from "./mobile";
+import Safari from "./safari";
 
 interface Node {
   pos: number[];
@@ -161,14 +162,11 @@ export default function MapView({ user, chapterid }: IParams) {
       </main>
     );
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
+  if (isSafari) return <Safari></Safari>;
 
   return (
     <TooltipProvider>
-      <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <main className="z-10 min-h-screen w-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white md:flex md:h-[92.5vh] md:w-full">
         {/* <div className="w-full bg-red-700 py-2 text-center font-bold text-white shadow-xl">
         {user.email + " " + user.id + " " + user.problems}
       </div> */}
@@ -182,20 +180,20 @@ export default function MapView({ user, chapterid }: IParams) {
             </ReactMarkdown>
           </DialogContent>
         </Dialog>
-        <div className="mt-[-2.5vh] flex size-full items-center justify-center">
+        <div className="flex md:mt-[-2.5vh] md:size-full md:items-center md:justify-center">
           {chapter != -1 ? (
-            <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
-              <div className="my-4 grid grid-cols-3 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+            <div className="flex w-[100vw] flex-col justify-center md:h-[85vh] md:w-[85vw]">
+              <div className="my-4 flex justify-between rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold md:grid md:grid-cols-3">
                 <a href="/map/home">
                   <ArrowLeft className="m-2 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
                 </a>
                 <Dialog>
                   <DialogTrigger>
-                    <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
+                    <div className="m-2 cursor-pointer rounded-lg bg-purple-700 p-2 text-center text-2xl font-bold duration-150 hover:bg-[#15162c]">
                       {mapFile.chapters[chapter]?.name}
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-h-[50vh] overflow-auto bg-zinc-800 text-white sm:max-w-[50vw]">
+                  <DialogContent className="max-h-[50vh] max-w-[80vw] overflow-auto rounded-xl bg-zinc-800 text-white sm:max-w-[50vw]">
                     <DialogHeader>
                       {/* <DialogTitle>{mapFile.chapters[chapter]?.name}</DialogTitle> */}
                       <DialogDescription className="w-full">
@@ -212,7 +210,7 @@ export default function MapView({ user, chapterid }: IParams) {
                 </Dialog>
               </div>
 
-              <div className="flex h-fit w-full shrink flex-row justify-center">
+              <div className="flex h-fit w-full shrink flex-col justify-center md:flex-row">
                 <div className="flex h-fit w-full shrink">
                   <NodeGraph
                     nodes={mapFile.chapters[chapter]?.nodes}
@@ -224,9 +222,9 @@ export default function MapView({ user, chapterid }: IParams) {
                   />
                 </div>
                 {/*fixing height for now*/}
-                <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
-                  <div className="flex w-[20vw] shrink flex-col">
-                    <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+                <div className="mt-4 flex grow md:ml-4 md:mt-0 md:h-[71.5vh] md:w-[20vw]">
+                  <div className="flex w-full shrink flex-col md:w-[20vw]">
+                    <div className="mb-2 w-full rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                       {problem ? (
                         problem?.solved ||
                         checkChapterCompletion(
@@ -371,8 +369,8 @@ export default function MapView({ user, chapterid }: IParams) {
               </div>
             </div>
           ) : (
-            <div className="flex h-[85vh] w-[85vw] flex-col justify-center">
-              <div className="my-4 grid grid-cols-3 rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold">
+            <div className="flex w-[100vw] flex-col justify-center md:h-[85vh] md:w-[85vw]">
+              <div className="my-4 grid rounded-xl bg-[#15162c] p-2 text-center text-2xl font-bold md:grid-cols-3">
                 <div />
                 <Dialog>
                   <DialogTrigger>
@@ -396,7 +394,7 @@ export default function MapView({ user, chapterid }: IParams) {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="flex h-fit w-full shrink flex-row justify-center">
+              <div className="flex h-fit w-full shrink flex-col justify-center md:flex-row">
                 <div className="flex h-fit w-full shrink">
                   <NodeGraph
                     nodes={mapFile.chapters}
@@ -408,8 +406,8 @@ export default function MapView({ user, chapterid }: IParams) {
                   />
                 </div>
                 <div>
-                  <div className="ml-4 flex h-[71.5vh] w-[20vw] grow">
-                    <div className="flex w-[20vw] flex-col">
+                  <div className="flex grow md:ml-4 md:h-[71.5vh] md:w-[20vw]">
+                    <div className="mt-4 flex w-[100vw] flex-col md:mt-0 md:w-[20vw]">
                       {selNode != -1 ? (
                         <div className="mb-2 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
                           {!homedesc ? (

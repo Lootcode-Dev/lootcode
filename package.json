@@ -37,6 +37,7 @@
     "@uiw/codemirror-extensions-langs": "^4.21.24",
     "@uiw/codemirror-theme-dracula": "^4.21.24",
     "@uiw/react-codemirror": "^4.21.24",
+    "@umami/node": "^0.3.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "codemirror": "^6.0.1",

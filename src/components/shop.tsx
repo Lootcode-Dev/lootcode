@@ -2,12 +2,10 @@
 
 import { CoinsIcon, LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
 import { getItem, getLevel, type GUser } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
-import Mobile from "./mobile";
 import StatDisplay from "./statdisplay";
 import { Item } from "~/app/game/utility";
 
@@ -88,15 +86,10 @@ export default function Shop({ name, user }: IParams) {
     }
   }, [buyCallback, getUser, selItem]);
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
-
   return (
-    <div className="mt-2 flex flex-row">
+    <div className="mt-2 flex flex-col md:flex-row">
       <StatDisplay name={name} user={getUser} />
-      <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+      <div className="m-4 h-[60vh] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white md:h-[80vh] md:w-[70vw]">
         <div className="m-2 text-left text-3xl">
           <div className="flex items-center gap-2">
             Shop
@@ -119,22 +112,22 @@ export default function Shop({ name, user }: IParams) {
 
                   <ItemDisplay id={itemIndexes[index] ?? 0} />
                 </div>
-              ) : (value.level > getLevel(user)) ? (
-              <div
-              className="m-2 cursor-pointer rounded border border-red-700 bg-red-950 p-4 duration-150 hover:bg-[#15162c]"
-              key={index}
-            >
-              <div className="grid grid-cols-2 justify-between text-base font-normal">
-                {`Level ${value.level}`}
-                <div className="items-right flex justify-end">
-                  <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
-                  <CoinsIcon />
-                </div>
-              </div>
+              ) : value.level > getLevel(user) ? (
+                <div
+                  className="m-2 cursor-pointer rounded border border-red-700 bg-red-950 p-4 duration-150 hover:bg-[#15162c]"
+                  key={index}
+                >
+                  <div className="grid grid-cols-2 justify-between text-base font-normal">
+                    {`Level ${value.level}`}
+                    <div className="items-right flex justify-end">
+                      <div>{"" + getItem(itemIndexes[index] ?? 0)?.value}</div>
+                      <CoinsIcon />
+                    </div>
+                  </div>
 
-              <ItemDisplay id={itemIndexes[index] ?? 0} />
-            </div>) : value.value <=
-                getUser.gold ? (
+                  <ItemDisplay id={itemIndexes[index] ?? 0} />
+                </div>
+              ) : value.value <= getUser.gold ? (
                 <div
                   className="m-2 cursor-pointer rounded border border-purple-700 bg-purple-700 p-4 duration-150 hover:bg-[#15162c]"
                   onClick={() =>

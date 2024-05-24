@@ -43,7 +43,7 @@ export default async function Page() {
     const topThree = lUsers.slice(0, 3); // Top three
   
     return (
-      <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <main className="z-10 flex md:h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <Leaderboard user={mainUser} place={dbUserPlace} totalUsers={totalUsers} topUsers={topTen} topThree={topThree}></Leaderboard>
       </main>
     );

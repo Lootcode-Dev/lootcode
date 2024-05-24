@@ -8,15 +8,15 @@ interface LParams {
 export default function LeaderboardCard({ user, place }: LParams) {
   return (
     <span
-      className={`m-4 flex flex-row justify-between gap-2 p-4 ${place == 0 ? "text-purple-500" : place <= 3 ? "text-yellow-300" : place <= 25 ? "text-[#c0c0c0]" : place <= 100 ? "text-[#CD7F32]" : "text-purple-500"} items-center overflow-auto rounded-xl border-4 border-double border-purple-400`}
+      className={`m-4 flex flex-row justify-between gap-2 p-2 text-sm md:text-md md:p-4 ${place == 0 ? "text-purple-500" : place <= 3 ? "text-yellow-300" : place <= 25 ? "text-[#c0c0c0]" : place <= 100 ? "text-[#CD7F32]" : "text-purple-500"} items-center overflow-auto rounded-xl border-4 border-double border-purple-400`}
     >
       <b>
         {place == 0 ? "Unranked" : place}
         {place == 0 ? "" : findExt(place)}
       </b>
-      <b className="w-[20%] overflow-clip">{user.name}</b>
-      <p className="w-[20%] overflow-clip">Solves: {user.score}</p>
-      <p className="w-[30%] overflow-clip">{formatTime(user.time)}</p>
+      <b className="w-[20%] overflow-clip break-words">{user.name}</b>
+      <p className="w-[20%] overflow-clip break-words">Solves: {user.score}</p>
+      <p className="w-[30%] overflow-clip break-words">{formatTime(user.time)}</p>
     </span>
   );
 }

@@ -7,13 +7,9 @@ import {
   ShieldIcon,
   SparkleIcon,
   SwordIcon,
-  Wand2
+  Wand2,
 } from "lucide-react";
-import {
-  GUser,
-  getLevel,
-  getUserStats
-} from "~/app/game/utility";
+import { GUser, getLevel, getUserStats } from "~/app/game/utility";
 import ItemDisplay from "./itemdisplay";
 import GameRules from "./gamerules";
 
@@ -26,9 +22,9 @@ export default function StatDisplay({ name, user }: IParams) {
   const stats = getUserStats(user);
 
   return (
-    <div className="m-4 flex flex-col rounded-xl bg-[#15162c] h-[80vh] p-2">
+    <div className="m-4 flex h-[80vh] flex-col rounded-xl bg-[#15162c] p-2">
       <div className="flex items-center justify-center pb-6 text-2xl font-bold">
-        <div className="mr-2">{name}</div> 
+        <div className="mr-2">{name}</div>
         <GameRules />
       </div>
       <div className="grid grid-cols-2 justify-items-center">

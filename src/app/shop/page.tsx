@@ -21,7 +21,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+    <main className="md:h-[92.5vh] z-10 flex flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <Shop name={user.firstName ?? ''} user={dbUser}></Shop>
     </main>
   );

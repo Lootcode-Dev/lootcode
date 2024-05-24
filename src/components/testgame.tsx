@@ -25,8 +25,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import Mobile from "./mobile";
-import { isMobile } from "react-device-detect";
+import Mobile from "./safari";
 import GameRules from "./gamerules";
 
 interface Entity {
@@ -304,11 +303,6 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     setLoopRunning(false);
   }
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
-
   return (
     <TooltipProvider>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -327,9 +321,9 @@ export default function Testgame({ user, name, enc, reg }: Props) {
         </DialogContent>
       </Dialog>
       <div className="h-[92.5vh] bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="flex justify-center space-x-4 pt-8">
-          <div className="flex size-full flex-col items-center justify-center">
-            <div className="grid w-[80vw] grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-2 pr-4 text-end text-3xl font-bold">
+        <div className="justify-center pt-8 md:flex md:space-x-4">
+          <div className="size-full flex-col md:flex md:items-center md:justify-center">
+            <div className="grid w-[100vw] grid-cols-2 items-center  justify-between bg-[#15162c] text-end font-bold md:w-[80vw] md:grid-cols-3 md:rounded-xl md:p-2 md:pr-4 md:text-3xl">
               {!data ? (
                 <div className="flex items-center justify-center">
                   <Loader2 className="h-6 w-6 animate-spin text-yellow-200" />
@@ -337,41 +331,41 @@ export default function Testgame({ user, name, enc, reg }: Props) {
               ) : (
                 <div className="flex flex-row items-center gap-2">
                   <a href={`/map/${reg}`}>
-                    <ArrowLeft className="m-1 size-10 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
+                    <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c] md:size-10"></ArrowLeft>
                   </a>
                   <div>{encounterLabel}</div>
                 </div>
               )}
 
-              <div className="grid grid-cols-3 items-center justify-between gap-8">
+              <div className="grid grid-cols-2 items-center justify-between space-x-2 p-2 md:grid-cols-3 md:gap-8">
                 <div
                   onClick={() => {
                     reset();
                     gameLoop();
                   }}
-                  className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
+                  className="cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c] md:m-2"
                 >
                   Start
                 </div>
-                <div className="flex h-full items-center justify-center">
+                <div className="hidden h-full items-center justify-center md:flex">
                   <GameRules />
                 </div>
                 <div
                   onClick={reset}
-                  className="m-2 cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c]"
+                  className="cursor-pointer rounded-lg bg-purple-700 p-1 text-center text-base font-bold duration-150 hover:bg-[#15162c] md:m-2"
                 >
                   Reset
                 </div>
               </div>
-              {"Level " + getLevel(user)}
+              <div className="hidden md:block">{"Level " + getLevel(user)}</div>
             </div>
 
             {!data ? (
-              <div className="m-4 flex h-[75vh] w-[80vw] items-center justify-center rounded-xl border-4 border-[#15162c] bg-indigo-950">
+              <div className="flex h-[75vh] w-[100vw] items-center justify-center border-4 border-[#15162c] bg-indigo-950 md:m-4 md:w-[80vw] md:rounded-xl">
                 <Loader2 className="h-32 w-32 animate-spin text-yellow-200" />
               </div>
             ) : (
-              <div className="m-4 grid h-[75vh] w-[80vw] grid-cols-3 rounded-xl border-4 border-[#15162c] bg-indigo-950">
+              <div className="grid h-[75vh] w-[100vw] grid-cols-3 border-4 border-[#15162c] bg-indigo-950 md:m-4 md:w-[80vw] md:rounded-xl">
                 <div className="flex items-center justify-center">
                   <div className="flex flex-col items-start space-y-12">
                     <Tooltip>
@@ -385,7 +379,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                               : player?.critHit
                                 ? "animate-wiggle-more bg-purple-950 animate-infinite"
                                 : "animate-wiggle border-purple-700 bg-purple-950 animate-infinite"
-                          } w-[250px] border-4 text-2xl text-white shadow-lg`}
+                          } border-4 text-white shadow-lg md:w-[250px] md:text-2xl`}
                         >
                           <div
                             style={{
@@ -453,8 +447,8 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                     </Tooltip>
                   </div>
                 </div>
-                <div className="col-span-2 flex flex-col items-center justify-center p-16">
-                  <div className="grid grid-cols-3 items-center gap-12">
+                <div className="col-span-2 flex flex-col items-center justify-center md:p-16">
+                  <div className="grid items-center gap-4 md:grid-cols-3 md:gap-12">
                     {enemies?.map((enemy, index) => (
                       <Tooltip key={index}>
                         <TooltipTrigger>
@@ -467,7 +461,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                                 : enemy.critHit
                                   ? "animate-wiggle-more bg-purple-950 animate-infinite"
                                   : "animate-wiggle border-purple-700 bg-purple-950 animate-infinite"
-                            } w-[250px] border-4 text-2xl text-white shadow-lg`}
+                            } border-4 text-white shadow-lg md:w-[250px] md:text-2xl`}
                           >
                             <div
                               style={{
@@ -479,11 +473,11 @@ export default function Testgame({ user, name, enc, reg }: Props) {
                               }}
                             >
                               <div className="grid grid-cols-3 p-2">
-                                <div className="col-span-2 flex flex-row items-center justify-center p-2 font-bold">
+                                <div className="col-span-2 flex flex-row items-center justify-center break-words p-2 text-sm font-bold md:text-base">
                                   {enemy.name}
                                 </div>
                                 <div className="flex flex-row items-center justify-center gap-1 p-2">
-                                  <HeartIcon></HeartIcon>
+                                  <HeartIcon className="hidden md:block"></HeartIcon>
                                   {Math.floor(enemy.health)}
                                 </div>
                               </div>

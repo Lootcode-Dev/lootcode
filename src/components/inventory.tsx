@@ -19,9 +19,9 @@ import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import Mobile from "./mobile";
-import { isMobile } from "react-device-detect";
-import { type Item } from "~/app/game/utility";
+import Mobile from "./safari";
+import { Item } from "~/app/game/utility";
+
 
 interface IParams {
   name: string;
@@ -80,22 +80,74 @@ export default function Inventory({ name, user }: IParams) {
     }
   }, [equipCallback, getUser, selItem]);
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
-
   return (
-    <div className="mt-2 flex flex-row">
+    <div className="mt-2 flex flex-col md:flex-row">
       <StatDisplay name={name} user={getUser} />
-      <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+      <div className="m-4 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white md:h-[80vh] md:w-[70vw]">
         <div className="m-2 text-left text-3xl">
+          <div className="flex items-center justify-end gap-2 md:hidden">
+            <Filter className="mr-2" />
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.HEALTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.HEALTH) setFilter(-1);
+                else setFilter(IKEY.HEALTH);
+              }}
+            >
+              <Heart />
+            </div>
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.CRIT ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.CRIT) setFilter(-1);
+                else setFilter(IKEY.CRIT);
+              }}
+            >
+              <Clover />
+            </div>
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.STRENGTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.STRENGTH) setFilter(-1);
+                else setFilter(IKEY.STRENGTH);
+              }}
+            >
+              <Sword />
+            </div>
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.ARMOR ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.ARMOR) setFilter(-1);
+                else setFilter(IKEY.ARMOR);
+              }}
+            >
+              <Shield />
+            </div>
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.MAGIC ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.MAGIC) setFilter(-1);
+                else setFilter(IKEY.MAGIC);
+              }}
+            >
+              <Wand2 />
+            </div>
+            <div
+              className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.RESIST ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
+              onClick={() => {
+                if (filter == IKEY.RESIST) setFilter(-1);
+                else setFilter(IKEY.RESIST);
+              }}
+            >
+              <Sparkle />
+            </div>
+          </div>
           <div className="grid grid-cols-2 justify-between">
             <div className="flex items-center gap-2">
               Items
               {fetching ? <LoaderIcon className="animate-spin" /> : <div />}
             </div>
-            <div className="flex items-center justify-end gap-2">
+            <div className="hidden items-center justify-end gap-2 md:flex">
               <Filter className="mr-2" />
               <div
                 className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.HEALTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
@@ -212,13 +264,13 @@ export default function Inventory({ name, user }: IParams) {
         </div>
         <div className="m-2 text-left">
           <span className="text-3xl">Collectibles</span>
-          <div className="my-4 flex max-h-[20vh] flex-wrap overflow-auto">
+          <div className="my-4 flex max-h-[40vh] flex-wrap overflow-auto md:max-h-[20vh]">
             {loreCollectibles?.map((value: string, index) => (
               <Dialog key={index}>
                 <DialogTrigger className="m-2 cursor-pointer rounded bg-purple-700 p-4 text-2xl duration-150 hover:bg-[#15162c]">
                   {value.split("\n")[0]?.replace("#", "")}
                 </DialogTrigger>
-                <DialogContent className="max-h-[425px] max-w-[600px] overflow-auto bg-[#15162c] p-4 text-white">
+                <DialogContent className="max-h-[50vh] max-w-[90vw] overflow-auto rounded-xl bg-[#15162c] p-4 text-white md:max-h-[425px] md:max-w-[600px]">
                   <ReactMarkdown
                     className="prose w-auto  max-w-none 
                         p-4 text-white prose-headings:text-purple-500 prose-strong:font-medium prose-strong:text-gray-400  prose-strong:text-opacity-30 prose-em:text-yellow-200"

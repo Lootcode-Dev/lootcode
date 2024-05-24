@@ -26,8 +26,7 @@ import { api } from "~/trpc/react";
 import mapFile from "~/util/map.json";
 import { nameToFileName } from "./mapview";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import Mobile from "./mobile";
-import { isMobile } from "react-device-detect";
+import Mobile from "./safari";
 import Stopwatch from "./stopwatch";
 // Dynamically import CodeMirror with no SSR
 const CodeMirrorNoSSR = dynamic(() => import("@uiw/react-codemirror"), {
@@ -111,21 +110,16 @@ export default function ProblemView({
     { enabled: false, retry: false },
   );
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
-
   return (
     <main className="z-10 flex h-[92.5vh] flex-col items-center bg-gradient-to-b  from-[#2e026d] to-[#15162c] p-2 text-white">
-      <div className="m-2 grid w-full grid-cols-3 items-center justify-between rounded-xl bg-[#15162c] p-2 text-2xl font-bold">
+      <div className="m-2 grid w-full grid-cols-2 items-center justify-between rounded-xl bg-[#15162c] p-2 font-bold md:grid-cols-3 md:text-2xl">
         <div className="flex flex-row items-center gap-2">
           <a href={`/map/${chapterid}`}>
             <ArrowLeft className="m-1 size-8 cursor-pointer rounded bg-purple-700 duration-150 hover:bg-[#15162c]"></ArrowLeft>
           </a>
           <div>{problemLabel}</div>
         </div>
-        <div className="text-lg">
+        <div className="hidden text-lg md:block">
           <Stopwatch />
         </div>
         <div className="mr-1 flex flex-row justify-end gap-2">

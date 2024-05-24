@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { TRPCError } from "@trpc/server";
+import umami from "@umami/node";
 import { existsSync, readdirSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { z } from "zod";
@@ -58,7 +59,8 @@ export const codeRouter = createTRPCRouter({
       }
 
       if (goldFile[input.name as keyof typeof goldFile] != 0) {
-        contents.gold = goldFile[input.name as keyof typeof goldFile] * getLevel(user);
+        contents.gold =
+          goldFile[input.name as keyof typeof goldFile] * getLevel(user);
       }
 
       const type = findNodeType(region ?? "", input.name);
@@ -80,7 +82,6 @@ export const codeRouter = createTRPCRouter({
             (problem) => problem === input.name,
           );
           if (index !== -1) {
-           
             if (user?.problems[index] === "1") {
               contents.solved = true;
             }
@@ -108,7 +109,6 @@ export const codeRouter = createTRPCRouter({
             (problem) => problem === input.name,
           );
           if (index !== -1) {
-
             if (user?.problems[index] === "1") {
               contents.solved = true;
             }
@@ -164,6 +164,15 @@ export const codeRouter = createTRPCRouter({
         compile?: string;
         run: string;
       } //Our Interface for our dictionary
+
+      // Umami
+      umami.init({
+        websiteId: "d99d0840-a8c0-4343-9f5f-c5195ded000c",
+        hostUrl: "https://dormdevs-analytics.vercel.app",
+      });
+
+      // Send analytics
+      await umami.track({ title: "Problem Ran" });
 
       const region = input.region;
 
@@ -222,13 +231,19 @@ export const codeRouter = createTRPCRouter({
 
       //Add special exceptions for certain problems
       let timeout = input.name === "the_pebble" ? 5 : 1;
-      switch(input.name) {
-        case 'the_pebble': timeout = 5;
-        break;
-        case 'merger': input.code = input.code.replaceAll(/[+\-*/]/g, "");
-        break;
-        case 'gargantuan': input.code = input.code.replaceAll(/set_int_max_str_digits|BigInteger/g, "");
-        break;
+      switch (input.name) {
+        case "the_pebble":
+          timeout = 5;
+          break;
+        case "merger":
+          input.code = input.code.replaceAll(/[+\-*/]/g, "");
+          break;
+        case "gargantuan":
+          input.code = input.code.replaceAll(
+            /set_int_max_str_digits|BigInteger/g,
+            "",
+          );
+          break;
       }
       // Write the code to a temp file with the correct extension
       await writeFile(`${codePath}.${langObject.ext}`, input.code);
@@ -329,7 +344,10 @@ export const codeRouter = createTRPCRouter({
         thisCase.expected = cutData(expectedOutput, MAXTRANSMIT);
         thisCase.output = cutData(userOutput, MAXTRANSMIT);
 
-        if (expected.stdout.replaceAll(/\s+/g, "") === output.stdout.replaceAll(/\s+/g, "")) {
+        if (
+          expected.stdout.replaceAll(/\s+/g, "") ===
+          output.stdout.replaceAll(/\s+/g, "")
+        ) {
           thisCase.result = true;
           codeGradeResponse.numPassed++;
         } else {
@@ -372,8 +390,7 @@ export const codeRouter = createTRPCRouter({
             // Add the gold to the user's account and solve the problem
             if (goldFile[input.name as keyof typeof goldFile])
               user.gold += Math.floor(
-                goldFile[input.name as keyof typeof goldFile] *
-                getLevel(user),
+                goldFile[input.name as keyof typeof goldFile] * getLevel(user),
               );
 
             await db.user.update({
