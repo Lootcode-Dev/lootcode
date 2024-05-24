@@ -87,9 +87,9 @@ export default function Shop({ name, user }: IParams) {
   }, [buyCallback, getUser, selItem]);
 
   return (
-    <div className="mt-2 flex flex-row">
+    <div className="mt-2 flex md:flex-row flex-col">
       <StatDisplay name={name} user={getUser} />
-      <div className="m-4 h-[80vh] w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
+      <div className="m-4 h-[60vh] md:h-[80vh] md:w-[70vw] overflow-auto rounded-xl bg-[#15162c] p-2 text-center font-bold text-white">
         <div className="m-2 text-left text-3xl">
           <div className="flex items-center gap-2">
             Shop

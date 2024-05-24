@@ -29,13 +29,12 @@ export default function Leaderboard({
   const [getPage, setPage] = useState(0);
   const [getLoader, setLoader] = useState(false);
 
-  const { refetch } =
-    api.leaderboard.grabUsers.useQuery(
-      { page: getPage, perPage: perPage },
-      {
-        enabled: false, // Prevents the query from automatically running on mount
-      },
-    );
+  const { refetch } = api.leaderboard.grabUsers.useQuery(
+    { page: getPage, perPage: perPage },
+    {
+      enabled: false, // Prevents the query from automatically running on mount
+    },
+  );
 
   const nextPage = () => {
     setUsers([]);
@@ -55,14 +54,12 @@ export default function Leaderboard({
     });
   }, [getPage, refetch]);
 
-
-
   return (
-    <div className="flex h-full w-full flex-row items-center justify-between p-10">
-      <div className="flex w-[100%] flex-row items-end justify-around">
+    <div className="flex h-full w-full md:items-center md:justify-between md:p-10">
+      <div className="flex h-[150vh] flex-col p-4 md:h-full md:w-[100%] md:flex-row md:items-end md:justify-around md:p-0">
         <div
           style={{ borderStyle: "groove" }}
-          className="flex h-[80vh] w-[40vw] flex-col overflow-auto rounded-2xl border-4 border-purple-700 bg-[#15162c] font-mono"
+          className="flex w-full flex-col overflow-auto rounded-2xl border-4 border-purple-700 bg-[#15162c] p-2 font-mono md:h-[80vh] md:w-[40vw]"
         >
           <div className="flex w-full flex-row items-center justify-between border-b-2 border-purple-700 p-2 text-3xl font-bold">
             {getPage != 0 ? (
@@ -98,12 +95,10 @@ export default function Leaderboard({
           <div className="flex grow flex-col justify-end">
             <hr className="border-purple-500"></hr>
             <b className="mx-4 px-4 pt-4">Your placement:</b>
-            {
-              <LeaderboardCard user={user} place={place}></LeaderboardCard>
-            }
+            {<LeaderboardCard user={user} place={place}></LeaderboardCard>}
           </div>
         </div>
-        <div className="flex flex-row items-end gap-2">
+        <div className="flex flex-row items-end justify-between gap-2 pt-20">
           <div className="flex flex-col">
             {topThree[2] ? (
               <div className="text-center font-extrabold">
@@ -112,7 +107,7 @@ export default function Leaderboard({
             ) : (
               <div></div>
             )}
-            <div className="h-[30vh] w-[10vw] rounded-xl bg-[#CD7F32]"></div>
+            <div className="h-[30vh] w-[30vw] rounded-xl bg-[#CD7F32] md:w-[10vw]"></div>
           </div>
           <div className="flex flex-col">
             {topThree[0] ? (
@@ -122,7 +117,7 @@ export default function Leaderboard({
             ) : (
               <div></div>
             )}
-            <div className="h-[70vh] w-[10vw] rounded-xl bg-yellow-300"></div>
+            <div className="h-[70vh] w-[30vw] rounded-xl bg-yellow-300 md:w-[10vw]"></div>
           </div>
           <div className="flex flex-col">
             {topThree[1] ? (
@@ -132,7 +127,7 @@ export default function Leaderboard({
             ) : (
               <div></div>
             )}
-            <div className="h-[50vh] w-[10vw] rounded-xl bg-[#c0c0c0]"></div>
+            <div className="h-[50vh] w-[30vw] rounded-xl bg-[#c0c0c0] md:w-[10vw]"></div>
           </div>
         </div>
       </div>
