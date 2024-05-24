@@ -294,8 +294,12 @@ export default async function Home() {
       </main>
       <footer className="flex w-full shrink-0 flex-col items-center gap-2 bg-indigo-950 px-4 py-6 text-white sm:flex-row md:px-6">
         <p className="text-xs ">© 2024 Lootcode. All rights reserved.</p>
+
         <nav className="flex gap-4 sm:ml-auto sm:gap-6"></nav>
         <div className="flex gap-4 sm:ml-auto sm:gap-6">
+          <Link href="/privacy.pdf" className="text-white">
+            Privacy Policy
+          </Link>
           <Link
             className="text-white transition-all ease-in hover:-translate-y-1"
             href="https://www.instagram.com/lootcode.dev/"
