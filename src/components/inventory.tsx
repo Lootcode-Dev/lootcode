@@ -85,7 +85,7 @@ export default function Inventory({ name, user }: IParams) {
       <StatDisplay name={name} user={getUser} />
       <div className="m-4 rounded-xl bg-[#15162c] p-2 text-center font-bold text-white md:h-[80vh] md:w-[70vw]">
         <div className="m-2 text-left text-3xl">
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex items-center justify-end gap-2 md:hidden">
             <Filter className="mr-2" />
             <div
               className={`cursor-pointer rounded-full border border-purple-700 ${filter == IKEY.HEALTH ? "bg-purple-950" : "bg-purple-700"} p-2 duration-150 hover:bg-[#15162c]`}
