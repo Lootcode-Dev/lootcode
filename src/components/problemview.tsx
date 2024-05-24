@@ -73,9 +73,10 @@ export default function ProblemView({
 
   useEffect(() => {
     const storedCode = localStorage.getItem(`code${problemid}`); // retrieve local stored code from problemid space
-    if (storedCode) {
-      setCode(storedCode);
-    }
+    const storedLang = localStorage.getItem(`lang${problemid}`); // retrieve local stored lang from problemid space
+    if (storedCode) setCode(storedCode);
+    if (storedLang) setLanguage(storedLang);
+
     mapFile.chapters.map((val, index) => {
       if (nameToFileName(val.name) == chapterid) {
         mapFile.chapters[index]?.nodes.map((value) => {
@@ -89,6 +90,15 @@ export default function ProblemView({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const langName = new Map(); //Map to convert lang identifier to proper name
+  langName.set("python", "Python"); langName.set("java", "Java"); langName.set("cpp", "C++"); langName.set("c", "C");
+
+  //Function to save what lang we're using to localStorage
+  const langSaver = (lang: string) => { 
+    setLanguage(lang);
+    localStorage.setItem(`lang${problemid}`, lang);
+  }
 
   const { data: problem } = api.code.getProblem.useQuery({
     name: problemid,
@@ -123,9 +133,9 @@ export default function ProblemView({
           <Stopwatch />
         </div>
         <div className="mr-1 flex flex-row justify-end gap-2">
-          <Select onValueChange={setLanguage}>
+          <Select onValueChange={langSaver}>
             <SelectTrigger className="h-8 w-[180px] bg-purple-700">
-              <SelectValue placeholder="Python" />
+              <SelectValue placeholder={langName.get(language) as string} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
