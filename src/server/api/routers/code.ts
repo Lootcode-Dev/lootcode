@@ -172,7 +172,7 @@ export const codeRouter = createTRPCRouter({
       });
 
       // Send analytics
-      await umami.track("Problem Ran");
+      await umami.track({ title: "Problem Ran" });
 
       const region = input.region;
 
