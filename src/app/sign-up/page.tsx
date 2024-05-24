@@ -6,7 +6,7 @@ export default function SignInPage() {
   return (
     <div className=" flex h-[92.5vh] w-full flex-col  bg-gradient-to-b from-[#2e026d] to-[#15162c]">
       <div className="flex items-center justify-center p-8 text-white lg:p-12 ">
-        <div className="w-full max-w-xl space-y-4 rounded-xl border bg-[#15162c] drop-shadow-xl">
+        <div className="w-full max-w-xl space-y-4 rounded-xl md:border md:bg-[#15162c] drop-shadow-xl">
           <div className="flex w-full justify-center px-12 pt-4">
             <Image
               src="/logos/lootcode-no-floor.png"

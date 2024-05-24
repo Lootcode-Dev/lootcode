@@ -37,18 +37,29 @@ export default async function Home() {
                 Explore the world, fight enemies, and uncover the mystery of the
                 world of Algorion.
               </p>
-              <div className="hidden md:flex md:flex-col">
+              <div className="md:flex md:flex-col">
                 <SignedOut>
                   <Link href="/sign-up">
                     <Button className="mt-4 bg-purple-700 text-white">
-                        <div className="flex items-center">
-                          Get Started
-                          <ArrowRight className="h-5 w-5" />
-                        </div>
+                      <div className="flex items-center">
+                        Get Started
+                        <ArrowRight className="h-5 w-5" />
+                      </div>
                     </Button>
                   </Link>
                 </SignedOut>
-                <div className="mt-4 font-bold">If you experience any issues feel free to reach out to us in our <a href="https://discord.com/invite/7G7kJzc4pd" target="_blank" className="text-blue-500 hover:text-white">Discord</a>.</div>
+                <div className="mt-4 font-bold">
+                  If you experience any issues feel free to reach out to us in
+                  our{" "}
+                  <a
+                    href="https://discord.com/invite/7G7kJzc4pd"
+                    target="_blank"
+                    className="text-blue-500 hover:text-white"
+                  >
+                    Discord
+                  </a>
+                  .
+                </div>
               </div>
             </div>
             <div className="mt-8 flex w-full items-center justify-center px-4">
