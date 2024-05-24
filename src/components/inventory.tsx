@@ -21,7 +21,6 @@ import ItemDisplay from "./itemdisplay";
 import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Mobile from "./mobile";
-import { isMobile } from "react-device-detect";
 import { Item } from "~/app/game/utility";
 
 interface IParams {
@@ -81,10 +80,7 @@ export default function Inventory({ name, user }: IParams) {
     }
   }, [equipCallback, getUser, selItem]);
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
+
 
   return (
     <div className="mt-2 flex flex-row">

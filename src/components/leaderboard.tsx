@@ -7,7 +7,6 @@ import { Button } from "~/components/ui/button";
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { api } from "~/trpc/react";
-import { isMobile } from "react-device-detect";
 import Mobile from "./mobile";
 
 interface LParams {
@@ -56,10 +55,7 @@ export default function Leaderboard({
     });
   }, [getPage, refetch]);
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
+
 
   return (
     <div className="flex h-full w-full flex-row items-center justify-between p-10">

@@ -26,7 +26,6 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import Mobile from "./mobile";
-import { isMobile } from "react-device-detect";
 import GameRules from "./gamerules";
 
 interface Entity {
@@ -304,10 +303,7 @@ export default function Testgame({ user, name, enc, reg }: Props) {
     setLoopRunning(false);
   }
 
-  // Check if the user is a mobile user
-  if (isMobile) {
-    return <Mobile />;
-  }
+ 
 
   return (
     <TooltipProvider>
