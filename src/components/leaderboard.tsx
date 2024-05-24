@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LUser } from "~/app/game/utility";
+import { type LUser } from "~/app/game/utility";
 import LeaderboardCard from "~/components/leaderboardcard";
 import { Button } from "~/components/ui/button";
 

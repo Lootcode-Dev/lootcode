@@ -1,5 +1,5 @@
 "use client";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
   ArrowRight,
   BackpackIcon,

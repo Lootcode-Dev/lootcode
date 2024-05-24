@@ -9,12 +9,11 @@ import {
   Shield,
   Sparkle,
   Sword,
-  Wand,
   Wand2,
 } from "lucide-react";
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { type GUser, isEquipped, getItem } from "~/app/game/utility";
+import { type GUser, isEquipped } from "~/app/game/utility";
 import { api } from "~/trpc/react";
 import itemList from "~/util/items.json";
 import ItemDisplay from "./itemdisplay";
@@ -22,6 +21,7 @@ import StatDisplay from "./statdisplay";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Mobile from "./safari";
 import { Item } from "~/app/game/utility";
+
 
 interface IParams {
   name: string;

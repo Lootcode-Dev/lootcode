@@ -72,6 +72,10 @@ export default function ProblemView({
   const panelRef = useRef(null);
 
   useEffect(() => {
+    const storedCode = localStorage.getItem(`code${problemid}`); // retrieve local stored code from problemid space
+    if (storedCode) {
+      setCode(storedCode);
+    }
     mapFile.chapters.map((val, index) => {
       if (nameToFileName(val.name) == chapterid) {
         mapFile.chapters[index]?.nodes.map((value) => {
@@ -143,7 +147,6 @@ export default function ProblemView({
                   void codeRun().then((response) => {
                     //Set stateful data to our data to propagate changes
                     setRunData(response.data);
-
                     //When setFirstSolve is true we solved the problem (not necessarily the first time)
                     if (response.data?.reward === true) setFirstSolve(true);
                     setRunningCode(false);
@@ -183,6 +186,7 @@ export default function ProblemView({
               <CodeMirrorNoSSR
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 theme={dracula}
+                value={code}
                 height={`${(80 * codeSize) / 100}vh`}
                 extensions={[
                   loadLanguage(language as "java" | "python" | "cpp" | "c")!,
@@ -196,6 +200,7 @@ export default function ProblemView({
                   autocompletion: false,
                 }}
                 onChange={(value) => {
+                  localStorage.setItem(`code${problemid}`, value); // Map code to local storage problem Id space
                   setCode(value);
                 }}
               />

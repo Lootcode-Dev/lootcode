@@ -1,4 +1,4 @@
-import { LUser } from "~/app/game/utility";
+import { type LUser } from "~/app/game/utility";
 
 interface LParams {
   user: LUser;
@@ -11,8 +11,8 @@ export default function LeaderboardCard({ user, place }: LParams) {
       className={`m-4 flex flex-row justify-between gap-2 p-2 text-sm md:text-md md:p-4 ${place == 0 ? "text-purple-500" : place <= 3 ? "text-yellow-300" : place <= 25 ? "text-[#c0c0c0]" : place <= 100 ? "text-[#CD7F32]" : "text-purple-500"} items-center overflow-auto rounded-xl border-4 border-double border-purple-400`}
     >
       <b>
-          {place == 0 ? "Unranked" : place}
-          {place == 0 ? "" : findExt(place)}
+        {place == 0 ? "Unranked" : place}
+        {place == 0 ? "" : findExt(place)}
       </b>
       <b className="w-[20%] overflow-clip break-words">{user.name}</b>
       <p className="w-[20%] overflow-clip break-words">Solves: {user.score}</p>
@@ -33,7 +33,7 @@ function formatTime(d: Date) {
 
   res += d.getFullYear();
   res += " ";
-  
+
   //24 Hour Time converted into 12 Hour
   res +=
     (d.getHours() % 12 == 0 ? (d.getHours() % 12) + 12 : d.getHours() % 12) +
