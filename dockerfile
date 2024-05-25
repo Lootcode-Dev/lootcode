@@ -1,6 +1,7 @@
 # Use a minimal base image
 FROM ubuntu:latest
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     python3 \
     openjdk-17-jdk \
@@ -8,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     bash \
     golang-go \
-    mono-complete \
+    mono-devel \
     rustc \
     && rm -rf /var/lib/apt/lists/*
 

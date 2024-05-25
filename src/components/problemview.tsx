@@ -209,7 +209,14 @@ export default function ProblemView({
                 height={`${(80 * codeSize) / 100}vh`}
                 extensions={[
                   loadLanguage(
-                    language as "java" | "python" | "csharp" | "cpp" | "c" | "rust" | "go",
+                    language as
+                      | "java"
+                      | "python"
+                      | "csharp"
+                      | "cpp"
+                      | "c"
+                      | "rust"
+                      | "go",
                   )!,
                 ]} //Typescript shenanigans
                 basicSetup={{

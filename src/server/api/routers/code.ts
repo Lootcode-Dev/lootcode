@@ -206,12 +206,12 @@ export const codeRouter = createTRPCRouter({
         },
         rust: {
           ext: "rs",
-          compile: `rustc ${codePath}.rs`,
+          compile: `rustc --out-dir ${codePathFolder} ${codePath}.rs`,
           run: `./${ctx.userId}${input.name}`,
         },
         go: {
           ext: "go",
-          run: `go run ${codePath}.go`,
+          run: `go run ${ctx.userId}${input.name}.go`,
         },
       };
       const langObject = langSearch[input.lang] ?? "Error"; //We have the appropriate necessities for our language stored in this object
